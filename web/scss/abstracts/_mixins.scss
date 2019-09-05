@@ -1,0 +1,79 @@
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+// layout
+@mixin flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin grid {
+  display: grid;
+}
+
+// position
+@mixin position-center($top: 50%, $left: 50%) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: translate(-$left, -$top);
+}
+
+@mixin trans-center {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// component
+@mixin circle($size: 10px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+@mixin placeholder {
+  position: relative;
+  & + span:before {
+    content: attr(data-placeholder);
+    z-index: -5;
+    font-size: 95%;
+    color: $text-placeholder;
+    transition: all 0.5s;
+    @include position-center(50%, 0);
+    left: 10px;
+  }
+}
+
+// style
+@mixin style-modal {
+  border-radius: 10px;
+  background: rgba($white, 0.8);
+  @include shadow;
+}
+
+// 체크박스로 모달 설정 시 백그라운드에 깔리는 레이블 설정
+@mixin label-bg {
+  position: fixed;
+  visibility: hidden;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.5s;
+  cursor: auto;
+}
+
+@mixin shadow($figure: 0.1) {
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, $figure);
+}
+
+@mixin cursor-pointer {
+  cursor: pointer;
+}

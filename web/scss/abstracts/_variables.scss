@@ -1,0 +1,27 @@
+$primary: #7873f5;
+$secondary : #ec77ab;
+
+$text-default: rgba(85, 85, 85, 1);
+$text-warining: $secondary;
+$text-placeholder: rgba(119, 119, 119, 1);
+
+$background-default: rgba(245, 245, 245, 1);
+$border-default: rgba(230, 230, 230, 1);
+
+$gradient-default: linear-gradient(to top, #fff1eb 0%, #dedffb 100%);
+$gradient-point: linear-gradient(to left, $secondary 0%, $primary 100%);
+$gradient-green: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+
+$base-font-family: "Noto Sans KR";
+$bold-font-family: "Anton";
+
+$white: rgba(255, 255, 255, 1);
+$black: rgba(0, 0, 0, 1);
+
+$aside-bg: $gradient-default;
+
+$breakpoints: (
+  "medium": 768px,
+  "large": 960px,
+  "max": 1440px
+);

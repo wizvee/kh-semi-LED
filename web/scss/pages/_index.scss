@@ -1,0 +1,276 @@
+@import "../abstracts/keyframes";
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+.gnb_index {
+  @include grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid rgba($white, 0.3);
+  background: rgba($white, 0.07);
+  color: $white;
+  text-align: center;
+  line-height: 60px;
+}
+
+.container_index {
+  overflow-y: scroll;
+  height: 100vh;
+  scroll : {
+    snap-type: Y mandatory;
+    behavior: smooth;
+  }
+}
+
+#ck_pop_frm {
+  display: none;
+  &:checked ~ .section_index .typo_area {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &:checked ~ .section_index #pop_wrap {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.bg_video_area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  z-index: -5;
+}
+
+video {
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -5;
+  @include position-center;
+}
+
+// index section
+.section_slide {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+}
+
+.section_index {
+  position: relative;
+  .typo_area {
+    @include position-center;
+    padding: 20px;
+    border-top: 1px solid rgba($white, 0.3);
+    border-bottom: 1px solid rgba($white, 0.3);
+    color: $white;
+    transition: all 0.7s;
+    animation: ani_typoline 10s 1;
+    p {
+      margin-bottom: 20px;
+      font : {
+        family: $bold-font-family;
+        size: 40px;
+      }
+      letter-spacing: 15px;
+      animation: ani_typo 3s 1;
+      @include respond-to("medium") {
+        font-size: 90px;
+      }
+      @include respond-to("large") {
+        font-size: 110px;
+      }
+    }
+    label,
+    button {
+      @include trans-center;
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 5px;
+      background: rgba($primary, 0.6);
+      letter-spacing: 2px;
+      box-shadow: none;
+      animation: ani_login 3.5s 1;
+      &:hover {
+        background: rgba($secondary, 0.6);
+      }
+      @include respond-to("medium") {
+        padding: 10px 20px;
+        font-size: 120%;
+      }
+    }
+
+    button {
+      height: 40px;
+    }
+  }
+}
+
+#pop_wrap {
+  $wrap_height: 420px;
+  $header_height: 90px;
+
+  @include style-modal;
+  @include position-center;
+  position: fixed;
+  visibility: hidden;
+  overflow: hidden;
+  width: 300px;
+  height: $wrap_height;
+  opacity: 0;
+  transition: all 0.5s;
+  #pop_header {
+    @include grid;
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    width: 100%;
+    height: $header_height;
+    div {
+      grid-column: 1 / 3;
+      text-align: right;
+      label {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        color: $text-placeholder;
+        font-size: 125%;
+        text-align: center;
+        line-height: 30px;
+        transition: color 0.5s;
+        &:hover {
+          color: $text-default;
+        }
+      }
+    }
+    span {
+      align-self: center;
+      text-align: center;
+      color: $text-placeholder;
+      transition: all 0.1s;
+      @include cursor-pointer;
+      &:hover {
+        color: $text-default;
+      }
+    }
+    .active {
+      background: $gradient-point;
+      font-size: 135%;
+      font-weight: 900;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  #pop_container {
+    width: 100%;
+    height: $wrap_height - $header_height;
+    form {
+      position: relative;
+      margin: 10px auto;
+      width: 80%;
+      height: 100%;
+      transition: transform 0.5s;
+      div {
+        position: relative;
+        width: 100%;
+        height: 40px;
+      }
+      input {
+        @include placeholder;
+      }
+      .focus + span {
+        &:before {
+          left: 20px;
+          opacity: 0;
+          visibility: hidden;
+        }
+        &:after {
+          width: 100%;
+        }
+      }
+      button {
+        width: 100%;
+        height: 37px;
+      }
+    }
+    .active {
+      transform: translateX(0);
+    }
+    .msg_area {
+      color: $text-warining;
+      text-align: center;
+    }
+  }
+}
+
+.frm_login {
+  @include grid;
+  grid-template-rows: repeat(9, 1fr);
+  grid-auto-flow: column;
+  transform: translateX(-120%);
+  div:nth-child(3) {
+    margin-top: 15px;
+  }
+  .option_area {
+    @include flex;
+    justify-content: space-between;
+    font-size: 90%;
+    a {
+      margin-top: 3px;
+      padding: 0 3px;
+    }
+  }
+}
+
+.frm_register {
+  @include grid;
+  grid-template-rows: repeat(8, 1fr);
+  grid-auto-flow: column;
+  top: -340px;
+  transform: translateX(120%);
+  div:nth-child(6) {
+    margin-top: 15px;
+  }
+  #pw1::placeholder {
+    color: $primary;
+  }
+  .error {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $text-warining;
+    font-size: 90%;
+    line-height: 40px;
+  }
+  .msg_area {
+    margin-top: 15px;
+  }
+}
+
+#btn_fb {
+  $facebook: rgba(33, 99, 175, 0.8);
+  background: $facebook;
+  font-size: 90%;
+  text-align: left;
+  &:hover {
+    background: darken($facebook, 10%);
+  }
+}
+
+#btn_gg {
+  $google: rgba(229, 77, 38, 0.8);
+  background: $google;
+  font-size: 90%;
+  text-align: left;
+  &:hover {
+    background: darken($google, 10%);
+  }
+}
