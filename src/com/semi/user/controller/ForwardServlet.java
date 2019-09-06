@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.user.model.service.EmpService;
-import com.semi.user.model.service.OwnerService;
-import com.semi.user.model.vo.Employee;
-import com.semi.user.model.vo.Owner;
+import com.semi.emp.model.service.EmpService;
+import com.semi.emp.model.vo.Employee;
+import com.semi.owner.model.service.OwnerService;
+import com.semi.owner.model.vo.Owner;
 import com.semi.user.model.vo.User;
 
 @WebServlet("/main.do")

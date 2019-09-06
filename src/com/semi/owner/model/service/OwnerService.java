@@ -1,12 +1,12 @@
-package com.semi.user.model.service;
+package com.semi.owner.model.service;
 
 import static common.template.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.semi.user.dao.OwnerDao;
-import com.semi.user.model.vo.Owner;
+import com.semi.owner.dao.OwnerDao;
+import com.semi.owner.model.vo.Owner;
 
 public class OwnerService {
 	

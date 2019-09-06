@@ -28,7 +28,7 @@ public class BusinessDao {
 		}
 	}
 
-	public int insertBusiness(Connection conn, String ownId, String name, String addr, String phone) {
+	public int insertBusiness(Connection conn, String ownId, String name, String addr, String phone, String bNum) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertBusiness");
 		int r = -1;
@@ -36,8 +36,9 @@ public class BusinessDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, ownId);
 			pstmt.setString(2, name);
-			pstmt.setString(3, addr);
-			pstmt.setString(4, phone);
+			pstmt.setString(3, bNum);
+			pstmt.setString(4, addr);
+			pstmt.setString(5, phone);
 			r = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,6 +46,26 @@ public class BusinessDao {
 			close(pstmt);
 		}
 		return r;
+	}
+
+	public int checkBusNum(Connection conn, String bNum) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("checkBusNum");
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bNum);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				count = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
 	}
 
 }

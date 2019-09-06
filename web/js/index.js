@@ -1,5 +1,3 @@
-var path = location.host;
-
 // 폼 모달에서 header 버튼 active
 $("#pop_header span").on("click", function() {
   $(this)
@@ -154,7 +152,7 @@ function sign_validate() {
           $(".frm_register .msg_area").html("<p>회원가입 실패</p>");
         }
       },
-      error: function(data) {
+      error: function() {
         alert("연결 실패");
       }
     });

@@ -11,18 +11,27 @@ import com.semi.bus.dao.BusinessDao;
 import com.semi.bus.model.vo.Business;
 
 public class BusinessService {
-	
+
 	private BusinessDao dao = new BusinessDao();
-	
-	public int insertBusiness(String ownId, String name, String addr, String phone) {
+
+	public int insertBusiness(String ownId, String name, String addr, String phone, String bNum) {
 		Connection conn = getConnection();
-		int r = dao.insertBusiness(conn, ownId, name, addr, phone);
-		if(r > 0)
+		int r = dao.insertBusiness(conn, ownId, name, addr, phone, bNum);
+		if (r > 0)
 			commit(conn);
 		else
 			rollback(conn);
 		close(conn);
 		return r;
+	}
+
+	public boolean checkBusNum(String bNum) {
+		Connection conn = getConnection();
+		int r = dao.checkBusNum(conn, bNum);
+		boolean check = false;
+		if (r > 0)
+			check = true;
+		return check;
 	}
 
 }

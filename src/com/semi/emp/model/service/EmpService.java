@@ -1,11 +1,11 @@
-package com.semi.user.model.service;
+package com.semi.emp.model.service;
 
 import static common.template.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 
-import com.semi.user.dao.EmpDao;
-import com.semi.user.model.vo.Employee;
+import com.semi.emp.dao.EmpDao;
+import com.semi.emp.model.vo.Employee;
 
 public class EmpService {
 	

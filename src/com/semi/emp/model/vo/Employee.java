@@ -1,15 +1,17 @@
-package com.semi.user.model.vo;
+package com.semi.emp.model.vo;
 
 import java.util.ArrayList;
 
-public class Owner extends User {
+import com.semi.user.model.vo.User;
+
+public class Employee extends User {
 
 	private ArrayList<String> busList;
 
-	public Owner() {
+	public Employee() {
 	}
 
-	public Owner(ArrayList<String> busList) {
+	public Employee(ArrayList<String> busList) {
 		super();
 		this.busList = busList;
 	}

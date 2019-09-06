@@ -1,4 +1,4 @@
-<%@page import="com.semi.user.model.vo.Employee"%>
+<%@page import="com.semi.emp.model.vo.Employee"%>
 <%@page import="com.semi.user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

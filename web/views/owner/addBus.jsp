@@ -22,18 +22,27 @@ include file="header.jsp"%>
       <div class="addInfo_area">
         <form
           class="frm_addBus"
-          action="<%=request.getContextPath() %>/addBus.do"
+          action="<%=request.getContextPath() %>/owner/addBus.do"
           method="post"
         >
-          ...
           <input
             type="hidden"
             name="userId"
             value="<%=loginOwner.getUserId()%>"
           />
-          <input type="hidden" name="name" value="" />
-          <input type="hidden" name="addr" value="" />
-          <input type="hidden" name="phone" value="" />
+          <div>사업장 이름</div>
+          <input type="text" name="name" value="" />
+          <div>사업장 주소</div>
+          <input type="text" name="addr" value="" />
+          <div>사업장 전화번호</div>
+          <input type="tel" name="phone" value="" />
+          <div>사업장 사업자번호</div>
+          <div>
+            <input type="text" name="bNum" required />
+          </div>
+          <div>
+            <button>등록</button>
+          </div>
         </form>
       </div>
     </div>

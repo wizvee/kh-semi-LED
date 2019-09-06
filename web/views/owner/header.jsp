@@ -1,6 +1,6 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.semi.user.model.service.OwnerService"%>
-<%@page import="com.semi.user.model.vo.Owner"%>
+<%@page import="com.semi.owner.model.service.OwnerService"%>
+<%@page import="com.semi.owner.model.vo.Owner"%>
 <%@page import="com.semi.user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -20,6 +20,8 @@
 	href="<%=request.getContextPath()%>/css/main.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+<!-- JavaScript Libraries -->
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -40,18 +42,18 @@
 						aria-hidden="true"></i>
 					</label>
 				</div>
-				<div>
+				<div class="busList_area">
 					<%
 						if (!bnsList.isEmpty()) {
 					%>
-					<h1><%=bnsList.get(0) %></h1>
-					<!-- <span><i class="fa fa-caret-down" aria-hidden="true"></i></!-->
+					<h1><%=bnsList.get(0)%><i class="fa fa-caret-down" aria-hidden="true"></i></h1>
+					
 					<%
 						}
 					%>
 				</div>
 				<div>
-					<i class="fa fa-bell-o" aria-hidden="true"></i>
+					<i class="fa fa-bell" aria-hidden="true"></i>
 				</div>
 				<div>
 					<i class="fa fa-cog" aria-hidden="true"></i>

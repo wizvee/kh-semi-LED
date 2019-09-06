@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.bus.model.service.BusinessService;
 import com.semi.bus.model.vo.Business;
 
-@WebServlet("/addBus.do")
-public class AddBusinessServlet extends HttpServlet {
+@WebServlet("/owner/addBus.do")
+public class AddBusinessOServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AddBusinessServlet() {
+	public AddBusinessOServlet() {
 		super();
 	}
 
@@ -24,9 +24,10 @@ public class AddBusinessServlet extends HttpServlet {
 		String ownId = request.getParameter("userId");
 		String name = request.getParameter("name");
 		String addr = request.getParameter("addr");
-		String phon = request.getParameter("phone");
+		String phone = request.getParameter("phone");
+		String bNum = request.getParameter("bNum");
 
-		int r = new BusinessService().insertBusiness(ownId, name, addr, phon);
+		int r = new BusinessService().insertBusiness(ownId, name, addr, phone, bNum);
 
 		if (r > 0) {
 

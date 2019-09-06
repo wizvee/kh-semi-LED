@@ -65,11 +65,21 @@ input[id="ck_snb"]:checked {
   div {
     text-align: center;
     line-height: $gnb_height;
-    h1 {
-      font-size: 120%;
+    &.busList_area {
       text-align: left;
+      h1 {
+        display: inline-block;
+        font-size: 120%;
+        text-align: left;
+        @include cursor-pointer;
+      }
+      i {
+        margin-left: 10px;
+        font-size: 120%;
+        transform: translateY(2px);
+      }
     }
-    i {
+    & > i {
       transition: all 0.7s;
       @include cursor-pointer;
       &:hover {

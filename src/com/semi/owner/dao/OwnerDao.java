@@ -1,4 +1,4 @@
-package com.semi.user.dao;
+package com.semi.owner.dao;
 
 import static common.template.JDBCTemplate.close;
 
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.semi.user.model.vo.Owner;
+import com.semi.owner.model.vo.Owner;
 
 public class OwnerDao {
 
@@ -61,7 +61,7 @@ public class OwnerDao {
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				list.add(rs.getString("BUS_ID"));
+				list.add(rs.getString("BUS_NAME"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

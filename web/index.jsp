@@ -58,8 +58,8 @@
 				<!-- pop header -->
 				<div id="pop_header">
 					<div>
-						<label for="ck_pop_frm"> <i class="fa fa-times"
-							aria-hidden="true"></i>
+						<label for="ck_pop_frm">
+							<i class="fa fa-times" aria-hidden="true"></i>
 						</label>
 					</div>
 					<span id="frm_login" class="active">로그인</span> <span

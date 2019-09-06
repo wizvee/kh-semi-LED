@@ -84,5 +84,12 @@
 
 .addInfo_area {
   display: none;
-  background: red;
+}
+
+.frm_addBus {
+  @include grid;
+  grid-template-columns: 200px 1fr;
+  div {
+    background: red;
+  }
 }

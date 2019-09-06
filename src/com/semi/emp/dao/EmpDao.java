@@ -1,4 +1,4 @@
-package com.semi.user.dao;
+package com.semi.emp.dao;
 
 import static common.template.JDBCTemplate.close;
 
@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.semi.user.model.vo.Employee;
+import com.semi.emp.model.vo.Employee;
 
 public class EmpDao {
 	

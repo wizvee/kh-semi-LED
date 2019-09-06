@@ -40,9 +40,7 @@ function fn_search() {
         $(this).addClass("selected");
 
         $(".selected").on("click", function(e) {
-          // $(".frm_addBus").submit();
-          // e.stopPropagation();
-          $(".addBus_area").fadeOut("slow");
+          $(".addBus_area").fadeOut("fast");
           $(".addInfo_area").fadeIn("slow");
         });
       });
@@ -52,3 +50,26 @@ function fn_search() {
     }
   });
 }
+
+$("input[name='bNum']").on("blur", function() {
+  $.ajax({
+    type: "post",
+    async: false,
+    url: "/p_190826_semi/owner/checkBusNum.do",
+    dataType: "text",
+    data: { bNum: $(this).value },
+    success: function(data) {
+      if (
+        data == "unable" &&
+        $(this)
+          .siblings()
+          .is(".error")
+      ) {
+        $(this).parent().append($("<span class='error'>사용불가</span>"));
+      }
+    },
+    error: function() {
+      alert("연결 실패");
+    }
+  });
+});
