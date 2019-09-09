@@ -45,6 +45,7 @@ include file="header.jsp"%>
           </fieldset>
           <fieldset>
             <legend>추가 정보</legend>
+            
           </fieldset>
           <div>
             <button>등록</button>
