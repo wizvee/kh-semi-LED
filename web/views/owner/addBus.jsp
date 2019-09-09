@@ -25,21 +25,27 @@ include file="header.jsp"%>
           action="<%=request.getContextPath() %>/owner/addBus.do"
           method="post"
         >
-          <input
-            type="hidden"
-            name="userId"
-            value="<%=loginOwner.getUserId()%>"
-          />
-          <div>사업장 이름</div>
-          <input type="text" name="name" value="" />
-          <div>사업장 주소</div>
-          <input type="text" name="addr" value="" />
-          <div>사업장 전화번호</div>
-          <input type="tel" name="phone" value="" />
-          <div>사업장 사업자번호</div>
-          <div>
-            <input type="text" name="bNum" required />
-          </div>
+          <fieldset>
+            <legend>기본 정보</legend>
+            <input
+              type="hidden"
+              name="userId"
+              value="<%=loginOwner.getUserId()%>"
+            />
+            <div>사업장 이름</div>
+            <input type="text" name="name" value="" />
+            <div>사업장 주소</div>
+            <input type="text" name="addr" value="" />
+            <div>사업장 전화번호</div>
+            <input type="tel" name="phone" value="" />
+            <div>사업장 사업자번호</div>
+            <div>
+              <input type="text" name="bNum" required />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>추가 정보</legend>
+          </fieldset>
           <div>
             <button>등록</button>
           </div>

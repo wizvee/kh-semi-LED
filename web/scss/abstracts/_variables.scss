@@ -1,16 +1,18 @@
-$primary: #7873f5;
-$secondary : #ec77ab;
+$primary: #f08080;
+$secondary: #ec77ab;
+$primary-vivid: #7873f5;
 
-$text-default: rgba(85, 85, 85, 1);
-$text-warining: $secondary;
-$text-placeholder: rgba(119, 119, 119, 1);
+$text-default: #555555;
+$text-warining: #e54d26;
+$text-placeholder: #777777;
 
-$background-default: rgba(245, 245, 245, 1);
-$border-default: rgba(230, 230, 230, 1);
+$background-default: #f5f5f5;
+$border-default: #e6e6e6;
 
 $gradient-default: linear-gradient(to top, #fff1eb 0%, #dedffb 100%);
-$gradient-point: linear-gradient(to left, $secondary 0%, $primary 100%);
+$gradient-point: linear-gradient(to left, #ec77ab 0%, $primary-vivid 100%);
 $gradient-green: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+$gradient-blue: linear-gradient(-225deg, #2cd8d5 0%, #c5c1ff 56%, #ffbac3 100%);
 
 $base-font-family: "Noto Sans KR";
 $bold-font-family: "Anton";

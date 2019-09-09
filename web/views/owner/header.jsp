@@ -38,15 +38,15 @@
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">
 				<div>
-					<label for="ck_snb"> <i class="fa fa-bars"
-						aria-hidden="true"></i>
+					<label for="ck_snb">
+						<i class="fa fa-bars" aria-hidden="true"></i>
 					</label>
 				</div>
 				<div class="busList_area">
 					<%
 						if (!bnsList.isEmpty()) {
 					%>
-					<h1><%=bnsList.get(0)%><i class="fa fa-caret-down" aria-hidden="true"></i></h1>
+					<h1><%=bnsList.get(0)%><i class="fa fa-caret-square-o-down" aria-hidden="true"></i></h1>
 					
 					<%
 						}

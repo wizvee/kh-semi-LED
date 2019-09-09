@@ -39,14 +39,30 @@
 
 @mixin placeholder {
   position: relative;
+  & + span > i {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    color: $text-placeholder;
+  }
   & + span:before {
     content: attr(data-placeholder);
     z-index: -5;
     font-size: 95%;
     color: $text-placeholder;
-    transition: all 0.5s;
+    transition: all 1s;
     @include position-center(50%, 0);
-    left: 10px;
+    left: 23px;
+  }
+  &.focus + span {
+    & > i {
+      color: $primary-vivid;
+    }
+    &:before {
+      left: 33px;
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 }
 
