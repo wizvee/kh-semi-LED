@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 		String login = request.getParameter("data");
 		UserService service = new UserService();
 		User user = null;
+		
 		try {
 			JSONParser jp = new JSONParser();
 			JSONObject json = (JSONObject) jp.parse(login);
@@ -44,6 +45,7 @@ public class LoginServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", user);

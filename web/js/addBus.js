@@ -1,3 +1,20 @@
+const btnAddShift = document.querySelector("#btn_addShift");
+btnAddShift.addEventListener(
+  "click",
+  ({ target }) => {
+    const area = target.parentElement;
+    const shiftArea = document.createElement("div");
+    shiftArea.setAttribute("class", "shift_area");
+    shiftArea.innerHTML = `
+    <input type="text" class="inpt-outline">
+    <input type="text" class="inpt-outline">
+  `;
+    area.append(shiftArea);
+  },
+  false
+);
+
+// OLD!!!!!!!!!!!!!!!!!! *************
 function fn_search() {
   $.ajax({
     type: "post",
@@ -65,7 +82,9 @@ $("input[name='bNum']").on("blur", function() {
           .siblings()
           .is(".error")
       ) {
-        $(this).parent().append($("<span class='error'>사용불가</span>"));
+        $(this)
+          .parent()
+          .append($("<span class='error'>사용불가</span>"));
       }
     },
     error: function() {

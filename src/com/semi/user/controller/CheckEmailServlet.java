@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import com.semi.user.model.service.UserService;
 
 @WebServlet("/checkEmail.do")
@@ -22,14 +25,14 @@ public class CheckEmailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		String mail = request.getParameter("data");
+		
+		boolean able = new UserService().selectUser(mail) != null ? false : true;
 
-		String mail = request.getParameter("mail");
-		boolean unable = new UserService().selectUser(mail) != null ? true : false;
-
-		if (unable)
-			out.print("unable");
+		if (able)
+			out.print("success");
 		else
-			out.print("able");
+			out.print("fail");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -51,7 +51,7 @@ loginUser = (User) session.getAttribute("loginUser"); %>
         <!-- pop header -->
         <div id="pop_header">
           <div>
-            <label for="ck_pop_frm">
+            <label id="btn_close" for="ck_pop_frm">
               <i class="fa fa-times" aria-hidden="true"></i>
             </label>
           </div>
@@ -76,7 +76,7 @@ loginUser = (User) session.getAttribute("loginUser"); %>
               </span>
             </div>
             <div>
-              <button class="btn-gradient" onclick="login_validate(); return false;">
+              <button id="btn_login" class="btn-gradient" onclick="return false;">
                 로그인
               </button>
             </div>
@@ -133,7 +133,7 @@ loginUser = (User) session.getAttribute("loginUser"); %>
               </span>
             </div>
             <div>
-              <button class="btn-gradient" onclick="sign_validate(); return false;">
+              <button id="btn_register" class="btn-gradient" onclick="return false;">
                 회원가입
               </button>
             </div>

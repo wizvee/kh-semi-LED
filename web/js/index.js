@@ -1,185 +1,201 @@
-// 폼 모달에서 header 버튼 active
-$("#pop_header span").on("click", function() {
-  $(this)
-    .siblings()
-    .removeClass("active");
-  $("input").removeClass("focus");
-  $(this).addClass("active");
-
-  var types = ["email", "text", "password"];
-  $.each(types, function(i, v) {
-    $("input[type='" + v + "']").val("");
-  });
-  $(".error").remove();
-
-  $(".msg_area")
-    .children()
-    .remove();
-
-  var target = $(this).attr("id");
-  $("." + target)
-    .siblings()
-    .removeClass("active");
-  $("." + target).addClass("active");
-});
-
-// input에 대한 focus
-$("input").on("focus", function() {
-  $(this).addClass("focus");
-  if ($(this).attr("id") == "pw1") {
-    $(this).attr("placeholder", "8~16자 영문 대·소문자 포함");
+class Register {
+  constructor() {
+    this.isUseMail = false;
+    this.isCorrectPw = false;
+    this.isCheckPw = false;
+    this.insertError = this.insertError;
+    this.setInit();
   }
-});
 
-// input이 비었을 때
-$("input").on("blur", function() {
-  $("#pw1").removeAttr("placeholder");
-  if ($(this).val() == "") {
-    $(this).removeClass("focus");
-  }
-});
+  setInit() {
+    const inptEmail = document.querySelector("#uMail");
+    const inptPw1 = document.querySelector("#pw1");
+    const inptPw2 = document.querySelector("#pw2");
+    const btnRegister = document.querySelector("#btn_register");
+    const btnLogin = document.querySelector("#btn_login");
 
-// 폼 모달 닫을 시 초기화
-$("#pop_header label").on("click", function() {
-  var types = ["email", "text", "password"];
-  $.each(types, function(i, v) {
-    $("input[type='" + v + "']").val("");
-    $("input[type='" + v + "']").removeClass("focus");
-  });
-  $(".error").remove();
+    inptEmail.addEventListener("blur", ({ target }) => {
+      this.isUseMail = false;
+      const data = this.getData(target.value);
+      this.getResult("checkEmail.do", data, this.checkEmail);
+    });
 
-  $(".msg_area")
-    .children()
-    .remove();
-});
+    inptPw1.addEventListener("keyup", ({ target }) => {
+      this.isCorrectPw = false;
+      const area = target.parentElement;
+      const reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,16}$/;
+      const pw = target.value.trim();
+      this.deleteError(area);
 
-var check_mail = false;
-var check_pw = false;
-var check_cpw = false;
+      if (reg.test(pw)) this.isCorrectPw = true;
+      else this.insertError(area, "사용 불가");
+    });
 
-// 이메일 체크
-$("#uMail").on("blur", function() {
-  $.ajax({
-    type: "post",
-    async: false,
-    url: "/p_190826_semi/checkEmail.do",
-    dataType: "text",
-    data: { mail: $(this).val() },
-    success: function(data) {
-      if (
-        data == "unable" &&
-        !$("#uMail")
-          .siblings()
-          .is(".error")
-      ) {
-        $("#uMail")
-          .parent()
-          .append($("<span class='error'>사용불가</span>"));
-      } else if (data == "able") {
-        check_mail = true;
-        $("#uMail")
-          .siblings(".error")
-          .remove();
-      }
-    },
-    error: function() {
-      alert("연결실패");
-    }
-  });
-});
+    inptPw2.addEventListener("keyup", ({ target }) => {
+      this.isCheckPw = false;
+      const area = target.parentElement;
+      const pw1 = inptPw1.value;
+      this.deleteError(area);
 
-// 비밀번호 체크
-$("#pw1").on("blur", function() {
-  var check = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,16}$/.test($(this).value);
-  if (
-    $(this).val() != "" &&
-    !check &&
-    !$(this)
-      .siblings()
-      .is(".error")
-  ) {
-    $(this)
-      .parent()
-      .append($("<span class='error'>사용불가</span>"));
-  } else {
-    $(this)
-      .siblings(".error")
-      .remove();
-    check_pw = true;
-  }
-});
+      if (pw1 == target.value) this.isCheckPw = true;
+      else this.insertError(area, "불일치");
+    });
 
-// 비밀번호 확인
-$("#pw2").on("blur", function() {
-  var check = $(this).val() == $("#pw1").val();
-  if (
-    $(this).val() != "" &&
-    !check &&
-    !$(this)
-      .siblings()
-      .is(".error")
-  ) {
-    $(this)
-      .parent()
-      .append($("<span class='error'>불일치</span>"));
-  } else {
-    $(this)
-      .siblings(".error")
-      .remove();
-    check_cpw = true;
-  }
-});
+    btnRegister.addEventListener(
+      "click",
+      () => {
+        const name = document.getElementsByName("userName")[0].value;
+        const phone = document.getElementsByName("userPhone")[0].value;
+        const isBlank = name != "" && phone != "";
 
-function sign_validate() {
-  var check3 = $(".frm_register input").val() != "";
+        const area = document.querySelectorAll(".frm_register .msg_area")[0];
+        this.deleteError(area);
 
-  var mail = $(".frm_register input")[0].value;
-  var pwd = $(".frm_register input")[1].value;
-  var uname = $(".frm_register input")[3].value;
-  var uphone = $(".frm_register input")[4].value;
-  var register = { email: mail, password: pwd, name: uname, phone: uphone };
-  if (check_mail && check_pw && check_cpw && check3) {
-    $.ajax({
-      type: "post",
-      async: false,
-      url: "/p_190826_semi/register.do",
-      dataType: "text",
-      data: { data: JSON.stringify(register) },
-      success: function(data) {
-        if (data == "success") {
-          location.href = "/p_190826_semi/emailSend.do?email=" + mail;
+        if (this.isUseMail && this.isCorrectPw && this.isCheckPw && isBlank) {
+          const rawData = {
+            email: inptEmail.value,
+            password: inptPw1.value,
+            name: name,
+            phone: phone
+          };
+          const data = this.getData(JSON.stringify(rawData));
+          this.getResult("register.do", data, this.submitRegister);
         } else {
-          $(".frm_register .msg_area").html("<p>회원가입 실패</p>");
+          this.insertError(area, "회원가입 실패");
         }
       },
-      error: function() {
-        alert("연결 실패");
-      }
+      false
+    );
+
+    btnLogin.addEventListener(
+      "click",
+      () => {
+        const mail = document.getElementsByName("userEmail")[0].value;
+        const pw = document.getElementsByName("userPw")[0].value;
+        const isBlank = mail != null && pw != null;
+
+        const area = document.querySelectorAll(".frm_login .msg_area")[0];
+        this.deleteError(area);
+
+        if (isBlank) {
+          const rawData = {
+            email: mail,
+            password: pw
+          };
+          const data = this.getData(JSON.stringify(rawData));
+          this.getResult("login.do", data, this.submitLogin);
+        } else {
+          this.insertError(area, "로그인 실패");
+        }
+      },
+      false
+    );
+  }
+
+  checkEmail = respText => {
+    const area = document.querySelector("#uMail").parentElement;
+    this.deleteError(area);
+
+    if (respText == "success") this.isUseMail = true;
+    else this.insertError(area, "사용 불가");
+  };
+
+  submitRegister = respText => {
+    if (respText == "success") {
+      const mail = document.querySelector("#uMail").value;
+      location.href = "/p_190826_semi/emailSend.do?email=" + mail;
+    } else {
+      const area = document.querySelectorAll(".frm_register .msg_area")[0];
+      this.insertError(area, "회원가입 실패");
+    }
+  };
+
+  submitLogin = respText => {
+    console.log(respText);
+    if (respText == "success") {
+      location.href = "/p_190826_semi/main.do";
+    } else {
+      const area = document.querySelectorAll(".frm_login .msg_area")[0];
+      this.insertError(area, "로그인 실패");
+    }
+  };
+
+  deleteError(area) {
+    const target = area.lastElementChild;
+    if (target != null && target.getAttribute("class") == "error")
+      target.remove();
+  }
+
+  insertError(area, msg) {
+    const err = document.createElement("span");
+    err.setAttribute("class", "error");
+    err.textContent = msg;
+    area.appendChild(err);
+  }
+
+  getResult(servletURL, data, fn) {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", () => {
+      return fn(xhr.responseText);
     });
-  } else {
-    $(".frm_register .msg_area").html("<p>회원가입 실패</p>");
+    xhr.open("post", "/p_190826_semi/" + servletURL);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(data);
+  }
+
+  getData(data) {
+    return `data=${data}`;
   }
 }
 
-function login_validate() {
-  var mail = $(".frm_login input")[0].value;
-  var pwd = $(".frm_login input")[1].value;
-  var login = { email: mail, password: pwd };
-  $.ajax({
-    type: "post",
-    async: false,
-    url: "/p_190826_semi/login.do",
-    dataType: "text",
-    data: { data: JSON.stringify(login) },
-    success: function(data) {
-      if (data == "success") {
-        location.href = "/p_190826_semi/main.do";
-      } else if (data == "fail") {
-        $(".frm_login .msg_area").html("<p>로그인 실패</p>");
-      }
-    },
-    error: function() {
-      alert("연결 실패");
-    }
+const register = new Register();
+
+function selectElements(name) {
+  let selectArr = Array.from(document.querySelectorAll(name));
+  return selectArr;
+}
+
+// MODAL
+// form간 switch event
+selectElements("#pop_header span").map(target => {
+  target.addEventListener("click", () => {
+    selectElements("#pop_header span").map(v => v.classList.remove("active"));
+    selectElements("#pop_container form").map(f => {
+      const name = target.getAttribute("id");
+      f.classList.remove("active");
+      if (f.classList.contains(name)) f.classList.add("active");
+    });
+    fn_popInit();
+    target.classList.add("active");
   });
+});
+
+// input 요소의 focus event
+selectElements("#pop_container input").map(target => {
+  target.addEventListener("focus", () => {
+    target.classList.add("focus");
+    if (target.getAttribute("id") == "pw1")
+      target.setAttribute("placeholder", "8~16자 영문 대·소문자 포함");
+  });
+  target.addEventListener("blur", () => {
+    if (target.getAttribute("id") == "pw1")
+      target.setAttribute("placeholder", "");
+    if (target.value == "") target.classList.remove("focus");
+  });
+});
+
+// modal 닫을 시 초기화
+document.querySelector("#btn_close").addEventListener("click", fn_popInit);
+
+// 폼 초기화 함수, 1) input요소 비움 2) error요소 삭제 3) msg_area 비움
+function fn_popInit() {
+  selectElements("#pop_container input").map(v => {
+    v.classList.remove("focus");
+    v.value = "";
+  });
+  selectElements("#pop_container .error").map(v => v.remove());
+  selectElements(".msg_area span").map(v => v.remove());
+  register.isUseMail = false;
+  register.isCorrectPw = false;
+  register.isCheckPw = false;
 }
