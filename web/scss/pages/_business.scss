@@ -86,8 +86,8 @@
 
 .addInfo_area {
   display: none;
-}
-
-.frm_addBus {
-  
+  fieldset {
+    @include grid;
+    grid-template-columns: 1fr 2fr;
+  }
 }

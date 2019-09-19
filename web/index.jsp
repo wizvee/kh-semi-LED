@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ page import="com.semi.user.model.vo.User"%> <% User
-loginUser = (User) session.getAttribute("loginUser"); %>
+pageEncoding="UTF-8"%> <%@ page import="com.semi.user.model.vo.User"%>
+<% User loginUser = (User) session.getAttribute("loginUser"); %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -158,7 +158,7 @@ loginUser = (User) session.getAttribute("loginUser"); %>
   <!-- //container -->
   <!-- JavaScript Libraries -->
   <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/index.js" charset="utf-8"></script>
 </body>
 
 </html>

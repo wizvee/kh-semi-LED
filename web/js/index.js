@@ -111,7 +111,6 @@ class Register {
   };
 
   submitLogin = respText => {
-    console.log(respText);
     if (respText == "success") {
       location.href = "/p_190826_semi/main.do";
     } else {
