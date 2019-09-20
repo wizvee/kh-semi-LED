@@ -5,6 +5,7 @@ import static common.template.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.semi.bus.model.vo.Business;
 import com.semi.owner.dao.OwnerDao;
 import com.semi.owner.model.vo.Owner;
 
@@ -18,9 +19,9 @@ public class OwnerService {
 		return o;
 	}
 	
-	public ArrayList<String> getBnsList(String userId) {
+	public ArrayList<Business> getBusList(String userId) {
 		Connection conn = getConnection();
-		ArrayList<String> list = dao.getBnsList(conn, userId);
+		ArrayList<Business> list = dao.getBusList(conn, userId);
 		return list;
 	}
 

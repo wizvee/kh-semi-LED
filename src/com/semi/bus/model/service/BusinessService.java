@@ -9,20 +9,36 @@ import java.sql.Connection;
 
 import com.semi.bus.dao.BusinessDao;
 import com.semi.bus.model.vo.Business;
+import com.semi.sft.dao.ShiftDao;
+import com.semi.sft.model.vo.Shift;
 
 public class BusinessService {
 
 	private BusinessDao dao = new BusinessDao();
+	private ShiftDao sftDao = new ShiftDao();
 
-	public int insertBusiness(String ownId, String name, String addr, String phone, String bNum) {
+	public Business selectBusiness(String busId) {
 		Connection conn = getConnection();
-		int r = dao.insertBusiness(conn, ownId, name, addr, phone, bNum);
-		if (r > 0)
+		Business b = dao.selectBusiness(conn, busId);
+		return b;
+	}
+
+	public String insertBusiness(String ownId, Business bus, Shift[] sftArr) {
+		Connection conn = getConnection();
+		String busId = null;
+		int r = dao.insertBusiness(conn, bus);
+		int r2 = 0;
+		for (Shift s : sftArr) {
+			r2 += sftDao.insertSft(conn, s);
+		}
+
+		if (r > 0 && r2 == sftArr.length) {
 			commit(conn);
-		else
+			busId = dao.getBusId(conn);
+		} else
 			rollback(conn);
 		close(conn);
-		return r;
+		return busId;
 	}
 
 	public boolean checkBusNum(String bNum) {

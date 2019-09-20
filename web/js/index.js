@@ -111,9 +111,8 @@ class Register {
   };
 
   submitLogin = respText => {
-    if (respText == "success") {
-      location.href = "/p_190826_semi/main.do";
-    } else {
+    if (respText == "success") location.href = "/p_190826_semi/main.do";
+    else {
       const area = document.querySelectorAll(".frm_login .msg_area")[0];
       this.insertError(area, "로그인 실패");
     }
@@ -135,7 +134,7 @@ class Register {
   getResult(servletURL, data, fn) {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", () => {
-      return fn(xhr.responseText);
+      fn(xhr.responseText);
     });
     xhr.open("post", "/p_190826_semi/" + servletURL);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

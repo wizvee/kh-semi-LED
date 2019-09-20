@@ -8,7 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.semi.bus.model.service.BusinessService;
+import com.semi.bus.model.vo.Business;
 import com.semi.emp.model.service.EmpService;
 import com.semi.emp.model.vo.Employee;
 import com.semi.owner.model.service.OwnerService;
@@ -25,34 +28,26 @@ public class ForwardServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
 		String url = "";
 
 		if (loginUser == null)
 			url += "/logout.do";
 		else {
-			if (!loginUser.isMailCheck()) {
+			if (!loginUser.isMailCheck())
 				url += "/views/common/emailCheck.jsp";
-			} else {
+			else {
 				if (loginUser.getUserType() == null)
 					url += "/views/common/enroll.jsp";
-				else if (loginUser.getUserType().equals("O")) {
-					Owner loginOwner = new OwnerService().castingTypeO(loginUser.getUserId());
-					ArrayList<String> bnsList = new OwnerService().getBnsList(loginOwner.getUserId());
-					request.getSession().setAttribute("loginOwner", loginOwner);
-					request.getSession().setAttribute("bnsList", bnsList);
-					if (bnsList.isEmpty())
-						url += "/views/owner/addBus.jsp";
-					else
-						url += "/views/owner/main.jsp";
-				} else if (loginUser.getUserType().equals("E")) {
-					Employee loginEmp = new EmpService().castingTypeO(loginUser.getUserId());
-					request.getSession().setAttribute("loginEmp", loginEmp);
-					url += "/views/emp/main.jsp";
-				}
+				else if (loginUser.getUserType().equals("O"))
+					url += "/owner/main.do";
+				else if (loginUser.getUserType().equals("E")) 
+					url += "/emp/main.do";
 			}
 		}
-		request.getRequestDispatcher(url).forward(request, response);
+
+		response.sendRedirect(request.getContextPath() + url);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

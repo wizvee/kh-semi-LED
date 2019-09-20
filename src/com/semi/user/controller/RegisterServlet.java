@@ -42,10 +42,12 @@ public class RegisterServlet extends HttpServlet {
 		try {
 			JSONParser jp = new JSONParser();
 			JSONObject json = (JSONObject) jp.parse(register);
+			
 			email = (String) json.get("email");
 			password = SHA512.getSHA512((String) json.get("password"));
 			name = (String) json.get("name");
 			phone = (String) json.get("phone");
+			
 			r = service.insertUser(email, password, name, phone);
 		} catch (ParseException e) {
 			e.printStackTrace();

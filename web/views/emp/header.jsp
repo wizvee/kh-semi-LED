@@ -1,24 +1,27 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.semi.bus.model.vo.Business"%>
 <%@page import="com.semi.emp.model.vo.Employee"%>
 <%@page import="com.semi.user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	Employee loginEmp = (Employee) session.getAttribute("loginEmp");
-	if (loginEmp == null)
-		response.sendRedirect(request.getContextPath());
+	Business selectBus = (Business) session.getAttribute("selectBus");
+	ArrayList<Business> busList = (ArrayList<Business>) session.getAttribute("busList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>service : site menu</title>
-<!-- CSS -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/main.min.css" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>service : site menu</title>
+	<!-- CSS -->
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.min.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	<!-- JavaScript Libraries -->
+	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -35,13 +38,29 @@
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_emp">
 				<div>
-					<label for="ck_snb"> <i class="fa fa-bars"
-						aria-hidden="true"></i>
+					<label for="ck_snb"> <i class="fa fa-bars" aria-hidden="true"></i>
 					</label>
 				</div>
-				<div>
-					<h1>사업장</h1>
-					<!-- <span><i class="fa fa-caret-down" aria-hidden="true"></i></!-->
+				<div class="busList_area">
+					<%
+						if (selectBus != null) {
+					%>
+					<h1 class="dropdown_toggle"><%=selectBus.getBusName()%></h1>
+					<ul class="dropdown_menu">
+						<%
+							for (Business b : busList) {
+						%>
+						<li><a
+								href="<%=request.getContextPath()%>/owner/switch.do?busId=<%=b.getBusId()%>"><%=b.getBusName()%></a>
+						</li>
+						<%
+							}
+						%>
+						<li><a href="<%=request.getContextPath()%>/owner/insertBus.do">추가</a></li>
+					</ul>
+					<%
+						}
+					%>
 				</div>
 				<div>
 					<i class="fa fa-bell-o" aria-hidden="true"></i>

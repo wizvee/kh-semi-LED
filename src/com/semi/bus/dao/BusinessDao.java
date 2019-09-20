@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import com.semi.bus.model.vo.Business;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class BusinessDao {
 
@@ -28,17 +30,37 @@ public class BusinessDao {
 		}
 	}
 
-	public int insertBusiness(Connection conn, String ownId, String name, String addr, String phone, String bNum) {
+	public Business selectBusiness(Connection conn, String busId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectBusiness");
+		Business b = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				b = new Business();
+				b.setBusId(rs.getString("BUS_ID"));
+				b.setBusName(rs.getString("BUS_NAME"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+
+	public int insertBusiness(Connection conn, Business bus) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertBusiness");
 		int r = -1;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, ownId);
-			pstmt.setString(2, name);
-			pstmt.setString(3, bNum);
-			pstmt.setString(4, addr);
-			pstmt.setString(5, phone);
+			pstmt.setString(1, bus.getOwnId());
+			pstmt.setString(2, bus.getBusName());
+			pstmt.setString(3, bus.getBusNum());
+			pstmt.setString(4, bus.getBusAddr());
+			pstmt.setString(5, bus.getBusPhone() != null ? bus.getBusPhone() : "NULL");
 			r = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,6 +68,23 @@ public class BusinessDao {
 			close(pstmt);
 		}
 		return r;
+	}
+
+	public String getBusId(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("getBusId");
+		String busId = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				busId = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return busId;
 	}
 
 	public int checkBusNum(Connection conn, String bNum) {
