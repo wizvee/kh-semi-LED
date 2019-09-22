@@ -71,5 +71,19 @@ public class UserService {
 		close(conn);
 		return list;
 	}
+	
+	public User selectOne(String userId) {
+		Connection conn = getConnection();
+		User u = dao.selectOne(conn,userId);
+		close(conn);
+		return u;
+	}
+	
+	public User checkpw(String pw) {
+		Connection conn=getConnection();
+		User u=dao.checkpw(conn, pw);
+		close(conn);
+		return u;
+	}
 
 }

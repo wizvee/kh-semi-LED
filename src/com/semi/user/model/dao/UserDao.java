@@ -197,5 +197,59 @@ public class UserDao {
 		}
 		return list;
 	}
+	
+	public User selectOne(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User u = null;
+		String sql = prop.getProperty("selectOne");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				u=new User();
+				u.setUserId(rs.getString("USER_ID"));
+				if(rs.getString("USER_TYPE").equals("O")) {
+					u.setUserType("사장");
+				} else if(rs.getString("USER_TYPE").equals("E")){
+					u.setUserType("종업원");
+				}
+				u.setEmail(rs.getString("EMAIL"));
+				u.setPassword(rs.getString("PASSWORD"));
+				u.setUserName(rs.getString("USER_NAME"));
+				u.setUserPhone(rs.getString("USER_PHONE"));
+				u.setProfilePic(rs.getString("PROFILE_PIC"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return u;
+	}
+	
+	public User checkpw(Connection conn, String pw) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		User u=null;
+		String sql=prop.getProperty("checkpw");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				u=new User();
+				u.setPassword(rs.getString("password"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return u;
+	}
 
 }
