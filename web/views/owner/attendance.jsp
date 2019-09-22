@@ -21,7 +21,6 @@ java.util.List"%>
 
 
 	.item .item_atd div {
-		border:1px solid #000;
 	}
 
 	.item .item_atd div p {
@@ -52,21 +51,65 @@ java.util.List"%>
 
 	.item .item_body_select {
 		display: grid;
-		grid-template-columns: 90% 10%;
-		grid-column-start: 2;
+		grid-template-columns: 90% 5% 5%;
+		grid-column: 3;
 	}
 
-	progress {
-		border: 0;
-		height: 20px;
-		width: 100%;
-		
+	.item_atd_employeeList {
+		border: 1px solid black;
+	}
+	
+	.atd_check_late{
+		border: 1px solid black;	
 	}
 
 	.atd_check_late p {
 		text-align: center;
 		font-size: 1em;
 
+	}
+	
+	.atd_progress_wraper div {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: 0px;
+		grid-column-gap: -10px;
+		background-color: blanchedalmond;
+		height: 20px;
+		display: inline-block;
+	}
+
+	#atd_progressBar_late {
+		width: 20%;
+		background-color: red;
+		border: none;
+	}
+
+	#atd_progressBar_work {
+		width: 70%;
+		background-color: chartreuse;
+		border: none;
+	}
+
+	#atd_progressBar_ealryLeave {
+		width: 10%;
+		background-color: dodgerblue;
+		border: none;
+	}
+
+	.atd_progress_color div {
+		width: 1em;
+		height: 1em;
+		border: 1px solid black;
+		display: inline-block;
+		margin-left: 5px;
+		
+	}
+	
+	.atd_progress_color {
+		font-size: 1em;
+		margin-top: 4%;
+		margin-bottom: 3%;
 	}
 
 
@@ -93,7 +136,7 @@ java.util.List"%>
 			<div class="item_body item_atd">
 			<% for(Employee e : list) { %>
 			<%if(e.getSftId() != null) { %>
-		<div>
+		<div class="item_atd_employeeList">
 			<h1 style="text-align: right; font-weight: bolder; color: red; font-size: 2em;"><%=e.getEmpType()%></h1>
 			<br>	
 			<p>직원 명 : <%=e.getUserName()%></p>
@@ -105,10 +148,14 @@ java.util.List"%>
 		<div class="atd_check_late">
 			<p>근무 시간</p>
 			<p><%=e.getShift().getSftOn()%> ~ <%=e.getShift().getSftOff()%></p>
-				<progress value="20" max="100"></progress>
+			<!-- 	<progress value="20" max="100"></progress> -->
+			<div class="atd_progress_color"> <div style="background-color: red;"></div> : 지각  <div style="background-color: chartreuse;"></div> : 근무 시간  <div style="background-color: dodgerblue;"></div> : 조퇴  </div>
+			<div class="atd_progress_wraper">
+				<div id="atd_progressBar_late"></div><div id="atd_progressBar_work"></div><div id="atd_progressBar_ealryLeave"></div>
+			</div>
 		</div>
 			<%}else { %>
-	<div>
+	<div class="item_atd_employeeList">
 			<h1 style="text-align: right; font-weight: bolder; color: red; font-size: 2em;">신입</h1>
 			<br>	
 			<p>직원 명 : <%=e.getUserName()%></p>
