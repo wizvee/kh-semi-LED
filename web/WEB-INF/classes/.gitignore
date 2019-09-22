@@ -1,6 +1,6 @@
-/com/
-<<<<<<< HEAD
-=======
-/common/
->>>>>>> branch 'develop' of https://github.com/wizvee/kh-semi-LED.git
-/sql/
+# Eclipse project files
+.classpath
+.project
+
+# Mac
+.DS_Store
