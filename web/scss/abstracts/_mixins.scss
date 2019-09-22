@@ -71,6 +71,11 @@
   }
 }
 
+@mixin selectMark {
+  position: relative;
+  
+}
+
 // style
 @mixin style-modal {
   border-radius: 10px;
