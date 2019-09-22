@@ -16,7 +16,7 @@ import java.util.Properties;
 import com.semi.sft.model.vo.Shift;
 
 public class ShiftDao {
-
+//  ----> test
 	private Properties prop = new Properties();
 
 	public ShiftDao() {
