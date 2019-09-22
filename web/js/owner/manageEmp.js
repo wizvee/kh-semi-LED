@@ -12,7 +12,7 @@ class MngEmp {
       const btnEnroll = mngHeader[2];
 
       btnWork.addEventListener("click", () => {
-        mngBody.innerText = "재직";
+        mngBody.innerText = "재직 test";
       })
 
       btnResign.addEventListener("click", () => {
