@@ -7,16 +7,17 @@
 }
 
 input[class="ly"] {
-  & + label {
+  &+label {
     @include label-bg;
   }
 }
 
 input[id="ck_snb"]:checked {
-  & ~ .snb {
+  &~.snb {
     transform: translateX(0);
   }
-  & + label {
+
+  &+label {
     visibility: visible;
     opacity: 1;
   }
@@ -33,10 +34,12 @@ input[id="ck_snb"]:checked {
   transform: translateX(-100%);
   transition: transform 0.7s;
   z-index: 5;
+
   @include respond-to("large") {
     position: sticky;
     transform: translateX(0);
   }
+
   .snb_profile {
     border: 2px solid $white;
     @include circle(100px);
@@ -49,6 +52,7 @@ input[id="ck_snb"]:checked {
   height: auto;
   min-height: 100vh;
   background: $background-default;
+
   @include respond-to("large") {
     flex: 1 1 0;
   }
@@ -64,37 +68,46 @@ input[id="ck_snb"]:checked {
   height: $gnb_height;
   border-bottom: 1px solid $border-default;
   background: $background-default;
+
   @include respond-to("medium") {
     grid-template-columns: 45px 1fr repeat(3, 45px) 45px;
   }
+
   div {
     text-align: center;
     line-height: $gnb_height;
+
     &.busList_area {
       text-align: left;
+
       h1 {
         display: inline-block;
         font-size: 120%;
         text-align: left;
         @include cursor-pointer;
+
         i {
           margin-left: 7px;
           font-size: 80%;
           transform: translateY(-1px);
         }
-        &:hover > i {
+
+        &:hover>i {
           color: $primary;
         }
       }
     }
+
     i {
       transition: all 0.7s;
       @include cursor-pointer;
+
       &:hover {
         color: $primary;
       }
     }
   }
+
   label {
     @include respond-to("large") {
       display: none;
@@ -114,14 +127,18 @@ input[id="ck_snb"]:checked {
   grid-auto-flow: row dense;
   grid-gap: 20px;
   justify-items: start;
+
   @include respond-to("large") {
     grid-template-columns: repeat(3, 1fr);
+
     .small {
       grid-column-end: span 1;
     }
+
     .medium {
       grid-column-end: span 2;
     }
+
     .large {
       grid-column-end: span 3;
     }
@@ -137,6 +154,7 @@ input[id="ck_snb"]:checked {
   border-radius: 5px;
   background: $white;
   @include shadow;
+
   .item_header {
     $title-height: 40px;
     padding: 0 20px;
@@ -146,6 +164,7 @@ input[id="ck_snb"]:checked {
     box-sizing: border-box;
     // background: blue;
   }
+
   .item_body {
     padding: 20px;
     width: 100%;
@@ -154,4 +173,36 @@ input[id="ck_snb"]:checked {
     box-sizing: border-box;
     // background: green;
   }
+}
+
+#chat_area {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: auto;
+  background: $secondary;
+  transform: translate(-50%, -50%);
+  .chatList_area {
+    @include grid;
+    grid-template-rows: 1fr;
+    grid-gap : 10px;  
+    .chatListItem_area {
+      width: 100%;
+      height: 50px;
+      @include style-modal;
+    }
+  }
+}
+
+#btn_chatting {
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  @include circle(50px);
+  border: 2px solid $white;
+  background: $primary;
+  color: $white;
+  font-size: 130%;
+  @include shadow;
 }

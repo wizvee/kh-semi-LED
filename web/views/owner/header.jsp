@@ -6,15 +6,16 @@
 <%@page import="com.semi.userinfo.model.vo.UserInfo"%>
 <%@page import="com.semi.bus.model.vo.Business"%>
 <%@page import="com.semi.owner.model.vo.Owner"%>
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	Owner loginOwner = (Owner) session.getAttribute("loginOwner");
 	UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 	HashMap<String, Business> busMap = userInfo.getBusMap();
 	Business selectBus = null;
 	ArrayList<Notification> notiList = null;
-	
-	if(!busMap.isEmpty()) {
+
+	if (!busMap.isEmpty()) {
 		selectBus = busMap.get(userInfo.getSelectBusId());
 		notiList = userInfo.getNotiList();
 	}
@@ -25,15 +26,15 @@
 <html lang="ko">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>service : site menu</title>
-	<!-- CSS -->
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.min.css" />
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
-	<!-- JavaScript Libraries -->
-	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>service : site menu</title>
+<!-- CSS -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.min.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
+<!-- JavaScript Libraries -->
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -46,24 +47,50 @@
 		<!-- 사이드 메뉴 -->
 		<aside class="snb snb_own">
 			<nav>
-			<ul>
-				<li><img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진"></li>
-				<li><%=loginOwner.getUserName() %></li>
-				<li><p>============</p></li>
-				<li><a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a></li>
-				<li><a href="<%=request.getContextPath()%>/owner/">개인 정보</a></li>
-				<li><a href="<%=request.getContextPath()%>/owner/">근태 관리</a></li>
-				<li><a href="<%=request.getContextPath()%>/owner/">급여 관리</a></li>
-			</ul>
+				<ul>
+					<li><img class="snb_profile"
+						src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic()%>"
+						alt="프로필 사진"></li>
+					<li><%=loginOwner.getUserName()%></li>
+					<li><p>============</p></li>
+					<li><a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a></li>
+					<li><a href="<%=request.getContextPath()%>/views/owner/pwdck.jsp">개인 정보</a></li>
+					<li><a href="<%=request.getContextPath()%>/views/attendance.jsp">근태 관리</a></li>
+					<li><a href="<%=request.getContextPath()%>/owner/">급여 관리</a></li>
+				</ul>
 			</nav>
 		</aside>
 		<!-- //사이드 메뉴 -->
 		<!-- container -->
 		<div id="container" class="container_main">
+			<div id="chat_area" class="item" style="display: none;">
+				<div class="item_header">채팅창</div>
+				<div class="item_body">
+					<div class="chatList_area" style="display: block;">
+						<%
+							for (Map.Entry<String, Business> e : busMap.entrySet()) {
+								Business b = e.getValue();
+						%>
+						<div class="chatListItem_area">
+							<%=b.getBusName()%>
+						</div>
+						<%
+							}
+						%>
+					</div>
+					<div class="chatMsg_area" style="display: none;">
+						<button class="btn_chatBack">돌아가기</button>
+						<p></p>
+						메세지영역
+					</div>
+				</div>
+
+			</div>
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">
 				<div>
-					<label for="ck_snb"> <i class="fa fa-bars" aria-hidden="true"></i>
+					<label for="ck_snb"> <i class="fa fa-bars"
+						aria-hidden="true"></i>
 					</label>
 				</div>
 				<div class="busList_area">
@@ -73,16 +100,17 @@
 					<h1 class="dropdown_toggle"><%=selectBus.getBusName()%></h1>
 					<ul class="dropdown_menu">
 						<%
-						for (Map.Entry<String, Business> e : busMap.entrySet()) {
-							Business b = e.getValue();
+							for (Map.Entry<String, Business> e : busMap.entrySet()) {
+									Business b = e.getValue();
 						%>
 						<li><a
-								href="<%=request.getContextPath()%>/owner/main.do?selectBus=<%=b.getBusId()%>"><%=b.getBusName()%></a>
+							href="<%=request.getContextPath()%>/owner/main.do?selectBus=<%=b.getBusId()%>"><%=b.getBusName()%></a>
 						</li>
 						<%
 							}
 						%>
-						<li><a href="<%=request.getContextPath()%>/owner/insertBus.do">추가</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/owner/insertBus.do">추가</a></li>
 					</ul>
 					<%
 						}
