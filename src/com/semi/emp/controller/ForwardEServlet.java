@@ -16,6 +16,7 @@ import com.semi.emp.model.service.EmpService;
 import com.semi.emp.model.vo.Employee;
 import com.semi.owner.model.service.OwnerService;
 import com.semi.user.model.vo.User;
+import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/emp/main.do")
 public class ForwardEServlet extends HttpServlet {
@@ -28,29 +29,36 @@ public class ForwardEServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
-		String url = "";
-		
-		Employee loginEmp = new EmpService().castingTypeE(loginUser.getUserId());
-		ArrayList<Business> busList = new EmpService().getBnsList(loginEmp.getUserId());
-		session.setAttribute("loginEmp", loginEmp);
-		session.setAttribute("busList", busList);
+		User loginUser = (User) session.getAttribute("loginUser");
 
-		if (busList.isEmpty())
-			url += "/views/emp/addBus.jsp";
+		// webSocket용 userInfo생성 및 불러오기
+		UserInfo userInfo = null;
+		if ((UserInfo) session.getAttribute("userInfo") != null)
+			userInfo = (UserInfo) session.getAttribute("userInfo");
 		else {
-			Business selectBus = null;
-			String selectBusId = (String) session.getAttribute("selectBusId");
-			
+			userInfo = loginUser.getUserInfo(loginUser.getUserId(), loginUser.getUserType());
+			session.removeAttribute("loginUser");
+		}
+
+		// redirect용 URL
+		String url = "";
+
+		// 기존 개발용 Employee instance 생성
+		Employee loginEmp = new EmpService().castingTypeE(userInfo.getUserId());
+		session.setAttribute("loginEmp", loginEmp);
+
+		if (userInfo.getBusMap().isEmpty())
+			url += "/emp/addBus.do";
+		else {
+			String selectBusId = request.getParameter("selectBus");
 			if (selectBusId != null)
-				selectBus = new BusinessService().selectBusiness(selectBusId);
-			else
-				selectBus = busList.get(0);
-			
-			session.setAttribute("selectBus", selectBus);
+				userInfo.setSelectBusId(selectBusId);
+
 			url += "/views/emp/main.jsp";
 		}
 
+		userInfo.getParameters("E");
+		session.setAttribute("userInfo", userInfo);
 		response.sendRedirect(request.getContextPath() + url);
 	}
 

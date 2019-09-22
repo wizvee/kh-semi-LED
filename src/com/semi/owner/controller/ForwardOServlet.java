@@ -15,6 +15,7 @@ import com.semi.bus.model.vo.Business;
 import com.semi.owner.model.service.OwnerService;
 import com.semi.owner.model.vo.Owner;
 import com.semi.user.model.vo.User;
+import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/owner/main.do")
 public class ForwardOServlet extends HttpServlet {
@@ -27,29 +28,36 @@ public class ForwardOServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
+		User loginUser = (User) session.getAttribute("loginUser");
+
+		// webSocket용 userInfo생성 및 불러오기
+		UserInfo userInfo = null;
+		if ((UserInfo) session.getAttribute("userInfo") != null)
+			userInfo = (UserInfo) session.getAttribute("userInfo");
+		else {
+			userInfo = loginUser.getUserInfo(loginUser.getUserId(), loginUser.getUserType());
+			session.removeAttribute("loginUser");
+		}
+
+		// redirect용 URL
 		String url = "";
 
-		Owner loginOwner = new OwnerService().castingTypeO(loginUser.getUserId());
-		ArrayList<Business> busList = new OwnerService().getBusList(loginOwner.getUserId());
+		// 기존 개발용 owner instance 생성
+		Owner loginOwner = new OwnerService().castingTypeO(userInfo.getUserId());
 		session.setAttribute("loginOwner", loginOwner);
-		session.setAttribute("busList", busList);
 
-		if (busList.isEmpty())
+		if (userInfo.getBusMap().isEmpty())
 			url += "/owner/insertBus.do";
 		else {
-			Business selectBus = null;
-			String selectBusId = (String) session.getAttribute("selectBusId");
-			
+			String selectBusId = request.getParameter("selectBus");
 			if (selectBusId != null)
-				selectBus = new BusinessService().selectBusiness(selectBusId);
-			else
-				selectBus = busList.get(0);
-			
-			session.setAttribute("selectBus", selectBus);
+				userInfo.setSelectBusId(selectBusId);
+
 			url += "/views/owner/main.jsp";
 		}
 
+		userInfo.getParameters("O");
+		session.setAttribute("userInfo", userInfo);
 		response.sendRedirect(request.getContextPath() + url);
 	}
 

@@ -1,0 +1,5 @@
+.dropdown_toggle {
+    &+.dropdown_menu {
+        display: none;
+    }
+}

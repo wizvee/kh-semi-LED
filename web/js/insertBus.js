@@ -17,7 +17,7 @@ class Shift {
   }
 }
 
-class insertBus {
+class InsertBus {
   constructor() {
     this.count = 0;
     this.setInit();
@@ -32,17 +32,16 @@ class insertBus {
       ({ target }) => {
         const area = target.parentElement;
         const sftArea = document.createElement("div");
+        const sftName = `근무조${++this.count}`;
         sftArea.setAttribute("class", "sft_area");
         sftArea.innerHTML = `
-      <div><input type="text" name="sftName" value="근무조${++this
-        .count}" class="inpt-outline">
+      <div><input type="text" name="sftName" value="${sftName}" class="inpt-outline">
       <span><i class="fa fa-tags" aria-hidden="true"></i></span></div>
       <div><input type="text" name="sftDay" class="inpt-outline">
       <span><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></span></div>
       <div><input type="text" name="sftOn" class="inpt-outline">
       <span><i class="fa fa-clock-o" aria-hidden="true"></i></span></div>
-      <input type="hidden" name="sftOff" value="18:00">
-      `;
+      <input type="hidden" name="sftOff" value="18:00">`;
         area.append(sftArea);
       },
       false
@@ -51,7 +50,7 @@ class insertBus {
     btnIstBus.addEventListener(
       "click",
       () => {
-        const ownId = document.getElementsByName("ownId")[0].value;
+        const ownId = userInfo.userId;
         const busName = document.getElementsByName("bName")[0].value;
         const busNum = document.getElementsByName("bNum")[0].value;
         const busAddr = document.getElementsByName("addr")[0].value;
@@ -84,14 +83,15 @@ class insertBus {
           JSON.stringify(sftArr)
         );
 
-        this.getResult("/owner/addBus.do", data, this.submitBusiness);
+        this.getResult("/insertBus.do", data, this.submitBusiness);
       },
       false
     );
   }
 
   submitBusiness(respText) {
-    if (respText == "success") location.href = "/p_190826_semi/main.do";
+    if (respText != "fail")
+      location.href = "/p_190826_semi/owner/main.do?selectBus=" + respText;
   }
 
   getResult(servletURL, data, fn) {
@@ -109,7 +109,7 @@ class insertBus {
   }
 }
 
-const addBus = new insertBus();
+const insertBus = new InsertBus();
 
 // OLD!!!!!!!!!!!!!!!!!! *************
 function fn_search() {
@@ -158,9 +158,6 @@ function fn_search() {
           $(".addInfo_area").fadeIn("slow");
         });
       });
-    },
-    error: function() {
-      alert("연결실패");
     }
   });
 }

@@ -149,8 +149,7 @@ class Register {
 const register = new Register();
 
 function selectElements(name) {
-  let selectArr = Array.from(document.querySelectorAll(name));
-  return selectArr;
+  return Array.from(document.querySelectorAll(name));
 }
 
 // MODAL

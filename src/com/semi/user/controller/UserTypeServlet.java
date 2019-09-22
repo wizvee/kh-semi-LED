@@ -23,7 +23,7 @@ public class UserTypeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String type = request.getParameter("type");
-		System.out.println(type);
+		
 		int r = new UserService().setUserType(userId, type);
 		
 		if(r > 0) {
@@ -31,6 +31,7 @@ public class UserTypeServlet extends HttpServlet {
 			loginUser = new UserService().selectUser(loginUser.getEmail());
 			request.getSession().setAttribute("loginUser", loginUser);
 		}
+		
 		request.getRequestDispatcher("/main.do").forward(request, response);
 	}
 

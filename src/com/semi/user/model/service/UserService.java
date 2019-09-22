@@ -6,8 +6,10 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
-import com.semi.user.dao.UserDao;
+import com.semi.noti.model.vo.Notification;
+import com.semi.user.model.dao.UserDao;
 import com.semi.user.model.vo.User;
 
 public class UserService {
@@ -41,12 +43,14 @@ public class UserService {
 	public User selectUser(String email, String pw) {
 		Connection conn = getConnection();
 		User u = dao.selectUser(conn, email, pw);
+		close(conn);
 		return u;
 	}
 
 	public User selectUser(String email) {
 		Connection conn = getConnection();
 		User u = dao.selectUser(conn, email);
+		close(conn);
 		return u;
 	}
 
@@ -59,6 +63,13 @@ public class UserService {
 			rollback(conn);
 		close(conn);
 		return r;
+	}
+	
+	public ArrayList<Notification> getNotiList(String busId) {
+		Connection conn = getConnection();
+		ArrayList<Notification> list = dao.getNotiList(conn, busId);
+		close(conn);
+		return list;
 	}
 
 }

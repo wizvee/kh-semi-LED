@@ -1,14 +1,25 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="com.semi.bus.model.vo.Business"%>
+<%@page import="com.semi.noti.model.vo.Notification"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.semi.owner.model.service.OwnerService"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="com.semi.userinfo.model.vo.UserInfo"%>
+<%@page import="com.semi.bus.model.vo.Business"%>
 <%@page import="com.semi.owner.model.vo.Owner"%>
-<%@page import="com.semi.user.model.vo.User"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	Owner loginOwner = (Owner) session.getAttribute("loginOwner");
-	Business selectBus = (Business) session.getAttribute("selectBus");
-	ArrayList<Business> busList = (ArrayList<Business>) session.getAttribute("busList");
+	UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+	HashMap<String, Business> busMap = userInfo.getBusMap();
+	Business selectBus = null;
+	ArrayList<Notification> notiList = null;
+	
+	if(!busMap.isEmpty()) {
+		selectBus = busMap.get(userInfo.getSelectBusId());
+		notiList = userInfo.getNotiList();
+	}
+
+	String parsingInfo = new Gson().toJson(userInfo);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,12 +37,25 @@
 </head>
 
 <body>
+	<script>
+		const userInfo = <%=parsingInfo %>;
+	</script>
 	<div id="wrap">
-		<input type="checkbox" id="ck_snb" class="ly" /> <label for="ck_snb"></label>
+		<input type="checkbox" id="ck_snb" class="ly" /><label for="ck_snb"></label>
 		<input type="checkbox" id="" class="ly" /> <label for=""></label>
 		<!-- 사이드 메뉴 -->
 		<aside class="snb snb_own">
-			<nav></nav>
+			<nav>
+			<ul>
+				<li><img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진"></li>
+				<li><%=loginOwner.getUserName() %></li>
+				<li><p>============</p></li>
+				<li><a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a></li>
+				<li><a href="<%=request.getContextPath()%>/owner/">개인 정보</a></li>
+				<li><a href="<%=request.getContextPath()%>/owner/">근태 관리</a></li>
+				<li><a href="<%=request.getContextPath()%>/owner/">급여 관리</a></li>
+			</ul>
+			</nav>
 		</aside>
 		<!-- //사이드 메뉴 -->
 		<!-- container -->
@@ -49,11 +73,11 @@
 					<h1 class="dropdown_toggle"><%=selectBus.getBusName()%></h1>
 					<ul class="dropdown_menu">
 						<%
-							for (Business b : busList) {
+						for (Map.Entry<String, Business> e : busMap.entrySet()) {
+							Business b = e.getValue();
 						%>
-						<li>
-							<a
-								href="<%=request.getContextPath()%>/owner/switch.do?busId=<%=b.getBusId()%>"><%=b.getBusName()%></a>
+						<li><a
+								href="<%=request.getContextPath()%>/owner/main.do?selectBus=<%=b.getBusId()%>"><%=b.getBusName()%></a>
 						</li>
 						<%
 							}

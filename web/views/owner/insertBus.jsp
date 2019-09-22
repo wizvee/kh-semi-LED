@@ -1,5 +1,10 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="com.semi.userinfo.model.vo.UserInfo"%>
+<%@page import="com.semi.bus.model.vo.Business"%>
+<%@page import="com.semi.owner.model.vo.Owner"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.semi.user.model.vo.User"%>
 <%@ include file="header.jsp"%>
 <div id="content">
 	<section class="item">
@@ -17,7 +22,6 @@
 			<div class="addInfo_area">
 				<form class="frm_addBus" method="post">
 					<div class="fieldBasic_area">
-						<input type="hidden" name="ownId" class="inpt-outline" value="<%=loginOwner.getUserId()%>" />
 						<div>사업장 이름</div>
 						<input type="text" name="bName" class="inpt-outline" value="" />
 						<div>사업장 주소</div>

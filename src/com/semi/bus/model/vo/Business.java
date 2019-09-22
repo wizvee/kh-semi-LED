@@ -1,6 +1,9 @@
 package com.semi.bus.model.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import com.semi.emp.model.vo.Employee;
 
 public class Business implements Serializable {
 
@@ -11,10 +14,14 @@ public class Business implements Serializable {
 	private String busAddr;
 	private String busPhone;
 
+	private String ownName;
+	private ArrayList<Employee> list;
+
 	public Business() {
 	}
 
-	public Business(String busId, String ownId, String busName, String busNum, String busAddr, String busPhone) {
+	public Business(String busId, String ownId, String busName, String busNum, String busAddr, String busPhone,
+			String ownName, ArrayList<Employee> list) {
 		super();
 		this.busId = busId;
 		this.ownId = ownId;
@@ -22,6 +29,8 @@ public class Business implements Serializable {
 		this.busNum = busNum;
 		this.busAddr = busAddr;
 		this.busPhone = busPhone;
+		this.ownName = ownName;
+		this.list = list;
 	}
 
 	public String getBusId() {
@@ -70,6 +79,22 @@ public class Business implements Serializable {
 
 	public void setBusPhone(String busPhone) {
 		this.busPhone = busPhone;
+	}
+
+	public String getOwnName() {
+		return ownName;
+	}
+
+	public void setOwnName(String ownName) {
+		this.ownName = ownName;
+	}
+
+	public ArrayList<Employee> getList() {
+		return list;
+	}
+
+	public void setList(ArrayList<Employee> list) {
+		this.list = list;
 	}
 
 }

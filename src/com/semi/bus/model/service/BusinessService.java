@@ -6,22 +6,18 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
-import com.semi.bus.dao.BusinessDao;
+import com.semi.bus.model.dao.BusinessDao;
 import com.semi.bus.model.vo.Business;
-import com.semi.sft.dao.ShiftDao;
+import com.semi.emp.model.vo.Employee;
+import com.semi.sft.model.dao.ShiftDao;
 import com.semi.sft.model.vo.Shift;
 
 public class BusinessService {
 
 	private BusinessDao dao = new BusinessDao();
 	private ShiftDao sftDao = new ShiftDao();
-
-	public Business selectBusiness(String busId) {
-		Connection conn = getConnection();
-		Business b = dao.selectBusiness(conn, busId);
-		return b;
-	}
 
 	public String insertBusiness(String ownId, Business bus, Shift[] sftArr) {
 		Connection conn = getConnection();
@@ -48,6 +44,13 @@ public class BusinessService {
 		if (r > 0)
 			check = true;
 		return check;
+	}
+	
+	public ArrayList<Employee> getEmpList(String selectBusId) {
+		Connection conn = getConnection();
+		ArrayList<Employee> list = dao.getEmpList(conn, selectBusId);
+		close(conn);
+		return list;
 	}
 
 }

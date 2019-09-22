@@ -37,6 +37,11 @@ input[id="ck_snb"]:checked {
     position: sticky;
     transform: translateX(0);
   }
+  .snb_profile {
+    border: 2px solid $white;
+    @include circle(100px);
+    @include shadow;
+  }
 }
 
 .container_main {

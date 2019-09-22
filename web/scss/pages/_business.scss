@@ -94,6 +94,24 @@
     background: rgba($primary, 0.2) !important;
     box-sizing: border-box;
     @include shadow;
+
+    button {
+      width: 100%;
+      transition: none;
+
+      @include respond-to("medium") {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        margin-right: 20px;
+        width: 100px;
+        height: 100px;
+        transform: translateY(-50%);
+      }
+    }
+
+
+
   }
 }
 
@@ -108,10 +126,6 @@
 
     @include respond-to("medium") {
       grid-template-columns: 170px 1fr;
-
-      div {
-        background: red;
-      }
     }
   }
 
@@ -134,7 +148,6 @@
       }
 
       input {
-        
         @include placeholder;
       }
     }
