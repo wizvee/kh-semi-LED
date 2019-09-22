@@ -9,7 +9,7 @@
 		<div class="item_header">
 			<h2>전체 직원 관리</h2>
 		</div>
-		<div class="item_body">
+		<div class="item_body item_mngEmp">
 			<div class="mngEmp_header">
 				<span>재직</span>
 				<span>퇴직</span>
@@ -20,6 +20,6 @@
 			</div>
 		</div>
 	</section>
-
+	<script src="<%=request.getContextPath()%>/js/owner/manageEmp.js"></script>
 </div>
 <%@ include file="footer.jsp"%>
