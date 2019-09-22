@@ -9,36 +9,17 @@
 		<div class="item_header">
 			<h2>전체 직원 관리</h2>
 		</div>
-		<div class="item_body">
-			<div class="emp_work">
-				<p>재직</p>
-				<%
-					for (Employee e : empList) {
-						if (e.getEmpType() != null) {
-				%>
-				<p><%=e.getUserName()%></p>
-				<%
-						}
-					}
-				%>
+		<div class="item_body item_mngEmp">
+			<div class="mngEmp_header">
+				<span>재직</span>
+				<span>퇴직</span>
+				<span>진행</span>
 			</div>
-			<div class="emp_resign">
-				<p>퇴직</p>
-			</div>
-			<div class="emp_enroll">
-				<p>진행중</p>
-				<%
-					for (Employee e : empList) {
-						if (e.getEmpType() == null) {
-				%>
-				<p><%=e.getUserName()%></p>
-				<%
-						}
-					}
-				%>
+			<div class="mngEmp_body">
+
 			</div>
 		</div>
 	</section>
-
+	<script src="<%=request.getContextPath()%>/js/owner/manageEmp.js"></script>
 </div>
 <%@ include file="footer.jsp"%>

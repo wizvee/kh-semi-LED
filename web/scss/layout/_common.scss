@@ -166,6 +166,8 @@ input[id="ck_snb"]:checked {
   }
 
   .item_body {
+    @include grid;
+    
     padding: 20px;
     width: 100%;
     height: auto;
@@ -197,8 +199,8 @@ input[id="ck_snb"]:checked {
 
 #btn_chatting {
   position: fixed;
-  bottom: 100px;
-  right: 100px;
+  bottom: 50px;
+  right: 50px;
   @include circle(50px);
   border: 2px solid $white;
   background: $primary;
