@@ -1,17 +1,11 @@
 .item_mngEmp {
     grid-template-rows: 35px 1fr;
+
     .mngEmp_header {
         @include grid;
         grid-template-columns: repeat(3, 1fr);
         text-align: center;
         line-height: 35px;
         // background: red;
-        span {
-            @include selectMark;
-            @include cursor-pointer;
-        }
-    }
-    .mngEmp_body {
-        background: blue;
     }
 }

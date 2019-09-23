@@ -109,6 +109,7 @@ public class BusinessDao {
 				e.setBankAccount(rs.getString("BANK_ACCOUNT"));
 				e.setSftId(rs.getString("SFT_ID"));
 				e.setUserName(rs.getString("USER_NAME"));
+				e.setProfilePic(rs.getString("PROFILE_PIC"));
 				list.add(e);
 			}
 		} catch (SQLException e) {
