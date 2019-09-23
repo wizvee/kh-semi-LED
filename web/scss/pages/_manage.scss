@@ -1,17 +1,53 @@
 .item_mngEmp {
     grid-template-rows: 35px 1fr;
+
     .mngEmp_header {
         @include grid;
         grid-template-columns: repeat(3, 1fr);
         text-align: center;
         line-height: 35px;
         // background: red;
-        span {
-            @include selectMark;
-            @include cursor-pointer;
-        }
     }
+
     .mngEmp_body {
-        background: blue;
+        &>div {
+            grid-gap: 5px;
+            display: none;
+            visibility: hidden;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all 0.7s;
+
+            &.focus {
+                visibility: visible;
+                @include grid;
+                grid-template-columns: repeat(2, 1fr);
+                opacity: 1;
+                animation: ani_slideDown 1s 1;
+            }
+        }
+
+        .empList_area {
+            @include grid;
+            grid-template-columns: 60px 1fr 160px;
+            height: 50px;
+            line-height: 50px;
+            background: red;
+
+            div {
+                text-align: center;
+            }
+
+            img {
+                @include trans-All;
+            }
+
+            button {
+                @include trans-middle;
+                margin-right: 3px;
+                width: 60px;
+            }
+        }
     }
 }

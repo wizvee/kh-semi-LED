@@ -5,25 +5,28 @@
   0% {
     margin-bottom: -40px;
   }
+
   30% {
-    letter-spacing: 25px;
     margin-bottom: -20px;
+    letter-spacing: 25px;
   }
+
   85% {
-    letter-spacing: 8px;
     margin-bottom: 0px;
+    letter-spacing: 8px;
   }
 }
 
 @keyframes ani_login {
   0% {
-    opacity: 0;
     visibility: hidden;
-  }
-  75% {
     opacity: 0;
+  }
+
+  75% {
     visibility: hidden;
     margin-bottom: -20px;
+    opacity: 0;
   }
 }
 
@@ -31,6 +34,7 @@
   0% {
     border: 0;
   }
+
   95% {
     border-top: 1px solid rgba($white, 0.3);
     border-bottom: 1px solid rgba($white, 0.3);
@@ -39,10 +43,18 @@
 
 @keyframes ani_slideDown {
   0% {
+    visibility: hidden;
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-100%);
   }
+
+  50% {
+    visibility: visible;
+    opacity: 0.5;
+  }
+
   100% {
+    visibility: visible;
     opacity: 1;
     transform: translateY(0);
   }

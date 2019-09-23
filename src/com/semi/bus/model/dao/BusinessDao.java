@@ -15,7 +15,6 @@ import java.util.Properties;
 
 import com.semi.bus.model.vo.Business;
 import com.semi.emp.model.vo.Employee;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class BusinessDao {
 
@@ -109,6 +108,7 @@ public class BusinessDao {
 				e.setBankAccount(rs.getString("BANK_ACCOUNT"));
 				e.setSftId(rs.getString("SFT_ID"));
 				e.setUserName(rs.getString("USER_NAME"));
+				e.setProfilePic(rs.getString("PROFILE_PIC"));
 				list.add(e);
 			}
 		} catch (SQLException e) {
@@ -119,5 +119,17 @@ public class BusinessDao {
 		}
 		return list;
 	}
+	
+//	public int approvalEmp(Connection conn, String busId, String empId) {
+//		PreparedStatement pstmt = null;
+//		String sql = prop.getProperty("");
+//		int r = -1;
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 }

@@ -11,12 +11,34 @@
 		</div>
 		<div class="item_body item_mngEmp">
 			<div class="mngEmp_header">
-				<span>재직</span>
-				<span>퇴직</span>
-				<span>진행</span>
+				<div><span>재직</span></div>
+				<div><span>퇴직</span></div>
+				<div><span>진행</span></div>
 			</div>
 			<div class="mngEmp_body">
-
+				<div class="mngEmpWork_area focus">
+					1
+				</div>
+				<div class="mngEmpResign_area">
+					2
+				</div>
+				<div class="mngEmpEnroll_area">
+					<% for(Employee e : empList) { %>
+					<div class="empList_area">
+						<img class="item_profile"
+							src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
+						<%=e.getUserName() %>
+						<div>
+							<button class="btn-outline btn_Approval">승인</button>
+							<input type="hidden" name="mngEmp_empId" value="<%=e.getUserId()%>">
+							<button class="btn-outline btn_Reject">거절</button>
+						</div>
+					</div>
+					<% } %>
+				</div>
+				<div class="approvalEmpInfo_area">
+					11
+				</div>
 			</div>
 		</div>
 	</section>
