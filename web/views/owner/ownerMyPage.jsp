@@ -2,14 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.semi.user.model.vo.User"%>
 <%
-	User infoUser =(User)request.getAttribute("infoUser");
+	User infoUser =(User)session.getAttribute("infoUser");
 %>
 
 <%@ include file="header.jsp"%>
 
 <style type="text/css">
 	.item .item_mypage {
-		grid-template-rows : repeat(7, 1fr);
+		grid-template-rows : repeat(4, 1fr);
 	}
 	.item .item_mypage div {
 		height: 100px;
@@ -43,9 +43,9 @@
 			<div class="item_body item_mypage_pw">
 				<div><a href="#" class="infoUserPwd">비밀번호 **********</a></div>
 				
+				<button id="btn_checkPw" class="btn-primary" onclick="return false;">확인</button>
 				<input type="button" onclick="fn_updateinfoUser();" value="비밀번호 변경"/>	
 			</div>
-		<input type="button" onclick="fn_backPage();" value="취소"/>
 		</form>
 	</section>
 </div>

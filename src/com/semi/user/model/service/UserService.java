@@ -85,5 +85,12 @@ public class UserService {
 		close(conn);
 		return u;
 	}
+	
+	public User CheckUser(String userId, String pw) {
+		Connection conn=getConnection();
+		User u = dao.CheckUser(conn, userId, pw);
+		close(conn);
+		return u;
+	}
 
 }

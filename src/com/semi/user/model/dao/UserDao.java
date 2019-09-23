@@ -197,22 +197,22 @@ public class UserDao {
 		}
 		return list;
 	}
-	
+
 	public User selectOne(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		User u = null;
 		String sql = prop.getProperty("selectOne");
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				u=new User();
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				u = new User();
 				u.setUserId(rs.getString("USER_ID"));
-				if(rs.getString("USER_TYPE").equals("O")) {
+				if (rs.getString("USER_TYPE").equals("O")) {
 					u.setUserType("사장");
-				} else if(rs.getString("USER_TYPE").equals("E")){
+				} else if (rs.getString("USER_TYPE").equals("E")) {
 					u.setUserType("종업원");
 				}
 				u.setEmail(rs.getString("EMAIL"));
@@ -221,35 +221,60 @@ public class UserDao {
 				u.setUserPhone(rs.getString("USER_PHONE"));
 				u.setProfilePic(rs.getString("PROFILE_PIC"));
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return u;
 	}
-	
+
 	public User checkpw(Connection conn, String pw) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		User u=null;
-		String sql=prop.getProperty("checkpw");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User u = null;
+		String sql = prop.getProperty("checkpw");
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pw);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				u=new User();
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				u = new User();
 				u.setPassword(rs.getString("password"));
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return u;
+	}
+
+	public User CheckUser(Connection conn, String userId, String pw) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User u = null;
+		String sql = prop.getProperty("CheckUser");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, pw);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				u = new User();
+				u.setUserId(rs.getString("USER_ID"));
+				u.setPassword(rs.getString("PASSWORD"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return u;
+
 	}
 
 }
