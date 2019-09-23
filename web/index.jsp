@@ -5,6 +5,7 @@
 <html lang="ko">
 <!-- 이거는 git push 테스트입니다 -->
 <!-- 태영씨 pc push test -->
+<!-- 우정 mac 나를 넘길 수 있을거 같아 ?-->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
