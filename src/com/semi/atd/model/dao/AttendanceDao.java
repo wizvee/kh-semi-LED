@@ -43,7 +43,6 @@ public class AttendanceDao {
 			pstmt.setString(2, e.getUserId());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				System.out.println("rs들어옴");
 				a.setSftId(rs.getString("SFT_ID"));
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));

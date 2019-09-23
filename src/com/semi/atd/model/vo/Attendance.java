@@ -140,7 +140,7 @@ public class Attendance {
 	public void setTimeforLong(String stAtdTime, String enAtdTime, String stSftTime, String enSftTime) {
 
 		Date enSftD = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmms");
 		Calendar cal = Calendar.getInstance();
 
 		String[] stSfts = stSftTime.split(":");
@@ -153,7 +153,7 @@ public class Attendance {
 			stSft += stSfts[i];
 			enSft += stSfts[i];
 		}
-
+			/// 값이 0으로 세팅됨 수정 해야함
 		try {
 			if (Integer.parseInt(stSfts[0]) > Integer.parseInt(enSfts[0])) {
 				cal.setTime(enSftD);
@@ -170,13 +170,14 @@ public class Attendance {
 				this.setEnAtdTime(sdf.parse(enAtdTime).getTime()/(1000*60));
 				this.setStSftTime(sdf.parse(stSftTime).getTime()/(1000*60));
 				this.setEnSftTime(sdf.parse(enSftTime).getTime()/(1000*60));
-
+				
 			}
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(this.getStAtdTime());
 
 	}
 

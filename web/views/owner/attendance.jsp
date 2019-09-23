@@ -159,6 +159,10 @@ java.util.List"%>
 				<p><%=e.getShift().getSftOn()%>
 					~
 					<%=e.getShift().getSftOff()%></p>
+					<input type="hidden" id="stAtTime" value=<%=e.getAttendance().getStAtdTime() %>>
+					<input type="hidden" id="enAtTime" value=<%=e.getAttendance().getEnAtdTime() %>>
+					<input type="hidden" id="stSftime" value=<%=e.getAttendance().getStSftTime() %>>
+					<input type="hidden" id="EnSftime" value=<%=e.getAttendance().getEnSftTime() %>>
 				<!-- 	<progress value="20" max="100"></progress> -->
 				<div class="atd_progress_color">
 					<div style="background-color: red;"></div>
@@ -173,34 +177,39 @@ java.util.List"%>
 					<script type="text/javascript">
 						// changeProcessBar(e);
 
-						$(function (e) {
-			var stAtd = e.getAtdOn;
-			var enAtd = e.getAtdOff;
-			var stSft = e.getSftOn;
-			var enSft = e.getSftOff;
-			e.setTimeforLong(stAtd, enAtd, stSft, enSft);
+			
+							var stAtd = $('#stAtTime').val();
+							var enAtd = $('#enAtTime').val();
+							var stSft = $('#stSftime').val();
+							var enSft = $('#enSftime').val();
+
+
+							console.log(stAtd);
+							console.log(enAtd);
+							console.log(stSft);
+							console.log(enSft);
+
 
 			var widthLate = 0;
 			var widthNomal = 0;
 			var widthEarly = 0;
 
-			if (widthLate < 0) {
-				widthLate = (e.getstSftTime - e.getStAtdTime)
-						/ (e.getEnSftTime - e.getStSftTime);
+			if (stSft > stAtd) {
+				widthLate = (stSft - stAtd)
+						/ (enSft - stSft);
 				$('#atd_progressBar_late').width(widthLate+'%');
 				console.log(width);
-			} else if (e.getEnSftTime > e.getEnAtdTime) {
-				widthEarly = (e.getEnSftTime - e.getEnAtdTime)
-						/ (e.getEnSftTime - e.getStSftTime) - widthLate;
+			} else if (enSft > enAtd) {
+				widthEarly = (enSft - enAtd)
+						/ (enSft - stSft) - widthLate;
 				$('#atd_progressBar_ealryLeave').width(widthEarly+'%');
 			} else {
-				widthNomal = ((e.getEnAtdTime - e.getStAtdTime) / (e.getEnSftTime - e.getStSftTime))
+				widthNomal = ((enAtd - stAtd) / (enSft - stSft))
 						- (widthLate - widthEarly);
 				$('#atd_progressBar_work').width(widthNomal+'%');
 			};
-			console.log(e.getEnAtdTime - e.getStAtdTime);
+			console.log(enAtd - stAtd);
 			console.log(widthLate + widthEarly + widthNomal);
-						});
 					</script>
 
 					<div id="atd_progressBar_late"></div>

@@ -67,7 +67,6 @@ public class ShiftDao {
 				s.setSftOn(rs.getString("SFT_ON"));
 				s.setSftOff(rs.getString("SFT_OFF"));
 				s.setSftName(rs.getString("SFT_NAME"));
-
 				list.add(s);
 			}
 		} catch (SQLException e) {
