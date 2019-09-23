@@ -41,21 +41,20 @@ public class AttendanceServlet extends HttpServlet {
 		String busId = user.getSelectBusId();
 		
 		List<Employee> empList = new BusinessService().getEmpList(busId);
-		List<Employee> list = new ShiftService().addShiftForEmpList(busId, empList);
-//		for(Employee e : empList) {
-//			for(Shift s : sftList) {
-//				if(e.getSftId()!=null) {
-//				if(e.getSftId().equals(s.getSftId())) {
-//					e.setShift(s);
-//				}
-//		}
-//		}
-//		}
+		List<Shift> sftList = new ShiftService().getSftList(busId);
+		for(Employee e : empList) {
+			for(Shift s : sftList) {
+				if(e.getSftId()!=null) {
+				if(e.getSftId().equals(s.getSftId())) {
+					e.setShift(s);
+				}
+		}
+		}
+		}
 //		List<String> atdList = new ShiftService().getAtdList(busId);
-//		String atdOn
-//		String atdOff
+
 		
-		request.setAttribute("empList", list);
+		request.setAttribute("empList", empList);
 
 		request.getRequestDispatcher("/views/owner/attendance.jsp").forward(request, response);
 
