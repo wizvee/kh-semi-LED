@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.atd.model.Service.AttendanceService;
+import com.semi.atd.model.vo.Attendance;
 import com.semi.bus.model.service.BusinessService;
 import com.semi.emp.model.vo.Employee;
 import com.semi.sft.model.Service.ShiftService;
 import com.semi.sft.model.vo.Shift;
-import com.semi.user.model.vo.User;
 import com.semi.userinfo.model.vo.UserInfo;
 
 /**
@@ -50,8 +51,8 @@ public class AttendanceServlet extends HttpServlet {
 				}
 		}
 		}
+			Attendance atd = new AttendanceService().setAttendance(e, busId);
 		}
-//		List<String> atdList = new ShiftService().getAtdList(busId);
 
 		
 		request.setAttribute("empList", empList);

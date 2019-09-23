@@ -20,12 +20,10 @@ public class Attendance {
 	private long enAtdTime;
 	private long stSftTime;
 	private long enSftTime;
-	
-	
+
 	public Attendance() {
 	}
 
-	
 	public Attendance(String busId, String empId, String atdOn, String atdOff, String overTime, String attendance,
 			int dayWage, String sftId, long stAtdTime, long enAtdTime, long stSftTime, long enSftTime) {
 		super();
@@ -42,7 +40,6 @@ public class Attendance {
 		this.stSftTime = stSftTime;
 		this.enSftTime = enSftTime;
 	}
-
 
 	public String getBusId() {
 		return busId;
@@ -139,36 +136,35 @@ public class Attendance {
 	public void setEnSftTime(long enSftTime) {
 		this.enSftTime = enSftTime;
 	}
-	
-	
+
 	public void setTimeforLong(String stAtdTime, String enAtdTime, String stSftTime, String enSftTime) {
-		
+
 		Date enSftD = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmmss");
 		Calendar cal = Calendar.getInstance();
-		
+
 		String[] stSfts = stSftTime.split(":");
 		String[] enSfts = enSftTime.split(":");
-		
+
 		String stSft = stAtdTime.substring(0, 8);
 		String enSft = stAtdTime.substring(0, 8);
 
-		for(int i = 0; i < 2; i++) {
+		for (int i = 0; i < 2; i++) {
 			stSft += stSfts[i];
 			enSft += stSfts[i];
 		}
-		
+
 		try {
-			if(Integer.parseInt(stSfts[0]) > Integer.parseInt(enSfts[0])) {
+			if (Integer.parseInt(stSfts[0]) > Integer.parseInt(enSfts[0])) {
 				cal.setTime(enSftD);
-				cal.add(Calendar.DATE,1);
+				cal.add(Calendar.DATE, 1);
 
 				this.setStAtdTime(sdf.parse(stAtdTime).getTime());
 				this.setEnAtdTime(sdf.parse(enAtdTime).getTime());
 				this.setStSftTime(sdf.parse(stSftTime).getTime());
 				this.setEnSftTime(cal.getTimeInMillis());
 
-			}else {
+			} else {
 
 				this.setStAtdTime(sdf.parse(stAtdTime).getTime());
 				this.setEnAtdTime(sdf.parse(enAtdTime).getTime());
@@ -176,27 +172,23 @@ public class Attendance {
 				this.setEnSftTime(sdf.parse(enSftTime).getTime());
 
 			}
-			
-			
-			}catch (ParseException e) {
+
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
-			
-			
-			
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	
-	
-	
 
+	}
+
+	@Override
+	public String toString() {
+		return "Attendance [busId=" + busId + ", empId=" + empId + ", atdOn=" + atdOn + ", atdOff=" + atdOff
+				+ ", overTime=" + overTime + ", attendance=" + attendance + ", dayWage=" + dayWage + ", sftId=" + sftId
+				+ ", stAtdTime=" + stAtdTime + ", enAtdTime=" + enAtdTime + ", stSftTime=" + stSftTime + ", enSftTime="
+				+ enSftTime + "]";
+	}
+
+	
+	
+	
 }
