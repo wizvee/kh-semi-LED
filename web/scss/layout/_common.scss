@@ -176,7 +176,7 @@ input[id="ck_snb"]:checked {
     // background: green;
     .item_profile {
       border: 2px solid $white;
-      @include circle(35px);
+      @include circle(30px);
       @include shadow;
     }
   }

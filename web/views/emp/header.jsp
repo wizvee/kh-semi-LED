@@ -70,7 +70,9 @@
 					<%
 						if (selectBus != null) {
 					%>
-					<h1 class="dropdown_toggle"><%=selectBus.getBusName()%></h1>
+					<h1 class="dropdown_toggle">
+						<%=selectBus.getBusName()%>
+					</h1>
 					<ul class="dropdown_menu">
 						<%
 							for (Map.Entry<String, Business> e : busMap.entrySet()) {

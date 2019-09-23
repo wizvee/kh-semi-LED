@@ -35,10 +35,10 @@
 
         .empList_area {
             @include grid;
-            grid-template-columns: 60px 1fr 160px;
+            grid-template-columns: 50px 1fr 110px;
             height: 50px;
             line-height: 50px;
-            background: red;
+            border: 1px solid $primary;
 
             div {
                 text-align: center;
@@ -51,7 +51,8 @@
             button {
                 @include trans-middle;
                 margin-right: 3px;
-                width: 60px;
+                padding: 5px;
+                width: 50px;
             }
         }
 
@@ -79,8 +80,17 @@
 
             .busShift_area {
                 background: red;
-                @include grid;
-                grid-template-columns: 1fr 2fr 1fr 1fr;
+                text-align: center;
+
+                .sftItem {
+                    @include grid;
+                    grid-template-columns: 1fr 2fr 1fr 1fr;
+                }
+
+                .workDay {
+                    border: 1px solid $secondary;
+                    border-radius: 5px;
+                }
             }
         }
     }

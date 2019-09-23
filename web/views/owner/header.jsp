@@ -26,20 +26,20 @@
 <html lang="ko">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>service : site menu</title>
-<!-- CSS -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.min.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
-<!-- JavaScript Libraries -->
-<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>service : site menu</title>
+	<!-- CSS -->
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.min.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	<!-- JavaScript Libraries -->
+	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
 	<script>
-		const userInfo = <%=parsingInfo %>;
+		const userInfo = <%= parsingInfo %>;
 	</script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /><label for="ck_snb"></label>
@@ -49,10 +49,12 @@
 			<nav>
 				<ul>
 					<li><img class="snb_profile"
-						src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic()%>"
-						alt="프로필 사진"></li>
+							src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic()%>"
+							alt="프로필 사진"></li>
 					<li><%=loginOwner.getUserName()%></li>
-					<li><p>============</p></li>
+					<li>
+						<p>============</p>
+					</li>
 					<li><a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a></li>
 					<li><a href="<%=request.getContextPath()%>/views/owner/pwdck.jsp">개인 정보</a></li>
 					<li><a href="<%=request.getContextPath()%>/views/attendance.jsp">근태 관리</a></li>
@@ -86,7 +88,8 @@
 							<p></p>
 						</div>
 						<div class="chatMsg_enter">
-							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white" autofocus></textarea>
+							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white"
+								autofocus></textarea>
 							<button id=btn>Send</button>
 						</div>
 					</div>
@@ -95,28 +98,28 @@
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">
 				<div>
-					<label for="ck_snb"> <i class="fa fa-bars"
-						aria-hidden="true"></i>
+					<label for="ck_snb"> <i class="fa fa-bars" aria-hidden="true"></i>
 					</label>
 				</div>
 				<div class="busList_area">
 					<%
 						if (selectBus != null) {
 					%>
-					<h1 class="dropdown_toggle"><%=selectBus.getBusName()%></h1>
+					<h1 class="dropdown_toggle">
+						<%=selectBus.getBusName()%>
+					</h1>
 					<ul class="dropdown_menu">
 						<%
 							for (Map.Entry<String, Business> e : busMap.entrySet()) {
 									Business b = e.getValue();
 						%>
 						<li><a
-							href="<%=request.getContextPath()%>/owner/main.do?selectBus=<%=b.getBusId()%>"><%=b.getBusName()%></a>
+								href="<%=request.getContextPath()%>/owner/main.do?selectBus=<%=b.getBusId()%>"><%=b.getBusName()%></a>
 						</li>
 						<%
 							}
 						%>
-						<li><a
-							href="<%=request.getContextPath()%>/owner/insertBus.do">추가</a></li>
+						<li><a href="<%=request.getContextPath()%>/owner/insertBus.do">추가</a></li>
 					</ul>
 					<%
 						}

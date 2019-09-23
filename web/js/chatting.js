@@ -88,7 +88,7 @@ btnChatBack.addEventListener("click", () => {
 
 	
 // socket 연결 
-	var socket=new WebSocket("ws://localhost:9000/p_190826_semi/")
+//	var socket=new WebSocket("ws://localhost:9000/p_190826_semi/")
 
 
 //textArea 엔터키 이벤트

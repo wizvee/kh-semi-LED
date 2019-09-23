@@ -52,7 +52,7 @@ public class BusinessService {
 		close(conn);
 		return list;
 	}
-	
+
 	public ArrayList<Shift> getSftList(String selectBusId) {
 		Connection conn = getConnection();
 		ArrayList<Shift> list = dao.getSftList(conn, selectBusId);
@@ -60,14 +60,14 @@ public class BusinessService {
 		return list;
 	}
 
-//	public int approvalEmp(String busId, String empId) {
-//		Connection conn = getConnection();
-//		int r = dao.approvalEmp(conn, busId, empId);
-//		if (r > 0)
-//			commit(conn);
-//		else
-//			rollback(conn);
-//		return r;
-//	}
-
+	public int approvalEmp(String busId, Employee e) {
+		Connection conn = getConnection();
+		int r = dao.approvalEmp(conn, busId, e);
+		if (r > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return r;
+	}
 }
