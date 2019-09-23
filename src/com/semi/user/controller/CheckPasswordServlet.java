@@ -43,10 +43,6 @@ public class CheckPasswordServlet extends HttpServlet {
 		UserService service = new UserService();
 		User u = service.checkpw(pw);
 
-		//infoUser 객체 만들어서 request에 담아서 디스페쳐 해라! 
-//		System.out.println("유저아이디는?---"+userid);
-		User infoUser = service.selectOne(userid);
-		request.setAttribute("infoUser", infoUser);
 		
 		String loc = "";
 		String msg = "";
@@ -54,11 +50,14 @@ public class CheckPasswordServlet extends HttpServlet {
 //		System.out.println("유저 담기냐?"+infoUser);
 //		System.out.println(u); 
 		if (u != null) {
+			//infoUser 객체 만들어서 request에 담아서 디스페쳐 해라! 
+//		System.out.println("유저아이디는?---"+userid);
+			User infoUser = service.selectOne(userid);
+			request.setAttribute("infoUser", infoUser);
 			request.getRequestDispatcher("/views/owner/ownerMyPage.jsp").forward(request, response);
 		} else {
-//			msg = "패스워트가 일치하지 않습니다.";
-//			view = "/views/common/msg.jsp";
-			loc = "/views/owner/pwdck.jsp";
+			msg = "패스워트가 일치하지 않습니다.";
+			view = "/views/common/enroll.jsp";
 //			request.setAttribute("msg", msg);
 //			request.setAttribute("loc", loc);
 			RequestDispatcher rd = request.getRequestDispatcher(view);
