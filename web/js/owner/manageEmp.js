@@ -20,7 +20,7 @@ class MngEmp {
 
     btnApproval.map(e => e.addEventListener("click", ({target}) => {
       mngBody.map(e => e.classList.remove("focus"));
-      empInfo.classList.add("focus")
+      empInfo.classList.add("focus");
     }));
   }
 

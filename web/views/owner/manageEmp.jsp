@@ -37,7 +37,7 @@
 					<% } %>
 				</div>
 				<div class="approvalEmpInfo_area">
-					11
+					<input type="text">
 				</div>
 			</div>
 		</div>
