@@ -23,16 +23,6 @@
 </div>
 
 <script>
-	/*  function update_validate(){
-		var pw=$('#pw').val().trim();
-		if(pw.length<=0){
-			alert("비밀번호를 입력하세요.");
-			$('#pw').focus();
-			return false;
-		}
-		return true;
-	} */
-	
 	$(function(){
 		$('#btn_checkPw').click(function(){
 			if($('#pw').val().trim()<=0){

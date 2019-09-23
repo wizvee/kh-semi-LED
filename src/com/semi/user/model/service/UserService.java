@@ -79,13 +79,6 @@ public class UserService {
 		return u;
 	}
 	
-	public User checkpw(String pw) {
-		Connection conn=getConnection();
-		User u=dao.checkpw(conn, pw);
-		close(conn);
-		return u;
-	}
-	
 	public User CheckUser(String userId, String pw) {
 		Connection conn=getConnection();
 		User u = dao.CheckUser(conn, userId, pw);

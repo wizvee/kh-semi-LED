@@ -230,28 +230,6 @@ public class UserDao {
 		return u;
 	}
 
-	public User checkpw(Connection conn, String pw) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		User u = null;
-		String sql = prop.getProperty("checkpw");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, pw);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				u = new User();
-				u.setPassword(rs.getString("password"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return u;
-	}
-
 	public User CheckUser(Connection conn, String userId, String pw) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
