@@ -35,15 +35,14 @@ public class ChattingDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
-			rs = pstmt.executeQuery();
-			System.out.println("불러울 사업장 아이디: "+busId);
+			rs=pstmt.executeQuery();
 			while(rs.next()){
 				Chatting c=new Chatting();
-				c.setChatType(rs.getString("chat_type"));
-				c.setChatMsg(rs.getString("chat_msg"));
-				c.setChatDate(rs.getDate("chat_date"));
-				c.setUserName(rs.getString("user_name"));
-				c.setProfilePic(rs.getString("profile_pic"));
+				c.setChatType(rs.getString("CHAT_TYPE"));
+				c.setUserName(rs.getString("CHAT_MSG"));
+				c.setChatDate(rs.getDate("CHAT_DATE"));
+				c.setUserName(rs.getString("USER_NAME"));
+				c.setProfilePic(rs.getString("PROFILE_PIC"));
 				list.add(c);
 			}
 			}catch(SQLException e) {
@@ -51,8 +50,7 @@ public class ChattingDao {
 			}finally {
 				close(rs);
 				close(pstmt);
-			}
-			return list;			
+			}return list;
 		}
 	
 	// 채팅 내역 DB에 저장하기
