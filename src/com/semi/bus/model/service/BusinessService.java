@@ -53,14 +53,14 @@ public class BusinessService {
 		return list;
 	}
 
-//	public int approvalEmp(String busId, String empId) {
-//		Connection conn = getConnection();
-//		int r = dao.approvalEmp(conn, busId, empId);
-//		if (r > 0)
-//			commit(conn);
-//		else
-//			rollback(conn);
-//		return r;
-//	}
+	public int approvalEmp(String busId, String empId) {
+		Connection conn = getConnection();
+		int r = dao.approvalEmp(conn, busId, empId);
+		if (r > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		return r;
+	}
 
 }

@@ -24,7 +24,7 @@
                 @include grid;
                 grid-template-columns: repeat(2, 1fr);
                 opacity: 1;
-                animation: ani_slideUp 1s 1;
+                animation: ani_slideDown 1s 1;
             }
         }
 
