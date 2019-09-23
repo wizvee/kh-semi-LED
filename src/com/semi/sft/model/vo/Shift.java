@@ -8,9 +8,6 @@ public class Shift {
 	private String sftDay;
 	private String sftOn;
 	private String sftOff;
-	// 추가 됨 두개
-	private String atdOn;
-	private String atdOff;
 
 	public Shift() {
 	}
@@ -24,7 +21,7 @@ public class Shift {
 		this.sftOn = sftOn;
 		this.sftOff = sftOff;
 	}
-	
+
 	public String getSftId() {
 		return sftId;
 	}
@@ -72,28 +69,5 @@ public class Shift {
 	public void setSftOff(String sftOff) {
 		this.sftOff = sftOff;
 	}
-
-	public String getAtdOn() {
-		return atdOn;
-	}
-
-	public void setAtdOn(String atdOn) {
-		this.atdOn = atdOn;
-	}
-
-	public String getAtdOff() {
-		return atdOff;
-	}
-
-	public void setAtdOff(String atdOff) {
-		this.atdOff = atdOff;
-	}
-
-	@Override
-	public String toString() {
-		return "Shift [sftId=" + sftId + ", busId=" + busId + ", sftName=" + sftName + ", sftDay=" + sftDay + ", sftOn="
-				+ sftOn + ", sftOff=" + sftOff + ", atdOn=" + atdOn + ", atdOff=" + atdOff + "]";
-	}
-	
 
 }
