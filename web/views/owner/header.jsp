@@ -80,16 +80,16 @@
 						%>
 					</div>
 					<div class="chatRoom_area" style="display: none;">
+						<button class="btn_chatBack">돌아가기</button>
 						<div class="chatMsg_area">
-							<button class="btn_chatBack">돌아가기</button>
 							<p></p>
 						</div>
 						<div class="chatMsg_enter">
-							<textarea rows="30" cols="10" style="color:white;"></textarea>
+							<textarea id=content rows="3" cols="20" style="border:1px solid white;" autofocus></textarea>
+							<button id=btn>Send</button>
 						</div>
 					</div>
 				</div>
-
 			</div>
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">

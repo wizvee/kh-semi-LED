@@ -8,12 +8,12 @@ btnChat.addEventListener("click", () => {
 
 const chatListItem = selectElements("#chat_area .chatListItem_area");
 const cListarea = document.querySelectorAll(".chatList_area")[0];
-const msgArea = document.querySelectorAll(".chatMsg_area")[0];
+const chatRoom = document.querySelectorAll(".chatRoom_area")[0];
 
 chatListItem.map(e => {
   e.addEventListener("click", ({ target }) => {
     cListarea.style.display = "none";
-    msgArea.style.display = "block";
+    chatRoom.style.display = "block";
     
     const content = document.querySelectorAll(".chatMsg_area p")[0];
     content.textContent = target.innerText;
