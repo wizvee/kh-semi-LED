@@ -17,13 +17,13 @@ import com.semi.chatting.model.vo.Chatting;
  * Servlet implementation class ChattingServlet
  */
 @WebServlet("/chat.do")
-public class ChattingServlet extends HttpServlet {
+public class chattingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChattingServlet() {
+    public chattingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
