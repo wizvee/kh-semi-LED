@@ -16,9 +16,9 @@ public class ChattingService {
 	private ChattingDao dao=new ChattingDao();
 	
 	// 채팅 타입,채팅 내역, 채팅 날짜, 유저 이름, 사진 정보 DB 에서 가지고 오기 
-	public List <Chatting>getHistory(){
+	public List <Chatting>getHistory(String busId){
 		Connection conn=getConnection();
-		List <Chatting>list=dao.getHistory(conn);
+		List <Chatting>list=dao.getHistory(conn, busId);
 		close(conn);
 		return list;
 	}

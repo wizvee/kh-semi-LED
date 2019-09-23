@@ -27,17 +27,17 @@ public class ChattingDao {
 	}
 	
 	// 채팅 타입,채팅 내역, 채팅 날짜, 유저 이름, 사진 정보 DB 에서 가지고 오기 
-	public List<Chatting>getHistory(Connection conn){
+	public List<Chatting>getHistory(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("getHistory");
 		List<Chatting>list=new ArrayList<Chatting>();
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				Chatting c=new Chatting();
-				c.setBusId(rs.getString("BUS_ID"));
 				c.setChatType(rs.getString("CHAT_TYPE"));
 				c.setUserName(rs.getString("CHAT_MSG"));
 				c.setChatDate(rs.getDate("CHAT_DATE"));
