@@ -1,4 +1,6 @@
 const btnChat = document.querySelector("#btn_chatting");
+var busId="";
+var userId="";
 
 btnChat.addEventListener("click", () => {
   const chatArea = document.querySelector("#chat_area");
@@ -9,17 +11,18 @@ btnChat.addEventListener("click", () => {
 const chatListItem = selectElements("#chat_area .chatListItem_area");
 const cListarea = document.querySelectorAll(".chatList_area")[0];
 const chatRoom = document.querySelectorAll(".chatRoom_area")[0];
-
 chatListItem.map(e => {
   e.addEventListener("click", ({ target }) => {
     cListarea.style.display = "none";
     chatRoom.style.display = "block";
     
-    const content = document.querySelectorAll(".chatMsg_area p")[0];
-    content.textContent = target.innerText;
+//    const content = document.querySelectorAll(".chatMsg_area p")[0];
+//    content.textContent = target.innerText;
 
-    const busId=$(target).find("input").val();
+    busId=$(target).find("#hidden_busId").val();
+    userId=$(target).find("#hidden_userId").val();
     console.log(busId);
+    console.log(userId);
     
     $.ajax({
     	type:'post',
@@ -36,7 +39,7 @@ chatListItem.map(e => {
     		})
     		
     		}else{
-    			content.textContent ='대화내용이 없습니다.';
+    			$('.chatMsg_area').append('<p> 대화내용이 없습니다. </p>');
     		}
     	},
     	error:function(e){
@@ -47,6 +50,7 @@ chatListItem.map(e => {
   });
 });
 
+// addChat 메소드
 function addChat(profilePic, userName, chatMsg, chatDate, chatType){
 	$('.chatMsg_area').append('<div class="row">'+
 			'<div class="main-content">'+
@@ -73,9 +77,38 @@ function addChat(profilePic, userName, chatMsg, chatDate, chatType){
 
 $('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 
+// 뒤로가기 버튼 이벤트
 const btnChatBack = document.querySelectorAll(".btn_chatBack")[0];
 btnChatBack.addEventListener("click", () => {
+  $('.chatMsg_area').empty();
+  console.log($('#content').innerHTML)
   cListarea.style.display = "block";
-  msgArea.style.display = "none";
+  chatRoom.style.display = "none";
+});
+
+
+$('#content').keyup(function () {
+
+	var inputLength = $(this).val().length;
+
+//	var remain = 150-inputLength;
+});
+
+//textArea 엔터키 이벤트
+document.getElementById('content').addEventListener('keydown', function(event) {
+	if (event.keyCode == 13) {
+		const content=$("#content").val();
+		const targetId=$()
+		const chatType="msg";
+		const send={
+				"busId":busId, 
+				"userId":userId, 
+				"chatType":"msg", 
+				"chatMsg":content
+				};
+		console.log(send);
+		event.preventDefault();
+		document.getElementById('content').value = "";
+	}
 });
 

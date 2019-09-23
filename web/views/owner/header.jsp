@@ -73,7 +73,8 @@
 						%>
 						<div class="chatListItem_area">
 							<%=b.getBusName()%>
-							<input type="hidden" name="hidden_busId" value='<%=b.getBusId()%>'>
+							<input type="hidden" id="hidden_busId" value='<%=b.getBusId()%>'>
+							<input type="hidden" id="hidden_userId" value='<%=userInfo.getUserId()%>'>
 						</div>
 						<%
 							}
@@ -85,7 +86,7 @@
 							<p></p>
 						</div>
 						<div class="chatMsg_enter">
-							<textarea id=content rows="3" cols="20" style="border:1px solid white;" autofocus></textarea>
+							<textarea id=content rows="3" cols="20" style="border:1px solid white" autofocus></textarea>
 							<button id=btn>Send</button>
 						</div>
 					</div>
