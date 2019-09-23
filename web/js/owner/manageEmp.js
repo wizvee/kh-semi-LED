@@ -13,11 +13,8 @@ class MngEmp {
 
     mngHeader.map((e, index) => {
       e.addEventListener("click", ({ target }) => {
-        mngBody.map(e => {
-          e.classList.remove("focus", "slideIn");
-          e.classList.add("slideOut");
-        });
-        mngBody[index].classList.add("focus", "slideIn");
+        mngBody.map(e => e.classList.remove("focus"));
+        mngBody[index].classList.add("focus");
       });
     });
 
@@ -25,11 +22,8 @@ class MngEmp {
       // const empId = target.nextElementSibling.value;
       // const data = `busId=${userInfo.selectBusId}&empId=${empId}`;
       // this.getResult("", target, data, this.approvalEmp);
-      mngBody.map(e => {
-        e.classList.remove("focus", "slideIn");
-        e.classList.add("slideOut");
-      });
-      empInfo.classList.add("focus", "slideIn");
+      mngBody.map(e => e.classList.remove("focus"));
+      empInfo.classList.add("focus", "focus");
     });
 
     btnReject.addEventListener("click", ({ target }) => {
