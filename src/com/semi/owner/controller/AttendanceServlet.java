@@ -52,6 +52,8 @@ public class AttendanceServlet extends HttpServlet {
 		}
 		}
 			Attendance atd = new AttendanceService().setAttendance(e, busId);
+			e.setAttendance(atd);
+			
 		}
 
 		

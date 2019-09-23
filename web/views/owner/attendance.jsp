@@ -151,6 +151,11 @@ java.util.List"%>
 			<!-- 	<progress value="20" max="100"></progress> -->
 			<div class="atd_progress_color"> <div style="background-color: red;"></div> : 지각  <div style="background-color: chartreuse;"></div> : 근무 시간  <div style="background-color: dodgerblue;"></div> : 조퇴  </div>
 			<div class="atd_progress_wraper">
+					
+					<script type="text/javascript">
+						changeProcessBar(e);
+					  </script>
+					  
 				<div id="atd_progressBar_late"></div><div id="atd_progressBar_work"></div><div id="atd_progressBar_ealryLeave"></div>
 			</div>
 		</div>
@@ -177,7 +182,12 @@ java.util.List"%>
 	</section>
 
 	<script>
-	
+	function changeProcessBar(e) {
+		var stSft = <%=e.getSftOn%>;
+		var enSft = <%=e.getSftOff%>;
+		var stAtd = e.getA
+		$('#atd_progressBar_late').css('width',)
+	}
 	</script>
 </div>
 <%@ include file="footer.jsp"%>

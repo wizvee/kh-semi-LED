@@ -180,15 +180,5 @@ public class Attendance {
 
 	}
 
-	@Override
-	public String toString() {
-		return "Attendance [busId=" + busId + ", empId=" + empId + ", atdOn=" + atdOn + ", atdOff=" + atdOff
-				+ ", overTime=" + overTime + ", attendance=" + attendance + ", dayWage=" + dayWage + ", sftId=" + sftId
-				+ ", stAtdTime=" + stAtdTime + ", enAtdTime=" + enAtdTime + ", stSftTime=" + stSftTime + ", enSftTime="
-				+ enSftTime + "]";
-	}
-
-	
-	
 	
 }

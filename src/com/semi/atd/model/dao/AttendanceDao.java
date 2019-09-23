@@ -32,19 +32,15 @@ public class AttendanceDao {
 	}
 
 	public Attendance setAttendance(Connection conn, Employee e, String id) {
-		System.out.println("dao들어옴");
 //		 SFT_ON, SFT_OFF, SFT_ID, ATD_ON, ATD_OFF 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("setAttendance");
 		Attendance a = new Attendance();
-		System.out.println(a);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, e.getUserId());
-			System.out.println(id);
-			System.out.println(e.getUserId());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				System.out.println("rs들어옴");
@@ -52,8 +48,6 @@ public class AttendanceDao {
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));
 				a.setOverTime("OVERTIME");
-				System.out.println("rs문 들어옴");
-				System.out.println(a);
 			}
 		} catch (SQLException b) {
 			b.printStackTrace();
