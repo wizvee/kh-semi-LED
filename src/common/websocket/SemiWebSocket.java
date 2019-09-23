@@ -15,10 +15,7 @@ public class SemiWebSocket {
 		
 	}
 	
-	@OnMessage
-	public void onMessage(Session session, Chatting send) {
-		
-	}
+
 	
 	
 }
