@@ -37,7 +37,15 @@
 					<% } %>
 				</div>
 				<div class="approvalEmpInfo_area">
-					<input type="text">
+					<div>
+						<p>고용 형태</p>
+						<div>
+							<input type="radio" name="type" id="">
+							<input type="radio" name="type" id="">
+							<input type="radio" name="type" id="">
+							<input type="text" name="" id="">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
