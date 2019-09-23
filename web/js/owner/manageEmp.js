@@ -8,8 +8,8 @@ class MngEmp {
     const mngBody = selectElements(".mngEmp_body div");
     const empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
 
-    const btnApproval = document.querySelectorAll(".btn_Approval")[0];
-    const btnReject = document.querySelectorAll(".btn_Reject")[0];
+    const btnApproval = selectElements(".btn_Approval");
+    const btnReject = selectElements(".btn_Reject");
 
     mngHeader.map((e, index) => {
       e.addEventListener("click", ({ target }) => {
@@ -18,18 +18,10 @@ class MngEmp {
       });
     });
 
-    btnApproval.addEventListener("click", ({ target }) => {
-      // const empId = target.nextElementSibling.value;
-      // const data = `busId=${userInfo.selectBusId}&empId=${empId}`;
-      // this.getResult("", target, data, this.approvalEmp);
+    btnApproval.map(e => e.addEventListener("click", ({target}) => {
       mngBody.map(e => e.classList.remove("focus"));
-      empInfo.classList.add("focus", "focus");
-    });
-
-    btnReject.addEventListener("click", ({ target }) => {
-      const empId = target.previousElementSibling.value;
-      console.log(empId);
-    });
+      empInfo.classList.add("focus")
+    }));
   }
 
   approvalEmp(target, respText) {
