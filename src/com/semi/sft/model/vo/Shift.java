@@ -89,11 +89,7 @@ public class Shift {
 		this.atdOff = atdOff;
 	}
 
-	@Override
-	public String toString() {
-		return "Shift [sftId=" + sftId + ", busId=" + busId + ", sftName=" + sftName + ", sftDay=" + sftDay + ", sftOn="
-				+ sftOn + ", sftOff=" + sftOff + ", atdOn=" + atdOn + ", atdOff=" + atdOff + "]";
-	}
+
 	
 
 }

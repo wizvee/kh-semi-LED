@@ -102,7 +102,6 @@ public class ShiftDao {
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));
 				
-				System.out.println(s);
 				empList.get(i).setShift(s);
 				empList.get(i).setAttendance(a);
 
