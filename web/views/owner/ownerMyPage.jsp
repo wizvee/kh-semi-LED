@@ -35,38 +35,55 @@
 				<div>이메일 : <input type="text" value=<%=infoUser.getEmail()%> name="infoUserEmail"></div>
 				<div>이름 : <input type="text" value=<%=infoUser.getUserName()%> name="infoUserName"></div>
 				<div>휴대폰 : <input type="text" value=<%=infoUser.getUserPhone()%> name="infoUserPhone"></div>
+				<button id="btn_updateinfo" class="btn-primary" onclick="return false;">회원정보 변경</button>
 			</div>
-		<input type="button" onclick="fn_updateinfoUser();" value="회원정보 변경"/>
 		</form>
 			
-		<form name="updateUserFrmPw" method="POST" onsubmit="return updatePw_validate();">
+		<form name="updateUserFrmPw" method="POST">
 			<div class="item_body item_mypage_pw">
-				<div><a href="#" class="infoUserPwd">비밀번호 **********</a></div>
-				
-				<button id="btn_checkPw" class="btn-primary" onclick="return false;">확인</button>
-				<input type="button" onclick="fn_updateinfoUser();" value="비밀번호 변경"/>	
+				현재 비밀번호 : <input type="password" class="inpt-outline" name="pw" id="pw">
+				<div id="result_pw"></div>
+				새 비밀번호 : <input type="password" class="inpt-outline" name="nPw" id="nPw">
+				<div id="result_nPw"></div>
+				새 비밀번호 확인 : <input type="password" class="inpt-outline" name="nkPw" id="nkPw">				
+				<div id="result_nkPw"></div>
+				<button id="btn_checkPw" class="btn-primary" onclick="return false;">비밀번호 변경</button>	
 			</div>
 		</form>
 	</section>
 </div>
 
-<%@ include file="footer.jsp"%>
-
 <script>
 	$(function(){
-		$(".item_mypage>div>.infoUserName").on("click",function(){
-			var input=$("<input>").attr({"type":"text","name":"userName"}).val($(this).html());
-			$(this).parent().append(input);
-			var removeVal=$(this).remove();
-			console.log($(input).select());
-			console.log(removeVal);
-		})
-	})
-	
-	function fn_updateinfoUser(){
-		//수정 된 정보가 있다면 servlet에 전송하는 것.
-		updateUserFrm.action="<%=request.getContextPath()%>/infoUser/infoUserUpdate.do";
-		console.log(updateUserFrm.action);
-		updateUserFrm.submit();
-	}
+		$('#btn_checkPw').click(function(){
+			$("#result_pw").html("");
+			$("#result_nPw").html("");
+			$("#result_nkPw").html("");
+			if($('#pw').val().trim()<=0){
+				$("#result_pw").html("현재 비밀번호를 입력하세요.").css("color","red");
+			} else if($('#nPw').val().trim()<=0){
+				$("#result_nPw").html("새 비밀번호를 입력하세요.").css("color","red");
+			} else if($('#pw').val().trim()==$('#nPw').val().trim()){
+				$("#result_nPw").html("현재 비밀번호와 다른 비밀번호를 입력하세요.").css("color","red");				
+			} else if($('#nkPw').val().trim()<=0){
+				$("#result_nkPw").html("새 비밀번호 확인을 입력하세요.").css("color","red");
+			} else if($('#nPw').val().trim()!=$('#nkPw').val().trim()){
+				$("#result_nkPw").html("새 비밀번호가 일치하지 않습니다.").css("color","red");
+			} else {
+				$.ajax({
+					url:"<%=request.getContextPath()%>/checkAjaxinfoPw.do",
+					data:{pw:$('#pw').val().trim(), nPw:$('#nPw').val().trim(), userId:userInfo.userId},
+					success:function(data){
+						if(!data){
+							$("#result_nkPw").html("비밀번호 변경 실패.").css("color","red");
+						} else {
+							location.href="/p_190826_semi/views/owner/ownerMyPage.jsp";
+						}
+					}
+				});
+			}
+		});
+	});
 </script>
+
+<%@ include file="footer.jsp"%>

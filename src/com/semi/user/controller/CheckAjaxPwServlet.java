@@ -3,7 +3,6 @@ package com.semi.user.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import com.semi.user.model.service.UserService;
 import com.semi.user.model.vo.User;
 
 import common.util.SHA512;
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 /**
  * Servlet implementation class CheckAjaxPwServlet

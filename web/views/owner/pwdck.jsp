@@ -13,6 +13,7 @@
 			<h2>비밀번호 확인</h2>
 		</div>
 		<div class="item_body item_mypage">
+		<!-- form 태그가 넘기는게 없어졌으니까 action과 onsubmit이 다 필요 없지 않을까? -->
 		<form action="<%=request.getContextPath()%>/checkPasswordEnd.do" name="updateUserFrm" method="POST" onsubmit="return update_validate();">
 			<input type="password" class="inpt-outline" name="pw" id="pw">
 			<div id="result"></div>
@@ -26,15 +27,7 @@
 	$(function(){
 		$('#btn_checkPw').click(function(){
 			if($('#pw').val().trim()<=0){
-				$.ajax({
-					url:"<%=request.getContextPath()%>/checkAjaxPw.do",
-					data:{pw:$(this).val(), userId:$('#userId').val()},
-					success:function(data){
-						if(!data){
-							$("#result").html("비밀번호를 입력하세요.").css("color","red");
-						}
-					}
-				})
+				$("#result").html("비밀번호를 입력하세요.").css("color","red");
 			} else {
 				$.ajax({
 					url:"<%=request.getContextPath()%>/checkAjaxPw.do",
@@ -46,7 +39,7 @@
 							location.href="/p_190826_semi/views/owner/ownerMyPage.jsp";
 						}
 					}
-				})
+				});
 			}
 		});
 	});
