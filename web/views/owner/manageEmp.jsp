@@ -24,9 +24,20 @@
 				</div>
 				<div class="mngEmpEnroll_area">
 					<% for(Employee e : empList) { %>
-					<div><img class="mngEmp_profile" src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
-					<span><%=e.getUserName() %></span></div>
+					<div class="empList_area">
+						<img class="item_profile"
+							src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
+						<%=e.getUserName() %>
+						<div>
+							<button class="btn-outline btn_Approval">승인</button>
+							<input type="hidden" name="mngEmp_empId" value="<%=e.getUserId()%>">
+							<button class="btn-outline btn_Reject">거절</button>
+						</div>
+					</div>
 					<% } %>
+				</div>
+				<div class="approvalEmpInfo_area">
+					11
 				</div>
 			</div>
 		</div>

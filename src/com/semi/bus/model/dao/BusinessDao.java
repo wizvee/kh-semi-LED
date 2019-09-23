@@ -120,5 +120,17 @@ public class BusinessDao {
 		}
 		return list;
 	}
+	
+	public int approvalEmp(Connection conn, String busId, String empId) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("");
+		int r = -1;
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }

@@ -45,12 +45,22 @@ public class BusinessService {
 			check = true;
 		return check;
 	}
-	
+
 	public ArrayList<Employee> getEmpList(String selectBusId) {
 		Connection conn = getConnection();
 		ArrayList<Employee> list = dao.getEmpList(conn, selectBusId);
 		close(conn);
 		return list;
+	}
+
+	public int approvalEmp(String busId, String empId) {
+		Connection conn = getConnection();
+		int r = dao.approvalEmp(conn, busId, empId);
+		if (r > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		return r;
 	}
 
 }
