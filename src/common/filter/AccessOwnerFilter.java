@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.semi.owner.model.vo.Owner;
@@ -28,10 +29,11 @@ public class AccessOwnerFilter implements Filter {
 		HttpSession session = req.getSession();
 		
 		Owner o = (Owner)session.getAttribute("loginOwner");
-		if(o != null)
-			System.out.println("권한O");
-		else
-			System.out.println("권한X");
+
+		if(o == null) {
+			HttpServletResponse resp = (HttpServletResponse) response;
+			resp.sendRedirect(req.getContextPath());
+		}
 		
 		chain.doFilter(request, response);
 	}

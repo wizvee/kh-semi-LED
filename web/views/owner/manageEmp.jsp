@@ -60,7 +60,7 @@
 							</div>
 						</div>
 						<p>근무조 설정</p>
-						<div>
+						<div class="busShift_area">
 							<%
 								for (Shift s : sftList) {
 							%>
@@ -75,7 +75,8 @@
 								}
 							%>
 							</div>
-							<span><%=s.getAtdOn() + " " + s.getSftOff()%></span>
+							<span><%=s.getAtdOn() %></span>
+							<span><%=s.getSftOff() %></span>
 							<%
 								}
 							%>

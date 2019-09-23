@@ -22,9 +22,14 @@
             &.focus {
                 visibility: visible;
                 @include grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: 1fr;
+
                 opacity: 1;
                 animation: ani_slideUp 1s 1;
+
+                @include respond-to("medium") {
+                    grid-template-columns: repeat(2, 1fr);
+                }
             }
         }
 
@@ -51,6 +56,12 @@
         }
 
         .approvalEmpInfo_area {
+            &.focus {
+                @include respond-to("medium") {
+                    grid-template-columns: 1fr;
+                }
+            }
+
             input[type="radio"] {
                 @include inpt-radio-mark;
             }
@@ -64,6 +75,12 @@
                     top: 50%;
                     transform: translateY(-50%);
                 }
+            }
+
+            .busShift_area {
+                background: red;
+                @include grid;
+                grid-template-columns: 1fr 2fr 1fr 1fr;
             }
         }
     }

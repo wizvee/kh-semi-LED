@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.semi.emp.model.vo.Employee;
@@ -29,10 +30,10 @@ public class AccessEmpFilter implements Filter {
 		HttpSession session = req.getSession();
 		
 		Employee e = (Employee)session.getAttribute("loginEmp");
-		if(e != null)
-			System.out.println("권한O");
-		else
-			System.out.println("권한X");
+		if(e == null) {
+			HttpServletResponse resp = (HttpServletResponse) response;
+			resp.sendRedirect(req.getContextPath());
+		}
 		
 		chain.doFilter(request, response);
 	}
