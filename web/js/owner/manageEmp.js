@@ -4,15 +4,24 @@ class MngEmp {
   }
 
   setInit() {
-    const mngHeader = selectElements(".mngEmp_header span");
-    const mngBody = selectElements(".mngEmp_body div");
+      const mngHeader = selectElements(".mngEmp_header span");
+      const mngBody = selectElements(".mngEmp_body")[0];
 
-    mngHeader.map((e, index) => {
-      e.addEventListener("click", ({target}) => {
-        mngBody.map(e => e.classList.remove("focus"));
-        mngBody[index].classList.add("focus");
+      const btnWork = mngHeader[0];
+      const btnResign = mngHeader[1];
+      const btnEnroll = mngHeader[2];
+
+      btnWork.addEventListener("click", () => {
+        mngBody.innerText = "재직 test";
       })
-    });
+
+      btnResign.addEventListener("click", () => {
+        mngBody.innerText = "퇴직";
+      })
+
+      btnEnroll.addEventListener("click", () => {
+        mngBody.innerText = "진행";
+      })
   }
 }
 
