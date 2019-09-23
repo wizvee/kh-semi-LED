@@ -59,3 +59,22 @@
     transform: translateY(0);
   }
 }
+
+@keyframes ani_slideUp {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  50% {
+    visibility: visible;
+    opacity: 0.5;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

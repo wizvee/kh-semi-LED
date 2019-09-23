@@ -23,7 +23,7 @@ public class ApprovalEmpServlet extends HttpServlet {
 		String busId = request.getParameter("busId");
 		String empId = request.getParameter("empId");
 		
-		int r = new BusinessService().approvalEmp(busId, empId);
+//		int r = new BusinessService().approvalEmp(busId, empId);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
