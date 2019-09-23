@@ -14,21 +14,19 @@ import com.semi.chatting.model.service.ChattingService;
 import com.semi.chatting.model.vo.Chatting;
 
 /**
- * Servlet implementation class chattingServlet
+ * Servlet implementation class ChattingServlet
  */
-@WebServlet("/chatting/chatServlet")
-public class chattingServlet extends HttpServlet {
+@WebServlet("/chat.do")
+public class ChattingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public chattingServlet() {
+    public ChattingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    private ChattingService service=new ChattingService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,16 +34,24 @@ public class chattingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//ajax 로 보낸 busId 값 받기 
-		String busId =request.getParameter("busId");
+		String busId =request.getParameter("data");
+		System.out.println(busId);
 		
 		// 채팅 타입,채팅 내역, 채팅 날짜, 유저 이름, 사진 정보 DB 에서 가지고 오기 
-		List<Chatting>list=service.getHistory(busId);
-		
-//		String chatHistory = new Gson().toJson(list);
 	
+		ChattingService service=new ChattingService();
+		
+		List<Chatting>list=service.getHistory(busId);
+		String chatHistory;
+		
+		if(!list.isEmpty()) {
+			chatHistory = new Gson().toJson(list);
+		}else {
+			chatHistory="none";
+		}
 		
 		// chatting.js 로 list 보내기
-		response.getWriter().print(list);
+		response.getWriter().print(chatHistory);
 	}
 
 	/**

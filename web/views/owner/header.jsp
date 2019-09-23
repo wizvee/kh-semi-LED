@@ -73,6 +73,7 @@
 						%>
 						<div class="chatListItem_area">
 							<%=b.getBusName()%>
+							<input type="hidden" name="hidden_busId" value='<%=b.getBusId()%>'>
 						</div>
 						<%
 							}
@@ -81,7 +82,6 @@
 					<div class="chatMsg_area" style="display: none;">
 						<button class="btn_chatBack">돌아가기</button>
 						<p></p>
-						메세지영역
 					</div>
 				</div>
 
