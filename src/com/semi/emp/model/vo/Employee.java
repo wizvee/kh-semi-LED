@@ -2,6 +2,7 @@ package com.semi.emp.model.vo;
 
 import java.util.ArrayList;
 
+import com.semi.atd.model.vo.Attendance;
 import com.semi.bus.model.vo.Business;
 import com.semi.sft.model.vo.Shift;
 import com.semi.user.model.vo.User;
@@ -15,13 +16,14 @@ public class Employee extends User {
 	private String sftId;
 
 	private Shift shift;
+	private Attendance attendance;
 	private ArrayList<Business> busList;
 	private ArrayList<Integer> wageList;
 
 	public Employee() {
 	}
 
-	public Employee(String empType, int empWage, String bankAccount, String empLevel, String sftId, Shift shift,
+	public Employee(String empType, int empWage, String bankAccount, String empLevel, String sftId, Shift shift, Attendance attendance,
 			ArrayList<Business> busList, ArrayList<Integer> wageList) {
 		super();
 		this.empType = empType;
@@ -30,6 +32,7 @@ public class Employee extends User {
 		this.empLevel = empLevel;
 		this.sftId = sftId;
 		this.shift = shift;
+		this.attendance = attendance;
 		this.busList = busList;
 		this.wageList = wageList;
 	}
@@ -80,6 +83,15 @@ public class Employee extends User {
 
 	public void setShift(Shift shift) {
 		this.shift = shift;
+	}
+	
+
+	public Attendance getAttendance() {
+		return attendance;
+	}
+
+	public void setAttendance(Attendance attendance) {
+		this.attendance = attendance;
 	}
 
 	public ArrayList<Business> getBusList() {

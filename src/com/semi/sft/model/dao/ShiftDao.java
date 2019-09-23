@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.semi.atd.model.vo.Attendance;
+import com.semi.emp.model.vo.Employee;
 import com.semi.sft.model.vo.Shift;
 
 public class ShiftDao {
@@ -67,6 +69,44 @@ public class ShiftDao {
 				s.setSftName(rs.getString("SFT_NAME"));
 
 				list.add(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+
+	}
+	
+	
+	public List<Employee> addShiftForEmpList(Connection conn, String id, List<Employee> empList) {
+		List<Employee> list = new ArrayList<Employee>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("addShiftForEmpList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			for(int i = 0; i < empList.size(); i++) {
+			pstmt.setString(2, empList.get(i).getUserId());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Attendance a = new Attendance();
+				Shift s = new Shift();
+				s.setSftId(rs.getString("SFT_ID"));
+				s.setSftOn(rs.getString("SFT_ON"));
+				s.setSftOff(rs.getString("SFT_OFF"));
+				s.setSftName(rs.getString("SFT_NAME"));
+				a.setAtdOn(rs.getString("ATD_ON"));
+				a.setAtdOff(rs.getString("ATD_OFF"));
+				
+				System.out.println(s);
+				empList.get(i).setShift(s);
+				empList.get(i).setAttendance(a);
+
+			}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

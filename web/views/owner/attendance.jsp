@@ -137,7 +137,7 @@ java.util.List"%>
 			<% for(Employee e : list) { %>
 			<%if(e.getSftId() != null) { %>
 		<div class="item_atd_employeeList">
-			<h1 style="text-align: right; font-weight: bolder; color: red; font-size: 2em;"><%=e.getEmpType()%></h1>
+			<h1 style="text-align: right; font-weight: bolder; color: red; font-size: 2em;"><%=e.getUserType()%></h1>
 			<br>	
 			<p>직원 명 : <%=e.getUserName()%></p>
 				<p>근무 조 : <%=e.getShift().getSftName()%></p>
@@ -176,5 +176,8 @@ java.util.List"%>
 
 	</section>
 
+	<script>
+	
+	</script>
 </div>
 <%@ include file="footer.jsp"%>
