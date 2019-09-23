@@ -84,6 +84,34 @@
   }
 }
 
+@mixin inpt-radio-mark {
+  &+label {
+    display: inline-block;
+    z-index: 5;
+    position: relative;
+    padding: 0 3px;
+
+    &:after {
+      content: "";
+      display: block;
+      z-index: -5;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 7px;
+      background: $primary;
+      transition: all 0.7s;
+    }
+  }
+
+  &:checked+label {
+    &:after {
+      width: 100%;
+    }
+  }
+}
+
 // style
 @mixin style-modal {
   border-radius: 10px;

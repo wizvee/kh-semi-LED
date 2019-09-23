@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.semi.bus.model.vo.Business;
 import com.semi.emp.model.vo.Employee;
+import com.semi.sft.model.vo.Shift;
 
 public class BusinessDao {
 
@@ -110,6 +111,33 @@ public class BusinessDao {
 				e.setUserName(rs.getString("USER_NAME"));
 				e.setProfilePic(rs.getString("PROFILE_PIC"));
 				list.add(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Shift> getSftList(Connection conn, String busId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("getSftList");
+		ArrayList<Shift> list = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Shift s = new Shift();
+				s.setSftId(rs.getString("SFT_ID"));
+				s.setSftName(rs.getString("SFT_NAME"));
+				s.setSftDay(rs.getString("SFT_DAY"));
+				s.setSftOn(rs.getString("SFT_ON"));
+				s.setSftOff(rs.getString("SFT_OFF"));
+				list.add(s);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

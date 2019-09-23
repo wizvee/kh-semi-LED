@@ -52,6 +52,13 @@ public class BusinessService {
 		close(conn);
 		return list;
 	}
+	
+	public ArrayList<Shift> getSftList(String selectBusId) {
+		Connection conn = getConnection();
+		ArrayList<Shift> list = dao.getSftList(conn, selectBusId);
+		close(conn);
+		return list;
+	}
 
 //	public int approvalEmp(String busId, String empId) {
 //		Connection conn = getConnection();

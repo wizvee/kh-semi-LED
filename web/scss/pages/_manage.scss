@@ -49,5 +49,22 @@
                 width: 60px;
             }
         }
+
+        .approvalEmpInfo_area {
+            input[type="radio"] {
+                @include inpt-radio-mark;
+            }
+
+            .inptIcon_area {
+                position: relative;
+
+                span {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
     }
 }
