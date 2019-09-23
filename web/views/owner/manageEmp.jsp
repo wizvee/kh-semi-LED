@@ -40,9 +40,10 @@
 					<div>
 						<p>고용 형태</p>
 						<div>
-							<input type="radio" name="type" id="">
-							<input type="radio" name="type" id="">
-							<input type="radio" name="type" id="">
+							<input type="radio" name="type" id="empTypeH">
+							<label for="empTypeH"></label>
+							<input type="radio" name="type" id="empTypeD">
+							<input type="radio" name="type" id="empTypeM">
 							<input type="text" name="" id="">
 						</div>
 					</div>
