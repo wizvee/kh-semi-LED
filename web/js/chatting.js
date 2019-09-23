@@ -80,19 +80,16 @@ $('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 // 뒤로가기 버튼 이벤트
 const btnChatBack = document.querySelectorAll(".btn_chatBack")[0];
 btnChatBack.addEventListener("click", () => {
-  $('.chatMsg_area').empty();
-  console.log($('#content').innerHTML)
-  cListarea.style.display = "block";
-  chatRoom.style.display = "none";
+	$('#content').val('');
+	$('.chatMsg_area').empty();
+	cListarea.style.display = "block";
+	chatRoom.style.display = "none";
 });
 
+	
+// socket 연결 
+	var socket=new WebSocket("ws://localhost:9000/p_190826_semi/")
 
-$('#content').keyup(function () {
-
-	var inputLength = $(this).val().length;
-
-//	var remain = 150-inputLength;
-});
 
 //textArea 엔터키 이벤트
 document.getElementById('content').addEventListener('keydown', function(event) {
@@ -107,6 +104,7 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 				"chatMsg":content
 				};
 		console.log(send);
+//		socket.send(JSON.stringify(send));
 		event.preventDefault();
 		document.getElementById('content').value = "";
 	}

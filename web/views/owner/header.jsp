@@ -86,7 +86,7 @@
 							<p></p>
 						</div>
 						<div class="chatMsg_enter">
-							<textarea id=content rows="3" cols="20" style="border:1px solid white" autofocus></textarea>
+							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white" autofocus></textarea>
 							<button id=btn>Send</button>
 						</div>
 					</div>
