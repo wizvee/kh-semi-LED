@@ -159,17 +159,17 @@ public class Attendance {
 				cal.setTime(enSftD);
 				cal.add(Calendar.DATE, 1);
 
-				this.setStAtdTime(sdf.parse(stAtdTime).getTime());
-				this.setEnAtdTime(sdf.parse(enAtdTime).getTime());
-				this.setStSftTime(sdf.parse(stSftTime).getTime());
-				this.setEnSftTime(cal.getTimeInMillis());
+				this.setStAtdTime(sdf.parse(stAtdTime).getTime()/(1000*60));
+				this.setEnAtdTime(sdf.parse(enAtdTime).getTime()/(1000*60));
+				this.setStSftTime(sdf.parse(stSftTime).getTime()/(1000*60));
+				this.setEnSftTime(cal.getTimeInMillis()/(1000*60));
 
 			} else {
 
-				this.setStAtdTime(sdf.parse(stAtdTime).getTime());
-				this.setEnAtdTime(sdf.parse(enAtdTime).getTime());
-				this.setStSftTime(sdf.parse(stSftTime).getTime());
-				this.setEnSftTime(sdf.parse(enSftTime).getTime());
+				this.setStAtdTime(sdf.parse(stAtdTime).getTime()/(1000*60));
+				this.setEnAtdTime(sdf.parse(enAtdTime).getTime()/(1000*60));
+				this.setStSftTime(sdf.parse(stSftTime).getTime()/(1000*60));
+				this.setEnSftTime(sdf.parse(enSftTime).getTime()/(1000*60));
 
 			}
 
