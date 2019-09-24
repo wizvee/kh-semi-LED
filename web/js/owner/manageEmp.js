@@ -26,7 +26,7 @@ class MngEmp {
       e.addEventListener("click", ({ target }) => {
         mngBody.map(e => e.classList.remove("focus"));
         empInfo.classList.add("focus");
-        const id =target.nextElementSibling.value;
+        const id = target.nextElementSibling.value;
         selectElements("input[name='empId']")[0].value = id;
       })
     );
@@ -36,7 +36,6 @@ class MngEmp {
         sftItem.map(e => e.classList.remove("selected"));
         const targetDiv = target.parentElement;
         targetDiv.classList.add("selected");
-        
       })
     );
 
@@ -49,15 +48,14 @@ class MngEmp {
       const sftId = selectElements(".selected input[name='sftId']")[0].value;
 
       const data = `empId=${empId}&empType=${empType}&empWage=${empWage}&sftId=${sftId}`;
-      
+
       this.getResult("/owner/enrollEmp.do", data, this.approvalEmp);
     });
   }
 
   approvalEmp(respText) {
-    if (respText != "fail") {
-      console.log(respText);
-    }
+    if (respText == "success")
+      location.href = "/p_190826_semi/owner/manageEmp.do";
   }
 
   rejectEmp(respText) {}
