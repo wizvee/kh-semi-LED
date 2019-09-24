@@ -59,6 +59,7 @@
 					<li><a href="<%=request.getContextPath()%>/views/owner/pwdck.jsp">개인 정보</a></li>
 					<li><a href="<%=request.getContextPath()%>/views/attendance.jsp">근태 관리</a></li>
 					<li><a href="<%=request.getContextPath()%>/owner/">급여 관리</a></li>
+					<li><a href="<%=request.getContextPath()%>/owner/statistics.do">직원 통계</a></li>
 				</ul>
 			</nav>
 		</aside>
