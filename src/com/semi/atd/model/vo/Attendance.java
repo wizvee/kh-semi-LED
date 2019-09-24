@@ -136,48 +136,70 @@ public class Attendance {
 	public void setEnSftTime(long enSftTime) {
 		this.enSftTime = enSftTime;
 	}
+	
+	public void setAtdTimeForLong(String stAtdT, String enAtdT) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmm");
 
-	public void setTimeforLong(String stAtdTime, String enAtdTime, String stSftTime, String enSftTime) {
-
-		Date enSftD = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmms");
-		Calendar cal = Calendar.getInstance();
-
-		String[] stSfts = stSftTime.split(":");
-		String[] enSfts = enSftTime.split(":");
-
-		String stSft = stAtdTime.substring(0, 8);
-		String enSft = stAtdTime.substring(0, 8);
-
-		for (int i = 0; i < 2; i++) {
-			stSft += stSfts[i];
-			enSft += stSfts[i];
-		}
-			/// 값이 0으로 세팅됨 수정 해야함
 		try {
-			if (Integer.parseInt(stSfts[0]) > Integer.parseInt(enSfts[0])) {
-				cal.setTime(enSftD);
-				cal.add(Calendar.DATE, 1);
-
-				this.setStAtdTime(sdf.parse(stAtdTime).getTime()/(1000*60));
-				this.setEnAtdTime(sdf.parse(enAtdTime).getTime()/(1000*60));
-				this.setStSftTime(sdf.parse(stSftTime).getTime()/(1000*60));
-				this.setEnSftTime(cal.getTimeInMillis()/(1000*60));
-
-			} else {
-
-				this.setStAtdTime(sdf.parse(stAtdTime).getTime()/(1000*60));
-				this.setEnAtdTime(sdf.parse(enAtdTime).getTime()/(1000*60));
-				this.setStSftTime(sdf.parse(stSftTime).getTime()/(1000*60));
-				this.setEnSftTime(sdf.parse(enSftTime).getTime()/(1000*60));
-				
-			}
-
+				this.setStAtdTime(sdf.parse(stAtdT).getTime()/(1000*60));
+				this.setEnAtdTime(sdf.parse(enAtdT).getTime()/(1000*60));
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(this.getStAtdTime());
+
+	}
+
+	
+	
+	public void setTimeforLong(String stAtdT, String enAtdT, String stSftT, String enSftT) {
+
+		Date enSftD = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmm");
+		Calendar cal = Calendar.getInstance();
+
+		String[] stSfts = stSftT.split(":");
+		String[] enSfts = enSftT.split(":");
+
+		String stSft = stAtdT.substring(0, 8);
+		String enSft = stAtdT.substring(0, 8);
+
+		System.out.println("년 월 일 " + stSft);
+		for (int i = 0; i < 2; i++) {
+			stSft += stSfts[i];
+			enSft += enSfts[i];
+		}
+		System.out.println("문자열 병합 : " + stSft);
+			/// 값이 0으로 세팅됨 수정 해야함
+		try {
+			if (Integer.parseInt(stSfts[0]) > Integer.parseInt(enSfts[0])) {
+				enSftD = sdf.parse(enSft);
+				cal.setTime(enSftD);
+				System.out.println("캘린더 값으로 parse " + cal);
+				cal.add(Calendar.DATE, 1);
+				System.out.println("다음 날짜로 변경 " + cal);
+				this.setStAtdTime(sdf.parse(stAtdT).getTime()/(1000*60));
+				this.setEnAtdTime(sdf.parse(enAtdT).getTime()/(1000*60));
+				this.setStSftTime(sdf.parse(stSft).getTime()/(1000*60));
+				this.setEnSftTime(cal.getTimeInMillis()/(1000*60));
+
+			} else {
+
+				this.setStAtdTime(sdf.parse(stAtdT).getTime()/(1000*60));
+				this.setEnAtdTime(sdf.parse(enAtdT).getTime()/(1000*60));
+				this.setStSftTime(sdf.parse(stSft).getTime()/(1000*60));
+				this.setEnSftTime(sdf.parse(enSft).getTime()/(1000*60));
+				
+			}
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("sft get으로 받아온 값 : " + this.getStSftTime());
+		System.out.println("ensft : " + this.getEnSftTime());
+		System.out.println("atd 계산값 : " + (this.getStAtdTime() - this.getEnAtdTime()));
 
 	}
 

@@ -162,7 +162,7 @@ java.util.List"%>
 					<input type="hidden" id="stAtTime" value=<%=e.getAttendance().getStAtdTime() %>>
 					<input type="hidden" id="enAtTime" value=<%=e.getAttendance().getEnAtdTime() %>>
 					<input type="hidden" id="stSftime" value=<%=e.getAttendance().getStSftTime() %>>
-					<input type="hidden" id="EnSftime" value=<%=e.getAttendance().getEnSftTime() %>>
+					<input type="hidden" id="enSftime" value=<%=e.getAttendance().getEnSftTime() %>>
 				<!-- 	<progress value="20" max="100"></progress> -->
 				<div class="atd_progress_color">
 					<div style="background-color: red;"></div>
