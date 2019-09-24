@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import com.semi.bus.model.dao.BusinessDao;
 import com.semi.bus.model.vo.Business;
 import com.semi.emp.model.vo.Employee;
+import com.semi.noti.model.dao.NotiDao;
+import com.semi.noti.model.vo.Notification;
 import com.semi.sft.model.dao.ShiftDao;
 import com.semi.sft.model.vo.Shift;
 
@@ -18,6 +20,7 @@ public class BusinessService {
 
 	private BusinessDao dao = new BusinessDao();
 	private ShiftDao sftDao = new ShiftDao();
+	private NotiDao nDao = new NotiDao();
 
 	public String insertBusiness(String ownId, Business bus, Shift[] sftArr) {
 		Connection conn = getConnection();
@@ -60,14 +63,19 @@ public class BusinessService {
 		return list;
 	}
 
-	public int approvalEmp(String busId, Employee e) {
+	public Notification approvalEmp(String busId, Employee e, Notification n) {
 		Connection conn = getConnection();
 		int r = dao.approvalEmp(conn, busId, e);
-		if (r > 0)
+		int r2 = nDao.insertNoti(conn, n);
+		Notification n2 = null;
+		if (r > 0 && r2 > 0) {
 			commit(conn);
+			String id = nDao.getNotiId(conn);
+			n2 = nDao.selectNoti(conn, id);
+		}
 		else
 			rollback(conn);
 		close(conn);
-		return r;
+		return n2;
 	}
 }

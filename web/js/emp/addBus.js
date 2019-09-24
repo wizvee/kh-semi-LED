@@ -62,7 +62,6 @@ class AddBus {
 
       btnEr.addEventListener("click", ({ target }) => {
         const result = target.parentElement;
-        let empId = userInfo.userId;
         let busId;
         let ownId;
 
@@ -71,7 +70,7 @@ class AddBus {
           else if (e.getAttribute("name") == "ownId") ownId = e.value;
         });
 
-        const data = `userId=${empId}&ownId=${ownId}&busId=${busId}`;
+        const data = `ownId=${ownId}&busId=${busId}`;
         this.getResult("/emp/enrollBus.do", data, this.submitEnroll);
       });
 

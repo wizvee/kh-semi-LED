@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.semi.bus.model.vo.Business;
+import com.semi.chatting.model.vo.Chatting;
 import com.semi.emp.model.service.EmpService;
-import com.semi.message.model.vo.Message;
 import com.semi.noti.model.vo.Notification;
 import com.semi.owner.model.service.OwnerService;
 import com.semi.user.model.service.UserService;
@@ -18,25 +18,25 @@ public class UserInfo {
 	private String selectBusId;
 	private HashMap<String, Business> busMap;
 	private ArrayList<Notification> notiList;
-	private ArrayList<Message> msgList;
+	private ArrayList<Chatting> chatList;
 
 	public UserInfo() {
 	}
 
-	public UserInfo(String userId, String selectBusId, HashMap<String, Business> busMap, ArrayList<Message> msgList,
-			ArrayList<Notification> notiList) {
+	public UserInfo(String userId, String selectBusId, HashMap<String, Business> busMap,
+			ArrayList<Notification> notiList, ArrayList<Chatting> chatList) {
 		super();
 		this.userId = userId;
 		this.selectBusId = selectBusId;
 		this.busMap = busMap;
-		this.msgList = msgList;
 		this.notiList = notiList;
+		this.chatList = chatList;
 	}
 
 	public void getParameters(String userType) {
 		String userId = this.getUserId();
 		String selectBusId = this.getSelectBusId();
-		
+
 		HashMap<String, Business> busMap = null;
 		if (userType.equals("O"))
 			busMap = new EmpService().getBusMap(userId);
@@ -79,20 +79,20 @@ public class UserInfo {
 		this.busMap = busMap;
 	}
 
-	public ArrayList<Message> getMsgList() {
-		return msgList;
-	}
-
-	public void setMsgList(ArrayList<Message> msgList) {
-		this.msgList = msgList;
-	}
-
 	public ArrayList<Notification> getNotiList() {
 		return notiList;
 	}
 
 	public void setNotiList(ArrayList<Notification> notiList) {
 		this.notiList = notiList;
+	}
+
+	public ArrayList<Chatting> getChatList() {
+		return chatList;
+	}
+
+	public void setChatList(ArrayList<Chatting> chatList) {
+		this.chatList = chatList;
 	}
 
 }

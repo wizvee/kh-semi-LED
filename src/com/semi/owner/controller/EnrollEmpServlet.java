@@ -1,8 +1,5 @@
 package com.semi.owner.controller;
 
-import static common.template.JDBCTemplate.commit;
-import static common.template.JDBCTemplate.rollback;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -12,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.semi.bus.model.service.BusinessService;
 import com.semi.emp.model.vo.Employee;
+import com.semi.noti.model.vo.Notification;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/owner/enrollEmp.do")
@@ -27,22 +27,32 @@ public class EnrollEmpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+
 		UserInfo ui = (UserInfo) request.getSession().getAttribute("userInfo");
-		
+		String busId = ui.getSelectBusId();
+
 		Employee e = new Employee();
 		e.setUserId(request.getParameter("empId"));
 		e.setEmpType(request.getParameter("empType"));
 		e.setEmpWage(Integer.parseInt(request.getParameter("empWage")));
 		e.setSftId(request.getParameter("sftId"));
-		
-		String busId = ui.getSelectBusId();
-		
-		int r = new BusinessService().approvalEmp(busId, e);
-		if (r > 0)
-			out.print("success");
-		else
+
+		Notification n = new Notification();
+		n.setUserId(e.getUserId());
+		n.setTargetUserId(ui.getUserId());
+		n.setTargetBusId(busId);
+		n.setNotiType("approval_Emp");
+		n.setNotiMsg("종업원 " + e.getUserId() + " 승인");
+		n.setNotiUrl("/owner/manageEmp.do");
+
+		Notification nNoti = new BusinessService().approvalEmp(busId, e, n);
+
+		if (nNoti != null) {
+			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			ui.getNotiList().add(nNoti);
+			out.print(gs.toJson(ui));
+		} else
 			out.print("fail");
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

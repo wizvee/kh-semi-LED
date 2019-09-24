@@ -5,6 +5,7 @@ import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.semi.userinfo.model.vo.UserInfo;
 
 public class UserInfoDecoder implements Decoder.Text<UserInfo> {
@@ -21,7 +22,8 @@ public class UserInfoDecoder implements Decoder.Text<UserInfo> {
 
 	@Override
 	public UserInfo decode(String s) throws DecodeException {
-		return new Gson().fromJson(s, UserInfo.class);
+		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		return gs.fromJson(s, UserInfo.class);
 	}
 
 	@Override

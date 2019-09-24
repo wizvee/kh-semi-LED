@@ -7,7 +7,10 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint(value = "/ws", encoders = {UserInfoEncoder.class}, decoders = {UserInfoDecoder.class})
+import com.google.gson.Gson;
+import com.semi.userinfo.model.vo.UserInfo;
+
+@ServerEndpoint(value = "/ws", encoders = { UserInfoEncoder.class }, decoders = { UserInfoDecoder.class })
 public class SemiWebSocket {
 
 	@OnOpen
@@ -17,6 +20,11 @@ public class SemiWebSocket {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+
+	@OnMessage
+	public void onMessage(Session session, UserInfo userInfo) {
+		System.out.println("??");
+	}
 
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.emp.model.service.EmpService;
 import com.semi.noti.model.vo.Notification;
+import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/emp/enrollBus.do")
 public class AddBusEndServlet extends HttpServlet {
@@ -24,20 +25,15 @@ public class AddBusEndServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		
-		String userId = request.getParameter("userId");
-		String targetUserId = request.getParameter("ownId");
-		String targetBusId = request.getParameter("busId");
-		String notiType = "enroll_Business";
-		String notiMsg = "근무신청(미정)";
-		String notiUrl = "/owner/manageEmp.do";
+		String userId = ((UserInfo) request.getSession().getAttribute("userInfo")).getUserId();
 		
 		Notification n = new Notification();
 		n.setUserId(userId);
-		n.setTargetUserId(targetUserId);
-		n.setTargetBusId(targetBusId);
-		n.setNotiType(notiType);
-		n.setNotiMsg(notiMsg);
-		n.setNotiUrl(notiUrl);
+		n.setTargetUserId(request.getParameter("ownId"));
+		n.setTargetBusId(request.getParameter("busId"));
+		n.setNotiType("enroll_Business");
+		n.setNotiMsg("근무신청(미정)");
+		n.setNotiUrl("/owner/manageEmp.do");
 		
 		int r = new EmpService().submitEnrollBus(n);
 		

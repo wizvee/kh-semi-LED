@@ -54,8 +54,10 @@ class MngEmp {
   }
 
   approvalEmp(respText) {
-    if (respText == "success")
-      location.href = "/p_190826_semi/owner/manageEmp.do";
+    if (respText != "fail") {
+      // location.href = "/p_190826_semi/owner/manageEmp.do";
+      socket.send(respText);
+    }
   }
 
   rejectEmp(respText) {}

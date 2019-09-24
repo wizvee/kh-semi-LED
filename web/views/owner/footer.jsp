@@ -5,8 +5,14 @@
       <!-- //container -->
     </div>
     <!-- JavaScript -->
+    <script>
+      let socket = new WebSocket("ws://localhost:9090/p_190826_semi/ws");
+
+      socket.onmessage = e => {
+      console.log(e.data);
+      }
+    </script>
     <script src="<%=request.getContextPath()%>/js/common.js"></script>
     <script src="<%=request.getContextPath()%>/js/chatting.js"></script>
-    <script src="<%=request.getContextPath()%>/js/websocket.js"></script>
   </body>
 </html>
