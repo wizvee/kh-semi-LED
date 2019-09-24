@@ -69,6 +69,23 @@
 
 <script>
 	$(function(){
+		$(".btn-phone").click(function(){
+			if($(this).parent().has('#phone').length==0){
+				var tr=$("<tr id='phone'>");
+				var html="<td style='display:none; text-align:left;' colspan='2'>"
+				html+="<form action='<%=request.getContextPath()%>' method='post'>";
+				html+='<textarea name="content" cols="60" rows="3"></textarea>';
+				html+='<input type="submit" value="등록">';
+				html+='</form></td>';
+				tr.html(html);
+				tr.insertAfter($(this).parent().parent()).children("td").slideDown(200);
+			}else{
+				$(this).parent().children("#phone").remove();
+			}
+		});
+	});
+
+	$(function(){
 		$('#btn_checkPw').click(function(){
 			$("#result_pw").html("");
 			$("#result_nPw").html("");

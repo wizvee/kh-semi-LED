@@ -7,17 +7,13 @@
 <%@ include file="header.jsp"%>
 
 <style type="text/css">
-
-</style>
-<!-- <style>
-	.item .item_mypage div b {
+/* 	.item .item_mypage div {
 		color : blue;
 	}
 	.item .item_mypage .email{
 		border-top : 2px solid #000;
-	}
-</style> -->
-
+	} */
+</style>
 
 <div id="content">
 	<section class="item">
@@ -26,7 +22,7 @@
 		</div>
 		<div class="item_body item_mypage">
 		<form name="updateUserFrm" method="POST">
-			<%-- <div><b><%=infoUser.getUserName()%></b>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</div>
+			<%-- <div><%=infoUser.getUserName()%>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</div>
 			<br>
 			<div class="email">아이디(이메일) : <%=infoUser.getEmail()%></div> --%>
 			비밀번호 : <input type="password" class="inpt-outline" name="pw" id="pw">
