@@ -34,7 +34,6 @@ chatListItem.map(e => {
     		if(chatHistory!='none'){
     		const result=JSON.parse(chatHistory);
     		result.forEach(function(msg){
-    			console.log(msg.profilePic);
     			addChat (msg.profilePic, msg.userName, msg.chatMsg, msg.chatDate, msg.chatType);
     		})
     		
@@ -88,7 +87,7 @@ btnChatBack.addEventListener("click", () => {
 
 	
 // socket 연결 
-//	var socket=new WebSocket("ws://localhost:9000/p_190826_semi/")
+//	var socket=new WebSocket("ws://localhost:9000/p_190826_semi/ws")
 
 
 //textArea 엔터키 이벤트

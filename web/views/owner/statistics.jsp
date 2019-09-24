@@ -81,7 +81,7 @@ var chart = new google.visualization.PieChart(document.getElementById('monthlyWa
 chart.draw(data, options);
 }
 
-// ============================================ 직원 급여 추이 라인 그래프 현재근무자 =========================================
+// ============================== 직원 급여 추이 라인 그래프현재근무자 ===================================
 google.charts.setOnLoadCallback(drawChartLine);
 
 function drawChartLine() {
@@ -96,13 +96,80 @@ function drawChartLine() {
   var options = {
 	title: '직원 급여 추이 라인 그래프',
 	curveType: 'function',
-	legend: { position: 'bottom' },
+	width:700,
+	height:500,
+	legend: { position: 'bottom' }
+	,
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
   chart.draw(data, options);
 }
+
+
+// =============================== 알바생별 받은 총 인권비 테이블차트 ==============================
+
+google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '이름');
+        data.addColumn('number', '받아간 총 급여');
+        data.addColumn('boolean', '현재 근무여부');
+        data.addRows([
+          ['강동원',  {v: 10000, f: '590,000'}, true],
+          ['조인성',   {v:8000,   f: '8,000,000'},  false],
+          ['한예슬', {v: 12500, f: '400,000'}, false],
+          ['손예진',   {v: 7000,  f: '7,000,000'},  true]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: true, width: '80%', height: '50%'});
+      }
+
+
+// =============================== 근무 기간 타임라인 차트 ==================================
+
+google.charts.load("current", {packages:["timeline"]});
+  google.charts.setOnLoadCallback(drawTimeLine);
+  function drawTimeLine() {
+    var container = document.getElementById('time_line');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+
+    dataTable.addColumn({ type: 'string', id: 'Term' });
+    dataTable.addColumn({ type: 'string', id: 'Name' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+	dataTable.addColumn({ type: 'date', id: 'End' });
+	
+	var d=new Date();
+	var year=d.getFullYear();
+	var month=d.getMonth();
+	var day=d.getDate();
+
+
+    dataTable.addRows([
+      [ '1', '강동원', new Date(2019, 3, 30), new Date(2019, 8, 12) ],
+      [ '2', '조인성',  new Date(2019, 5, 4),  new Date(2019, 7, 1) ],
+	  [ '3', '한예슬',  new Date(2019, 8, 21),  new Date(2019, 9, 20) ],
+	  [ '4', '손예진',  new Date(2019, 8, 10),  new Date(year,month,day)]]); 
+
+	var options={
+	width:500,
+	height:300,
+	}
+
+    chart.draw(dataTable,options);
+  }
+
+
+
+
+
+
 </script>
 
 
@@ -132,6 +199,11 @@ function drawChartLine() {
 						<div id="monthlyWageWorkers_div" style="border: 1px solid #ccc"></div>
 						<br>						
 						<div id="curve_chart" style="width: 900px; height: 500px"></div>
+						<br>
+						<div id="table_div"></div>
+						<br>
+						<div id="time_line" style="height: 200px;"></div>
+						<br>
 					</div>
 			</div>
 		</div>
