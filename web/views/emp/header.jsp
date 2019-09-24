@@ -38,7 +38,7 @@
 
 <body>
 	<script>
-		const userInfo = <%= parsingInfo %>;
+		const userInfo = <%=parsingInfo %>;
 	</script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /> <label for="ck_snb"></label>

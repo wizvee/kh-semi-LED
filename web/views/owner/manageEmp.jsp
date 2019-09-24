@@ -26,11 +26,22 @@
 				</div>
 			</div>
 			<div class="mngEmp_body">
-				<div class="mngEmpWork_area focus">1</div>
+				<div class="mngEmpWork_area focus">
+					<%
+						for (Employee e : empList) {
+							if (true) {
+					%>
+					
+					<%
+							}
+						}
+					%>
+				</div>
 				<div class="mngEmpResign_area">2</div>
 				<div class="mngEmpEnroll_area">
 					<%
 						for (Employee e : empList) {
+							if (e.getEmpType() == null) {
 					%>
 					<div class="empList_area">
 						<img class="item_profile"
@@ -43,20 +54,19 @@
 						</div>
 					</div>
 					<%
+							}
 						}
 					%>
 				</div>
 				<div class="approvalEmpInfo_area">
 					<div>
-					<input type="hidden" name="empId" vlaue="">
+						<input type="hidden" name="empId" vlaue="">
 						<p>고용 형태</p>
 						<div>
 							<input type="radio" name="empType" value="H" id="empTypeH">
-							<label for="empTypeH">시급직</label>
-							<input type="radio" name="empType" value="D" id="empTypeD">
-							<label for="empTypeD">일당직</label>
-							<input type="radio" name="empType" value="M" id="empTypeM">
-							<label for="empTypeM">월급직</label>
+							<label for="empTypeH">시급직</label> <input type="radio" name="empType" value="D"
+								id="empTypeD"> <label for="empTypeD">일당직</label> <input type="radio" name="empType"
+								value="M" id="empTypeM"> <label for="empTypeM">월급직</label>
 							<div class="inptIcon_area">
 								<input type="text" class="inpt-outline" name="empWage">
 								<span>원</span>
@@ -72,20 +82,20 @@
 								<span><%=s.getSftName()%></span>
 								<div>
 									<%
-									ArrayList<String> sftDays = new ArrayList<>(Arrays.asList(s.getSftDay().split(",")));
-										String[] wkd = { "일", "월", "화", "수", "목", "금", "토" };
-										for (String str : wkd) {
-											if (sftDays.contains(str)) {
-								%>
+										ArrayList<String> sftDays = new ArrayList<>(Arrays.asList(s.getSftDay().split(",")));
+											String[] wkd = { "일", "월", "화", "수", "목", "금", "토" };
+											for (String str : wkd) {
+												if (sftDays.contains(str)) {
+									%>
 									<span class="workDay contain"><%=str%></span>
 									<%
-									} else {
-								%>
+										} else {
+									%>
 									<span class="workDay"><%=str%></span>
 									<%
-									}
 										}
-								%>
+											}
+									%>
 								</div>
 								<span><%=s.getSftOn()%></span> <span><%=s.getSftOff()%></span>
 							</div>

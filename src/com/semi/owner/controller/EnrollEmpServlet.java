@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,9 +27,10 @@ public class EnrollEmpServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
 
-		UserInfo ui = (UserInfo) request.getSession().getAttribute("userInfo");
+		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
 		String busId = ui.getSelectBusId();
 
 		Employee e = new Employee();
@@ -50,6 +52,8 @@ public class EnrollEmpServlet extends HttpServlet {
 		if (nNoti != null) {
 			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			ui.getNotiList().add(nNoti);
+			
+			session.setAttribute("userInfo", ui);
 			out.print(gs.toJson(ui));
 		} else
 			out.print("fail");

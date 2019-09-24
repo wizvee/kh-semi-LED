@@ -20,17 +20,20 @@ public class UserInfo {
 	private ArrayList<Notification> notiList;
 	private ArrayList<Chatting> chatList;
 
+	private String flag;
+
 	public UserInfo() {
 	}
 
 	public UserInfo(String userId, String selectBusId, HashMap<String, Business> busMap,
-			ArrayList<Notification> notiList, ArrayList<Chatting> chatList) {
+			ArrayList<Notification> notiList, ArrayList<Chatting> chatList, String flag) {
 		super();
 		this.userId = userId;
 		this.selectBusId = selectBusId;
 		this.busMap = busMap;
 		this.notiList = notiList;
 		this.chatList = chatList;
+		this.flag = flag;
 	}
 
 	public void getParameters(String userType) {
@@ -93,6 +96,14 @@ public class UserInfo {
 
 	public void setChatList(ArrayList<Chatting> chatList) {
 		this.chatList = chatList;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 }

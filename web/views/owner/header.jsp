@@ -39,7 +39,7 @@
 
 <body>
 	<script>
-		const userInfo = <%= parsingInfo %>;
+		const userInfo = < %= parsingInfo % > ;
 	</script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /><label for="ck_snb"></label>
@@ -66,6 +66,13 @@
 		<!-- //사이드 메뉴 -->
 		<!-- container -->
 		<div id="container" class="container_main">
+			<!-- 알람창 -->
+			<div id="alert">
+				<div id="alert_header">알림 센터</div>
+				<div id="alert_body"></div>
+			</div>
+			<!-- //알람창 -->
+			<!-- 채팅창 -->
 			<div id="chat_area" class="item" style="display: none;">
 				<div class="item_header">채팅창</div>
 				<div class="item_body">
@@ -96,6 +103,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- //채팅창 -->
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">
 				<div>
@@ -126,7 +134,8 @@
 						}
 					%>
 				</div>
-				<div>
+				<div id="gnb_alert">
+					<span id="gnb_badge"></span>
 					<i class="fa fa-bell" aria-hidden="true"></i>
 				</div>
 				<div>
