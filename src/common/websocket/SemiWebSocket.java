@@ -7,7 +7,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint(value = "/ws")
+@ServerEndpoint(value = "/ws", encoders = {UserInfoEncoder.class}, decoders = {UserInfoDecoder.class})
 public class SemiWebSocket {
 
 	@OnOpen
@@ -17,12 +17,6 @@ public class SemiWebSocket {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	@OnMessage
-	public void onMessage(Session session) {
-		
-	}
-	
-	
+	}	
+
 }
