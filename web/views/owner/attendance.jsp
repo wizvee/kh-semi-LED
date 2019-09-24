@@ -66,30 +66,28 @@ java.util.List"%>
 	font-size: 1em;
 }
 
-.atd_progress_wraper div {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 0px;
-	grid-column-gap: -10px;
+.atd_progress_wraper {
+
+	display: inline-block;
 	background-color: blanchedalmond;
 	height: 20px;
-	display: inline-block;
+	width: 100%;
 }
 
-#atd_progressBar_late {
-	width: 20%;
+.atd_progressBar_late {
+	float:left;
 	background-color: red;
 	border: none;
 }
 
-#atd_progressBar_work {
-	width: 70%;
+.atd_progressBar_work {
+	float:left;
 	background-color: chartreuse;
 	border: none;
 }
 
-#atd_progressBar_ealryLeave {
-	width: 10%;
+.atd_progressBar_ealryLeave {
+	float:left;
 	background-color: dodgerblue;
 	border: none;
 }
@@ -159,10 +157,14 @@ java.util.List"%>
 				<p><%=e.getShift().getSftOn()%>
 					~
 					<%=e.getShift().getSftOff()%></p>
-					<input type="hidden" id="stAtTime" value=<%=e.getAttendance().getStAtdTime() %>>
-					<input type="hidden" id="enAtTime" value=<%=e.getAttendance().getEnAtdTime() %>>
-					<input type="hidden" id="stSftime" value=<%=e.getAttendance().getStSftTime() %>>
-					<input type="hidden" id="enSftime" value=<%=e.getAttendance().getEnSftTime() %>>
+				<input type="hidden" id="stAtTime"
+					value=<%=e.getAttendance().getStAtdTime()%>> <input
+					type="hidden" id="enAtTime"
+					value=<%=e.getAttendance().getEnAtdTime()%>> <input
+					type="hidden" id="stSftime"
+					value=<%=e.getAttendance().getStSftTime()%>> <input
+					type="hidden" id="enSftime"
+					value=<%=e.getAttendance().getEnSftTime()%>>
 				<!-- 	<progress value="20" max="100"></progress> -->
 				<div class="atd_progress_color">
 					<div style="background-color: red;"></div>
@@ -172,49 +174,35 @@ java.util.List"%>
 					<div style="background-color: dodgerblue;"></div>
 					: 조퇴
 				</div>
-				<div class="atd_progress_wraper">
-
-					<script type="text/javascript">
-						// changeProcessBar(e);
-
-			
-							var stAtd = $('#stAtTime').val();
-							var enAtd = $('#enAtTime').val();
-							var stSft = $('#stSftime').val();
-							var enSft = $('#enSftime').val();
-
-
-							console.log(stAtd);
-							console.log(enAtd);
-							console.log(stSft);
-							console.log(enSft);
-
-
-			var widthLate = 0;
-			var widthNomal = 0;
-			var widthEarly = 0;
-
-			if (stSft > stAtd) {
-				widthLate = (stSft - stAtd)
-						/ (enSft - stSft);
-				$('#atd_progressBar_late').width(widthLate+'%');
-				console.log(width);
-			} else if (enSft > enAtd) {
-				widthEarly = (enSft - enAtd)
-						/ (enSft - stSft) - widthLate;
-				$('#atd_progressBar_ealryLeave').width(widthEarly+'%');
-			} else {
-				widthNomal = ((enAtd - stAtd) / (enSft - stSft))
-						- (widthLate - widthEarly);
-				$('#atd_progressBar_work').width(widthNomal+'%');
-			};
-			console.log(enAtd - stAtd);
-			console.log(widthLate + widthEarly + widthNomal);
-					</script>
-
-					<div id="atd_progressBar_late"></div>
-					<div id="atd_progressBar_work"></div>
-					<div id="atd_progressBar_ealryLeave"></div>
+				<div class="atd_progress_wraper" >
+		
+					<%
+					long stAtd = e.getAttendance().getStAtdTime();
+					long enAtd = e.getAttendance().getEnAtdTime();
+					long stSft = e.getAttendance().getStSftTime();
+					long enSft = e.getAttendance().getEnSftTime();
+				
+					long widthLate = 0;
+					long widthEarly = 0;
+					long widthNomal = 0;
+					
+					if (stSft < stAtd) {
+						widthLate = (100 - (((enSft - stSft) - (stAtd - stSft)) / (enSft - stSft)) * 100);
+					}
+					if (enSft > enAtd) {
+						widthEarly = (100 - (((enSft - stSft) - (enSft - enAtd)) / (enSft - stSft)) * 100
+								- widthLate);
+					}
+					widthNomal = (100 - (((enSft - stSft) - (enAtd - stAtd)) / (enSft - stSft)) * 100
+						- (widthLate - widthEarly));
+				
+				
+					%>
+					
+					<div style="float:left; height:100%;  background-color: red; width:<%= widthLate%>%;"></div>
+					<div style= "float:left; height:100%; background-color: chartreuse; width :<%= widthEarly %>%;"></div>
+					<div style= "float:left; height:100%; background-color: dodgerblue; width :<%= widthNomal %>%;"></div>
+					
 				</div>
 			</div>
 			<%
@@ -255,8 +243,9 @@ java.util.List"%>
 
 	</section>
 
-	<script>
+<script type="text/javascript">
+
 		
-	</script>
+			</script>
 </div>
 <%@ include file="footer.jsp"%>

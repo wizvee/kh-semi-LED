@@ -56,12 +56,45 @@ public class AttendanceServlet extends HttpServlet {
 				System.out.println(atd.getAtdOn()+","+ atd.getAtdOff()+","+ e.getShift().getSftOn()+","+ e.getShift().getSftOff());
 				atd.setTimeforLong(atd.getAtdOn(), atd.getAtdOff(), e.getShift().getSftOn(), e.getShift().getSftOff());
 				e.setAttendance(atd);
+				
+				
+				/// width값 구하는 로직 완성하기
+				long stAtd = e.getAttendance().getStAtdTime();
+				long enAtd = e.getAttendance().getEnAtdTime();
+				long stSft = e.getAttendance().getStSftTime();
+				long enSft = e.getAttendance().getEnSftTime();
+				
+				long widthLate = 0;
+				long widthEarly = 0;
+				long widthNomal = 0;
+				
+				if (stSft < stAtd) {
+					widthLate = 100 - (((enSft - stSft) - (stAtd - stSft)) / (enSft - stSft)) * 100;
+				}
+				if (enSft > enAtd) {
+					widthEarly = 100 - (((enSft - stSft) - (enSft - enAtd)) / (enSft - stSft)) * 100
+							- widthLate;
+				}
+				widthNomal = 100 - (((enSft - stSft) - (enAtd - stAtd)) / (enSft - stSft)) * 100
+						- (widthLate - widthEarly);
+				
+				System.out.println(enSft - stSft);
+				System.out.println(stAtd - stSft);
+				System.out.println(enSft - stSft);
+				
+				System.out.println(stAtd);
+				System.out.println(enAtd);
+				System.out.println(stSft);
+				System.out.println(enSft);
+				
+				System.out.println(widthLate);
+				System.out.println(widthEarly);
+				System.out.println(widthNomal);
+		request.setAttribute("empList", empList);
+		
 			}
 			
 		}
-
-		
-		request.setAttribute("empList", empList);
 
 		request.getRequestDispatcher("/views/owner/attendance.jsp").forward(request, response);
 
