@@ -1,6 +1,8 @@
 package com.semi.user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,12 +38,17 @@ public class CheckAjaxinfoPwServlet extends HttpServlet {
 		String nPw = SHA512.getSHA512(request.getParameter("nPw"));
 		boolean able = new UserService().CheckUser(userId, pw) != null ? true : false;
 		
-		if (able) {
-			//현재 비밀번호들 중에 새 비밀번호가 있는지 확인해야됨.
-			if(pw==nPw) {
-				
-			}
+		if (able && nPw != null) {
+			int result = new UserService().UpdatePw(userId,nPw);
+				if(result<0) {
+					able = false;
+				}
+			
 		}
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(able);
 		
 	}
 

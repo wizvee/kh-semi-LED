@@ -1,21 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.semi.user.model.vo.User"%>
+<%
+	User infoUser =(User)session.getAttribute("infoUser");
+%>
 
 <%@ include file="header.jsp"%>
 
 <style type="text/css">
 
 </style>
+<!-- <style>
+	.item .item_mypage div b {
+		color : blue;
+	}
+	.item .item_mypage .email{
+		border-top : 2px solid #000;
+	}
+</style> -->
+
 
 <div id="content">
 	<section class="item">
 		<div class="item_header">
-			<h2>비밀번호 확인</h2>
+			<h2>회원정보 확인</h2>
 		</div>
 		<div class="item_body item_mypage">
-		<!-- form 태그가 넘기는게 없어졌으니까 action과 onsubmit이 다 필요 없지 않을까? -->
-		<form action="<%=request.getContextPath()%>/checkPasswordEnd.do" name="updateUserFrm" method="POST" onsubmit="return update_validate();">
-			<input type="password" class="inpt-outline" name="pw" id="pw">
+		<form name="updateUserFrm" method="POST">
+			<%-- <div><b><%=infoUser.getUserName()%></b>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</div>
+			<br>
+			<div class="email">아이디(이메일) : <%=infoUser.getEmail()%></div> --%>
+			비밀번호 : <input type="password" class="inpt-outline" name="pw" id="pw">
 			<div id="result"></div>
 			<button id="btn_checkPw" class="btn-primary" onclick="return false;">확인</button>
 		</form>
