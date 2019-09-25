@@ -42,6 +42,7 @@ public class ShiftDao {
 			pstmt.setString(2, sft.getSftDay());
 			pstmt.setString(3, sft.getSftOn());
 			pstmt.setString(4, sft.getSftOff());
+			pstmt.setInt(5, sft.getSftTime());
 			r = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

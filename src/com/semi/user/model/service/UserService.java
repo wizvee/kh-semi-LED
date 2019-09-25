@@ -65,9 +65,9 @@ public class UserService {
 		return r;
 	}
 	
-	public ArrayList<Notification> getNotiList(String busId) {
+	public ArrayList<Notification> getNotiList(String busId, String userId) {
 		Connection conn = getConnection();
-		ArrayList<Notification> list = dao.getNotiList(conn, busId);
+		ArrayList<Notification> list = dao.getNotiList(conn, busId, userId);
 		close(conn);
 		return list;
 	}

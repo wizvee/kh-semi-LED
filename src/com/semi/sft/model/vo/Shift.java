@@ -8,14 +8,16 @@ public class Shift {
 	private String sftDay;
 	private String sftOn;
 	private String sftOff;
-	// 추가 됨 두개
+	private int sftTime;
+
 	private String atdOn;
 	private String atdOff;
 
 	public Shift() {
 	}
 
-	public Shift(String sftId, String busId, String sftName, String sftDay, String sftOn, String sftOff) {
+	public Shift(String sftId, String busId, String sftName, String sftDay, String sftOn, String sftOff, int sftTime,
+			String atdOn, String atdOff) {
 		super();
 		this.sftId = sftId;
 		this.busId = busId;
@@ -23,8 +25,11 @@ public class Shift {
 		this.sftDay = sftDay;
 		this.sftOn = sftOn;
 		this.sftOff = sftOff;
+		this.sftTime = sftTime;
+		this.atdOn = atdOn;
+		this.atdOff = atdOff;
 	}
-	
+
 	public String getSftId() {
 		return sftId;
 	}
@@ -73,6 +78,14 @@ public class Shift {
 		this.sftOff = sftOff;
 	}
 
+	public int getSftTime() {
+		return sftTime;
+	}
+
+	public void setSftTime(int sftTime) {
+		this.sftTime = sftTime;
+	}
+
 	public String getAtdOn() {
 		return atdOn;
 	}
@@ -88,8 +101,5 @@ public class Shift {
 	public void setAtdOff(String atdOff) {
 		this.atdOff = atdOff;
 	}
-
-
-	
 
 }

@@ -7,12 +7,14 @@ import com.semi.emp.model.vo.Employee;
 
 public class Business implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String busId;
 	private String ownId;
 	private String busName;
 	private String busNum;
 	private String busAddr;
 	private String busPhone;
+	private int busDate;
 
 	private String ownName;
 	private ArrayList<Employee> list;
@@ -21,7 +23,7 @@ public class Business implements Serializable {
 	}
 
 	public Business(String busId, String ownId, String busName, String busNum, String busAddr, String busPhone,
-			String ownName, ArrayList<Employee> list) {
+			int busDate, String ownName, ArrayList<Employee> list) {
 		super();
 		this.busId = busId;
 		this.ownId = ownId;
@@ -29,6 +31,7 @@ public class Business implements Serializable {
 		this.busNum = busNum;
 		this.busAddr = busAddr;
 		this.busPhone = busPhone;
+		this.busDate = busDate;
 		this.ownName = ownName;
 		this.list = list;
 	}
@@ -81,6 +84,14 @@ public class Business implements Serializable {
 		this.busPhone = busPhone;
 	}
 
+	public int getBusDate() {
+		return busDate;
+	}
+
+	public void setBusDate(int busDate) {
+		this.busDate = busDate;
+	}
+
 	public String getOwnName() {
 		return ownName;
 	}
@@ -95,6 +106,10 @@ public class Business implements Serializable {
 
 	public void setList(ArrayList<Employee> list) {
 		this.list = list;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

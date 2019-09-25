@@ -1,6 +1,7 @@
 package com.semi.emp.model.vo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.semi.atd.model.vo.Attendance;
 import com.semi.bus.model.vo.Business;
@@ -14,6 +15,8 @@ public class Employee extends User {
 	private String bankAccount;
 	private String empLevel;
 	private String sftId;
+	private Date empStart;
+	private Date empEnd;
 
 	private Shift shift;
 	private Attendance attendance;
@@ -23,14 +26,16 @@ public class Employee extends User {
 	public Employee() {
 	}
 
-	public Employee(String empType, int empWage, String bankAccount, String empLevel, String sftId, Shift shift, Attendance attendance,
-			ArrayList<Business> busList, ArrayList<Integer> wageList) {
+	public Employee(String empType, int empWage, String bankAccount, String empLevel, String sftId, Date empStart,
+			Date empEnd, Shift shift, Attendance attendance, ArrayList<Business> busList, ArrayList<Integer> wageList) {
 		super();
 		this.empType = empType;
 		this.empWage = empWage;
 		this.bankAccount = bankAccount;
 		this.empLevel = empLevel;
 		this.sftId = sftId;
+		this.empStart = empStart;
+		this.empEnd = empEnd;
 		this.shift = shift;
 		this.attendance = attendance;
 		this.busList = busList;
@@ -77,6 +82,22 @@ public class Employee extends User {
 		this.sftId = sftId;
 	}
 
+	public Date getEmpStart() {
+		return empStart;
+	}
+
+	public void setEmpStart(Date empStart) {
+		this.empStart = empStart;
+	}
+
+	public Date getEmpEnd() {
+		return empEnd;
+	}
+
+	public void setEmpEnd(Date empEnd) {
+		this.empEnd = empEnd;
+	}
+
 	public Shift getShift() {
 		return shift;
 	}
@@ -84,7 +105,6 @@ public class Employee extends User {
 	public void setShift(Shift shift) {
 		this.shift = shift;
 	}
-	
 
 	public Attendance getAttendance() {
 		return attendance;

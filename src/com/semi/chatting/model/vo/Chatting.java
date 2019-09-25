@@ -10,6 +10,7 @@ public class Chatting {
 	private String chatType;
 	private String chatMsg;
 	private Date chatDate;
+	private boolean readed;
 
 	private String userName;
 	private String profilePic;
@@ -18,7 +19,7 @@ public class Chatting {
 	}
 
 	public Chatting(String busId, String userId, String targetUserId, String chatType, String chatMsg, Date chatDate,
-			String userName, String profilePic) {
+			boolean readed, String userName, String profilePic) {
 		super();
 		this.busId = busId;
 		this.userId = userId;
@@ -26,6 +27,7 @@ public class Chatting {
 		this.chatType = chatType;
 		this.chatMsg = chatMsg;
 		this.chatDate = chatDate;
+		this.readed = readed;
 		this.userName = userName;
 		this.profilePic = profilePic;
 	}
@@ -76,6 +78,14 @@ public class Chatting {
 
 	public void setChatDate(Date chatDate) {
 		this.chatDate = chatDate;
+	}
+
+	public boolean isReaded() {
+		return readed;
+	}
+
+	public void setReaded(boolean readed) {
+		this.readed = readed;
 	}
 
 	public String getUserName() {

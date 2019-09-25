@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,6 +44,7 @@ public class BusinessDao {
 			pstmt.setString(3, bus.getBusNum());
 			pstmt.setString(4, bus.getBusAddr());
 			pstmt.setString(5, bus.getBusPhone() != null ? bus.getBusPhone() : "NULL");
+			pstmt.setInt(6, bus.getBusDate());
 			r = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -157,8 +159,9 @@ public class BusinessDao {
 			pstmt.setString(1, e.getEmpType());
 			pstmt.setInt(2, e.getEmpWage());
 			pstmt.setString(3, e.getSftId());
-			pstmt.setString(4, busId);
-			pstmt.setString(5, e.getUserId());
+			pstmt.setDate(4, (Date) e.getEmpStart());
+			pstmt.setString(5, busId);
+			pstmt.setString(6, e.getUserId());
 			r = pstmt.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

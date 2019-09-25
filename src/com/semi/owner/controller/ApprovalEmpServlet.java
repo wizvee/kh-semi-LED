@@ -2,6 +2,7 @@ package com.semi.owner.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +18,11 @@ import com.semi.emp.model.vo.Employee;
 import com.semi.noti.model.vo.Notification;
 import com.semi.userinfo.model.vo.UserInfo;
 
-@WebServlet("/owner/enrollEmp.do")
-public class EnrollEmpServlet extends HttpServlet {
+@WebServlet("/owner/ApprovalEmp.do")
+public class ApprovalEmpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public EnrollEmpServlet() {
+	public ApprovalEmpServlet() {
 		super();
 	}
 
@@ -38,6 +39,7 @@ public class EnrollEmpServlet extends HttpServlet {
 		e.setEmpType(request.getParameter("empType"));
 		e.setEmpWage(Integer.parseInt(request.getParameter("empWage")));
 		e.setSftId(request.getParameter("sftId"));
+//		e.setEmpStart((Date)request.getParameter("empStart"));
 
 		Notification n = new Notification();
 		n.setUserId(e.getUserId());

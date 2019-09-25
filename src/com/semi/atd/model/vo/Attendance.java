@@ -11,9 +11,8 @@ public class Attendance {
 	private String empId;
 	private String atdOn;
 	private String atdOff;
-	private String overTime;
-	private String attendance;
-	private int dayWage;
+	private String atdType;
+	private int empWage;
 	private String sftId;
 
 	private long stAtdTime;
@@ -24,16 +23,15 @@ public class Attendance {
 	public Attendance() {
 	}
 
-	public Attendance(String busId, String empId, String atdOn, String atdOff, String overTime, String attendance,
-			int dayWage, String sftId, long stAtdTime, long enAtdTime, long stSftTime, long enSftTime) {
+	public Attendance(String busId, String empId, String atdOn, String atdOff, String atdType, int empWage,
+			String sftId, long stAtdTime, long enAtdTime, long stSftTime, long enSftTime) {
 		super();
 		this.busId = busId;
 		this.empId = empId;
 		this.atdOn = atdOn;
 		this.atdOff = atdOff;
-		this.overTime = overTime;
-		this.attendance = attendance;
-		this.dayWage = dayWage;
+		this.atdType = atdType;
+		this.empWage = empWage;
 		this.sftId = sftId;
 		this.stAtdTime = stAtdTime;
 		this.enAtdTime = enAtdTime;
@@ -73,28 +71,20 @@ public class Attendance {
 		this.atdOff = atdOff;
 	}
 
-	public String getOverTime() {
-		return overTime;
+	public String getAtdType() {
+		return atdType;
 	}
 
-	public void setOverTime(String overTime) {
-		this.overTime = overTime;
+	public void setAtdType(String atdType) {
+		this.atdType = atdType;
 	}
 
-	public String getAttendance() {
-		return attendance;
+	public int getEmpWage() {
+		return empWage;
 	}
 
-	public void setAttendance(String attendance) {
-		this.attendance = attendance;
-	}
-
-	public int getDayWage() {
-		return dayWage;
-	}
-
-	public void setDayWage(int dayWage) {
-		this.dayWage = dayWage;
+	public void setEmpWage(int empWage) {
+		this.empWage = empWage;
 	}
 
 	public String getSftId() {
@@ -136,14 +126,14 @@ public class Attendance {
 	public void setEnSftTime(long enSftTime) {
 		this.enSftTime = enSftTime;
 	}
-	
+
 	public void setAtdTimeForLong(String stAtdT, String enAtdT) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmm");
 
 		try {
-				this.setStAtdTime(sdf.parse(stAtdT).getTime()/(1000*60));
-				this.setEnAtdTime(sdf.parse(enAtdT).getTime()/(1000*60));
-			
+			this.setStAtdTime(sdf.parse(stAtdT).getTime() / (1000 * 60));
+			this.setEnAtdTime(sdf.parse(enAtdT).getTime() / (1000 * 60));
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,8 +141,6 @@ public class Attendance {
 
 	}
 
-	
-	
 	public void setTimeforLong(String stAtdT, String enAtdT, String stSftT, String enSftT) {
 
 		Date enSftD = new Date();
@@ -171,7 +159,7 @@ public class Attendance {
 			enSft += enSfts[i];
 		}
 		System.out.println("문자열 병합 : " + stSft);
-			/// 값이 0으로 세팅됨 수정 해야함
+		/// 값이 0으로 세팅됨 수정 해야함
 		try {
 			if (Integer.parseInt(stSfts[0]) > Integer.parseInt(enSfts[0])) {
 				enSftD = sdf.parse(enSft);
@@ -179,20 +167,20 @@ public class Attendance {
 				System.out.println("캘린더 값으로 parse " + cal);
 				cal.add(Calendar.DATE, 1);
 				System.out.println("다음 날짜로 변경 " + cal);
-				this.setStAtdTime(sdf.parse(stAtdT).getTime()/(1000*60));
-				this.setEnAtdTime(sdf.parse(enAtdT).getTime()/(1000*60));
-				this.setStSftTime(sdf.parse(stSft).getTime()/(1000*60));
-				this.setEnSftTime(cal.getTimeInMillis()/(1000*60));
+				this.setStAtdTime(sdf.parse(stAtdT).getTime() / (1000 * 60));
+				this.setEnAtdTime(sdf.parse(enAtdT).getTime() / (1000 * 60));
+				this.setStSftTime(sdf.parse(stSft).getTime() / (1000 * 60));
+				this.setEnSftTime(cal.getTimeInMillis() / (1000 * 60));
 
 			} else {
 
-				this.setStAtdTime(sdf.parse(stAtdT).getTime()/(1000*60));
-				this.setEnAtdTime(sdf.parse(enAtdT).getTime()/(1000*60));
-				this.setStSftTime(sdf.parse(stSft).getTime()/(1000*60));
-				this.setEnSftTime(sdf.parse(enSft).getTime()/(1000*60));
-				
+				this.setStAtdTime(sdf.parse(stAtdT).getTime() / (1000 * 60));
+				this.setEnAtdTime(sdf.parse(enAtdT).getTime() / (1000 * 60));
+				this.setStSftTime(sdf.parse(stSft).getTime() / (1000 * 60));
+				this.setEnSftTime(sdf.parse(enSft).getTime() / (1000 * 60));
+
 			}
-			
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,8 +188,6 @@ public class Attendance {
 		System.out.println("sft get으로 받아온 값 : " + this.getStSftTime());
 		System.out.println("ensft : " + this.getEnSftTime());
 		System.out.println("atd 계산값 : " + (this.getStAtdTime() - this.getEnAtdTime()));
-
 	}
 
-	
 }

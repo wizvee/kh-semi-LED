@@ -168,7 +168,7 @@ public class UserDao {
 		return r;
 	}
 
-	public ArrayList<Notification> getNotiList(Connection conn, String busId) {
+	public ArrayList<Notification> getNotiList(Connection conn, String busId, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("getNotiList");
@@ -176,6 +176,7 @@ public class UserDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
+			pstmt.setString(2, userId);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Notification n = new Notification();
@@ -186,7 +187,7 @@ public class UserDao {
 				n.setNotiMsg(rs.getString("NOTI_MSG"));
 				n.setNotiUrl(rs.getString("NOTI_URL"));
 				n.setNotiDate(rs.getTimestamp("NOTI_DATE"));
-				n.setReaded(rs.getString("ISREADED").equals("T") ? true : false);
+				n.setReaded(rs.getString("READED").equals("T") ? true : false);
 				n.setUserName(rs.getString("USER_NAME"));
 				n.setProfilePic(rs.getString("PROFILE_PIC"));
 				list.add(n);

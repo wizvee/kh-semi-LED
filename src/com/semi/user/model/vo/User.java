@@ -1,16 +1,7 @@
 package com.semi.user.model.vo;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
-import com.semi.bus.model.vo.Business;
-import com.semi.emp.model.service.EmpService;
-import com.semi.noti.model.vo.Notification;
-import com.semi.owner.model.service.OwnerService;
-import com.semi.user.model.service.UserService;
 import com.semi.userinfo.model.vo.UserInfo;
 
 public class User {
@@ -24,12 +15,13 @@ public class User {
 	private boolean mailCheck;
 	private String profilePic;
 	private Date joinDate;
+	private String quit;
 
 	public User() {
 	}
 
 	public User(String userId, String email, String password, String userName, String userPhone, String userType,
-			boolean mailCheck, String profilePic, Date joinDate) {
+			boolean mailCheck, String profilePic, Date joinDate, String quit) {
 		super();
 		this.userId = userId;
 		this.email = email;
@@ -40,13 +32,14 @@ public class User {
 		this.mailCheck = mailCheck;
 		this.profilePic = profilePic;
 		this.joinDate = joinDate;
+		this.quit = quit;
 	}
 
 	public UserInfo getUserInfo(String userId, String userType) {
 		UserInfo ui = new UserInfo();
 		ui.setUserId(userId);
 		ui.getParameters(userType);
-		
+
 		return ui;
 	}
 
@@ -120,6 +113,14 @@ public class User {
 
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
+	}
+
+	public String getQuit() {
+		return quit;
+	}
+
+	public void setQuit(String quit) {
+		this.quit = quit;
 	}
 
 }
