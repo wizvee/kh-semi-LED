@@ -8,22 +8,29 @@
 <%@ include file="header.jsp"%>
 
 <style type="text/css">
-	.item .item_mypage {
-		grid-template-rows : repeat(4, 1fr);
-	}
-	.item .item_mypage .pic {
-		display: table-cell;
-      	vertical-align: middle;
-	}
-	.item .item_mypage div .snb_profile{
-		width: 50px;
-		height: 50px;
-	}
-	button { 
-		text-align: left;
-		height: 70px;
-		width: 100%;
-	}
+.item .item_mypage {
+	grid-template-rows: repeat(4, 1fr);
+}
+
+.item .item_mypage .pic {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.item .item_mypage div .snb_profile {
+	width: 50px;
+	height: 50px;
+}
+
+.btn_pic, .btn_email, .btn_name, .btn_phone, .btn_password {
+	text-align: left;
+	height: 70px;
+	width: 100%;
+}
+
+.item .item_mypage_pw, .item .item_mypage_phone, .item .item_mypage_name, .item .item_mypage_email, .item .item_mypage_pic {
+	display: none;
+}
 </style>
 
 <div id="content">
@@ -33,65 +40,152 @@
 		</div>
 		<form name="updateUserFrm" method="POST">
 			<div class="item_body item_mypage">
-				<input type="hidden" value=<%=infoUser.getUserId()%> name="userId">
-				<input type="hidden" value=<%=infoUser.getPassword() %> name="infoUserPwd">
-				<button class="btn-pic"><div class="pic">사진  <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic"></div></button>
+				<input type="hidden" name="userId" value=<%=infoUser.getUserId() %>>
+				<input type="hidden" name="infoUserPwd"
+					value=<%=infoUser.getPassword() %>>
+				<button class="btn_pic" onclick="return false;">
+					<div class="pic">
+						사진 <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic">
+					</div>
+				</button>
+				<div class="item_body item_mypage_pic">
+					<button id="btn_orgin_pic" class="btn-primary" onclick="return false;">기본 프로필로 변경</button>
+					<button id="btn_pic" class="btn-primary" onclick="return false;">새 프로필 변경</button>
+				</div>
+
+				<button class="btn_email" onclick="return false;">
+					<div>
+						이메일 :
+						<%=infoUser.getEmail() %>
+					</div>
+				</button>
+				<div class="item_body item_mypage_email">
+					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 이메일 : </i> 
+					<input type="email" class="inpt-outline" name="email" id="email" placeholder="이메일을 입력하세요.">
+					<button id="btn_email" class="btn-primary" onclick="return false;">이메일 변경</button>
+				</div>
+
+				<button class="btn_name" onclick="return false;">
+					<div>
+						이름 :
+						<%=infoUser.getUserName() %>
+					</div>
+				</button>
+				<div class="item_body item_mypage_name">
+					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 이름 : </i>
+					<input type="text" class="inpt-outline" name="name" id="name" placeholder="이름을 입력하세요.">
+					<button id="btn_name" class="btn-primary" onclick="return false;">이름 변경</button>
+				</div>
+
+				<button class="btn_phone" onclick="return false;">
+					<div>
+						휴대폰 :
+						<%=infoUser.getUserPhone() %>
+					</div>
+				</button>
+				<div class="item_body item_mypage_phone">
+					<span data-placeholder="변경 할 휴대폰 번호 : "> 
+					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 휴대폰 번호 : </i>
+					</span> 
+					<input type="tel" class="inpt-outline" name="phone" id="phone" placeholder="-포함 입력하세요.">
+					<div id="result_phone"></div>
+					<button id="btn_phone" class="btn-primary" onclick="fn_updatePhone();">휴대폰 번호 변경</button>
+				</div>
 				
-				<!-- <input type="file" name="profile_pic" id="profile_pic"> -->
-				
-				<button class="btn-email"><div>이메일 : <%=infoUser.getEmail() %></div></button>
-				
-				<button class="btn-name"><div>이름 : <%=infoUser.getUserName() %></div></button>
-				
-				<button class="btn-phone"><div>휴대폰 : <%=infoUser.getUserPhone() %></div></button>
-				
-			</div>
-		</form>
-			
-		<form name="updateUserFrmPw" method="POST">
-			<div class="item_body item_mypage_pw">
-				<span data-placeholder="현재 비밀번호">
-                	<i class="fa fa-unlock-alt" aria-hidden="true"> 현재 비밀번호 : </i>
-              	</span>
-				<input type="password" class="inpt-outline" name="pw" id="pw">
-				<div id="result_pw"></div>
-				
-				<span data-placeholder="새 비밀번호">
-                	<i class="fa fa-unlock-alt" aria-hidden="true"> 신규 비밀번호 : </i>
-              	</span>
-				<input type="password" class="inpt-outline" name="nPw" id="nPw">
-				<div id="result_nPw"></div>
-				
-				<span data-placeholder="새 비밀번호 확인">
-                	<i class="fa fa-unlock-alt" aria-hidden="true"> 신규 비밀번호 확인 : </i>
-              	</span>
-				<input type="password" class="inpt-outline" name="nkPw" id="nkPw">				
-				<div id="result_nkPw"></div>
-				
-				<button id="btn_checkPw" class="btn-primary" onclick="return false;">비밀번호 변경</button>	
+
+				<button class="btn_password" onclick="return false;">
+					<div>비밀번호 : **********</div>
+				</button>
+
+				<div class="item_body item_mypage_pw">
+					<span data-placeholder="현재 비밀번호"> 
+					<i class="fa fa-unlock-alt" aria-hidden="true"> 현재 비밀번호 : </i>
+					</span> 
+					<input type="password" class="inpt-outline" name="pw" id="pw">
+					<div id="result_pw"></div>
+
+					<span data-placeholder="새 비밀번호"> <i class="fa fa-unlock-alt"
+						aria-hidden="true"> 새 비밀번호 : </i>
+					</span> <input type="password" class="inpt-outline" name="nPw" id="nPw">
+					<div id="result_nPw"></div>
+
+					<span data-placeholder="새 비밀번호 확인"> <i
+						class="fa fa-unlock-alt" aria-hidden="true"> 새 비밀번호 확인 : </i>
+					</span> <input type="password" class="inpt-outline" name="nkPw" id="nkPw">
+					<div id="result_nkPw"></div>
+
+					<button id="btn_checkPw" class="btn-primary" onclick="return false;">비밀번호 변경</button>
+				</div>
+
 			</div>
 		</form>
 	</section>
 </div>
 
-<script>
+<script>	
 	$(function(){
-		$(".btn-phone").click(function(){
-			if($(this).parent().has('#phone').length==0){
-				var tr=$("<tr id='phone'>");
-				var html="<td style='display:none; text-align:left;' colspan='2'>"
-				html+="<form action='<%=request.getContextPath()%>' method='post'>";
-				html+='<textarea name="content" cols="60" rows="3"></textarea>';
-				html+='<input type="submit" value="등록">';
-				html+='</form></td>';
-				tr.html(html);
-				tr.insertAfter($(this).parent().parent()).children("td").slideDown(200);
-			}else{
-				$(this).parent().children("#phone").remove();
+	 	$(".btn_pic").click(function(){
+	 		var area = document.querySelectorAll(".item_mypage_pic")[0];
+	 		if(area.style.display == "none")
+	 			area.style.display = "block";
+	 		else
+	 			area.style.display = "none";
+	 	});
+	 });
+	
+	$(function(){
+	 	$(".btn_email").click(function(){
+	 		var area = document.querySelectorAll(".item_mypage_email")[0];
+	 		if(area.style.display == "none")
+	 			area.style.display = "block";
+	 		else
+	 			area.style.display = "none";
+	 	});
+	 });
+	
+	$(function(){
+	 	$(".btn_name").click(function(){
+	 		var area = document.querySelectorAll(".item_mypage_name")[0];
+	 		if(area.style.display == "none")
+	 			area.style.display = "block";
+	 		else
+	 			area.style.display = "none";
+	 	});
+	 });
+	
+	$(function(){
+	 	$(".btn_phone").click(function(){
+	 		var area = document.querySelectorAll(".item_mypage_phone")[0];
+	 		if(area.style.display == "none")
+	 			area.style.display = "block";
+	 		else
+	 			area.style.display = "none";
+	 	});
+	 });
+	
+	$(function(){
+	 	$(".btn_password").click(function(){
+	 		var area = document.querySelectorAll(".item_mypage_pw")[0];
+	 		if(area.style.display == "none")
+	 			area.style.display = "block";
+	 		else
+	 			area.style.display = "none";
+	 	});
+	 });
+
+	$(function(){
+		$('#btn_phone').click(function(){
+			var regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+			if($('#phone').val().trim()!=regExp){
+				$("#result_phone").html("다시 입력해 주세요.").css("color","red");
+			} else{
+				function fn_updatePhone(){
+					updateMemberFrm.action="<%=request.getContextPath()%>/changeAjaxinfophone.do";
+					updateMemberFrm.submit();
+				}
 			}
 		});
 	});
-
 	$(function(){
 		$('#btn_checkPw').click(function(){
 			$("#result_pw").html("");
