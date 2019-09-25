@@ -36,6 +36,7 @@ class Alert {
 
   viewNoti() {
     const area = document.querySelector("#alert_body");
+    selectElements("#alert_body .alert_item").map(e => e.remove());
     if (this.count > 0) this.list.map(n => this.createItem(area, n));
     else area.textContent = "알림이 없습니다.";
   }
