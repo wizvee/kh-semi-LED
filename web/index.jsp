@@ -157,8 +157,8 @@
   </div>
   <!-- //container -->
   <!-- JavaScript Libraries -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/index.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 </body>
 
 </html>

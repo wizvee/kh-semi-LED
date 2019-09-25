@@ -59,9 +59,10 @@ input[id="ck_snb"]:checked {
 }
 
 .gnb_main {
-  $gnb_height: 40px;
+  $gnb_height: 60px;
   @include grid;
-  grid-template-columns: 45px 1fr repeat(3, 45px) 10px;
+  grid-template-columns: 45px 160px repeat(3, 35px) 1fr;
+  grid-template-rows: $gnb_height;
   position: sticky;
   top: 0;
   width: 100%;
@@ -70,10 +71,10 @@ input[id="ck_snb"]:checked {
   background: $background-default;
 
   @include respond-to("medium") {
-    grid-template-columns: 45px 1fr repeat(3, 45px) 45px;
+    grid-template-columns: 45px 1fr repeat(3, 43px) 45px;
   }
 
-  div {
+  &>div {
     text-align: center;
     line-height: $gnb_height;
 
@@ -81,16 +82,13 @@ input[id="ck_snb"]:checked {
       text-align: left;
 
       h1 {
-        display: inline-block;
+        overflow: hidden;
+        height: 60px;
+        white-space: nowrap;
         font-size: 120%;
         text-align: left;
+        text-overflow: ellipsis;
         @include cursor-pointer;
-
-        i {
-          margin-left: 7px;
-          font-size: 80%;
-          transform: translateY(-1px);
-        }
 
         &:hover>i {
           color: $primary;
@@ -99,6 +97,7 @@ input[id="ck_snb"]:checked {
     }
 
     i {
+      font-size: 120%;
       transition: all 0.7s;
       @include cursor-pointer;
 
@@ -111,25 +110,6 @@ input[id="ck_snb"]:checked {
   label {
     @include respond-to("large") {
       display: none;
-    }
-  }
-
-  #gnb_alert {
-    position: relative;
-    #gnb_badge {
-      display: none;
-      position: absolute;
-      top: 11px;
-      right: 11px;
-      border: 1.5px solid $white;
-      background: red;
-      @include circle(8px);
-    }
-    &.news {
-      color: $primary;
-      #gnb_badge {
-        display: block;
-      }
     }
   }
 }
@@ -191,14 +171,12 @@ input[id="ck_snb"]:checked {
     height: auto;
     min-height: 100px;
     box-sizing: border-box;
-
-    // background: green;
-    .item_profile {
-      border: 2px solid $white;
-      @include circle(30px);
-      @include shadow;
-    }
   }
+}
+
+.item_profile {
+  border: 2px solid $white;
+  @include circle(35px);
 }
 
 #chat_area {

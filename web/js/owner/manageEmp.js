@@ -73,8 +73,8 @@ class MngEmp {
   }
 }
 
-function selectElements(name) {
-  return Array.from(document.querySelectorAll(name));
-}
+// function selectElements(name) {
+//   return Array.from(document.querySelectorAll(name));
+// }
 
 const mngEmp = new MngEmp();

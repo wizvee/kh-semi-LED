@@ -104,7 +104,7 @@ public class BusinessDao {
 			while (rs.next()) {
 				Employee e = new Employee();
 				e.setUserId(rs.getString("EMP_ID"));
-				e.setUserType(rs.getString("EMP_TYPE"));
+				e.setEmpType(rs.getString("EMP_TYPE"));
 				e.setEmpWage(rs.getInt("EMP_WAGE"));
 				e.setBankAccount(rs.getString("BANK_ACCOUNT"));
 				e.setSftId(rs.getString("SFT_ID"));

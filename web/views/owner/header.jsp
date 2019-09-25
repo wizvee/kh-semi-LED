@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="com.semi.noti.model.vo.Notification"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
@@ -19,8 +20,9 @@
 		selectBus = busMap.get(userInfo.getSelectBusId());
 		notiList = userInfo.getNotiList();
 	}
-
-	String parsingInfo = new Gson().toJson(userInfo);
+	
+	Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+	String parsingInfo = gs.toJson(userInfo);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -35,15 +37,15 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
 	<!-- JavaScript Libraries -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/modules.js"></script>
 </head>
 
 <body>
 	<script>
-		const userInfo = < %= parsingInfo % > ;
+		const userInfo = <%=parsingInfo %>;
 	</script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /><label for="ck_snb"></label>
-		<input type="checkbox" id="" class="ly" /> <label for=""></label>
 		<!-- 사이드 메뉴 -->
 		<aside class="snb snb_own">
 			<nav>
@@ -66,12 +68,6 @@
 		<!-- //사이드 메뉴 -->
 		<!-- container -->
 		<div id="container" class="container_main">
-			<!-- 알람창 -->
-			<div id="alert">
-				<div id="alert_header">알림 센터</div>
-				<div id="alert_body"></div>
-			</div>
-			<!-- //알람창 -->
 			<!-- 채팅창 -->
 			<div id="chat_area" class="item" style="display: none;">
 				<div class="item_header">채팅창</div>
@@ -107,16 +103,15 @@
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">
 				<div>
-					<label for="ck_snb"> <i class="fa fa-bars" aria-hidden="true"></i>
+					<label for="ck_snb">
+						<i class="fa fa-bars" aria-hidden="true"></i>
 					</label>
 				</div>
 				<div class="busList_area">
 					<%
 						if (selectBus != null) {
 					%>
-					<h1 class="dropdown_toggle">
-						<%=selectBus.getBusName()%>
-					</h1>
+					<h1 class="dropdown_toggle"><%=selectBus.getBusName()%></h1>
 					<ul class="dropdown_menu">
 						<%
 							for (Map.Entry<String, Business> e : busMap.entrySet()) {
@@ -135,8 +130,16 @@
 					%>
 				</div>
 				<div id="gnb_alert">
-					<span id="gnb_badge"></span>
-					<i class="fa fa-bell" aria-hidden="true"></i>
+					<div id="btn_alert">
+						<div id="gnb_alertBadge"></div>
+						<i class="fa fa-bell" aria-hidden="true"></i>
+					</div>
+					<!-- 알람창 -->
+					<div id="alert">
+						<div id="alert_header">알림 센터</div>
+						<div id="alert_body"></div>
+					</div>
+					<!-- //알람창 -->
 				</div>
 				<div>
 					<i class="fa fa-cog" aria-hidden="true"></i>

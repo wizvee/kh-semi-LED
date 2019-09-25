@@ -32,8 +32,6 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.min.css" />
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
-	<!-- JavaScript Libraries -->
-	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>

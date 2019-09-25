@@ -185,8 +185,10 @@ public class UserDao {
 				n.setNotiType(rs.getString("NOTI_TYPE"));
 				n.setNotiMsg(rs.getString("NOTI_MSG"));
 				n.setNotiUrl(rs.getString("NOTI_URL"));
-				n.setNotiDate(rs.getDate("NOTI_DATE"));
+				n.setNotiDate(rs.getTimestamp("NOTI_DATE"));
 				n.setReaded(rs.getString("ISREADED").equals("T") ? true : false);
+				n.setUserName(rs.getString("USER_NAME"));
+				n.setProfilePic(rs.getString("PROFILE_PIC"));
 				list.add(n);
 			}
 		} catch (SQLException e) {

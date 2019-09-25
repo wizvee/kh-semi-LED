@@ -1,3 +1,5 @@
+const selectElements = src => Array.from(document.querySelectorAll(src));
+
 class Register {
   constructor() {
     this.isUseMail = false;
@@ -147,10 +149,6 @@ class Register {
 }
 
 const register = new Register();
-
-function selectElements(name) {
-  return Array.from(document.querySelectorAll(name));
-}
 
 // MODAL
 // form간 switch event

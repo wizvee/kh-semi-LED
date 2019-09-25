@@ -14,11 +14,14 @@ public class Notification {
 	private Date notiDate;
 	private boolean readed;
 
+	private String userName;
+	private String profilePic;
+
 	public Notification() {
 	}
 
 	public Notification(String notiId, String userId, String targetUserId, String targetBusId, String notiType,
-			String notiMsg, String notiUrl, Date notiDate, boolean readed) {
+			String notiMsg, String notiUrl, Date notiDate, boolean readed, String userName, String profilePic) {
 		super();
 		this.notiId = notiId;
 		this.userId = userId;
@@ -29,6 +32,8 @@ public class Notification {
 		this.notiUrl = notiUrl;
 		this.notiDate = notiDate;
 		this.readed = readed;
+		this.userName = userName;
+		this.profilePic = profilePic;
 	}
 
 	public String getNotiId() {
@@ -101,6 +106,22 @@ public class Notification {
 
 	public void setReaded(boolean readed) {
 		this.readed = readed;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 }
