@@ -2,6 +2,7 @@ package com.semi.statistics.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.statistics.model.service.StatisticsService;
 import com.semi.statistics.model.vo.Statistics;
 import com.semi.userinfo.model.vo.UserInfo;
 
@@ -32,18 +34,17 @@ public class StatisticsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String whatsup="hello!";
-		System.out.println("값은?:"+whatsup);
-		
+				
+		// 해당 owner 의 userId 와 선택한 사업장 busId 값을 불러와서 저장
 		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
 		String busId = user.getSelectBusId();
-		// 해당 owner 의 userId 와 선택한 사업장 busId 값을 불러와서 저장
-//		String userId=user.getUserId();
-		System.out.println(busId);
+		System.out.println("사업장아이디: "+busId);
 		
-//		Map<String, Statistics> dataMap = new HashMap<String, Statistics>();
+		Map<String, List<Statistics>> dataMap = new HashMap<String, List<Statistics>>();
 		
+		StatisticsService ss=new StatisticsService();
+		
+		dataMap=ss.getAllData(busId);
 	
 		
 	request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);

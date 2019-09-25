@@ -67,7 +67,7 @@ function drawChartLine() {
 				width: '70%',
 				height:'70%'
 			} ,
-	vAxis: {title: '백만원'},
+	vAxis: {title: '만원'},
     hAxis: {title: '월별'},
 	legend: { position: 'bottom' },
 	animation:{
