@@ -177,31 +177,28 @@ java.util.List"%>
 				<div class="atd_progress_wraper" >
 		
 					<%
-					long stAtd = e.getAttendance().getStAtdTime();
-					long enAtd = e.getAttendance().getEnAtdTime();
-					long stSft = e.getAttendance().getStSftTime();
-					long enSft = e.getAttendance().getEnSftTime();
-				
-					long widthLate = 0;
-					long widthEarly = 0;
-					long widthNomal = 0;
+					double stAtd = e.getAttendance().getStAtdTime();
+					double enAtd = e.getAttendance().getEnAtdTime();
+					double stSft = e.getAttendance().getStSftTime();
+					double enSft = e.getAttendance().getEnSftTime();
+					
+					double widthLate = 0;
+					double widthEarly = 0;
+					double widthNomal = 0;
 					
 					if (stSft < stAtd) {
-						widthLate = (100 - (((enSft - stSft) - (stAtd - stSft)) / (enSft - stSft)) * 100);
+						widthLate = ((100 - ((((enSft - stSft) - (stAtd - stSft)) / (enSft - stSft)) * 100)));
 					}
 					if (enSft > enAtd) {
-						widthEarly = (100 - (((enSft - stSft) - (enSft - enAtd)) / (enSft - stSft)) * 100
-								- widthLate);
+						widthEarly = ((100 - ((((enSft - stSft) - (enSft - enAtd)) / (enSft - stSft)) * 100)));
 					}
-					widthNomal = (100 - (((enSft - stSft) - (enAtd - stAtd)) / (enSft - stSft)) * 100
-						- (widthLate - widthEarly));
-				
-				
+					widthNomal = 100 - (widthLate + widthEarly);
+					
 					%>
 					
 					<div style="float:left; height:100%;  background-color: red; width:<%= widthLate%>%;"></div>
-					<div style= "float:left; height:100%; background-color: chartreuse; width :<%= widthEarly %>%;"></div>
-					<div style= "float:left; height:100%; background-color: dodgerblue; width :<%= widthNomal %>%;"></div>
+					<div style= "float:left; height:100%; background-color: chartreuse; width :<%= widthNomal %>%;"></div>
+					<div style= "float:left; height:100%; background-color: dodgerblue; width :<%= widthEarly %>%;"></div>
 					
 				</div>
 			</div>
@@ -216,6 +213,9 @@ java.util.List"%>
 					직원 명 :
 					<%=e.getUserName()%></p>
 				<p>직원의 근무시간을 설정해 주세요</p>
+			</div>
+			<div class="atd_check_late">
+			<p>근무 시간</p>
 			</div>
 			<%
 				}
