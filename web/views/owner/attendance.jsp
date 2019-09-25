@@ -60,7 +60,7 @@ java.util.List"%>
 }
 
 .atd_check_late {
-	margin-top: 20%;
+	margin-top: 10%;
 	
 }
 
@@ -216,6 +216,7 @@ java.util.List"%>
 }
 
 .card .additional .stats {
+	width: 95%;
 	font-size: 2rem;
 	display: flex;
 	position: absolute;
@@ -231,29 +232,20 @@ java.util.List"%>
 }
 
 .card .additional .stats>div {
-	flex: 1;
-	text-align: center;
+	display: grid;
+	grid-template-columns: repeat(7,1fr);
+	grid-template-rows: 9px;
+	border: 1px solid red;
+	margin: 7px;
+	width: 10px;
+	height: 10px;
+	background-color: #f8f8f8;
 }
 
 .card .additional .stats i {
 	display: block;
 }
 
-.card .additional .stats div.title {
-	font-size: 0.75rem;
-	font-weight: bold;
-	text-transform: uppercase;
-}
-
-.card .additional .stats div.value {
-	font-size: 1.5rem;
-	font-weight: bold;
-	line-height: 1.5rem;
-}
-
-.card .additional .stats div.value.infinity {
-	font-size: 2.5rem;
-}
 
 .card .general {
 	width: 300px;
@@ -273,6 +265,13 @@ java.util.List"%>
 	right: 1rem;
 	font-size: 0.9em;
 }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+    }
 </style>
 
 <div id="content">
@@ -399,37 +398,30 @@ java.util.List"%>
 						<div class="more-info">
 							<h1><%=e.getUserName()%></h1>
 							<div class="coords">
-								<span>Group Name</span> <span>Joined January 2019</span>
+								<span>지정 근무 시간</span> <span><%=e.getShift().getSftOn()%> ~ <%=e.getShift().getSftOff()%></span>
 							</div>
 							<div class="coords">
 								<span>Position/Role</span> <span>City, Country</span>
 							</div>
 							<div class="stats">
-								<div>
-									<div class="title">Awards</div>
-									<i class="fa fa-trophy"></i>
-									<div class="value">2</div>
-								</div>
-								<div>
-									<div class="title">Matches</div>
-									<i class="fa fa-gamepad"></i>
-									<div class="value">27</div>
-								</div>
-								<div>
-									<div class="title">Pals</div>
-									<i class="fa fa-group"></i>
-									<div class="value">123</div>
-								</div>
-								<div>
-									<div class="title">Coffee</div>
-									<i class="fa fa-coffee"></i>
-									<div class="value infinity">∞</div>
-								</div>
+								
+								<div></div><div></div><div></div><div></div>
+								<div></div><div></div><div></div><div></div>
+							<div></div><div></div>
+								
+								
 							</div>
 						</div>
 					</div>
 					<div class="general">
 						<h1><%=e.getUserName()%></h1>
+						<hr>
+						<p style="margin:10%">
+						<%=e.getAttendance().getAtdOn().substring(0, 4)%> 년 
+						<%=e.getAttendance().getAtdOn().substring(4, 6)%> 월
+						<%=e.getAttendance().getAtdOn().substring(6, 8)%> 일의
+						<br> 근무 기록 입니다.
+						</p>
 						<div class="atd_check_late">
 							<p>근무 시간</p>
 							<p><%=e.getShift().getSftOn()%>
@@ -516,7 +508,7 @@ java.util.List"%>
 
 
 		<div>
-			<div class="card">
+			<div class="card green">
 				<div class="additional">
 					<div class="user-card">
 						<div class="level center">Level 13</div>
@@ -609,37 +601,21 @@ java.util.List"%>
             </svg>
 					</div>
 					<div class="more-info">
-						<h1>Jane Doe</h1>
-						<div class="coords">
-							<span>Group Name</span> <span>Joined January 2019</span>
-						</div>
-						<div class="coords">
-							<span>Position/Role</span> <span>City, Country</span>
-						</div>
-						<div class="stats">
-							<div>
-								<div class="title">Awards</div>
-								<i class="fa fa-trophy"></i>
-								<div class="value">2</div>
+							<h1><%=e.getUserName()%></h1>
+							<div class="coords">
+								<span>Group Name</span> <span>Joined January 2019</span>
 							</div>
-							<div>
-								<div class="title">Matches</div>
-								<i class="fa fa-gamepad"></i>
-								<div class="value">27</div>
+							<div class="coords">
+								<span>Position/Role</span> <span>City, Country</span>
 							</div>
-							<div>
-								<div class="title">Pals</div>
-								<i class="fa fa-group"></i>
-								<div class="value">123</div>
-							</div>
-							<div>
-								<div class="title">Coffee</div>
-								<i class="fa fa-coffee"></i>
-								<div class="value infinity">∞</div>
+							<div class="stats">
+						
+							
+							
+								
 							</div>
 						</div>
 					</div>
-				</div>
 				<div class="general">
 					<h1>Jane Doe</h1>
 					<div class="atd_check_late">
