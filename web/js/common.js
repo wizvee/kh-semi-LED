@@ -14,7 +14,8 @@ $(".fa-sign-out").on("click", function() {
 class Alert {
   constructor() {
     this.list = userInfo.notiList;
-    this.count = this.list.length;
+    if (this.list != null) this.count = this.list.length;
+    else this.count = 0;
 
     this.createItem = this.createItem;
 
@@ -69,7 +70,6 @@ class Alert {
   itemLink(item, url) {
     item.addEventListener("click", () => {
       location.href = `/p_190826_semi${url}`;
-      
     });
   }
 }

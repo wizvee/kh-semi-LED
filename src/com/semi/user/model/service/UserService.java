@@ -54,9 +54,9 @@ public class UserService {
 		return u;
 	}
 
-	public int setUserType(String userId, String type) {
+	public int setUserType(String userId, String type, String url) {
 		Connection conn = getConnection();
-		int r = dao.setUserType(conn, userId, type);
+		int r = dao.setUserType(conn, userId, type, url);
 		if (r > 0)
 			commit(conn);
 		else

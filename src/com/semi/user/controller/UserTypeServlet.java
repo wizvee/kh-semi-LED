@@ -23,8 +23,9 @@ public class UserTypeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String type = request.getParameter("type");
+		String url = type.equals("O") ? "own_default.png" : "emp_default.png";
 		
-		int r = new UserService().setUserType(userId, type);
+		int r = new UserService().setUserType(userId, type, url);
 		
 		if(r > 0) {
 			User loginUser = (User) request.getSession().getAttribute("loginUser");

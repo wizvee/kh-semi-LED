@@ -151,14 +151,15 @@ public class UserDao {
 		return u;
 	}
 
-	public int setUserType(Connection conn, String userId, String type) {
+	public int setUserType(Connection conn, String userId, String type, String url) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("setUserType");
 		int r = -1;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, type);
-			pstmt.setString(2, userId);
+			pstmt.setString(2, url);
+			pstmt.setString(3, userId);
 			r = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
