@@ -20,7 +20,7 @@ import com.semi.userinfo.model.vo.UserInfo;
 /**
  * Servlet implementation class AttendanceServlet
  */
-@WebServlet("/views/attendance.jsp")
+@WebServlet("/views/attendance.do")
 public class AttendanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
