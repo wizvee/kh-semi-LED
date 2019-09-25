@@ -11,13 +11,18 @@
 	.item .item_mypage {
 		grid-template-rows : repeat(4, 1fr);
 	}
-	.item .item_mypage div {
-		height: 50px;
-		border-bottom: 1px solid #000;
+	.item .item_mypage .pic {
+		display: table-cell;
+      	vertical-align: middle;
 	}
 	.item .item_mypage div .snb_profile{
 		width: 50px;
 		height: 50px;
+	}
+	button { 
+		text-align: left;
+		height: 70px;
+		width: 100%;
 	}
 </style>
 
@@ -30,13 +35,15 @@
 			<div class="item_body item_mypage">
 				<input type="hidden" value=<%=infoUser.getUserId()%> name="userId">
 				<input type="hidden" value=<%=infoUser.getPassword() %> name="infoUserPwd">
-				<div>사진 : <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic"></div>
+				<button class="btn-pic"><div class="pic">사진  <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic"></div></button>
 				
-				<div>이메일 : <button class="btn-email"><%=infoUser.getEmail() %></button></div>
+				<!-- <input type="file" name="profile_pic" id="profile_pic"> -->
 				
-				<div>이름 : <button class="btn-name"><%=infoUser.getUserName() %></button></div>
+				<button class="btn-email"><div>이메일 : <%=infoUser.getEmail() %></div></button>
 				
-				<div>휴대폰 : <button class="btn-phone"><%=infoUser.getUserPhone() %></button></div>
+				<button class="btn-name"><div>이름 : <%=infoUser.getUserName() %></div></button>
+				
+				<button class="btn-phone"><div>휴대폰 : <%=infoUser.getUserPhone() %></div></button>
 				
 			</div>
 		</form>

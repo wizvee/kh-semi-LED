@@ -256,7 +256,24 @@ public class UserDao {
 			close(pstmt);
 		}
 		return u;
-
+	}
+	
+	public int UpdatePw(Connection conn, String userId, String nPw) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updatePW");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, nPw);
+			pstmt.setString(2, userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

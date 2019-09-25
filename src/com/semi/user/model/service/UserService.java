@@ -86,4 +86,18 @@ public class UserService {
 		return u;
 	}
 
+	public int UpdatePw(String userId, String nPw) {
+		Connection conn=getConnection();
+		int result=0;
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
+
 }
