@@ -1,15 +1,16 @@
 package com.semi.statistics.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.semi.owner.model.vo.Owner;
+import com.semi.statistics.model.vo.Statistics;
 import com.semi.userinfo.model.vo.UserInfo;
 
 /**
@@ -32,22 +33,20 @@ public class StatisticsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String whatsup="hello!";
+		System.out.println("값은?:"+whatsup);
+		
 		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
-		
+		String busId = user.getSelectBusId();
 		// 해당 owner 의 userId 와 선택한 사업장 busId 값을 불러와서 저장
-		String userId=user.getUserId();
-		String busId=user.getSelectBusId();
+//		String userId=user.getUserId();
+		System.out.println(busId);
 		
-		
-		
-		
-		
-		
-		
+//		Map<String, Statistics> dataMap = new HashMap<String, Statistics>();
 		
 	
-		request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
-
+		
+	request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
 	}
 
 	/**

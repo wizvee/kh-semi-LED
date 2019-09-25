@@ -4,7 +4,6 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-	// Load Charts and the corechart package.
 	google.charts.load('current', {'packages':['corechart']});
 
 	// google.charts.setOnLoadCallback(WageWorkers);
@@ -64,8 +63,10 @@ function drawChartLine() {
   var options = {
 	title: '월별 급여/일급/월급/전체 인권비',
 	curveType: 'function',
-	width:700,
-	height:500,
+	chartArea: {
+				width: '70%',
+				height:'70%'
+			} ,
 	vAxis: {title: '백만원'},
     hAxis: {title: '월별'},
 	legend: { position: 'bottom' },
@@ -93,8 +94,8 @@ google.charts.load('current', {'packages':['table']});
         data.addColumn('number', '받아간 총 급여');
         data.addColumn('boolean', '현재 근무여부');
         data.addRows([
-          ['강동원',  {v: 10000, f: '590,000'}, true],
-          ['조인성',   {v:8000,   f: '8,000,000'},  false],
+          ['강동원',  {v: 0, f: '3,000,000'}, true],
+          ['조인성',   {v:0,   f: '8,000,000'},  false],
           ['한예슬', {v: 12500, f: '400,000'}, false],
 		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
 		  ['강동원',  {v: 10000, f: '590,000'}, true],
@@ -122,12 +123,16 @@ google.charts.load('current', {'packages':['table']});
 		]);
 		
 		var options={
-			title:'직원별 받아간 총 인권비'
+			title:'직원별 받아간 총 인권비',
+			chartArea: {
+				width: '80%',
+				height:'80%'
+			} 
 		}
 
         var table = new google.visualization.Table(document.getElementById('table_div'));
 
-        table.draw(data, {showRowNumber: true, width: '90%', height: '70%', page:'enable', pageSize:20});
+        table.draw(data, {showRowNumber: true, width: '80%', height: '80%'});
       }
 
 
@@ -151,8 +156,9 @@ google.charts.load("current", {packages:["timeline"]});
 	var day=d.getDate();
 
 
+
     dataTable.addRows([
-      [ '1', '강동원', new Date(2017, 3-1, 30), new Date(2017, 8-1, 12) ],
+      [ '1', '강동원', new Date(2017, 4-1, 11), new Date(2017, 8-1, 12) ],
       [ '2', '조인성',  new Date(2017, 5-1, 4),  new Date(2018, 7-1, 1) ],
 	  [ '3', '한예슬',  new Date(2018, 8-1, 21),  new Date(2019, 3-1, 20) ],
 	  [ '4', '손예진',  new Date(2018, 8-1, 10),  new Date(year,month,day)],
@@ -164,8 +170,10 @@ google.charts.load("current", {packages:["timeline"]});
 
 	var options={
 		timeline: { groupByRowLabel: false },
-		height:'400px',
-		width:'600px',
+		chartArea: {
+				width: '70%',
+				height:'70%'
+			} ,
 		forceIFrame:true,
 	}
 
@@ -206,8 +214,8 @@ google.charts.load("current", {packages:["timeline"]});
 			duration:3000
 			},
 			chartArea: {
-				width: '90%',
-				height:'90%'
+				width: '65%',
+				height:'70%'
 			} 
 		 };
 
@@ -239,8 +247,10 @@ function dailyWorkerCount() {
         vAxis: {
           title: '인원수(명)'
 		},
-		width:800,
-		height:300,
+		chartArea: {
+				width: '70%',
+				height:'70%'
+			} ,
 		animation:{
 			easing:'inAndOut',
 			startup:true,
@@ -318,7 +328,7 @@ function drawMultSeries() {
 		<hr>
 		<div class="item_body">
 			<div class ="statistics_menu">
-				<div class="statistics_list">월별 근무자 급여 비율 파이 차트</div>
+				<!-- <div class="statistics_list">월별 근무자 급여 비율 파이 차트</div> -->
 				<div class="statistics_list">인권비 급여/일급/월급/전체 커브 차트</div>
 				<div class="statistics_list">알바생별 받은 총 인권비 테이블차트</div>
 				<div class="statistics_list">근무 기간 타임라인 차트</div>
@@ -332,15 +342,15 @@ function drawMultSeries() {
 						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->	
 						<div id="curve_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>
 						<br>
-						<div id="table_div" style="border: 1px solid red"></div>
+						<div id="table_div" style="width:700px ; height: 500px; border: 1px solid red"></div>
 						<br>
-						<div id="time_line" style="height: 500px; width:700px ;border: 1px solid red"></div>
+						<div id="time_line" style="width:700px ; height: 500px; border: 1px solid red"></div>
 						<br>
 						<div id="combo_chart_div" style="width: 700px; height: 500px;border: 1px solid red"></div>
 						<br>
-						<div id="dailyWorkerCount_div" style="border: 1px solid red"></div>
+						<div id="dailyWorkerCount_div" style="width:700px; height:500px; border: 1px solid red"></div>
 						<br>
-						<div id="barchart_div" style="width: 800px; height:500px; border: 1px solid red"></div>
+						<div id="barchart_div" style="width: 700px; height:500px; border: 1px solid red"></div>
 					</div>
 			</div>
 		</div>
