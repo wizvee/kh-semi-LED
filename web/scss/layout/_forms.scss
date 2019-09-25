@@ -22,7 +22,7 @@ input[type="radio"] {
 }
 
 // 일단은 인덱스 전용
-input[type="checkbox"] {
+input[name="loginKeep"] {
   display: none;
   & + label:before {
     content: "";

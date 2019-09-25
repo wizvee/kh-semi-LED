@@ -35,13 +35,27 @@ class InsertBus {
         const sftName = `근무조${++this.count}`;
         sftArea.setAttribute("class", "sft_area");
         sftArea.innerHTML = `
-      <div><input type="text" name="sftName" value="${sftName}" class="inpt-outline">
-      <span><i class="fa fa-tags" aria-hidden="true"></i></span></div>
-      <div><input type="text" name="sftDay" class="inpt-outline">
-      <span><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></span></div>
-      <div><input type="text" name="sftOn" class="inpt-outline">
-      <span><i class="fa fa-clock-o" aria-hidden="true"></i></span></div>
-      <input type="hidden" name="sftOff" value="18:00">`;
+        <div><input type="text" name="sftName" value="${sftName}" class="inpt-outline">
+        <span><i class="fa fa-tags" aria-hidden="true"></i></span></div>
+        <div class="sftDay">
+          <input type="checkbox" name="sftDay" value="1" id="day1">
+          <label for="day1">일</label>
+          <input type="checkbox" name="sftDay" value="2" id="day2">
+          <label for="day2">월</label>
+          <input type="checkbox" name="sftDay" value="3" id="day3">
+          <label for="day3">화</label>
+          <input type="checkbox" name="sftDay" value="4" id="day4">
+          <label for="day4">수</label>
+          <input type="checkbox" name="sftDay" value="5" id="day5">
+          <label for="day5">목</label>
+          <input type="checkbox" name="sftDay" value="6" id="day6">
+          <label for="day6">금</label>
+          <input type="checkbox" name="sftDay" value="7" id="day7">
+          <label for="day7">토</label>
+        </div>
+        <div><input type="text" name="sftOn" class="inpt-outline">
+        <span><i class="fa fa-clock-o" aria-hidden="true"></i></span></div>
+        <input type="hidden" name="sftOff" value="18:00">`;
         area.append(sftArea);
       },
       false

@@ -203,6 +203,7 @@ input[id="ck_snb"]:checked {
 }
 
 #btn_chatting {
+  z-index: 50;
   position: fixed;
   bottom: 50px;
   right: 50px;

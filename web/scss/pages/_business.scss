@@ -71,6 +71,7 @@
     background: $background-default;
     box-sizing: border-box;
     animation: ani_slideDown 1s 1;
+    animation-fill-mode: both;
     transition: all 0.5s;
     @include cursor-pointer;
 
@@ -109,9 +110,6 @@
         transform: translateY(-50%);
       }
     }
-
-
-
   }
 }
 
@@ -135,19 +133,41 @@
 
     .sft_area {
       @include grid;
-      grid-template-rows: 1fr;
+      grid-template-rows: repeat(3, 40px);
       grid-gap: 5px;
       margin-bottom: 7px;
 
       @include respond-to("medium") {
+        grid-template-rows: 1fr;
         grid-template-columns: repeat(3, 1fr);
+      }
+
+      .sftDay {
+        @include grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        label {
+          line-height: 40px;
+          text-align: center;
+        }
+      }
+
+      input[name="sftDay"] {
+        display: none;
+
+        &:checked+label {
+          color: $primary;
+        }
       }
 
       div {
         position: relative;
+        i {
+          margin-left: 3px;
+        }
       }
 
-      input {
+      input[type="text"] {
         @include placeholder;
       }
     }

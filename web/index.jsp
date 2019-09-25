@@ -82,8 +82,8 @@
               </button>
             </div>
             <div class="option_area">
-              <input type="checkbox" name="" id="ck_keep" />
-              <label for="ck_keep">로그인 유지</label>
+              <input type="checkbox" name="loginKeep" id="loginKeep" />
+              <label for="loginKeep">로그인 유지</label>
               <a href="#">비밀번호 찾기</a>
             </div>
             <div class="msg_area"></div>

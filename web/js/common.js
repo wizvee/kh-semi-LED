@@ -69,6 +69,7 @@ class Alert {
   itemLink(item, url) {
     item.addEventListener("click", () => {
       location.href = `/p_190826_semi${url}`;
+      
     });
   }
 }
