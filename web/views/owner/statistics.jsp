@@ -98,6 +98,8 @@ function drawChartLine() {
 	curveType: 'function',
 	width:700,
 	height:500,
+	vAxis: {title: '백만원'},
+    hAxis: {title: '월별'},
 	legend: { position: 'bottom' }
 	,
   };
@@ -165,6 +167,61 @@ google.charts.load("current", {packages:["timeline"]});
     chart.draw(dataTable,options);
   }
 
+// ================================ 평균 근무 시간 콤보 차트 ==================================
+
+  google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['월별', '월급 근무자', '일당근무자', '시급근무자', '평균'],
+          ['5월',  120,      55,         220,           150],
+          ['6월',  135,      52,        210,           130],
+          ['7월',  157,      20,        210,            160],
+          ['8월',  139,      0,        180,           80],
+          ['9월',  136,      0,         200,           90]
+        ]);
+
+        var options = {
+          title : '월별 근무자 근무시간',
+          vAxis: {title: '시간'},
+          hAxis: {title: '월별'},
+          seriesType: 'bars',
+          series: {3: {type: 'line'}}        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('combo_chart_div'));
+        chart.draw(data, options);
+	  }
+
+// ================================= 조직도 관계 차트 ==================================
+	  
+google.charts.load('current', {packages:["orgchart"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '이름');
+        data.addColumn('string', 'Manager');
+        data.addColumn('string', 'ToolTip');
+
+        // For each orgchart box, provide the name, manager, and tooltip to show.
+        data.addRows([
+          [{'v':'조인성', 'f':'조인성<div style="color:red; font-style:italic">사장님</div>'},
+           '', 'The President'],
+          [{'v':'한예슬', 'f':'한예슬<div style="color:red; font-style:italic">매니저</div>'},
+           '조인성', 'VP'],
+          ['송중기', '한예슬', ''],
+          ['이지은', '한예슬', ''],
+          ['신예슬', '한예슬', '']
+        ]);
+
+        // Create the chart.
+        var chart = new google.visualization.OrgChart(document.getElementById('org_chart_div'));
+        // Draw the chart, setting the allowHtml option to true for the tooltips.
+        chart.draw(data, {'allowHtml':true});
+      }
+
+
 
 
 
@@ -198,16 +255,19 @@ google.charts.load("current", {packages:["timeline"]});
 						<br>
 						<div id="monthlyWageWorkers_div" style="border: 1px solid #ccc"></div>
 						<br>						
-						<div id="curve_chart" style="width: 900px; height: 500px"></div>
+						<div id="curve_chart" style="width: 800px; height: 500px"></div>
 						<br>
 						<div id="table_div"></div>
 						<br>
 						<div id="time_line" style="height: 200px;"></div>
 						<br>
+						<div id="combo_chart_div" style="width: 600px; height: 300px;"></div>
+						<br>
+						<div id="org_chart_div"></div>
+						<br>
 					</div>
 			</div>
 		</div>
 	</section>
-
 </div>
 <%@ include file="footer.jsp"%>
