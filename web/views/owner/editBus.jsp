@@ -4,7 +4,7 @@
 
 	<section class="item">
 		<div class="item_header">
-			<h2>제목</h2>
+			<h2>페이지</h2>
 		</div>
 		<div class="item_body">
 			내용
