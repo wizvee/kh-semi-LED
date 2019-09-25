@@ -43,6 +43,8 @@ public class StatisticsServlet extends HttpServlet {
 		
 		
 		
+		
+		
 	
 		request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
 

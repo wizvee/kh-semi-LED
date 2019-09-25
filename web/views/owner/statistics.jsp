@@ -7,101 +7,73 @@
 	// Load Charts and the corechart package.
 	google.charts.load('current', {'packages':['corechart']});
 
-	google.charts.setOnLoadCallback(hourlyWageWorkers);
-	google.charts.setOnLoadCallback(dailyWageWorkers);
-	google.charts.setOnLoadCallback(monthlyWageWorkers);
+	// google.charts.setOnLoadCallback(WageWorkers);
 
-	// Callback that draws the pie chart for Sarah's pizza.
-	function hourlyWageWorkers() {
+	// // Callback that draws the pie chart for Sarah's pizza.
+	// function WageWorkers() {
 
-	  // Create the data table for Sarah's pizza.
-	  var data = new google.visualization.DataTable();
-	  data.addColumn('string', 'Topping');
-	  data.addColumn('number', 'Slices');
-	  data.addRows([
-		['Mushrooms', 7800],
-		['Onions', 8500],
-		['Olives', 8600],
-		['Zucchini', 9000],
-		['Pepperoni', 9500]
-	  ]);
+	//   // Create the data table for Sarah's pizza.
+	//   var data = new google.visualization.DataTable();
+	//   data.addColumn('string', '근무자');
+	//   data.addColumn('number', '월 급여');
+	//   data.addRows([
+	// 	['강동원', 2100000],
+	// 	['한예슬', 800000],
+	// 	['손예진', 880600],
+	// 	['신예은', 1900000],
+	// 	['브래드피트', 95000]
+	//   ]);
 
-	  // Set options for Sarah's pie chart.
-	  var options = {title:'시급 근무자',
-					 width:400,
-					 height:300};
+	//   // Set options for Sarah's pie chart.
+	//   var options = {title:'월별 근무자 급여 비율',
+	// 				 width:400,
+	// 				 height:300,
+	// 				 animation:{
+	// 					easing:'inAndOut',
+	// 					startup:true,
+	// 					duration:3000
+	// 					}
+	// 				};
 
-	  // Instantiate and draw the chart for Sarah's pizza.
-	  var chart = new google.visualization.PieChart(document.getElementById('hourlyWageWorkers_div'));
-	  chart.draw(data, options);
-	}
+	//   // Instantiate and draw the chart for Sarah's pizza.
+	//   var chart = new google.visualization.PieChart(document.getElementById('worker_wage_div'));
+	//   chart.draw(data, options);
+	// }
 
-	// Callback that draws the pie chart for Anthony's pizza.
-	function dailyWageWorkers() {
-
-	  // Create the data table for Anthony's pizza.
-	  var data = new google.visualization.DataTable();
-	  data.addColumn('string', 'Topping');
-	  data.addColumn('number', 'Slices');
-	  data.addRows([
-		['Mushrooms', 90000],
-		['Onions', 110000],
-	  ]);
-
-	  // Set options for Anthony's pie chart.
-	  var options = {title:'일당 근무자',
-					 width:400,
-					 height:300};
-
-	  // Instantiate and draw the chart for Anthony's pizza.
-	  var chart = new google.visualization.PieChart(document.getElementById('dailyWageWorkers_div'));
-	  chart.draw(data, options);
-	}
-
-		// Callback that draws the pie chart for Anthony's pizza.
-		function monthlyWageWorkers() {
-
-// Create the data table for Anthony's pizza.
-var data = new google.visualization.DataTable();
-data.addColumn('string', 'Topping');
-data.addColumn('number', 'Slices');
-data.addRows([
-  ['Mushrooms', 2100000],
-  ['Onions', 2400000],
-  ['Olives', 2500000],
-]);
-
-// Set options for Anthony's pie chart.
-var options = {title:'월급 근무자',
-			   width:400,
-			   height:300};
-
-// Instantiate and draw the chart for Anthony's pizza.
-var chart = new google.visualization.PieChart(document.getElementById('monthlyWageWorkers_div'));
-chart.draw(data, options);
-}
 
 // ============================== 직원 급여 추이 라인 그래프현재근무자 ===================================
 google.charts.setOnLoadCallback(drawChartLine);
 
 function drawChartLine() {
   var data = google.visualization.arrayToDataTable([
-	['월', '시급', '일당', '월급'],
-	['7월',  350,      100, 	500],
-	['8월',  450,      130, 	510],
-	['9월',  250,       40, 	550],
-	['10월',  200,      80, 	600]
+	['월', '시급', '일당', '월급', '전체'],
+	['1월',  0,      0, 	0,	0],
+	['2월',  0,      0, 	510,	0+0+510],
+	['3월',  250,       0, 	550,	250+0+550],
+	['4월',  200,      0, 	600,	200+0+800],
+	['5월',  350,      100, 	500,	350+100+500],
+	['6월',  450,      130, 	510,	450+130+510],
+	['7월',  250,       40, 	550,	250+40+550],
+	['8월',  200,      80, 	600,	200+80+800],
+	['9월',  350,      100, 	500,	350+100+500],
+	['10월',  450,      130, 	510,	450+130+510],
+	['11월',  250,       40, 	550,	250+40+550],
+	['12월',  200,      80, 	600,	200+80+800]
   ]);
 
   var options = {
-	title: '직원 급여 추이 라인 그래프',
+	title: '월별 급여/일급/월급/전체 인권비',
 	curveType: 'function',
 	width:700,
 	height:500,
 	vAxis: {title: '백만원'},
     hAxis: {title: '월별'},
-	legend: { position: 'bottom' }
-	,
+	legend: { position: 'bottom' },
+	animation:{
+			easing:'inAndOut',
+			startup:true,
+			duration:3000
+		}
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -124,12 +96,38 @@ google.charts.load('current', {'packages':['table']});
           ['강동원',  {v: 10000, f: '590,000'}, true],
           ['조인성',   {v:8000,   f: '8,000,000'},  false],
           ['한예슬', {v: 12500, f: '400,000'}, false],
-          ['손예진',   {v: 7000,  f: '7,000,000'},  true]
-        ]);
+		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
+		  ['강동원',  {v: 10000, f: '590,000'}, true],
+          ['조인성',   {v:8000,   f: '8,000,000'},  false],
+          ['한예슬', {v: 12500, f: '400,000'}, false],
+		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
+		  ['강동원',  {v: 10000, f: '590,000'}, true],
+          ['조인성',   {v:8000,   f: '8,000,000'},  false],
+          ['한예슬', {v: 12500, f: '400,000'}, false],
+		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
+		  ['강동원',  {v: 10000, f: '590,000'}, true],
+          ['조인성',   {v:8000,   f: '8,000,000'},  false],
+          ['한예슬', {v: 12500, f: '400,000'}, false],
+		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
+		  ['한예슬', {v: 12500, f: '400,000'}, false],
+		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
+		  ['강동원',  {v: 10000, f: '590,000'}, true],
+          ['조인성',   {v:8000,   f: '8,000,000'},  false],
+          ['한예슬', {v: 12500, f: '400,000'}, false],
+		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
+		  ['강동원',  {v: 10000, f: '590,000'}, true],
+          ['조인성',   {v:8000,   f: '8,000,000'},  false],
+          ['한예슬', {v: 12500, f: '400,000'}, false],
+		  ['손예진',   {v: 7000,  f: '7,000,000'},  true]
+		]);
+		
+		var options={
+			title:'직원별 받아간 총 인권비'
+		}
 
         var table = new google.visualization.Table(document.getElementById('table_div'));
 
-        table.draw(data, {showRowNumber: true, width: '80%', height: '50%'});
+        table.draw(data, {showRowNumber: true, width: '90%', height: '70%', page:'enable', pageSize:20});
       }
 
 
@@ -154,32 +152,46 @@ google.charts.load("current", {packages:["timeline"]});
 
 
     dataTable.addRows([
-      [ '1', '강동원', new Date(2019, 3, 30), new Date(2019, 8, 12) ],
-      [ '2', '조인성',  new Date(2019, 5, 4),  new Date(2019, 7, 1) ],
-	  [ '3', '한예슬',  new Date(2019, 8, 21),  new Date(2019, 9, 20) ],
-	  [ '4', '손예진',  new Date(2019, 8, 10),  new Date(year,month,day)]]); 
+      [ '1', '강동원', new Date(2017, 3-1, 30), new Date(2017, 8-1, 12) ],
+      [ '2', '조인성',  new Date(2017, 5-1, 4),  new Date(2018, 7-1, 1) ],
+	  [ '3', '한예슬',  new Date(2018, 8-1, 21),  new Date(2019, 3-1, 20) ],
+	  [ '4', '손예진',  new Date(2018, 8-1, 10),  new Date(year,month,day)],
+	  [ '5', '강동원', new Date(2019, 2-1, 30), new Date(year,month,day) ],
+      [ '6', '조인성',  new Date(2019, 6-1, 4),  new Date(year,month,day) ],
+	  [ '7', '한예슬',  new Date(2019, 7-1, 21),  new Date(year,month,day) ],
+	  [ '8', '손예진',  new Date(2019, 8-1, 10),  new Date(year,month,day)],
+	]); 
 
 	var options={
-	width:500,
-	height:300,
+		timeline: { groupByRowLabel: false },
+		height:'400px',
+		width:'600px',
+		forceIFrame:true,
 	}
 
     chart.draw(dataTable,options);
   }
 
-// ================================ 평균 근무 시간 콤보 차트 ==================================
+// ================================ 평균 월별 근무 시간 콤보 차트 ==================================
 
   google.charts.setOnLoadCallback(drawVisualization);
 
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-          ['월별', '월급 근무자', '일당근무자', '시급근무자', '평균'],
-          ['5월',  120,      55,         220,           150],
-          ['6월',  135,      52,        210,           130],
-          ['7월',  157,      20,        210,            160],
-          ['8월',  139,      0,        180,           80],
-          ['9월',  136,      0,         200,           90]
+		  ['월별', '시급 근무자', '일당근무자', '월급근무자', '전체', '평균'],
+		  ['1월',  140,      0,         130,           140+0+130, 	(140+0+130)/5],
+          ['2월',  135,      0,        150,           135+0+150, 		(135+0+150)/3],
+          ['3월',  157,      20,        130,            157+20+130, 	(157+20+130)/3],
+          ['4월',  132,      0,        120,           132+0+120, 			(132+0+120)/3],
+          ['5월',  142,      0,         200,           142+0+200, 		(142+0+200)/3],
+          ['6월',  120,      55,         220,           120+55+220, 	( 120+55+220)/3],
+          ['7월',  130,      52,        210,           130+52+210, 		(130+52+210)/3],
+          ['8월',  90,      20,        210,            90+20+210, 	( 90+20+210)/3],
+          ['9월',  110,      0,        180,           110+0+180, 			(110+0+180)/3],
+		  ['10월',  120,      0,         200,           120+0+200, 		(120+0+200)/3],
+		  ['11월',  160,      55,         250,           160+55+250, 	(160+55+250)/3],
+          ['12월',  150,      52,        280,           150+52+280, 		(150+52+280)/3]
         ]);
 
         var options = {
@@ -187,42 +199,108 @@ google.charts.load("current", {packages:["timeline"]});
           vAxis: {title: '시간'},
           hAxis: {title: '월별'},
           seriesType: 'bars',
-          series: {3: {type: 'line'}}        };
+		  series: {4: {type: 'line'}},
+		  animation:{
+			easing:'inAndOut',
+			startup:true,
+			duration:3000
+			},
+			chartArea: {
+				width: '90%',
+				height:'90%'
+			} 
+		 };
 
         var chart = new google.visualization.ComboChart(document.getElementById('combo_chart_div'));
         chart.draw(data, options);
 	  }
 
-// ================================= 조직도 관계 차트 ==================================
+// ================================= 월별 근무자 수 라인차트  ==================================
 	  
-google.charts.load('current', {packages:["orgchart"]});
-      google.charts.setOnLoadCallback(drawChart);
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(dailyWorkerCount);
 
-      function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '이름');
-        data.addColumn('string', 'Manager');
-        data.addColumn('string', 'ToolTip');
+function dailyWorkerCount() {
 
-        // For each orgchart box, provide the name, manager, and tooltip to show.
-        data.addRows([
-          [{'v':'조인성', 'f':'조인성<div style="color:red; font-style:italic">사장님</div>'},
-           '', 'The President'],
-          [{'v':'한예슬', 'f':'한예슬<div style="color:red; font-style:italic">매니저</div>'},
-           '조인성', 'VP'],
-          ['송중기', '한예슬', ''],
-          ['이지은', '한예슬', ''],
-          ['신예슬', '한예슬', '']
-        ]);
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', '월');
+      data.addColumn('number', '근무자수');
 
-        // Create the chart.
-        var chart = new google.visualization.OrgChart(document.getElementById('org_chart_div'));
-        // Draw the chart, setting the allowHtml option to true for the tooltips.
-        chart.draw(data, {'allowHtml':true});
-      }
+      data.addRows([
+        [1, 3],   [2, 5],  [3, 4],  [4, 4],  [5, 8],  [6, 9],
+		[7, 8],  [8, 6],  [9, 9],  [10, 10],  [11, 9], [12, 13],
+      ]);
 
+      var options = {
+		title:'월별 총 근무자 수',
+		hAxis: {
+          title: '월'
+        },
+        vAxis: {
+          title: '인원수(명)'
+		},
+		width:800,
+		height:300,
+		animation:{
+			easing:'inAndOut',
+			startup:true,
+			duration:3000
+		},
+		tooltip:{
+			isHtml:true
+		},
+      };
 
+      var chart = new google.visualization.LineChart(document.getElementById('dailyWorkerCount_div'));
 
+      chart.draw(data, options);
+    }
+
+// ================================= 월별 총 지각 조퇴 바 차트  ==================================
+
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawMultSeries);
+
+function drawMultSeries() {
+      var data = google.visualization.arrayToDataTable([
+        ['월', '지각', '조퇴'],
+        ['1월', 10, 9],
+        ['2월', 5, 3],
+        ['3월', 3, 5],
+        ['4월', 2, 4],
+        ['5월', 8, 3],
+        ['6월', 8, 4],
+        ['7월', 4, 6],
+        ['8월', 5, 3],
+        ['9월', 4, 2],
+        ['10월', 3, 1],
+        ['11월', 9, 2],
+        ['12월', 11, 2]
+      ]);
+
+      var options = {
+		title: '월별 총 지각/조퇴 자 수',
+        chartArea: {
+			width: '80%',
+			height:'80%'
+		},
+        hAxis: {
+          title: '인원수(명)',
+          minValue: 0
+        },
+        vAxis: {
+          title: '월'
+		},
+		animation:{
+			easing:'inAndOut',
+			startup:true,
+			duration:3000
+		}
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+      chart.draw(data, options);
+    }
 
 
 
@@ -237,34 +315,32 @@ google.charts.load('current', {packages:["orgchart"]});
 		<div class="item_header">
 			<h2>통계</h2>
 		</div>
+		<hr>
 		<div class="item_body">
 			<div class ="statistics_menu">
-				<div class="statistics_list">직원 급여 파이 차트</div>
+				<div class="statistics_list">월별 근무자 급여 비율 파이 차트</div>
 				<div class="statistics_list">인권비 급여/일급/월급/전체 커브 차트</div>
 				<div class="statistics_list">알바생별 받은 총 인권비 테이블차트</div>
 				<div class="statistics_list">근무 기간 타임라인 차트</div>
 				<div class="statistics_list">평균 근무 시간 콤보 차트</div>
-				<div class="statistics_list">조직도 관계 차트</div>
+				<div class="statistics_list">월별 근무자 수 라인 차트</div>
+				<div class="statistics_list">월별 총 지각 조퇴 바 차트</div>
 			</div>
 			<br>
 			<div class="statistics_view">
 					<div class="columns">
-						<div id="hourlyWageWorkers_div" style="border: 1px solid #ccc"></div>
+						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->	
+						<div id="curve_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>
 						<br>
-						<div id="dailyWageWorkers_div" style="border: 1px solid #ccc"></div>
+						<div id="table_div" style="border: 1px solid red"></div>
 						<br>
-						<div id="monthlyWageWorkers_div" style="border: 1px solid #ccc"></div>
-						<br>						
-						<div id="curve_chart" style="width: 800px; height: 500px"></div>
+						<div id="time_line" style="height: 500px; width:700px ;border: 1px solid red"></div>
 						<br>
-						<div id="table_div"></div>
+						<div id="combo_chart_div" style="width: 700px; height: 500px;border: 1px solid red"></div>
 						<br>
-						<div id="time_line" style="height: 200px;"></div>
+						<div id="dailyWorkerCount_div" style="border: 1px solid red"></div>
 						<br>
-						<div id="combo_chart_div" style="width: 600px; height: 300px;"></div>
-						<br>
-						<div id="org_chart_div"></div>
-						<br>
+						<div id="barchart_div" style="width: 800px; height:500px; border: 1px solid red"></div>
 					</div>
 			</div>
 		</div>
