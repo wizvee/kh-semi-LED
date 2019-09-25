@@ -64,7 +64,7 @@ class Alert {
     item.appendChild(content);
     this.itemLink(item, n.notiUrl);
 
-    area.appendChild(item);
+    area.prepend(item);
   }
 
   itemLink(item, url) {

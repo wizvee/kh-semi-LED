@@ -46,14 +46,12 @@ public class ForwardEServlet extends HttpServlet {
 		// 기존 개발용 Employee instance 생성
 		Employee loginEmp = new EmpService().castingTypeE(userInfo.getUserId());
 		session.setAttribute("loginEmp", loginEmp);
+		String selectBusId = request.getParameter("selectBus");
 
-		if (userInfo.getBusMap().isEmpty())
+		if (userInfo.getBusMap().isEmpty() && selectBusId == null)
 			url += "/emp/addBus.do";
 		else {
-			String selectBusId = request.getParameter("selectBus");
-			if (selectBusId != null)
-				userInfo.setSelectBusId(selectBusId);
-
+			userInfo.setSelectBusId(selectBusId);
 			url += "/views/emp/main.jsp";
 		}
 

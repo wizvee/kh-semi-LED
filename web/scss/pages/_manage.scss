@@ -3,7 +3,7 @@
 
     .mngEmp_header {
         @include grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 80px) 1fr;
         text-align: center;
         line-height: 35px;
         // background: red;
@@ -35,10 +35,11 @@
 
         .empList_area {
             @include grid;
-            grid-template-columns: 50px 1fr 110px;
+            grid-template-columns: 50px 1fr 100px;
             height: 50px;
             line-height: 50px;
-            border: 1px solid $primary;
+            border-radius: 10px;
+            border: 1px solid $border-default;
 
             div {
                 text-align: center;
@@ -50,9 +51,10 @@
 
             button {
                 @include trans-middle;
-                margin-right: 3px;
-                padding: 5px;
-                width: 50px;
+                margin-right: 2px;
+                padding: 0 5px;
+                width: 40px;
+                font-size: 90%;
             }
         }
 

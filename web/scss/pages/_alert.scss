@@ -45,7 +45,7 @@
         #alert_header {
             padding: 0 20px;
             line-height: 40px;
-            // border-bottom: 1px solid $border-default;
+            border-bottom: 1px solid $background-default;
         }
 
         #alert_body {
@@ -70,7 +70,7 @@
                 @include cursor-pointer;
 
                 &:hover {
-                    background: $background-default;
+                    background: rgba($secondary, 0.2);
                 }
 
                 img {

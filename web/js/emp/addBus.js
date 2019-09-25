@@ -71,7 +71,7 @@ class AddBus {
         });
 
         const data = `ownId=${ownId}&busId=${busId}`;
-        this.getResult("/emp/enrollBus.do", data, this.submitEnroll);
+        this.getResult("/emp/requestBus.do", data, this.submitEnroll);
       });
 
       const checkBtn = selectElements(".result_area button").length > 0;
@@ -96,7 +96,3 @@ class AddBus {
 }
 
 const addBus = new AddBus();
-
-function selectElements(name) {
-  return Array.from(document.querySelectorAll(name));
-}

@@ -12,7 +12,6 @@ button {
   border-radius: 5px;
   outline: none;
   background: transparent;
-  @include shadow;
 }
 
 .btn {
@@ -30,6 +29,7 @@ button {
     background-size: 230%;
     color: $white;
     transition: all 1s;
+    @include shadow;
     @include cursor-pointer;
     &:hover {
       background-position: right;

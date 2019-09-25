@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="com.semi.noti.model.vo.Notification"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
@@ -19,7 +20,8 @@
 		notiList = userInfo.getNotiList();
 	}
 	
-	String parsingInfo = new Gson().toJson(userInfo);
+	Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+	String parsingInfo = gs.toJson(userInfo);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -43,7 +45,6 @@
 	</script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /> <label for="ck_snb"></label>
-		<input type="checkbox" id="" class="ly" /> <label for=""></label>
 		<!-- 사이드 메뉴 -->
 		<aside class="snb snb_emp">
 			<nav>
@@ -71,9 +72,7 @@
 					<%
 						if (selectBus != null) {
 					%>
-					<h1 class="dropdown_toggle">
-						<%=selectBus.getBusName()%>
-					</h1>
+					<h1 class="dropdown_toggle"><%=selectBus.getBusName()%></h1>
 					<ul class="dropdown_menu">
 						<%
 							for (Map.Entry<String, Business> e : busMap.entrySet()) {
@@ -91,8 +90,17 @@
 						}
 					%>
 				</div>
-				<div>
-					<i class="fa fa-bell-o" aria-hidden="true"></i>
+				<div id="gnb_alert">
+					<div id="btn_alert">
+						<div id="gnb_alertBadge"></div>
+						<i class="fa fa-bell" aria-hidden="true"></i>
+					</div>
+					<!-- 알람창 -->
+					<div id="alert">
+						<div id="alert_header">알림 센터</div>
+						<div id="alert_body"></div>
+					</div>
+					<!-- //알람창 -->
 				</div>
 				<div>
 					<i class="fa fa-cog" aria-hidden="true"></i>

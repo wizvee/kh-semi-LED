@@ -13,7 +13,7 @@ import com.semi.emp.model.service.EmpService;
 import com.semi.noti.model.vo.Notification;
 import com.semi.userinfo.model.vo.UserInfo;
 
-@WebServlet("/emp/enrollBus.do")
+@WebServlet("/emp/requestBus.do")
 public class AddBusEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,8 +31,8 @@ public class AddBusEndServlet extends HttpServlet {
 		n.setUserId(userId);
 		n.setTargetUserId(request.getParameter("ownId"));
 		n.setTargetBusId(request.getParameter("busId"));
-		n.setNotiType("enroll_Business");
-		n.setNotiMsg("근무신청(미정)");
+		n.setNotiType("requestBus");
+		n.setNotiMsg("입사 요청");
 		n.setNotiUrl("/owner/manageEmp.do");
 		
 		int r = new EmpService().submitEnrollBus(n);
