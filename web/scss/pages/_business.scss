@@ -120,16 +120,39 @@
 .frm_addBus {
   .fieldBasic_area {
     @include grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: 50px;
+    line-height: 50px;
+    font-size: 95%;
+
+    div {
+      color: $text-gray;
+    }
+
+    input {
+      transition: color 0.5s;
+
+      &:hover {
+        color: $primary;
+      }
+    }
 
     @include respond-to("medium") {
       grid-template-columns: 170px 1fr;
+
+      div {
+        padding-left: 10px;
+        border-bottom: 1px solid $border-default;
+      }
     }
   }
 
   .fieldSide_area {
     @include grid;
     grid-template-rows: 1fr;
+
+    button {
+      margin: 20px 0;
+    }
 
     .sft_area {
       @include grid;
@@ -139,7 +162,7 @@
 
       @include respond-to("medium") {
         grid-template-rows: 1fr;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
 
       .sftDay {
@@ -152,7 +175,7 @@
         }
       }
 
-      input[name="sftDay"] {
+      input[name*="sftDay"] {
         display: none;
 
         &:checked+label {
@@ -162,6 +185,7 @@
 
       div {
         position: relative;
+
         i {
           margin-left: 3px;
         }

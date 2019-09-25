@@ -55,7 +55,7 @@ class Alert {
     spanUser.textContent = n.userName;
     const spanMsg = document.createElement("span");
     spanMsg.setAttribute("class", "alert_msg");
-    spanMsg.textContent = n.notiMsg;
+    spanMsg.innerHTML = n.notiMsg;
 
     content.appendChild(spanUser);
     content.appendChild(spanMsg);
@@ -69,7 +69,7 @@ class Alert {
 
   itemLink(item, url) {
     item.addEventListener("click", () => {
-      location.href = `/p_190826_semi${url}`;
+      location.href = `/p_190826_semi/${url}`;
     });
   }
 }

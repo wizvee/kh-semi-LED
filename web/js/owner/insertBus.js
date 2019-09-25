@@ -1,19 +1,21 @@
 class Business {
-  constructor(ownId, busName, busNum, busAddr, busPhone) {
+  constructor(ownId, busName, busNum, busAddr, busPhone, busDate) {
     this.ownId = ownId;
     this.busName = busName;
     this.busNum = busNum;
     this.busAddr = busAddr;
     this.busPhone = busPhone;
+    this.busDate = busDate;
   }
 }
 
 class Shift {
-  constructor(sftName, sftDay, sftOn, sftOff) {
+  constructor(sftName, sftDay, sftOn, sftOff, sftTime) {
     this.sftName = sftName;
     this.sftDay = sftDay;
     this.sftOn = sftOn;
     this.sftOff = sftOff;
+    this.sftTime = sftTime;
   }
 }
 
@@ -38,24 +40,25 @@ class InsertBus {
         <div><input type="text" name="sftName" value="${sftName}" class="inpt-outline">
         <span><i class="fa fa-tags" aria-hidden="true"></i></span></div>
         <div class="sftDay">
-          <input type="checkbox" name="sftDay" value="1" id="day1">
-          <label for="day1">일</label>
-          <input type="checkbox" name="sftDay" value="2" id="day2">
-          <label for="day2">월</label>
-          <input type="checkbox" name="sftDay" value="3" id="day3">
-          <label for="day3">화</label>
-          <input type="checkbox" name="sftDay" value="4" id="day4">
-          <label for="day4">수</label>
-          <input type="checkbox" name="sftDay" value="5" id="day5">
-          <label for="day5">목</label>
-          <input type="checkbox" name="sftDay" value="6" id="day6">
-          <label for="day6">금</label>
-          <input type="checkbox" name="sftDay" value="7" id="day7">
-          <label for="day7">토</label>
+          <input type="checkbox" name="sftDay${this.count}" value="1" id="sft${this.count}day1">
+          <label for="sft${this.count}day1">일</label>
+          <input type="checkbox" name="sftDay${this.count}" value="2" id="sft${this.count}day2">
+          <label for="sft${this.count}day2">월</label>
+          <input type="checkbox" name="sftDay${this.count}" value="3" id="sft${this.count}day3">
+          <label for="sft${this.count}day3">화</label>
+          <input type="checkbox" name="sftDay${this.count}" value="4" id="sft${this.count}day4">
+          <label for="sft${this.count}day4">수</label>
+          <input type="checkbox" name="sftDay${this.count}" value="5" id="sft${this.count}day5">
+          <label for="sft${this.count}day5">목</label>
+          <input type="checkbox" name="sftDay${this.count}" value="6" id="sft${this.count}day6">
+          <label for="sft${this.count}day6">금</label>
+          <input type="checkbox" name="sftDay${this.count}" value="7" id="sft${this.count}day7">
+          <label for="sft${this.count}day7">토</label>
         </div>
         <div><input type="text" name="sftOn" class="inpt-outline">
         <span><i class="fa fa-clock-o" aria-hidden="true"></i></span></div>
-        <input type="hidden" name="sftOff" value="18:00">`;
+        <div><input type="text" name="sftOff" class="inpt-outline">
+        <span><i class="fa fa-clock-o" aria-hidden="true"></i></span></div>`;
         area.append(sftArea);
       },
       false
@@ -69,25 +72,29 @@ class InsertBus {
         const busNum = document.getElementsByName("bNum")[0].value;
         const busAddr = document.getElementsByName("addr")[0].value;
         const busPhone = document.getElementsByName("phone")[0].value;
+        const busDate = document.getElementsByName("bDate")[0].value;
         const business = new Business(
           ownId,
           busName,
           busNum,
           busAddr,
-          busPhone
+          busPhone,
+          busDate
         );
 
-        const sftId = document.getElementsByName("sftName");
-        const sftDay = document.getElementsByName("sftDay");
+        const sftName = document.getElementsByName("sftName");
         const sftOn = document.getElementsByName("sftOn");
         const sftOff = document.getElementsByName("sftOff");
         const sftArr = [];
         for (let i = 0; i < this.count; i++) {
+          const inpt = document.getElementsByName(`sftDay${i + 1}`);
+          const sftDay = [...inpt].filter(c => c.checked).map(v => v.value);
           const sft = new Shift(
-            sftId[i].value,
-            sftDay[i].value,
+            sftName[i].value,
+            sftDay.join(),
             sftOn[i].value,
-            sftOff[i].value
+            sftOff[i].value,
+            this.timeCal(sftOn[i].value, sftOff[i].value)
           );
           sftArr.push(sft);
         }
@@ -101,6 +108,15 @@ class InsertBus {
       },
       false
     );
+  }
+
+  timeCal(on, off) {
+    const start = on.split(":");
+    const end = off.split(":");
+    const onDate = new Date(0, 0, 0, start[0], start[1], 0);
+    const offDate = new Date(0, 0, 0, end[0], end[1], 0);
+    const diff = offDate.getTime() - onDate.getTime();
+    return Math.floor(diff / 1000 / 60);
   }
 
   submitBusiness(respText) {

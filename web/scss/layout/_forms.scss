@@ -57,6 +57,9 @@ input[name="loginKeep"] {
     border: 1px solid $border-default;
     border-radius: 5px;
   }
+  &-underline {
+    border-bottom: 1px solid $border-default;
+  }
 }
 
 label {

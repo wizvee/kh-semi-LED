@@ -11,9 +11,18 @@ import com.semi.noti.model.dao.NotiDao;
 import com.semi.noti.model.vo.Notification;
 
 public class NotiService {
-	
-	private NotiDao dao = new NotiDao();
-	
 
-	
+	private NotiDao dao = new NotiDao();
+
+	public int insertNoti(Notification n) {
+		Connection conn = getConnection();
+		int r = dao.insertNoti(conn, n);
+		if (r > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return r;
+	}
+
 }

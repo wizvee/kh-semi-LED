@@ -14,11 +14,11 @@
         top: calc(#{$gnb_height} - 10px);
         right: -55px;
         z-index: 10;
-        width: 250px;
+        width: 270px;
         height: auto;
         background: $bg;
         text-align: left;
-        color: $text-gray;
+        color: $text-placeholder;
         opacity: 0;
         transition: all 0.7s;
         @include style-modal(1);
@@ -45,27 +45,33 @@
         #alert_header {
             padding: 0 20px;
             line-height: 40px;
+            // border-bottom: 1px solid $border-default;
         }
 
         #alert_body {
             @include flex;
             justify-content: center;
             overflow-y: auto;
+            padding-bottom: 10px;
             height: auto;
             max-height: 430px;
             @include scroll($bg);
 
             .alert_item {
                 @include grid;
-                grid-template-columns: 60px 1fr;
-                // margin-bottom: 10px;
+                grid-template-columns: 50px 1fr;
                 padding: 8px 0;
                 width: 100%;
                 height: 50px;
-                border-bottom: 1px solid $border-default;
+                border-bottom: 1px solid $background-default;
                 background: $white;
                 line-height: 50px;
+                transition: background-color 0.5s;
                 @include cursor-pointer;
+
+                &:hover {
+                    background: $background-default;
+                }
 
                 img {
                     @include trans-All;
@@ -75,11 +81,11 @@
                     @include grid;
                     grid-template-rows: 1fr 1fr;
                     height: 50px;
+                    font-size: 80%;
 
                     span {
                         height: 25px;
                         line-height: 25px;
-                        font-size: 80%;
                     }
                 }
             }
@@ -104,8 +110,6 @@
     }
 
     &.news {
-        color: $primary;
-
         #gnb_alertBadge {
             z-index: 1;
             display: block;
@@ -125,6 +129,7 @@
         }
 
         i {
+            color: $primary !important;
             animation: ani_alert 2s alternate infinite ease-in-out;
             animation-fill-mode: both;
         }

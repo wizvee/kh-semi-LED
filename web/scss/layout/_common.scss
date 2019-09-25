@@ -75,6 +75,10 @@ input[id="ck_snb"]:checked {
     grid-template-columns: 45px 1fr repeat(3, 43px) 45px;
   }
 
+  @include respond-to("large") {
+    grid-template-columns: 45px 1fr repeat(3, 43px) 70px;
+  }
+
   &>div {
     text-align: center;
     line-height: $gnb_height;
@@ -98,6 +102,7 @@ input[id="ck_snb"]:checked {
     }
 
     i {
+      color: $text-gray;
       font-size: 120%;
       transition: all 0.7s;
       @include cursor-pointer;
@@ -156,28 +161,35 @@ input[id="ck_snb"]:checked {
   @include shadow;
 
   .item_header {
-    $title-height: 40px;
+    $title-height: 60px;
     padding: 0 20px;
     width: 100%;
     height: $title-height;
     line-height: $title-height;
     box-sizing: border-box;
     // background: blue;
+    @include respond-to("medium") {
+      padding: 0 30px;
+    }
   }
 
   .item_body {
     @include grid;
+    overflow: hidden;
     padding: 20px;
     width: 100%;
     height: auto;
     min-height: 100px;
     box-sizing: border-box;
+    @include respond-to("medium") {
+      padding: 20px 50px;
+    }
   }
 }
 
 .item_profile {
-  border: 2px solid $white;
-  @include circle(35px);
+  border: 3px solid $white;
+  @include circle(34px);
 }
 
 #chat_area {

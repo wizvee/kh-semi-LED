@@ -45,14 +45,12 @@ public class ForwardOServlet extends HttpServlet {
 		// 기존 개발용 owner instance 생성
 		Owner loginOwner = new OwnerService().castingTypeO(userInfo.getUserId());
 		session.setAttribute("loginOwner", loginOwner);
+		String selectBusId = request.getParameter("selectBus");
 
-		if (userInfo.getBusMap().isEmpty())
+		if (userInfo.getBusMap().isEmpty() && selectBusId == null)
 			url += "/owner/insertBus.do";
 		else {
-			String selectBusId = request.getParameter("selectBus");
-			if (selectBusId != null)
-				userInfo.setSelectBusId(selectBusId);
-
+			userInfo.setSelectBusId(selectBusId);
 			url += "/views/owner/main.jsp";
 		}
 

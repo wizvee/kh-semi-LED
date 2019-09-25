@@ -23,16 +23,18 @@
 				<form class="frm_addBus" method="post">
 					<div class="fieldBasic_area">
 						<div>사업장 이름</div>
-						<input type="text" name="bName" class="inpt-outline" value="" />
+						<input type="text" name="bName" class="inpt-underline" value="" />
 						<div>사업장 주소</div>
-						<input type="text" name="addr" class="inpt-outline" value="" />
+						<input type="text" name="addr" class="inpt-underline" value="" />
 						<div>사업장 전화번호</div>
-						<input type="tel" name="phone" class="inpt-outline" value="" />
+						<input type="tel" name="phone" class="inpt-underline" value="" />
 						<div>사업장 사업자번호</div>
-						<input type="text" name="bNum" class="inpt-outline" required />
+						<input type="text" name="bNum" class="inpt-underline" required />
+						<div>사업장 월급일</div>
+						<input type="text" name="bDate" class="inpt-underline" value="20" required />
 					</div>
 					<div class="fieldSide_area">
-						<button id="btn_addSft" onclick="return false;">근무조 추가</button>
+						<button id="btn_addSft" class="btn-primary" onclick="return false;">근무조 추가</button>
 					</div>
 					<div>
 						<button id="btn_istBus" onclick="return false;">등록</button>
