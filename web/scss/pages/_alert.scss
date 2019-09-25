@@ -108,7 +108,26 @@
         color: $primary;
 
         #gnb_alertBadge {
+            z-index: 1;
             display: block;
+
+            &:after {
+                $size: 15px;
+                content: "";
+                position: absolute;
+                top: -1px;
+                right: -1px;
+                width: $size;
+                height: $size;
+                border: 2px solid rgba($secondary, 0.5);
+                border-radius: 5px;
+                animation: ani_badge 1.5s infinite ease-in-out;
+            }
+        }
+
+        i {
+            animation: ani_alert 2s alternate infinite ease-in-out;
+            animation-fill-mode: both;
         }
     }
 }

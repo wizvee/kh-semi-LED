@@ -24,11 +24,7 @@ public class SemiWebSocket {
 
 	@OnMessage
 	public void onMessage(Session session, UserInfo userInfo) {
-		try {
-			session.getBasicRemote().sendText("noti");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println(userInfo.getFlag());
 	}
 
 }

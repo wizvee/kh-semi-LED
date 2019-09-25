@@ -52,6 +52,7 @@ public class EnrollEmpServlet extends HttpServlet {
 		if (nNoti != null) {
 			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			ui.getNotiList().add(nNoti);
+			ui.setFlag("noti");
 			
 			session.setAttribute("userInfo", ui);
 			out.print(gs.toJson(ui));
