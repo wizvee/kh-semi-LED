@@ -8,6 +8,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
   <title>service : site menu</title>
   <!-- CSS -->
   <link rel="stylesheet" href="css/main.min.css" />
@@ -94,6 +95,7 @@
             </div>
             <div>
               <button id="btn_gg" class="btn-primary">
+                  <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> 구글 로그인 버튼 --> 
                 <i class="fa fa-google-plus-square" aria-hidden="true"></i>
                 구글로 로그인
               </button>
@@ -157,6 +159,7 @@
   </div>
   <!-- //container -->
   <!-- JavaScript Libraries -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
 </body>
