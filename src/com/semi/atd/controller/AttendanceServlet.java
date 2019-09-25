@@ -57,11 +57,11 @@ public class AttendanceServlet extends HttpServlet {
 				e.setAttendance(atd);
 				
 				
-		request.setAttribute("empList", empList);
 		
 			}
 			
 		}
+		request.setAttribute("empList", empList);
 
 		request.getRequestDispatcher("/views/owner/attendance.jsp").forward(request, response);
 
