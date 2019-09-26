@@ -16,14 +16,14 @@ import common.util.SHA512;
 /**
  * Servlet implementation class CheckAjaxinfoPwServlet
  */
-@WebServlet("/checkAjaxinfoPw.do")
-public class CheckAjaxinfoPwServlet extends HttpServlet {
+@WebServlet("/changeAjaxinfoUpdatePw.do")
+public class ChangeAjaxinfoUpdatePwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckAjaxinfoPwServlet() {
+    public ChangeAjaxinfoUpdatePwServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +36,14 @@ public class CheckAjaxinfoPwServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String pw = SHA512.getSHA512(request.getParameter("pw"));
 		String nPw = SHA512.getSHA512(request.getParameter("nPw"));
+		
 		boolean able = new UserService().CheckUser(userId, pw) != null ? true : false;
 		
 		if (able && nPw != null) {
-			int result = new UserService().UpdatePw(userId,nPw);
-				if(result<0) {
+			int resultPw = new UserService().UpdatePw(userId,nPw);
+				if(resultPw<0) {
 					able = false;
 				}
-			
 		}
 		
 		response.setContentType("application/json;charset=UTF-8");

@@ -45,7 +45,7 @@
 					value=<%=infoUser.getPassword() %>>
 				<button class="btn_pic" onclick="return false;">
 					<div class="pic">
-						사진 <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic">
+						사진 : <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic">
 					</div>
 				</button>
 				<div class="item_body item_mypage_pic">
@@ -77,19 +77,19 @@
 					<button id="btn_name" class="btn-primary" onclick="return false;">이름 변경</button>
 				</div>
 
-				<button class="btn_phone" onclick="return false;">
+				<button id="btn_phone_view" class="btn_phone" onclick="return false;">
 					<div>
-						휴대폰 :
-						<%=infoUser.getUserPhone() %>
+						<span>휴대폰 :</span>
+						<span><%=infoUser.getUserPhone()%></span>
 					</div>
 				</button>
 				<div class="item_body item_mypage_phone">
 					<span data-placeholder="변경 할 휴대폰 번호 : "> 
 					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 휴대폰 번호 : </i>
 					</span> 
-					<input type="tel" class="inpt-outline" name="phone" id="phone" placeholder="-포함 입력하세요.">
+					<input type="text" class="inpt-outline" name="phone" id="phone" placeholder="-포함 입력하세요.">
 					<div id="result_phone"></div>
-					<button id="btn_phone" class="btn-primary" onclick="fn_updatePhone();">휴대폰 번호 변경</button>
+					<button id="btn_phone" class="btn-primary" onclick="return false;"> 휴대폰 번호 변경</button>
 				</div>
 				
 
@@ -174,39 +174,77 @@
 	 });
 
 	$(function(){
-		$('#btn_phone').click(function(){
-			var regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-			if($('#phone').val().trim()!=regExp){
-				$("#result_phone").html("다시 입력해 주세요.").css("color","red");
-			} else{
-				function fn_updatePhone(){
-					updateMemberFrm.action="<%=request.getContextPath()%>/changeAjaxinfophone.do";
-					updateMemberFrm.submit();
-				}
+		$('#btn_name').click(function(){
+			var area = document.querySelectorAll(".item_mypage_name")[0];
+			if($('#name').val().trim().length<=0){
+				$("#result_name").html("이름을 입력하세요.").css("color","red");
+			}
+			else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/changeAjaxinfoUpdateName.do",
+					data:{name : $('#name').val().trim(), userId:userInfo.userId},
+					success:function(data){
+						if(!data){
+							$("#result_name").html("이름 변경 실패. 다시 시도해 주세요.").css("color","red");
+						} else{
+							area.style.display = "none";
+							$('#btn_name_view').find('div>span').last().html($('#name').val().trim());
+						}
+					}
+				});
 			}
 		});
 	});
+	
+	$(function(){
+		$('#btn_phone').click(function(){
+			var regExp = /01(0|1|6|7|8|9)-(\d{4}|\d{3})-\d{4}$/g;
+			var area = document.querySelectorAll(".item_mypage_phone")[0];
+			
+			if($('#phone').val().trim().length<=0){
+				$("#result_phone").html("휴대폰 번호를 입력하세요.").css("color","red");
+			}
+			else if($('#phone').val().trim().length>0 && !regExp.test($('#phone').val().trim())){
+				$("#result_phone").html("다시 입력해 주세요.").css("color","red");
+			}
+			else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/changeAjaxinfoUpdatePhone.do",
+					data:{phone : $('#phone').val().trim(), userId:userInfo.userId},
+					success:function(data){
+						if(!data){
+							$("#result_phone").html("휴대폰 번호 변경 실패. 다시 시도해 주세요.").css("color","red");
+						} else{
+							area.style.display = "none";
+							$('#btn_phone_view').find('div>span').last().html($('#phone').val().trim());
+						}
+					}
+				});
+			}
+		});
+	});
+	
 	$(function(){
 		$('#btn_checkPw').click(function(){
 			$("#result_pw").html("");
 			$("#result_nPw").html("");
 			$("#result_nkPw").html("");
 			var reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,16}$/;
-			if($('#pw').val().trim()<=0){
+			if($('#pw').val().trim().length<=0){
 				$("#result_pw").html("현재 비밀번호를 입력하세요").css("color","red");
-			} else if($('#nPw').val().trim()<=0){
+			} else if($('#nPw').val().trim().length<=0){
 				$("#result_nPw").html("새 비밀번호를 입력하세요").css("color","red");
 			} else if($('#pw').val().trim()==$('#nPw').val().trim()){
 				$("#result_nPw").html("현재 비밀번호와 다른 비밀번호를 입력하세요").css("color","red");				
-			} else if($('#nkPw').val().trim()<=0){
+			} else if($('#nkPw').val().trim().length<=0){
 				$("#result_nkPw").html("새 비밀번호 확인을 입력하세요").css("color","red");
 			} else if($('#nPw').val().trim()!=$('#nkPw').val().trim()){
 				$("#result_nkPw").html("새 비밀번호가 일치하지 않습니다").css("color","red");
-			} else if($('#nPw').val().trim()!=reg){
+			} else if(!reg.test($('#nPw').val().trim())){
 				$("#result_nPw").html("8~16자 영문 대·소문자 사용").css("color","red");
 			} else {
 				$.ajax({
-					url:"<%=request.getContextPath()%>/checkAjaxinfoPw.do",
+					url:"<%=request.getContextPath()%>/changeAjaxinfoUpdatePw.do",
 					data:{pw:$('#pw').val().trim(), nPw:$('#nPw').val().trim(), userId:userInfo.userId},
 					success:function(data){
 						if(!data){

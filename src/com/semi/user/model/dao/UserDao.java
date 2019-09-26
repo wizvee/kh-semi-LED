@@ -275,5 +275,23 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	public int UpdatePhone(Connection conn, String userId, String phone) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updatePhone");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

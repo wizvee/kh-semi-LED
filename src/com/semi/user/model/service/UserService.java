@@ -89,6 +89,7 @@ public class UserService {
 	public int UpdatePw(String userId, String nPw) {
 		Connection conn=getConnection();
 		int result=0;
+		result = dao.UpdatePw(conn, userId, nPw);
 		if(result>0) {
 			commit(conn);
 		}else {
@@ -98,6 +99,17 @@ public class UserService {
 		return result;
 	}
 	
-	
+	public int UpdatePhone(String userId, String phone) {
+		Connection conn=getConnection();
+		int result=0;
+		result = dao.UpdatePhone(conn, userId, phone);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }
