@@ -59,10 +59,11 @@ label:hover {background: #2A394F;}
   position: absolute;
   left: 0;
   top: 3rem;
+  width: 20%;
 }
 .paises label {
   display: block;
-  width: 9rem;
+  width: 100%;
   line-height: 2.5rem;
   border-left: 3px solid transparent;
 }
@@ -70,16 +71,15 @@ label:hover {background: #2A394F;}
   background: #D6DBE7;
   margin: 2rem auto;
   width: 90%;
-  max-width: 850px;
   min-width: 400px;
-  height: 20rem;
+  height: 30rem;
   overflow: hidden;
   border-radius: 2px;
   box-shadow: 0 0 4px rgba(0,0,0,.4);
 }
 
 .section > div:before {
-  content:'EsCss';
+  content:'급여관리';
   position: absolute;
   left:0;top:0;right:0;
   text-align: center;
@@ -89,20 +89,16 @@ label:hover {background: #2A394F;}
 }
 article {
   margin: 1rem;
-  height: 16rem;
+  height: 85%;
   overflow: auto;
 }
 article > div { 
   background: #fff;
   position: absolute;  
-  height: 16rem;
+  height: 25rem;
   width: 100%;
 }
-.pais img {
-  max-height: 14rem;
-  display: block;
-  margin: 1rem auto;
-}
+
 table {
   table-layout: fixed;
   font-size: 1rem;
@@ -122,17 +118,30 @@ td {
   padding: .5rem 1rem;
 }
 tr td:nth-child(1) {
-  width: 45%;
+  width: 20%;
 }
 tr td:nth-child(2) {
-  width: 42%;
+  width: 40%;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
 tr td:nth-child(3) {
-  width: 13%;
+  width: 17%;
   font-weight: 500;
   text-align: right;
+}
+tr td:nth-child(4) {
+  width: 12%;
+  font-weight: 500;
+  text-align: center;
+  border-left: 1px solid #ddd;
+}
+tr td:nth-child(5) {
+  width: 12%;
+  font-weight: 500;
+  text-align: center;
+    border-left: 1px solid #ddd;
+   border-right: 1px solid #ddd;
 }
 td span {
   background: #e5e5e5;
@@ -171,10 +180,7 @@ td span:after {
   background: #2EC7C9;
   width: 53%;
 }
-.cinco:before {
-  background: #CC324B;
-  width: 37%;
-}
+
 .italia span:before{opacity: .4}
 .grecia span:before{opacity: .7}
 .alemania span:before{opacity: .2}
@@ -188,10 +194,7 @@ caption:before {
   height: 50px;
   opacity: .5;  
 }
-.espana caption:before {background-image: url(http://www.institutovannghi.es/images/sp.gif)}
-.italia caption:before {background-image: url(http://i01.i.aliimg.com/wsphoto/v0/659951967_1/ITALY-ITALIAN-Flag-150x90cm-5X3ft.jpg_50x50.jpg)}
-.alemania caption:before {background-image: url(http://www.davidcalero.com/img/Banderas/Alemania.gif);}
-.grecia caption:before {background-image: url(http://www.sobrefutbol.com/imagenes/banderas/grecia.gif);}
+
 .eu, .am, .as, .europa, .america, .asia, .pais {
   display: none
 }
@@ -254,6 +257,7 @@ caption:before {
 	float: right;
 	margin-top: 4%;
 	background-color: #e5e5e5;
+	height: 100%;
 }
 
 table>caption>tbody>tr td{
@@ -292,12 +296,12 @@ table>caption>tbody>tr td{
 				<input type="radio" id="malasia" name="pais" />
 				
 				<div class="section">
-				  <h1 class="entypo-address">Double checked</h1>
+				  <h1 class="entypo-address">e.get bus_name</h1>
 				  <!-- labels continentes y grupos paises -->
 				  <nav class='continente'>
-					 <label for="europa" class="entypo-air">1rodnjf</label>
-					 <label for="america" class="entypo-calendar">America</label>
-					 <label for="asia" class="entypo-instagrem">Asia</label>
+					 <label for="europa" class="entypo-air">Monthly</label>
+					 <label for="america" class="entypo-calendar">Daily</label>
+					 <label for="asia" class="entypo-instagrem">Hourly</label>
 				  </nav>
 					<nav class='paises eu'>
 					 <label for="espana" class="entypo-chart-bar">1개월</label>
@@ -307,17 +311,17 @@ table>caption>tbody>tr td{
 					</nav>
 				  
 					<nav class='paises am'>
-					 <label for="argentina" class="entypo-rss">Argentina</label>
-					 <label for="peru" class="entypo-shareable">Peru</label>
-					 <label for="mexico" class="entypo-shuffle">Mexico</label>
-					 <label for="eeuu" class="entypo-signal">EE.UU.</label>
+					 <label for="argentina" class="entypo-rss">1개월</label>
+					 <label for="peru" class="entypo-shareable">3개월</label>
+					 <label for="mexico" class="entypo-shuffle">6개월</label>
+					 <label for="eeuu" class="entypo-signal">1년</label>
 					</nav>
 				  
 					<nav class='paises as'>
-					 <label for="japon" class="entypo-flow-branch">Japón</label>
-					 <label for="filipinas" class="entypo-flow-cascade">Filipinas</label>
-					 <label for="china" class="entypo-flow-tree">China</label>
-					 <label for="malasia" class="entypo-flow-parallel">Malasia</label>
+					 <label for="japon" class="entypo-flow-branch">1개월</label>
+					 <label for="filipinas" class="entypo-flow-cascade">3개월</label>
+					 <label for="china" class="entypo-flow-tree">6개월</label>
+					 <label for="malasia" class="entypo-flow-parallel">1년</label>
 					</nav>
 
 
@@ -333,163 +337,96 @@ table>caption>tbody>tr td{
 				  <article class='europa'>
 					<div class='pais espana'>
 				<table>
-				   <caption>Qué opinas sobre los aspectos siguientes:</caption>
+				   <caption>Monthly_Wage For One-Month</caption>
 				   <tbody>
-					  <tr>
-						 <td>La visitaré por su gente</td>
-						<td><span class='uno' data-valor='65'></span></td>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='uno' data-valor='65'></span></td>
 						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
 					  </tr>
-					  <tr>
-						 <td>Iría por su comida</td>
-						<td><span class='dos' data-valor='73'></span></td>
-						 <td>456</td>
-					  </tr>
-					  <tr>
-						 <td>La fiesta me llama</td>
-						<td><span class='tres' data-valor='99'></span></td>
-						 <td>980</td>
-					  </tr>
-					  <tr>
-						 <td>Sol y playa me pierde</td>
-						<td><span class='cuatro' data-valor='53'></span></td>
-						 <td>666</td>
-					  </tr>
-					  <tr>
-						 <td>Sus montañas son mi hogar</td>
-						<td><span class='cinco' data-valor='37'></span></td>
-						 <td>259</td>
-					  </tr>
-					  <tr>
-							<td>Sus montañas son mi hogar</td>
-						   <td><span class='cinqco' data-valor='37'></span></td>
-							<td>259</td>
-						 </tr>
-						 <tr>
-								<td>Sus montañas son mi hogar</td>
-							   <td><span class='cinaco' data-valor='37'></span></td>
-								<td>259</td>
-							 </tr>
-							 
-							 <tr>
-									<td>Sus montañas son mi hogar</td>
-								   <td style="background-color: red;"><span class='cidnco' data-valor='37'></span></td>
-									<td>259</td>
-								 </tr>
-								 <tr>
-										<td>Sus montañas son mi hogar</td>
-									   <td style="background-color: red;"><span class='cinco' data-valor='37'></span></td>
-										<td>259</td>
-									 </tr>
-									 <tr>
-											<td>Sus montañas son mi hogar</td>
-										   <td style="background-color: red;"><span class='cinco' data-valor='37'></span></td>
-											<td>259</td>
-										 </tr>
-										 <tr>
-												<td>Sus montañas son mi hogar</td>
-											   <td><span class='cinco' data-valor='37'></span></td>
-												<td>259</td>
-											 </tr>
+				
 				   </tbody>
 				</table>      
 					</div>
 					
 					<div class='pais italia'>
 				<table>
-				   <caption>Qué opinas sobre los aspectos siguientes:</caption>
-				   <tbody>
-					  <tr>
-						 <td>La visitaré por su gente</td>
-						<td><span class='uno' data-valor='65'></span></td>
+				   <caption>Monthly_Wage For Three-Month</caption>
+				   	     <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='dos' data-valor='65'></span></td>
 						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
 					  </tr>
-					  <tr>
-						 <td>Iría por su comida</td>
-						<td><span class='dos' data-valor='73'></span></td>
-						 <td>456</td>
-					  </tr>
-					  <tr>
-						 <td>La noche y la fiesta me llaman</td>
-						<td><span class='tres' data-valor='99'></span></td>
-						 <td>980</td>
-					  </tr>
-					  <tr>
-						 <td>El sol y sus playas me pierden</td>
-						<td><span class='cuatro' data-valor='53'></span></td>
-						 <td>666</td>
-					  </tr>
-					  <tr>
-						 <td>Sus montañas son mi hogar</td>
-						<td><span class='cinco' data-valor='37'></span></td>
-						 <td>259</td>
-					  </tr>
+				
 				   </tbody>
 				</table>      
 					</div>
 					
 					<div class='pais grecia'>
 				<table>
-				   <caption>Qué opinas sobre los aspectos siguientes:</caption>
-				   <tbody>
-					  <tr>
-						 <td>La visitaré por su gente</td>
-						<td><span class='uno' data-valor='65'></span></td>
+				   <caption>Monthly_Wage For Six-Month</caption>
+				    <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='tres' data-valor='65'></span></td>
 						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
 					  </tr>
-					  <tr>
-						 <td>Iría por su comida</td>
-						<td><span class='dos' data-valor='73'></span></td>
-						 <td>456</td>
-					  </tr>
-					  <tr>
-						 <td>La noche y la fiesta me llaman</td>
-						<td><span class='tres' data-valor='99'></span></td>
-						 <td>980</td>
-					  </tr>
-					  <tr>
-						 <td>El sol y sus playas me pierden</td>
-						<td><span class='cuatro' data-valor='53'></span></td>
-						 <td>666</td>
-					  </tr>
-					  <tr>
-						 <td>Sus montañas son mi hogar</td>
-						<td><span class='cinco' data-valor='37'></span></td>
-						 <td>259</td>
-					  </tr>
+			
 				   </tbody>
 				</table>      
 					</div>
 					
 					<div class='pais alemania'>
 				<table>
-				   <caption>Qué opinas sobre los aspectos siguientes:</caption>
-				   <tbody>
-					  <tr>
-						 <td>La visitaré por su gente</td>
-						<td><span class='uno' data-valor='65'></span></td>
+				   <caption>Monthly_Wage For One-Year</caption>
+				     <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='cuatro' data-valor='65'></span></td>
 						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
 					  </tr>
-					  <tr>
-						 <td>Iría por su comida</td>
-						<td><span class='dos' data-valor='73'></span></td>
-						 <td>456</td>
-					  </tr>
-					  <tr>
-						 <td>La noche y la fiesta me llaman</td>
-						<td><span class='tres' data-valor='99'></span></td>
-						 <td>980</td>
-					  </tr>
-					  <tr>
-						 <td>El sol y sus playas me pierden</td>
-						<td><span class='cuatro' data-valor='53'></span></td>
-						 <td>666</td>
-					  </tr>
-					  <tr>
-						 <td>Sus montañas son mi hogar</td>
-						<td><span class='cinco' data-valor='37'></span></td>
-						 <td>259</td>
-					  </tr>
+				
 				   </tbody>
 				</table>      
 					</div>
@@ -497,39 +434,208 @@ table>caption>tbody>tr td{
 				  
 				  <article class='america'>
 					  <div class='pais argentina'>
-					  <img alt='' src='https://4.bp.blogspot.com/-K5zec53PX2k/UrOmNoYza6I/AAAAAAAAAeU/Nc5i0G71N2A/s1600/bandera2.png'>
+					  	<table>
+				   <caption>Daily_Wage For One-Month</caption>
+				      <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='uno' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 					  <div class='pais peru'>
-					  <img alt='' src='http://www.mceconsultoresasociados.com/ps13/peru.jpg'>
+					  	<table>
+				   <caption>Daily_Wage For Three-Month</caption>
+				     <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='dos' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 					  <div class='pais mexico'>
-					  <img alt='' src='http://fernandortizg.files.wordpress.com/2012/09/bandera-de-mexico.jpg'>
+					 	<table>
+				   <caption>Daily_Wage For Six-Month</caption>
+				     <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='tres' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 					  <div class='pais eeuu'>
-					  <img alt='' src='http://www.computerworld.es/archivos/201211/bandera_eeuu_hi.png'>
+					 	<table>
+				   <caption>Daily_Wage For One-Year</caption>
+				     <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='cuatro' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 				  </article>
 				  
 				  <article class='asia'>
 					  <div class='pais japon'>
-					  <img alt='' src='http://www.lovethesepics.com/wp-content/uploads/2012/09/Japan-Fujiyoshida-and-Mount-Fuji.jpg'>
+					  	<table>
+				   <caption>Hourly_Wage For One-Month</caption>
+				      <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='uno' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 					  <div class='pais filipinas'>
-					  <img alt='' src='http://img01.lavanguardia.com/2010/12/07/Filipinas_54083687758_600_226.jpg'>
+						<table>
+				   <caption>Hourly_Wage For Three-Month</caption>
+				      <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='dos' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 					  <div class='pais china'>
-					  <img alt='' src='http://www.jaimelago.org/sites/default/files/u1/china.jpg'>
+						<table>
+				   <caption>Hourly_Wage For Six-Month</caption>
+				    <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='tres' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 					  <div class='pais malasia'>
-					  <img alt='' src='https://3.bp.blogspot.com/-wE_Jh3dv8jI/UzROlo7XU3I/AAAAAAAABJw/0Z_0YgOFmn4/s800/Shwedagon+Pagoda-007.jpg'>
+					 	<table>
+				   <caption>Hourly_Wage For One-Year</caption>
+				     <tbody>
+					  <tr> 
+						 <td>이름</td>
+						<td>급여 지급액</td>
+						 <td>근무 시간</td>
+						  <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+					  
+					 <!-- 여기 부터 for 문 돌려서 계속 생성 -->
+					  <tr> 
+						 <td>신지섭</td>
+						<td> 여기에 수령금액 적용하고 %값 밑에 width
+						<span class='cuatro' data-valor='65'></span></td>
+						 <td>345</td>
+						   <td>지각</td>
+						  <td>조퇴</td>
+					  </tr>
+				
+				   </tbody>
+				</table>   
 					  </div>
+					  
 				  </article>
 				 </div> 
 				</div>
 				
-				<p>Study of tabs by double checked. Pure Css. <a href='https://escss.blogspot.com/2014/01/the-Css-Mentalist.html'>The post and a simpler demo</a>.</p>
-				<p>The base of this technique is the pen <a href='https://codepen.io/Kseso/full/IlwoG'>"The Css Mentalist"</a></p>
-
+				<p>전체 직원 지급 예정 금액 : 여기에 더한값 넣기</p>
+				<p></p>
 		</div>
 	</section>
 
