@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.semi.owner.model.vo.Owner;
+import com.semi.userinfo.model.vo.UserInfo;
 
 @WebFilter("/views/owner/*")
 public class AccessOwnerFilter implements Filter {
@@ -25,15 +26,10 @@ public class AccessOwnerFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpSession session = req.getSession();
-		
-		Owner o = (Owner)session.getAttribute("loginOwner");
+//		HttpServletRequest req = (HttpServletRequest) request;
+//		HttpSession session = req.getSession();
 
-		if(o == null) {
-			HttpServletResponse resp = (HttpServletResponse) response;
-			resp.sendRedirect(req.getContextPath());
-		}
+		System.out.println("own:");
 		
 		chain.doFilter(request, response);
 	}

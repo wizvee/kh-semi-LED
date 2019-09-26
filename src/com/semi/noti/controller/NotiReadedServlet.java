@@ -1,46 +1,47 @@
-package com.semi.emp.controller;
+package com.semi.noti.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.semi.emp.model.service.EmpService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.semi.noti.model.service.NotiService;
 import com.semi.noti.model.vo.Notification;
 import com.semi.userinfo.model.vo.UserInfo;
 
-@WebServlet("/emp/requestBus.do")
-public class AddBusEndServlet extends HttpServlet {
+@WebServlet("/notiRead.do")
+public class NotiReadedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AddBusEndServlet() {
+	public NotiReadedServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		
-		String userId = ((UserInfo) request.getSession().getAttribute("userInfo")).getUserId();
-		
-		Notification n = new Notification();
-		n.setUserId(userId);
-		n.setTargetUserId(request.getParameter("ownId"));
-		n.setTargetBusId(request.getParameter("busId"));
-		n.setNotiType("requestBus");
-		n.setNotiMsg("입사 요청");
-		n.setNotiUrl("owner/manageEmp.do");
-		
-		int r = new EmpService().submitEnrollBus(n);
-		
-		if (r > 0) 
-			out.print("sucess");
-		 else
+		HttpSession session = request.getSession();
+
+		String notiId = request.getParameter("notiId");
+		int r = new NotiService().isReadNoti(notiId);
+
+		if (r > 0) {
+			UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+			userInfo.getParameters("O");
+			ArrayList<Notification> list = userInfo.getNotiList();
+			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			out.print(gs.toJson(list));
+		} else
 			out.print("fail");
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
