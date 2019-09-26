@@ -293,5 +293,23 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	public int UpdateName(Connection conn, String userId, String name) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateName");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

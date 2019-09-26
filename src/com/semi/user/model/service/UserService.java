@@ -111,5 +111,18 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+	
+	public int UpdateName(String userId, String name) {
+		Connection conn=getConnection();
+		int result=0;
+		result = dao.UpdateName(conn, userId, name);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }
