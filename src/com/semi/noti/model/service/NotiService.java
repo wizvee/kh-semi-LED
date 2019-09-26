@@ -24,5 +24,16 @@ public class NotiService {
 		close(conn);
 		return r;
 	}
+	
+	public int isReadNoti(String notiId) {
+		Connection conn= getConnection();
+		int r = dao.isReadNoti(conn, notiId);
+		if (r > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return r;
+	}
 
 }

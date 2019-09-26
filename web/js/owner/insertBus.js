@@ -40,19 +40,19 @@ class InsertBus {
         <div><input type="text" name="sftName" value="${sftName}" class="inpt-outline">
         <span><i class="fa fa-tags" aria-hidden="true"></i></span></div>
         <div class="sftDay">
-          <input type="checkbox" name="sftDay${this.count}" value="1" id="sft${this.count}day1">
+          <input type="checkbox" name="sftDay${this.count}" value="일" id="sft${this.count}day1">
           <label for="sft${this.count}day1">일</label>
-          <input type="checkbox" name="sftDay${this.count}" value="2" id="sft${this.count}day2">
+          <input type="checkbox" name="sftDay${this.count}" value="월" id="sft${this.count}day2">
           <label for="sft${this.count}day2">월</label>
-          <input type="checkbox" name="sftDay${this.count}" value="3" id="sft${this.count}day3">
+          <input type="checkbox" name="sftDay${this.count}" value="화" id="sft${this.count}day3">
           <label for="sft${this.count}day3">화</label>
-          <input type="checkbox" name="sftDay${this.count}" value="4" id="sft${this.count}day4">
+          <input type="checkbox" name="sftDay${this.count}" value="수" id="sft${this.count}day4">
           <label for="sft${this.count}day4">수</label>
-          <input type="checkbox" name="sftDay${this.count}" value="5" id="sft${this.count}day5">
+          <input type="checkbox" name="sftDay${this.count}" value="목" id="sft${this.count}day5">
           <label for="sft${this.count}day5">목</label>
-          <input type="checkbox" name="sftDay${this.count}" value="6" id="sft${this.count}day6">
+          <input type="checkbox" name="sftDay${this.count}" value="금" id="sft${this.count}day6">
           <label for="sft${this.count}day6">금</label>
-          <input type="checkbox" name="sftDay${this.count}" value="7" id="sft${this.count}day7">
+          <input type="checkbox" name="sftDay${this.count}" value="토" id="sft${this.count}day7">
           <label for="sft${this.count}day7">토</label>
         </div>
         <div><input type="text" name="sftOn" class="inpt-outline">

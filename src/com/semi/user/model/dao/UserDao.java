@@ -181,6 +181,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Notification n = new Notification();
+				n.setNotiId(rs.getString("NOTI_ID"));
 				n.setUserId(rs.getString("USER_ID"));
 				n.setTargetUserId(rs.getString("TARGET_USER_ID"));
 				n.setTargetBusId(rs.getString("TARGET_BUS_ID"));
@@ -188,7 +189,6 @@ public class UserDao {
 				n.setNotiMsg(rs.getString("NOTI_MSG"));
 				n.setNotiUrl(rs.getString("NOTI_URL"));
 				n.setNotiDate(rs.getTimestamp("NOTI_DATE"));
-				n.setReaded(rs.getString("READED").equals("T") ? true : false);
 				n.setUserName(rs.getString("USER_NAME"));
 				n.setProfilePic(rs.getString("PROFILE_PIC"));
 				list.add(n);

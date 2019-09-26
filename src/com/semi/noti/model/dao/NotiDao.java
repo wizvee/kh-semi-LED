@@ -88,7 +88,7 @@ public class NotiDao {
 				n.setNotiMsg(rs.getString("NOTI_MSG"));
 				n.setNotiUrl(rs.getString("NOTI_URL"));
 				n.setNotiDate(rs.getTimestamp("NOTI_DATE"));
-				n.setReaded(rs.getString("ISREADED").equals("T") ? true : false);
+				n.setReaded(rs.getString("READED").equals("T") ? true : false);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,6 +97,22 @@ public class NotiDao {
 			close(pstmt);
 		}
 		return n;
+	}
+	
+	public int isReadNoti(Connection conn, String notiId) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("isReadNoti");
+		int r = -1;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, notiId);
+			r = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return r;
 	}
 
 }

@@ -17,14 +17,13 @@ class Alert {
     if (this.list != null) this.count = this.list.length;
     else this.count = 0;
 
+    this.viewNoti = this.viewNoti;
     this.createItem = this.createItem;
-
     this.setInit();
   }
 
   setInit() {
     this.viewCount();
-    this.viewNoti();
   }
 
   viewCount() {
@@ -32,7 +31,10 @@ class Alert {
     const badge = document.querySelector("#gnb_alertBadge");
     badge.textContent = this.count;
 
-    if (this.count > 0) area.setAttribute("class", "news");
+    if (this.count > 0) {
+      area.setAttribute("class", "news");
+      this.viewNoti();
+    }
   }
 
   viewNoti() {
@@ -44,6 +46,7 @@ class Alert {
 
   createItem(area, n) {
     const item = document.createElement("div");
+    item.setAttribute("id", `${n.notiType},${n.notiId}`);
     item.setAttribute("class", "alert_item");
     const img = document.createElement("img");
     img.setAttribute("class", "item_profile");
@@ -51,10 +54,8 @@ class Alert {
     const content = document.createElement("div");
     content.setAttribute("class", "alert_content");
     const spanUser = document.createElement("span");
-    spanUser.setAttribute("class", "alert_user");
     spanUser.textContent = n.userName;
     const spanMsg = document.createElement("span");
-    spanMsg.setAttribute("class", "alert_msg");
     spanMsg.innerHTML = n.notiMsg;
 
     content.appendChild(spanUser);
@@ -69,8 +70,27 @@ class Alert {
 
   itemLink(item, url) {
     item.addEventListener("click", () => {
-      location.href = `/p_190826_semi/${url}`;
+      const id = item.getAttribute("id");
+      if (!id.includes("static")) {
+        const data = `notiId=${id.split(",")[1]}`;
+        this.getResult(data, url);
+      }
     });
+  }
+
+  getResult(data, url) {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", () => {
+      if (xhr.responseText != "fail") {
+        this.list = JSON.parse(xhr.responseText);
+        this.viewCount();
+        this.viewNoti();
+        location.href = `/p_190826_semi/${url}`;
+      }
+    });
+    xhr.open("post", "/p_190826_semi/notiRead.do");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(data);
   }
 }
 
