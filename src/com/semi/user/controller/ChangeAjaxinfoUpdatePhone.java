@@ -1,25 +1,27 @@
 package com.semi.user.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.semi.user.model.service.UserService;
 
 /**
- * Servlet implementation class ChangeAjaxinfoPhone
+ * Servlet implementation class ChangeAjaxinfoUpdatePhone
  */
-@WebServlet("/changeAjaxinfophone.do")
-public class ChangeAjaxinfoPhone extends HttpServlet {
+@WebServlet("/changeAjaxinfoUpdatePhone.do")
+public class ChangeAjaxinfoUpdatePhone extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeAjaxinfoPhone() {
+    public ChangeAjaxinfoUpdatePhone() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,14 +30,17 @@ public class ChangeAjaxinfoPhone extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String userId = request.getParameter("userId");
 		String phone = request.getParameter("phone");
 		
-		int result = new UserService().UpdatePhone(userId,phone);
+		int resultPhone = new UserService().UpdatePhone(userId, phone);
 		
-		if(result>0) {
-			
-		}
+		boolean flag=resultPhone>0?true:false;
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(flag,response.getWriter());
+		
+		
 	}
 
 	/**
