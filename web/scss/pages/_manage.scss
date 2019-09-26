@@ -87,10 +87,6 @@
                     color: $text-gray;
                 }
 
-                .dropMenu {
-                    display: none;
-                }
-
                 .temp {
                     @include grid;
                     grid-template-columns: 2fr 150px 1fr 15px 1fr 60px;
@@ -119,6 +115,18 @@
                             color: $primary;
                         }
                     }
+                }
+
+                .dropToggle {
+                    position: relative;
+                }
+                
+                .dropMenu {
+                    // display: none;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background: red;
                 }
             }
 

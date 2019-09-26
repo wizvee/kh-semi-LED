@@ -44,7 +44,7 @@ public class InsertBusinessServlet extends HttpServlet {
 		n.setTargetBusId(busId);
 		n.setNotiType("insertBus");
 		n.setNotiMsg("<b>" + bus.getBusName() + "</b> 사업장 등록");
-		n.setNotiUrl("");
+		n.setNotiUrl("owner/editBus.do");
 
 		if (busId != null) {
 			int r = new NotiService().insertNoti(n);
