@@ -2,6 +2,8 @@ package com.semi.owner.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -33,21 +35,30 @@ public class ApprovalEmpServlet extends HttpServlet {
 
 		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
 		String busId = ui.getSelectBusId();
+		
+		String from =request.getParameter("empStart");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy/mm/dd");
+		Date empStart = null;
+		try {
+			empStart = sf.parse(from);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 
 		Employee e = new Employee();
 		e.setUserId(request.getParameter("empId"));
 		e.setEmpType(request.getParameter("empType"));
 		e.setEmpWage(Integer.parseInt(request.getParameter("empWage")));
 		e.setSftId(request.getParameter("sftId"));
-//		e.setEmpStart((Date)request.getParameter("empStart"));
+		e.setEmpStart(empStart);
 
 		Notification n = new Notification();
 		n.setUserId(e.getUserId());
 		n.setTargetUserId(ui.getUserId());
 		n.setTargetBusId(busId);
-		n.setNotiType("approval_Emp");
-		n.setNotiMsg("종업원 " + e.getUserId() + " 승인");
-		n.setNotiUrl("/owner/manageEmp.do");
+		n.setNotiType("approvalEmp");
+		n.setNotiMsg("종업원 " + e.getUserId() + " 입사 승인");
+		n.setNotiUrl("owner/manageEmp.do");
 
 		Notification nNoti = new BusinessService().approvalEmp(busId, e, n);
 

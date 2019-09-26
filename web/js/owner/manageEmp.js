@@ -1,5 +1,7 @@
 class MngEmp {
   constructor() {
+    this.aprEmp = "";
+    this.now = new Date();
     this.setInit();
   }
 
@@ -13,10 +15,12 @@ class MngEmp {
     const btnApproval = selectElements(".btn_Approval");
     const btnReject = selectElements(".btn_Reject");
 
-    const btnEnrollEmp = document.querySelectorAll(".btn_enrollEmp")[0];
+    const btnApvEmp = document.querySelectorAll(".btn_arvEmp")[0];
 
     mngHeader.map((e, index) => {
       e.addEventListener("click", ({ target }) => {
+        mngHeader.map(e => e.classList.remove("focus"));
+        target.classList.add("focus");
         mngBody.map(e => e.classList.remove("focus"));
         mngBody[index].classList.add("focus");
       });
@@ -27,7 +31,9 @@ class MngEmp {
         mngBody.map(e => e.classList.remove("focus"));
         empInfo.classList.add("focus");
         const id = target.nextElementSibling.value;
-        selectElements("input[name='empId']")[0].value = id;
+        this.aprEmp = id;
+        const inptStart = selectElements("input[name='empStart']")[0];
+        inptStart.value = this.getDate(this.now);
       })
     );
 
@@ -39,23 +45,25 @@ class MngEmp {
       })
     );
 
-    btnEnrollEmp.addEventListener("click", () => {
-      const empId = selectElements("input[name='empId']")[0].value;
+    btnApvEmp.addEventListener("click", () => {
       const empType = selectElements("input[name='empType']").find(
         e => e.checked
       ).value;
       const empWage = selectElements("input[name='empWage']")[0].value;
-      const sftId = selectElements(".selected input[name='sftId']")[0].value;
+      const sftId = selectElements(".select input[name='sftId']")[0].value;
+      const empStart = selectElements("input[name='empStart']")[0].value;
 
-      const data = `empId=${empId}&empType=${empType}&empWage=${empWage}&sftId=${sftId}`;
+      const data = `empId=${this.aprEmp}&empType=${empType}&empWage=${empWage}&sftId=${sftId}&empStart=${empStart}`;
+      console.log(data);
 
-      this.getResult("/owner/enrollEmp.do", data, this.approvalEmp);
+      // this.getResult("/owner/ApprovalEmp.do", data, this.approvalEmp);
     });
   }
 
   approvalEmp(respText) {
     if (respText != "fail") {
-      // location.href = "/p_190826_semi/owner/manageEmp.do";
+      this.aprEmp = "";
+      location.href = "/p_190826_semi/owner/manageEmp.do";
       socket.send(respText);
     }
   }
@@ -70,6 +78,13 @@ class MngEmp {
     xhr.open("post", "/p_190826_semi/" + servletURL);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
+  }
+
+  getDate(time) {
+    const year = time.getFullYear();
+    const month = time.getMonth();
+    const date = time.getDate();
+    return `${year}/${month}/${date}`;
   }
 }
 

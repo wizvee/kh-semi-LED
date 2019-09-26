@@ -15,29 +15,17 @@
 		</div>
 		<div class="item_body item_mngEmp">
 			<div class="mngEmp_header">
-				<div>
-					<span>재직</span>
-				</div>
-				<div>
-					<span>퇴직</span>
-				</div>
-				<div>
-					<span>진행</span>
-				</div>
+				<span class="focus">재직</span>
+				<span>퇴직</span>
+				<span>진행</span>
 			</div>
 			<div class="mngEmp_body">
 				<div class="mngEmpWork_area focus">
-					<%
-						for (Employee e : empList) {
-							if(e.getEmpEnd() == null) {
-					%>
-					
-					<%
-							}
-						}
-					%>
+					1
 				</div>
-				<div class="mngEmpResign_area">2</div>
+				<div class="mngEmpResign_area">
+					2
+				</div>
 				<div class="mngEmpEnroll_area">
 					<%
 						for (Employee e : empList) {
@@ -60,25 +48,55 @@
 				</div>
 				<div class="approvalEmpInfo_area">
 					<div>
-						<p>고용 형태</p>
+						<span>고용 형태</span>
 						<div>
-							<input type="hidden" name="empId" vlaue="">
-							<input type="radio" name="empType" value="H" id="et-h">
+							<input type="radio" name="empType" value="H" id="et-h" checked>
 							<label for="et-h">시급직</label>
 							<input type="radio" name="empType" value="D" id="et-d">
 							<label for="et-d">일당직</label>
 							<input type="radio" name="empType" value="M" id="et-M">
 							<label for="et-M">월급직</label>
 						</div>
-						<input type="text" class="inpt-underline" name="empWage">
 					</div>
 					<div>
-						<p>근무조 설정</p>
+						<span>급여</span>
+						<input type="text" class="inpt-outline" name="empWage" value="8350">
 					</div>
 					<div>
-						<p>적용 시작일</p>
+						<span>근무조 설정</span>
+						<%
+							if(sftList != null && !sftList.isEmpty()) {
+								for(int i = 0; i < sftList.size(); i++) {
+								ArrayList<String> days= new ArrayList<>(Arrays.asList(sftList.get(i).getSftDay().split(",")));
+						%>
+						<div class="temp <%=i == 0 ? "dropToggle" : "dropMenu" %> select">
+							<input type="hidden" name="sftId" value="<%=sftList.get(i).getSftId()%>">
+							<span><%=sftList.get(i).getSftName() %></span>
+							<div class="sftDay">
+								<span <%=days.contains("일") ? "class='work'" : "" %>>일</span>
+								<span <%=days.contains("월") ? "class='work'" : "" %>>월</span>
+								<span <%=days.contains("화") ? "class='work'" : "" %>>화</span>
+								<span <%=days.contains("수") ? "class='work'" : "" %>>수</span>
+								<span <%=days.contains("목") ? "class='work'" : "" %>>목</span>
+								<span <%=days.contains("금") ? "class='work'" : "" %>>금</span>
+								<span <%=days.contains("토") ? "class='work'" : "" %>>토</span>
+							</div>
+							<span><%=sftList.get(i).getSftOn() %></span>
+							<span><strong>~</strong></span>
+							<span><%=sftList.get(i).getSftOff() %></span>
+							<span><i class="fa fa-sort-desc" aria-hidden="true"></i></span>
+						</div>
+						
+						<%
+								}
+							}
+						%>
 					</div>
-					<button class="btn-outline btn_enrollEmp">저장</button>
+					<div>
+						<span>적용 시작일</span>
+						<input type="text" class="input-outline" name="empStart">
+					</div>
+					<button class="btn-outline btn_arvEmp">저장</button>
 				</div>
 			</div>
 		</div>

@@ -98,5 +98,21 @@ public class NotiDao {
 		}
 		return n;
 	}
+	
+	public int isReadNoti(Connection conn, String notiId) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("isReadNoti");
+		int r = -1;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, notiId);
+			r = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return r;
+	}
 
 }
