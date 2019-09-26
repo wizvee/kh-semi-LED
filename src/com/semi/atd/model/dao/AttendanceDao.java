@@ -46,7 +46,6 @@ public class AttendanceDao {
 				a.setSftId(rs.getString("SFT_ID"));
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));
-				a.setOverTime("OVERTIME");
 			}
 		} catch (SQLException b) {
 			b.printStackTrace();
