@@ -55,7 +55,7 @@ public class StatisticsDao {
 	public List<Statistics> forWageTable(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("forWageLine");
+		String sql=prop.getProperty("forWageTable");
 		List<Statistics>list=new ArrayList<Statistics>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -65,7 +65,7 @@ public class StatisticsDao {
 				Statistics s=new Statistics();
 				s.setEmpName(rs.getString(1));
 				s.setTotalWage(rs.getInt(2));
-				s.setWorkingNow(rs.getDate(1)!=null?false:true);
+				s.setWorkingNow(rs.getDate(3)!=null?false:true);
 				list.add(s);
 			}
 		}catch(SQLException e) {
@@ -74,6 +74,7 @@ public class StatisticsDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println(list.get(0));
 		return list;
 	}
 	
@@ -81,7 +82,7 @@ public class StatisticsDao {
 	public List<Statistics> forTimeLine(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("forWageLine");
+		String sql=prop.getProperty("forTimeLine");
 		List<Statistics>list=new ArrayList<Statistics>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -107,7 +108,7 @@ public class StatisticsDao {
 	public List<Statistics> forWorkingHour(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("forWageLine");
+		String sql=prop.getProperty("forWorkingHour");
 		List<Statistics>list=new ArrayList<Statistics>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -134,7 +135,7 @@ public class StatisticsDao {
 	public List<Statistics> forTotalEmp(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("forWageLine");
+		String sql=prop.getProperty("forTotalEmp");
 		List<Statistics>list=new ArrayList<Statistics>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -158,7 +159,7 @@ public class StatisticsDao {
 	public List<Statistics> forLateLeave(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("forWageLine");
+		String sql=prop.getProperty("forLateLeave");
 		List<Statistics>list=new ArrayList<Statistics>();
 		try {
 			pstmt=conn.prepareStatement(sql);
