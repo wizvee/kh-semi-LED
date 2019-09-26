@@ -1,9 +1,6 @@
 package com.semi.statistics.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.statistics.model.service.StatisticsService;
-import com.semi.statistics.model.vo.Statistics;
 import com.semi.userinfo.model.vo.UserInfo;
 
 /**
@@ -39,13 +34,13 @@ public class StatisticsServlet extends HttpServlet {
 		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
 		String busId = user.getSelectBusId();
 		System.out.println("사업장아이디: "+busId);
-		System.out.println("값은헬로우같은거 없다구!");
+		System.out.println("우우우");
 		
-		Map<String, List<Statistics>> dataMap = new HashMap<String, List<Statistics>>();
+//		Map<String, List<Statistics>> dataMap = new HashMap<String, List<Statistics>>();
 		
-		StatisticsService ss=new StatisticsService();
-		
-		dataMap=ss.getAllData(busId);
+//		StatisticsService ss=new StatisticsService();
+//		
+//		dataMap=ss.getAllData(busId);
 	
 		
 	request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
