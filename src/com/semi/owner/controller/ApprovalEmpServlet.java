@@ -57,18 +57,19 @@ public class ApprovalEmpServlet extends HttpServlet {
 		n.setTargetUserId(ui.getUserId());
 		n.setTargetBusId(busId);
 		n.setNotiType("approvalEmp");
-		n.setNotiMsg("종업원 " + e.getUserId() + " 입사 승인");
+		n.setNotiMsg(e.getUserId() + " 입사 승인");
 		n.setNotiUrl("owner/manageEmp.do");
 
 		Notification nNoti = new BusinessService().approvalEmp(busId, e, n);
 
 		if (nNoti != null) {
-			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-			ui.getNotiList().add(nNoti);
-			ui.setFlag("noti");
-			
-			session.setAttribute("userInfo", ui);
-			out.print(gs.toJson(ui));
+//			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//			ui.getNotiList().add(nNoti);
+//			ui.setFlag("noti");
+//			
+//			session.setAttribute("userInfo", ui);
+//			out.print(gs.toJson(ui));
+			out.print("임시ㅠㅠ");
 		} else
 			out.print("fail");
 	}

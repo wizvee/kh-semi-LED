@@ -88,7 +88,7 @@ public class NotiDao {
 				n.setNotiMsg(rs.getString("NOTI_MSG"));
 				n.setNotiUrl(rs.getString("NOTI_URL"));
 				n.setNotiDate(rs.getTimestamp("NOTI_DATE"));
-				n.setReaded(rs.getString("ISREADED").equals("T") ? true : false);
+				n.setReaded(rs.getString("READED").equals("T") ? true : false);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

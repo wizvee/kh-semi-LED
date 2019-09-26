@@ -54,17 +54,15 @@ class MngEmp {
       const empStart = selectElements("input[name='empStart']")[0].value;
 
       const data = `empId=${this.aprEmp}&empType=${empType}&empWage=${empWage}&sftId=${sftId}&empStart=${empStart}`;
-      console.log(data);
-
-      // this.getResult("/owner/ApprovalEmp.do", data, this.approvalEmp);
+      this.getResult("owner/ApprovalEmp.do", data, this.approvalEmp);
     });
   }
 
-  approvalEmp(respText) {
+  approvalEmp = respText => {
     if (respText != "fail") {
       this.aprEmp = "";
       location.href = "/p_190826_semi/owner/manageEmp.do";
-      socket.send(respText);
+      // socket.send(respText);
     }
   }
 
@@ -82,7 +80,7 @@ class MngEmp {
 
   getDate(time) {
     const year = time.getFullYear();
-    const month = time.getMonth();
+    const month = time.getMonth() < 10 ? `0${time.getMonth()}` : time.getMonth();
     const date = time.getDate();
     return `${year}/${month}/${date}`;
   }

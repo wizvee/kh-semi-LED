@@ -159,7 +159,7 @@ public class BusinessDao {
 			pstmt.setString(1, e.getEmpType());
 			pstmt.setInt(2, e.getEmpWage());
 			pstmt.setString(3, e.getSftId());
-			pstmt.setDate(4, (Date) e.getEmpStart());
+			pstmt.setDate(4, new java.sql.Date(e.getEmpStart().getTime()));
 			pstmt.setString(5, busId);
 			pstmt.setString(6, e.getUserId());
 			r = pstmt.executeUpdate();
