@@ -34,7 +34,7 @@ public class StatisticsServlet extends HttpServlet {
 		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
 		String busId = user.getSelectBusId();
 		System.out.println("사업장아이디: "+busId);
-		System.out.println("우우우");
+		System.out.println("qwe");
 		
 //		Map<String, List<Statistics>> dataMap = new HashMap<String, List<Statistics>>();
 		
