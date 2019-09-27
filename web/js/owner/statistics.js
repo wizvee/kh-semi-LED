@@ -22,11 +22,21 @@ function addComma(value) {
 
 
 
+
+
+
 // ============================== 직원 급여 월별 라인 그래프 ===================================
-		
+
 var chartYearList = document.querySelectorAll(".area_chart");
 var pathOne=json.forWageLine[0]; 
+var firstYear=2017;
 var yearNow=new Date().getFullYear();
+var firstChart=document.getElementById("firstChart");
+
+
+for(var y=firstYear;y<yearNow;y++){
+    firstChart.append('<div class="year">'+y+'>')
+}
 
 
 Array.from(chartYearList).forEach(function(e) {

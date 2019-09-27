@@ -30,9 +30,7 @@ public class StatisticsServlet extends HttpServlet {
 		
 		
 		
-//		request.setAttribute("year", );
-//		request.setAttribute("year", );
-//		request.setAttribute("year", );
+
 		request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
 	}
 
