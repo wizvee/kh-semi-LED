@@ -9,7 +9,7 @@
 
 <style type="text/css">
 .item .item_mypage {
-	grid-template-rows: repeat(4, 1fr);
+	grid-template-rows: repeat(1, 1fr);
 }
 
 .item .item_mypage .pic {
@@ -17,20 +17,25 @@
 	vertical-align: middle;
 }
 
-.item .item_mypage div .snb_profile {
+.item .item_mypage .pic .snb_profile {
 	width: 50px;
 	height: 50px;
 }
 
-.btn_pic, .btn_email, .btn_name, .btn_phone, .btn_password {
+.btn_pic, .btn_email, .btn_name, .btn_phone, .btn_password, .btn_quit{
 	text-align: left;
-	height: 70px;
+	height: 60px;
 	width: 100%;
 }
 
-.item .item_mypage_pw, .item .item_mypage_phone, .item .item_mypage_name, .item .item_mypage_email, .item .item_mypage_pic {
+.item .item_mypage_pic, .item .item_mypage_pw, .item .item_mypage_phone, .item .item_mypage_name, .item .item_mypage_email {
 	display: none;
 }
+
+/* .item .item_mypage_pic{
+	height: 80px;
+} */
+
 </style>
 
 <div id="content">
@@ -50,7 +55,7 @@
 				</button>
 				<div class="item_body item_mypage_pic">
 					<button id="btn_orgin_pic" class="btn-primary" onclick="return false;">기본 프로필로 변경</button>
-					<button id="btn_pic" class="btn-primary" onclick="return false;">새 프로필 변경</button>
+					<button id="btn_new_pic" class="btn-primary" onclick="fn_new_pic(); return false;">새 프로필 변경</button>
 				</div>
 
 				<button id="btn_email_view" class="btn_email" onclick="return false;">
@@ -100,20 +105,33 @@
 					<span data-placeholder="현재 비밀번호"> 
 					<i class="fa fa-unlock-alt" aria-hidden="true"> 현재 비밀번호 : </i>
 					</span> 
-					<input type="password" class="inpt-outline" name="pw" id="pw">
+					<input type="password" class="inpt-outline" name="pw" id="pw" placeholder="현재 비밀번호를 입력하세요.">
 					<div id="result_pw"></div>
 
-					<span data-placeholder="새 비밀번호"> <i class="fa fa-unlock-alt"
-						aria-hidden="true"> 새 비밀번호 : </i>
-					</span> <input type="password" class="inpt-outline" name="nPw" id="nPw">
+					<span data-placeholder="새 비밀번호"> 
+					<i class="fa fa-unlock-alt" aria-hidden="true"> 새 비밀번호 : </i>
+					</span> <input type="password" class="inpt-outline" name="nPw" id="nPw" placeholder="새 비밀번호를 입력하세요.">
 					<div id="result_nPw"></div>
 
-					<span data-placeholder="새 비밀번호 확인"> <i
-						class="fa fa-unlock-alt" aria-hidden="true"> 새 비밀번호 확인 : </i>
-					</span> <input type="password" class="inpt-outline" name="nkPw" id="nkPw">
+					<span data-placeholder="새 비밀번호 확인"> 
+					<i class="fa fa-unlock-alt" aria-hidden="true"> 새 비밀번호 확인 : </i>
+					</span> <input type="password" class="inpt-outline" name="nkPw" id="nkPw" placeholder="새 비밀번호 확인을 입력하세요.">
 					<div id="result_nkPw"></div>
 
 					<button id="btn_checkPw" class="btn-primary" onclick="return false;">비밀번호 변경</button>
+				</div>
+				
+				<button id="btn_quit_view" class="btn_quit" onclick="return false;">
+					<div>
+						<span>회원탈퇴 :</span>
+						<span><%=loginOwner.getJoinDate()%>회원 가입일</span>
+					</div>
+				</button>
+				<div class="item_body item_mypage_phone">
+					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 휴대폰 번호 : </i> 
+					<input type="text" class="inpt-outline" name="phone" id="phone" placeholder="-포함 입력하세요.">
+					<div id="result_phone"></div>
+					<button id="btn_phone" class="btn-primary" onclick="return false;"> 휴대폰 번호 변경</button>
 				</div>
 
 			</div>
@@ -121,11 +139,16 @@
 	</section>
 </div>
 
-<script>	
+<script>
+	
+	function fn_new_pic(){
+		console.log("gg");
+	}
+
 	$(function(){
 	 	$(".btn_pic").click(function(){
 	 		var area = document.querySelectorAll(".item_mypage_pic")[0];
-	 		if(area.style.display == "none")
+	 		if(area.style.display==""||area.style.display == "none")
 	 			area.style.display = "block";
 	 		else
 	 			area.style.display = "none";
@@ -135,7 +158,7 @@
 	$(function(){
 	 	$(".btn_email").click(function(){
 	 		var area = document.querySelectorAll(".item_mypage_email")[0];
-	 		if(area.style.display == "none")
+	 		if(area.style.display==""||area.style.display == "none")
 	 			area.style.display = "block";
 	 		else
 	 			area.style.display = "none";
@@ -145,7 +168,7 @@
 	$(function(){
 	 	$(".btn_name").click(function(){
 	 		var area = document.querySelectorAll(".item_mypage_name")[0];
-	 		if(area.style.display == "none")
+	 		if(area.style.display==""||area.style.display == "none")
 	 			area.style.display = "block";
 	 		else
 	 			area.style.display = "none";
@@ -155,7 +178,7 @@
 	$(function(){
 	 	$(".btn_phone").click(function(){
 	 		var area = document.querySelectorAll(".item_mypage_phone")[0];
-	 		if(area.style.display == "none")
+	 		if(area.style.display==""||area.style.display == "none")
 	 			area.style.display = "block";
 	 		else
 	 			area.style.display = "none";
@@ -165,7 +188,7 @@
 	$(function(){
 	 	$(".btn_password").click(function(){
 	 		var area = document.querySelectorAll(".item_mypage_pw")[0];
-	 		if(area.style.display == "none")
+	 		if(area.style.display==""||area.style.display == "none")
 	 			area.style.display = "block";
 	 		else
 	 			area.style.display = "none";
@@ -175,6 +198,7 @@
 	$(function(){
 		$('#btn_name').click(function(){
 			var area = document.querySelectorAll(".item_mypage_name")[0];
+			$("#result_name").html("");
 			if($('#name').val().trim().length<=0){
 				$("#result_name").html("이름을 입력하세요.").css("color","red");
 			}
@@ -188,6 +212,7 @@
 						} else{
 							area.style.display = "none";
 							$('#btn_name_view').find('div>span').last().html($('#name').val().trim());
+							$('.snb_own').find('nav>ul>li').eq(1).html($('#name').val().trim());
 						}
 					}
 				});
