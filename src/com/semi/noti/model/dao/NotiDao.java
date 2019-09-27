@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Properties;
 
 import com.semi.noti.model.vo.Notification;
@@ -99,7 +101,7 @@ public class NotiDao {
 		}
 		return n;
 	}
-	
+
 	public int isReadNoti(Connection conn, String notiId) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("isReadNoti");
@@ -114,6 +116,28 @@ public class NotiDao {
 			close(pstmt);
 		}
 		return r;
+	}
+
+	public HashSet<String> getAlertTarget(Connection conn, String busId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("getAlertTarget");
+		HashSet<String> set = new HashSet<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				set.add(rs.getString("USER_ID"));
+				set.add(rs.getString("TARGET_USER_ID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return set;
 	}
 
 }

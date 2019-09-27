@@ -61,10 +61,10 @@ class MngEmp {
   approvalEmp = respText => {
     if (respText != "fail") {
       this.aprEmp = "";
-      // location.href = "/p_190826_semi/owner/manageEmp.do";
       socket.send(respText);
+      location.href = "/p_190826_semi/owner/manageEmp.do";
     }
-  }
+  };
 
   rejectEmp(respText) {}
 
@@ -80,14 +80,11 @@ class MngEmp {
 
   getDate(time) {
     const year = time.getFullYear();
-    const month = time.getMonth() < 10 ? `0${time.getMonth()}` : time.getMonth();
+    const month =
+      time.getMonth() < 10 ? `0${time.getMonth() + 1}` : time.getMonth() + 1;
     const date = time.getDate();
     return `${year}/${month}/${date}`;
   }
 }
-
-// function selectElements(name) {
-//   return Array.from(document.querySelectorAll(name));
-// }
 
 const mngEmp = new MngEmp();

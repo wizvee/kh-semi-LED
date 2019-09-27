@@ -42,9 +42,9 @@ public class UserInfo {
 
 		HashMap<String, Business> busMap = null;
 		if (userType.equals("O"))
-			busMap = new EmpService().getBusMap(userId);
-		else
 			busMap = new OwnerService().getBusMap(userId);
+		else
+			busMap = new EmpService().getBusMap(userId);
 		this.setBusMap(busMap);
 
 		if (!busMap.isEmpty()) {

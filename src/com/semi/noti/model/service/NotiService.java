@@ -6,6 +6,8 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.semi.noti.model.dao.NotiDao;
 import com.semi.noti.model.vo.Notification;
@@ -34,6 +36,13 @@ public class NotiService {
 			rollback(conn);
 		close(conn);
 		return r;
+	}
+	
+	public HashSet<String> getAlertTarget(String busId) {
+		Connection conn = getConnection();
+		HashSet<String> set = dao.getAlertTarget(conn, busId);
+		close(conn);
+		return set;
 	}
 
 }
