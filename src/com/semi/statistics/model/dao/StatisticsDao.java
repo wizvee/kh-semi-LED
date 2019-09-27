@@ -31,11 +31,9 @@ public class StatisticsDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("forWageLine");
-		System.out.println(sql);
 		List<Statistics>list=new ArrayList<Statistics>();
 		Statistics st= new Statistics();
 		List<StatisticsMonth>lists=new ArrayList<StatisticsMonth>();
-		System.out.println("여기까지 오나요?");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
@@ -126,18 +124,31 @@ public class StatisticsDao {
 		ResultSet rs=null;
 		String sql=prop.getProperty("forWorkingHour");
 		List<Statistics>list=new ArrayList<Statistics>();
+		Statistics st= new Statistics();
+		List<StatisticsMonth>lists=new ArrayList<StatisticsMonth>();
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Statistics s=new Statistics();
-				s.setHourlyWorkedHours(rs.getInt(1));
-				s.setDailyWorkedHours(rs.getInt(2));
-				s.setMonthlyWorkedHours(rs.getInt(3));
-				s.setTotalWorkedHours(rs.getInt(4));
-				list.add(s);
+				StatisticsMonth s=new StatisticsMonth();
+				s.setYear(rs.getInt(1));
+				s.setJan(rs.getInt(2));
+				s.setFab(rs.getInt(3));
+				s.setMar(rs.getInt(4));
+				s.setApr(rs.getInt(5));
+				s.setMay(rs.getInt(6));
+				s.setJun(rs.getInt(7));
+				s.setJuly(rs.getInt(8));
+				s.setAug(rs.getInt(9));
+				s.setSep(rs.getInt(10));
+				s.setOct(rs.getInt(11));
+				s.setNov(rs.getInt(12));
+				s.setDec(rs.getInt(13));
+				lists.add(s);
 			}
+			st.setYears(lists);
+			list.add(st);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
