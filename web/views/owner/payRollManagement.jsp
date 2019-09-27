@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ page
+	import="com.semi.prm.model.vo.PayRollManagement,java.util.List"%>
+<%
+	int totalPay = 0;
+	List<PayRollManagement> list = (List) request.getAttribute("list");
+	for(PayRollManagement p : list) {
+		totalPay += p.getPayRoll();
+	}
+%>
 <style>
 
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,500);
@@ -363,6 +372,7 @@ table>caption>tbody>tr td{
 				<table>
 				   <caption>Monthly_Wage For Three-Month</caption>
 				   	     <tbody>
+				   	     <%for(PayRollManagement p : list) { %>
 					  <tr> 
 						 <td>이름</td>
 						<td>급여 지급액</td>
@@ -371,14 +381,15 @@ table>caption>tbody>tr td{
 						  <td>조퇴</td>
 					  </tr>
 					  <tr> 
-						 <td>신지섭</td>
-						<td> 여기에 수령금액 적용하고 %값 밑에 width
-						<span class='dos' data-valor='65'></span></td>
-						 <td>345</td>
-						   <td>지각</td>
-						  <td>조퇴</td>
+						 <td><%=p.getEmpName() %></td>
+						<td><%=p.getPayRoll() %>
+						<span class='dos' data-valor='65' style="width:<%=(p.getPayRoll() / totalPay)*100%>%"></span></td>
+						 <td><%=p.getWorkTime() %></td>
+						  <td><%=p.getLateCount() %></td>
+						  <td><%=p.getEarlyCount() %></td>
 					  </tr>
-				
+					  
+				<%} %>
 				   </tbody>
 				</table>      
 					</div>
