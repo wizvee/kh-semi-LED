@@ -29,6 +29,10 @@ public class StatisticsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		
+//		request.setAttribute("year", );
+//		request.setAttribute("year", );
+//		request.setAttribute("year", );
 		request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
 	}
 

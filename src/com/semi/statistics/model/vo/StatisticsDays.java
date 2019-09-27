@@ -22,7 +22,6 @@ public class StatisticsDays {
 	}
 
 
-
 	public String getYear() {
 		return year;
 	}
