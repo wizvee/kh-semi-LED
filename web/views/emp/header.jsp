@@ -36,13 +36,13 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
 	<!-- JavaScript Libraries -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/modules.js"></script>
 </head>
 
 <body>
 	<script>
 		const userInfo = <%=parsingInfo %>;
 	</script>
+	<script src="<%=request.getContextPath()%>/dist/modules.js"></script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /> <label for="ck_snb"></label>
 		<!-- 사이드 메뉴 -->
