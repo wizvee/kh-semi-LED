@@ -61,8 +61,8 @@ class MngEmp {
   approvalEmp = respText => {
     if (respText != "fail") {
       this.aprEmp = "";
-      location.href = "/p_190826_semi/owner/manageEmp.do";
-      // socket.send(respText);
+      // location.href = "/p_190826_semi/owner/manageEmp.do";
+      socket.send(respText);
     }
   }
 

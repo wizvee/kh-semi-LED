@@ -1,16 +1,3 @@
-const dropToggle = selectElements(".dropdown_toggle");
-dropToggle.map(e => {
-  e.addEventListener("click", ({ target }) => {
-    const menu = target.nextElementSibling;
-    if (menu.style.display == "none") menu.style.display = "block";
-    else menu.style.display = "none";
-  });
-});
-
-$(".fa-sign-out").on("click", function() {
-  location.href = "/p_190826_semi/logout.do";
-});
-
 class Alert {
   constructor() {
     this.list = userInfo.notiList;
@@ -100,4 +87,21 @@ document.querySelector("#btn_alert").addEventListener("click", () => {
   alert.viewNoti();
   const target = document.querySelector("#alert");
   target.classList.toggle("view");
+});
+
+
+
+// OLD????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+const dropToggle = selectElements(".dropdown_toggle");
+dropToggle.map(e => {
+  e.addEventListener("click", ({ target }) => {
+    const menu = target.nextElementSibling;
+    if (menu.style.display == "none") menu.style.display = "block";
+    else menu.style.display = "none";
+  });
+});
+
+$(".fa-sign-out").on("click", function() {
+  location.href = "/p_190826_semi/logout.do";
 });

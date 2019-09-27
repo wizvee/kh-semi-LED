@@ -88,7 +88,8 @@ public class NotiDao {
 				n.setNotiMsg(rs.getString("NOTI_MSG"));
 				n.setNotiUrl(rs.getString("NOTI_URL"));
 				n.setNotiDate(rs.getTimestamp("NOTI_DATE"));
-				n.setReaded(rs.getString("READED").equals("T") ? true : false);
+				n.setUserName(rs.getString("USER_NAME"));
+				n.setProfilePic(rs.getString("PROFILE_PIC"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
