@@ -271,12 +271,7 @@ java.util.List"%>
       -webkit-transform: translate(-50%, -50%);
     }
 </style>
-<script type="text/javascript">
 
-console.log("jsp 테스트");
-console.log(<%=list.get(0).getEmpEnd()%>);
-console.log(<%=list.get(4).getEmpEnd()%>);
-</script>
 
 <div id="content">
 
