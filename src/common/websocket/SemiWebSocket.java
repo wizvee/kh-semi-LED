@@ -3,7 +3,7 @@ package common.websocket;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.Set;
 
 import javax.websocket.OnMessage;
 import javax.websocket.Session;
@@ -24,6 +24,7 @@ public class SemiWebSocket {
 			users.put(userInfo.getUserId(), session);
 			System.out.println(userInfo.getUserId());
 		} else if(flag.equals("N")) {
+			System.out.println("??");
 			HashSet<String> userSet = new NotiService().getAlertTarget(userInfo.getSelectBusId());
 			for(String id : userSet) {
 				if(users.get(id) != null)
@@ -32,6 +33,16 @@ public class SemiWebSocket {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+			}
+		} else if(flag.equals("T")) {
+			Set<String> id = users.keySet();
+			for(String s : id) {
+				try {
+					users.get(s).getBasicRemote().sendText("T");
+					System.out.println(s);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
