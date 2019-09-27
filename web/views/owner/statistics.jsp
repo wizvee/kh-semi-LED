@@ -36,9 +36,7 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 					<div class="columns">
 						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
 						<div id="firstChart">
-							<div class="area_chart"  style="border: 1px solid blue">2017</div>
-							<div class="area_chart"  style="border: 1px solid blue">2018</div>
-							<div class="area_chart"  style="border: 1px solid blue">2019</div>
+							<div id="firstChartList"></div>
 							<div id="area_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>	
 						</div>	
 						<br>
@@ -56,6 +54,6 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 		</div>
 	</section>
 </div>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/owner/statistics.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/statistics.js"></script>
 
 <%@ include file="footer.jsp"%>
