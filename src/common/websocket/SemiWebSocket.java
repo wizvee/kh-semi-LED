@@ -1,30 +1,39 @@
 package common.websocket;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import com.google.gson.Gson;
+import com.semi.noti.model.service.NotiService;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @ServerEndpoint(value = "/ws", encoders = { UserInfoEncoder.class }, decoders = { UserInfoDecoder.class })
 public class SemiWebSocket {
 
-	@OnOpen
-	public void onOpen(Session session) {
-		try {
-			session.getBasicRemote().sendText("zz");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	private HashMap<String, Session> users = new HashMap<>();
 
 	@OnMessage
 	public void onMessage(Session session, UserInfo userInfo) {
-		System.out.println(userInfo.getFlag());
+		String flag = userInfo.getFlag();
+		if (flag.equals("S")) {
+			users.put(userInfo.getUserId(), session);
+			System.out.println(userInfo.getUserId());
+		} else if(flag.equals("N")) {
+			HashSet<String> userSet = new NotiService().getAlertTarget(userInfo.getSelectBusId());
+			for(String id : userSet) {
+				if(users.get(id) != null)
+					try {
+						users.get(id).getBasicRemote().sendText("N");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+			}
+		}
 	}
 
 }
