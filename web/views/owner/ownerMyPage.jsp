@@ -36,6 +36,9 @@
 	height: 80px;
 } */
 
+#profile {
+	display:none;
+}
 </style>
 
 <div id="content">
@@ -55,7 +58,8 @@
 				</button>
 				<div class="item_body item_mypage_pic">
 					<button id="btn_orgin_pic" class="btn-primary" onclick="return false;">기본 프로필로 변경</button>
-					<button id="btn_new_pic" class="btn-primary" onclick="fn_new_pic(); return false;">새 프로필 변경</button>
+					<label id="btn_new_pic" class="btn-primary" for="profile">새 프로필 변경</label>
+					<input type="file" name="profile" id="profile">
 				</div>
 
 				<button id="btn_email_view" class="btn_email" onclick="return false;">
@@ -140,10 +144,22 @@
 </div>
 
 <script>
-	
-	function fn_new_pic(){
-		console.log("gg");
-	}
+	$(function(){
+		$("#profile").change(function(){
+			var fd = new FormDate();
+			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/ajaxproFile.do",
+				data:fd,
+				type:"post",
+				processData:false,
+				contentType:false,
+				success:function(data){
+					console.log(data);
+				}
+			});
+		});
+	});
 
 	$(function(){
 	 	$(".btn_pic").click(function(){
