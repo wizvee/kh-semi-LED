@@ -44,5 +44,5 @@
 		</div>
 	</section>
 </div>
-<script src="<%=request.getContextPath()%>/js/owner/insertBus.js"></script>
+<script src="<%=request.getContextPath()%>/dist/owner/insertBus.js"></script>
 <%@ include file="footer.jsp"%>

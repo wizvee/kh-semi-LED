@@ -21,5 +21,5 @@
 		</div>
 	</section>
 </div>
-<script src="<%=request.getContextPath()%>/js/emp/addBus.js"></script>
+<script src="<%=request.getContextPath()%>/dist/emp/addBus.js"></script>
 <%@ include file="footer.jsp"%>

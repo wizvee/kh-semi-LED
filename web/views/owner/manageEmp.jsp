@@ -116,6 +116,6 @@
 			</div>
 		</div>
 	</section>
-	<script src="<%=request.getContextPath()%>/js/owner/manageEmp.js"></script>
+	<script src="<%=request.getContextPath()%>/dist/owner/manageEmp.js"></script>
 </div>
 <%@ include file="footer.jsp"%>
