@@ -160,8 +160,7 @@
   <!-- //container -->
   <!-- JavaScript Libraries -->
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="dist/index.js"></script>
 </body>
 
 </html>

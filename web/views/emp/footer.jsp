@@ -5,8 +5,8 @@
 <!-- //container -->
 </div>
 <!-- JavaScript Libraries -->
-<script src="<%=request.getContextPath()%>/js/common.js"></script>
-<script src="<%=request.getContextPath()%>/js/chatting.js"></script>
+<script src="<%=request.getContextPath()%>/dist/common.js"></script>
+<!-- <script src="<%=request.getContextPath()%>/js/chatting.js"></script> -->
 </body>
 
 </html>

@@ -112,6 +112,8 @@ public class BusinessDao {
 				e.setSftId(rs.getString("SFT_ID"));
 				e.setUserName(rs.getString("USER_NAME"));
 				e.setProfilePic(rs.getString("PROFILE_PIC"));
+				e.setEmpStart(rs.getDate("EMP_START"));
+				e.setEmpEnd(rs.getDate("EMP_END"));
 				list.add(e);
 			}
 		} catch (SQLException e) {

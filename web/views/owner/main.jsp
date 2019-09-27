@@ -7,9 +7,15 @@
 			<h2>제목</h2>
 		</div>
 		<div class="item_body">
-			내용!
+			<button id="test">테스트</button>
 		</div>
 	</section>
-
+	
+	<script>
+		document.querySelector("#test").addEventListener("click", () => {
+			userInfo.flag = "T";
+			socket.send(JSON.stringify(userInfo));
+		})
+	</script>
 </div>
 <%@ include file="footer.jsp"%>
