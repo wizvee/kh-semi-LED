@@ -1,86 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page
+	import="com.semi.statistics.model.vo.Statistics,
+	java.util.List"%>
 <%@ include file="header.jsp"%>
+<%
+Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.getAttribute("dataMap");
+%>
 <!-- 구글 AJAX API 불러오기 -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-	google.charts.load('current', {'packages':['corechart']});
+var json
 
-	// google.charts.setOnLoadCallback(WageWorkers);
-
-	// // Callback that draws the pie chart for Sarah's pizza.
-	// function WageWorkers() {
-
-	//   // Create the data table for Sarah's pizza.
-	//   var data = new google.visualization.DataTable();
-	//   data.addColumn('string', '근무자');
-	//   data.addColumn('number', '월 급여');
-	//   data.addRows([
-	// 	['강동원', 2100000],
-	// 	['한예슬', 800000],
-	// 	['손예진', 880600],
-	// 	['신예은', 1900000],
-	// 	['브래드피트', 95000]
-	//   ]);
-
-	//   // Set options for Sarah's pie chart.
-	//   var options = {title:'월별 근무자 급여 비율',
-	// 				 width:400,
-	// 				 height:300,
-	// 				 animation:{
-	// 					easing:'inAndOut',
-	// 					startup:true,
-	// 					duration:3000
-	// 					}
-	// 				};
-
-	//   // Instantiate and draw the chart for Sarah's pizza.
-	//   var chart = new google.visualization.PieChart(document.getElementById('worker_wage_div'));
-	//   chart.draw(data, options);
-	// }
+$.ajax({url: "/p_190826_semi/owner/requestStatistics.do",
+	type: "post", 
+	async: false, 
+    success: function(data){
+    	json = JSON.parse(data);
+    	
+    	
+    	
+    	
+    	
+    },
+    error: function(data) {
+        alert('데이터 안넘어 옴!');
+    } 
+});
 
 
-// ============================== 직원 급여 추이 라인 그래프현재근무자 ===================================
-google.charts.setOnLoadCallback(drawChartLine);
 
-function drawChartLine() {
-  var data = google.visualization.arrayToDataTable([
-	['월', '시급', '일당', '월급', '전체'],
-	['1월',  0,      0, 	0,	0],
-	['2월',  0,      0, 	510,	0+0+510],
-	['3월',  250,       0, 	550,	250+0+550],
-	['4월',  200,      0, 	600,	200+0+800],
-	['5월',  350,      100, 	500,	350+100+500],
-	['6월',  450,      130, 	510,	450+130+510],
-	['7월',  250,       40, 	550,	250+40+550],
-	['8월',  200,      80, 	600,	200+80+800],
-	['9월',  350,      100, 	500,	350+100+500],
-	['10월',  450,      130, 	510,	450+130+510],
-	['11월',  250,       40, 	550,	250+40+550],
-	['12월',  200,      80, 	600,	200+80+800]
-  ]);
 
-  var options = {
-	title: '월별 급여/일급/월급/전체 인권비',
-	curveType: 'function',
-	chartArea: {
-				width: '70%',
-				height:'70%'
-			} ,
-	vAxis: {title: '만원'},
-    hAxis: {title: '월별'},
-	legend: { position: 'bottom' },
-	animation:{
-			easing:'inAndOut',
-			startup:true,
-			duration:3000
-		}
-  };
-
-  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-  chart.draw(data, options);
+function addComma(value) {
+    return Number(value).toLocaleString('en').split(".")[0];
 }
+
+
+
+출처: https://lemontia.tistory.com/422 [안녕하세요]
+
+
+
+
+// ============================== 직원 급여 월별 라인 그래프 ===================================
+
+	
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+			
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['월', '급여지출'],
+          ['1월',  1000],
+          ['2월',  1170],
+          ['3월',  660],
+          ['4월',  1020],
+          ['5월',  900],
+          ['6월',  1030],
+          ['7월',  1200],
+          ['8월',  1400],
+          ['9월',  1600],
+          ['10월',  1430],
+          ['11월',  1230],
+          ['12월',  830]
+        ]);
+
+        var options = {
+          title: '월별 직원 급여 지출',
+          hAxis: {title: '월별',  titleTextStyle: {color: '#333'}},
+          vAxis: {title: '만원', minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('area_chart'));
+        chart.draw(data, options);
+      }
 
 
 // =============================== 알바생별 받은 총 인권비 테이블차트 ==============================
@@ -93,37 +86,13 @@ google.charts.load('current', {'packages':['table']});
         data.addColumn('string', '이름');
         data.addColumn('number', '받아간 총 급여');
         data.addColumn('boolean', '현재 근무여부');
-        data.addRows([
-          ['강동원',  {v: 0, f: '3,000,000'}, true],
-          ['조인성',   {v:0,   f: '8,000,000'},  false],
-          ['한예슬', {v: 12500, f: '400,000'}, false],
-		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
-		  ['강동원',  {v: 10000, f: '590,000'}, true],
-          ['조인성',   {v:8000,   f: '8,000,000'},  false],
-          ['한예슬', {v: 12500, f: '400,000'}, false],
-		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
-		  ['강동원',  {v: 10000, f: '590,000'}, true],
-          ['조인성',   {v:8000,   f: '8,000,000'},  false],
-          ['한예슬', {v: 12500, f: '400,000'}, false],
-		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
-		  ['강동원',  {v: 10000, f: '590,000'}, true],
-          ['조인성',   {v:8000,   f: '8,000,000'},  false],
-          ['한예슬', {v: 12500, f: '400,000'}, false],
-		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
-		  ['한예슬', {v: 12500, f: '400,000'}, false],
-		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
-		  ['강동원',  {v: 10000, f: '590,000'}, true],
-          ['조인성',   {v:8000,   f: '8,000,000'},  false],
-          ['한예슬', {v: 12500, f: '400,000'}, false],
-		  ['손예진',   {v: 7000,  f: '7,000,000'},  true],
-		  ['강동원',  {v: 10000, f: '590,000'}, true],
-          ['조인성',   {v:8000,   f: '8,000,000'},  false],
-          ['한예슬', {v: 12500, f: '400,000'}, false],
-		  ['손예진',   {v: 7000,  f: '7,000,000'},  true]
-		]);
+    
+        for(i in json.forWageTable){
+        	data.addRow([json.forWageTable[i].empName, {v:0,f: String(addComma(json.forWageTable[i].totalWage))+"원"}, json.forWageTable[i].workingNow])
+        } 
 		
 		var options={
-			title:'직원별 받아간 총 인권비',
+			title:'직원별 받아간 총 급여',
 			chartArea: {
 				width: '80%',
 				height:'80%'
@@ -140,6 +109,7 @@ google.charts.load('current', {'packages':['table']});
 
 google.charts.load("current", {packages:["timeline"]});
   google.charts.setOnLoadCallback(drawTimeLine);
+  
   function drawTimeLine() {
     var container = document.getElementById('time_line');
     var chart = new google.visualization.Timeline(container);
@@ -315,6 +285,8 @@ function drawMultSeries() {
 
 
 
+
+
 </script>
 
 
@@ -337,10 +309,13 @@ function drawMultSeries() {
 				<div class="statistics_list">월별 총 지각 조퇴 바 차트</div>
 			</div>
 			<br>
+			<% if (dataMap!=null){ %>
+			<div><%=dataMap.get("forWageTable").get(0).getEmpName()%></div>
+			<% } %>
 			<div class="statistics_view">
 					<div class="columns">
-						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->	
-						<div id="curve_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>
+						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
+						<div id="area_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>	
 						<br>
 						<div id="table_div" style="width:700px ; height: 500px; border: 1px solid red"></div>
 						<br>

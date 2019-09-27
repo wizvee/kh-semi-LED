@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.userinfo.model.vo.UserInfo;
-
 /**
  * Servlet implementation class StatisticsServlet
  */
@@ -29,21 +27,9 @@ public class StatisticsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		// 해당 owner 의 userId 와 선택한 사업장 busId 값을 불러와서 저장
-		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
-		String busId = user.getSelectBusId();
-		System.out.println("사업장아이디: "+busId);
-		System.out.println("qwe");
 		
-//		Map<String, List<Statistics>> dataMap = new HashMap<String, List<Statistics>>();
 		
-//		StatisticsService ss=new StatisticsService();
-//		
-//		dataMap=ss.getAllData(busId);
-	
-		
-	request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/owner/statistics.jsp").forward(request, response);
 	}
 
 	/**
