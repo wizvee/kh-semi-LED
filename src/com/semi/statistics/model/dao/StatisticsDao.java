@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.semi.statistics.model.vo.Statistics;
+import com.semi.statistics.model.vo.StatisticsDays;
 
 public class StatisticsDao {
 	
@@ -31,17 +32,22 @@ public class StatisticsDao {
 		ResultSet rs=null;
 		String sql=prop.getProperty("forWageLine");
 		List<Statistics>list=new ArrayList<Statistics>();
+		Statistics st= new Statistics();
+		List<StatisticsDays>lists=new ArrayList<StatisticsDays>();
+		System.out.println("여기까지 오나요?");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Statistics s=new Statistics();
-				s.setHourlyWage(rs.getInt(1));
-				s.setDailyWage(rs.getInt(2));
-				s.setMonthlyWage(rs.getInt(3));
-				list.add(s);
+				StatisticsDays s=new StatisticsDays();
+				s.setYear(rs.getString(1));
+				s.setMonth(rs.getString(2));
+				s.setSumWage(rs.getInt(3));
+				lists.add(s);
 			}
+			st.setAllDays(lists);
+			list.add(st);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

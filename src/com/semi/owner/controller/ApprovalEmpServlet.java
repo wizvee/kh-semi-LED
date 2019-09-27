@@ -37,7 +37,7 @@ public class ApprovalEmpServlet extends HttpServlet {
 		String busId = ui.getSelectBusId();
 		
 		String from =request.getParameter("empStart");
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy/mm/dd");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
 		Date empStart = null;
 		try {
 			empStart = sf.parse(from);
@@ -53,8 +53,8 @@ public class ApprovalEmpServlet extends HttpServlet {
 		e.setEmpStart(empStart);
 
 		Notification n = new Notification();
-		n.setUserId(e.getUserId());
-		n.setTargetUserId(ui.getUserId());
+		n.setUserId(ui.getUserId());
+		n.setTargetUserId(e.getUserId());
 		n.setTargetBusId(busId);
 		n.setNotiType("approvalEmp");
 		n.setNotiMsg(e.getUserId() + " 입사 승인");

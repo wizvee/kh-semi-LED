@@ -55,6 +55,7 @@ public class ForwardOServlet extends HttpServlet {
 		}
 
 		userInfo.getParameters("O");
+		userInfo.setFlag("S");
 		session.setAttribute("userInfo", userInfo);
 		response.sendRedirect(request.getContextPath() + url);
 	}
