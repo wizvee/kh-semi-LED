@@ -6,7 +6,7 @@
   grid-template-rows: 35px 1fr;
 }
 
-.calendar_header{
+.calendar_header {
   @include grid;
   grid-template-columns: 25px 1fr 25px;
   font-size: 90%;
@@ -17,10 +17,19 @@
   grid-template-columns: repeat(7, 1fr);
 
   div {
-    height: 35px;
     font-size: 90%;
+    text-align: center;
+    box-sizing: border-box;
+    
+    &.week {
+      margin-bottom: 20px;
+      height: 35px;
+      border-bottom: 1px solid $border-default;
+      line-height: 35px;
+    }
 
     &.date {
+      height: 50px;
       font-size: 85%;
     }
 

@@ -16,6 +16,19 @@
 		</div>
 	</section>
 
+	<section class="item">
+		<div class="item_header">
+			<h2>일정 추가</h2>
+		</div>
+		<div class="item_body">
+			<input type="text" name="" class="inpt-outline">
+			<input type="text" name="" class="inpt-outline">
+			<input type="text" name="" class="inpt-outline">
+			<textarea name="" class="inpt-outline" cols="30" rows="10"></textarea>
+			<button class="btn-primary">할 일 추가</button>
+		</div>
+	</section>
+
 </div>
 <script src="<%=request.getContextPath()%>/dist/calendar.js"></script>
 <%@ include file="footer.jsp"%>
