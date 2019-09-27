@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.bus.model.service.BusinessService;
-import com.semi.emp.model.vo.Employee;
+import com.semi.prm.model.Service.PayRollManagementService;
+import com.semi.prm.model.vo.PayRollManagement;
 import com.semi.userinfo.model.vo.UserInfo;
 
 /**
@@ -32,18 +32,15 @@ public class PayRollManagementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-	
 	
 		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
 		String busId = user.getSelectBusId();
-		
-		List<Employee> empList = new BusinessService().getEmpList(busId);
+		String type = "H";
+		int length = 0;
+			
+			List <PayRollManagement> prmList = new PayRollManagementService().makePayRollList(busId, type, length);
 
-	
-	
-	
+			request.setAttribute("list", prmList);
 	request.getRequestDispatcher("/views/owner/payRollManagement.jsp").forward(request, response);
 	
 	}
