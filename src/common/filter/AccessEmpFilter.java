@@ -29,8 +29,12 @@ public class AccessEmpFilter implements Filter {
 			throws IOException, ServletException {
 //		HttpServletRequest req = (HttpServletRequest) request;
 //		HttpSession session = req.getSession();
+//		
+//		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//		userInfo.getParameters("E");
+//		session.setAttribute("userInfo", userInfo);
 
-		System.out.println("emp:");
+//		System.out.println("emp:UserInfo갱신");
 		
 		chain.doFilter(request, response);
 	}

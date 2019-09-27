@@ -63,13 +63,12 @@ public class ApprovalEmpServlet extends HttpServlet {
 		Notification nNoti = new BusinessService().approvalEmp(busId, e, n);
 
 		if (nNoti != null) {
-//			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-//			ui.getNotiList().add(nNoti);
-//			ui.setFlag("noti");
-//			
-//			session.setAttribute("userInfo", ui);
-//			out.print(gs.toJson(ui));
-			out.print("임시ㅠㅠ");
+			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			ui.getNotiList().add(nNoti);
+			ui.setFlag("N");
+
+			session.setAttribute("userInfo", ui);
+			out.print(gs.toJson(ui));
 		} else
 			out.print("fail");
 	}
