@@ -23,7 +23,7 @@ public class PayRollManagementDao {
 	
 	public PayRollManagementDao() {
 		// TODO Auto-generated constructor stub
-		String path = OwnerDao.class.getResource("/sql/user/prm-query.properties").getPath();
+		String path = OwnerDao.class.getResource("/sql/payRollManagement/prm-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (FileNotFoundException e) {

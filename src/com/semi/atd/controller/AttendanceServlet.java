@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.semi.atd.model.Service.AttendanceService;
 import com.semi.atd.model.vo.Attendance;
@@ -38,8 +39,10 @@ public class AttendanceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
-		String busId = user.getSelectBusId();
+		HttpSession session = request.getSession();
+
+		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
+		String busId = ui.getSelectBusId();
 		
 		List<Employee> empList = new BusinessService().getEmpList(busId);
 		List<Shift> sftList = new ShiftService().getSftList(busId);
@@ -48,16 +51,21 @@ public class AttendanceServlet extends HttpServlet {
 				if(e.getSftId()!=null) {
 				if(e.getSftId().equals(s.getSftId())) {
 					e.setShift(s);
+
+					Attendance atd = new AttendanceService().setAttendance(e, busId);
+					if(e.getShift() != null && atd.getAtdOn() != null) {
+						if(atd.getAtdOff() == null) {
+							atd.setTimeforLong(atd.getAtdOn(), e.getShift().getSftOff(), e.getShift().getSftOn(), e.getShift().getSftOff());
+						}else {
+							atd.setTimeforLong(atd.getAtdOn(), atd.getAtdOff(), e.getShift().getSftOn(), e.getShift().getSftOff());
+						}
+						
+						e.setAttendance(atd);
 				}
 		}
 		}
-			Attendance atd = new AttendanceService().setAttendance(e, busId);
-			if(e.getShift() != null) {
-				atd.setTimeforLong(atd.getAtdOn(), atd.getAtdOff(), e.getShift().getSftOn(), e.getShift().getSftOff());
-				e.setAttendance(atd);
 				
 				
-		
 			}
 			
 		}

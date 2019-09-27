@@ -144,7 +144,7 @@ public class Attendance {
 	public void setTimeforLong(String stAtdT, String enAtdT, String stSftT, String enSftT) {
 
 		Date enSftD = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 		Calendar cal = Calendar.getInstance();
 
 		String[] stSfts = stSftT.split(":");
