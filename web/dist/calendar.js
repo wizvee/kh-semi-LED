@@ -44,6 +44,7 @@ function () {
       var week = ["일", "월", "화", "수", "목", "금", "토"];
       week.map(function (w) {
         var cell = document.createElement("div");
+        cell.setAttribute("class", "week");
         cell.textContent = w;
 
         _this2.body.appendChild(cell);
