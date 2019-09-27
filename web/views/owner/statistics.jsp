@@ -17,11 +17,6 @@ $.ajax({url: "/p_190826_semi/owner/requestStatistics.do",
 	async: false, 
     success: function(data){
     	json = JSON.parse(data);
-    	
-    	
-    	
-    	
-    	
     },
     error: function(data) {
         alert('데이터 안넘어 옴!');
@@ -37,17 +32,29 @@ function addComma(value) {
 
 
 
-출처: https://lemontia.tistory.com/422 [안녕하세요]
+
 
 
 
 
 // ============================== 직원 급여 월별 라인 그래프 ===================================
 
+		var pathOne=json.forWageLine[0]; 
+/* 		console.log(pathOne); */
+		console.log(pathOne.allDays[0].year);
 	
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 			
+  			for(i in pathOne){
+     		console.log(pathOne.allDays[i].year); 
+			} 
+     	
+/*      	for(var i=0;i<pathOne.size;i++){
+     		console.log(pathOne.getAllDays[i]);
+     	} */
+     	
+      
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['월', '급여지출'],

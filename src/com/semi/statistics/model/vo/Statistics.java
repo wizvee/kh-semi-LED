@@ -1,6 +1,7 @@
 package com.semi.statistics.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Statistics {
 	
@@ -18,16 +19,17 @@ public class Statistics {
 	private int earlyLeaveDays;
 	private int empCount;
 	
+	private List<StatisticsDays> allDays;
+	
+	
 	public Statistics() {
 		//TODO Auto-generated constructor stub
 	}
 
 	
-
-	public Statistics(int totalWage, String date, String empName,
-			boolean workingNow, java.sql.Date empStart, java.sql.Date empEnd, int hourlyWorkedHours,
-			int dailyWorkedHours, int monthlyWorkedHours, int totalWorkedHours, int lateDays, int earlyLeaveDays, 
-			int empCount) {
+	public Statistics(int totalWage, String date, String empName, boolean workingNow, java.sql.Date empStart,
+			java.sql.Date empEnd, int hourlyWorkedHours, int dailyWorkedHours, int monthlyWorkedHours,
+			int totalWorkedHours, int lateDays, int earlyLeaveDays, int empCount, List<StatisticsDays> allDays) {
 		super();
 		this.totalWage = totalWage;
 		Date = date;
@@ -41,11 +43,9 @@ public class Statistics {
 		this.totalWorkedHours = totalWorkedHours;
 		this.lateDays = lateDays;
 		this.earlyLeaveDays = earlyLeaveDays;
-		this.empCount=empCount;
+		this.empCount = empCount;
+		this.allDays = allDays;
 	}
-
-
-
 
 
 	public int getTotalWage() {
@@ -53,11 +53,9 @@ public class Statistics {
 	}
 
 
-
 	public void setTotalWage(int totalWage) {
 		this.totalWage = totalWage;
 	}
-
 
 
 	public String getDate() {
@@ -65,11 +63,9 @@ public class Statistics {
 	}
 
 
-
 	public void setDate(String date) {
 		Date = date;
 	}
-
 
 
 	public String getEmpName() {
@@ -77,11 +73,9 @@ public class Statistics {
 	}
 
 
-
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
-
 
 
 	public boolean isWorkingNow() {
@@ -89,11 +83,9 @@ public class Statistics {
 	}
 
 
-
 	public void setWorkingNow(boolean workingNow) {
 		this.workingNow = workingNow;
 	}
-
 
 
 	public Date getEmpStart() {
@@ -101,11 +93,9 @@ public class Statistics {
 	}
 
 
-
 	public void setEmpStart(Date empStart) {
 		this.empStart = empStart;
 	}
-
 
 
 	public Date getEmpEnd() {
@@ -113,11 +103,9 @@ public class Statistics {
 	}
 
 
-
 	public void setEmpEnd(Date empEnd) {
 		this.empEnd = empEnd;
 	}
-
 
 
 	public int getHourlyWorkedHours() {
@@ -125,11 +113,9 @@ public class Statistics {
 	}
 
 
-
 	public void setHourlyWorkedHours(int hourlyWorkedHours) {
 		this.hourlyWorkedHours = hourlyWorkedHours;
 	}
-
 
 
 	public int getDailyWorkedHours() {
@@ -137,11 +123,9 @@ public class Statistics {
 	}
 
 
-
 	public void setDailyWorkedHours(int dailyWorkedHours) {
 		this.dailyWorkedHours = dailyWorkedHours;
 	}
-
 
 
 	public int getMonthlyWorkedHours() {
@@ -149,11 +133,9 @@ public class Statistics {
 	}
 
 
-
 	public void setMonthlyWorkedHours(int monthlyWorkedHours) {
 		this.monthlyWorkedHours = monthlyWorkedHours;
 	}
-
 
 
 	public int getTotalWorkedHours() {
@@ -161,11 +143,9 @@ public class Statistics {
 	}
 
 
-
 	public void setTotalWorkedHours(int totalWorkedHours) {
 		this.totalWorkedHours = totalWorkedHours;
 	}
-
 
 
 	public int getLateDays() {
@@ -173,11 +153,9 @@ public class Statistics {
 	}
 
 
-
 	public void setLateDays(int lateDays) {
 		this.lateDays = lateDays;
 	}
-
 
 
 	public int getEarlyLeaveDays() {
@@ -185,11 +163,9 @@ public class Statistics {
 	}
 
 
-
 	public void setEarlyLeaveDays(int earlyLeaveDays) {
 		this.earlyLeaveDays = earlyLeaveDays;
 	}
-
 
 
 	public int getEmpCount() {
@@ -197,12 +173,22 @@ public class Statistics {
 	}
 
 
-
 	public void setEmpCount(int empCount) {
 		this.empCount = empCount;
 	}
-	
-	
+
+
+	public List<StatisticsDays> getAllDays() {
+		return allDays;
+	}
+
+
+	public void setAllDays(List<StatisticsDays> allDays) {
+		this.allDays = allDays;
+	}
+
+
+
 
 	
 
