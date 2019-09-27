@@ -42,7 +42,7 @@ Array.from(chartYearList).forEach(function(e) {
         
         var no=parseInt(e.textContent)-firstYear
         console.log(no);
-        console.log(pathOne);
+        console.log(pathOne.years[0]);
 
         // for(var i=0;i<12;i++){
         //   pathOne.allDays[no].year
@@ -56,15 +56,15 @@ Array.from(chartYearList).forEach(function(e) {
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 			
-  			for(i in pathOne.allDays){
-     			if(pathOne.allDays[i].year==yearNow){
-					console.log(2019);
-				 }else if(pathOne.allDays[i].year==yearNow-1){
-					console.log(2018);
-				 }else if(pathOne.allDays[i].year==yearNow-2){
-					console.log(2017);
-				 }
-			  }
+  			// for(i in pathOne.allDays){
+     		// 	if(pathOne.allDays[i].year==yearNow){
+				// 	console.log(2019);
+				//  }else if(pathOne.allDays[i].year==yearNow-1){
+				// 	console.log(2018);
+				//  }else if(pathOne.allDays[i].year==yearNow-2){
+				// 	console.log(2017);
+				//  }
+			  // }
 
 
      	

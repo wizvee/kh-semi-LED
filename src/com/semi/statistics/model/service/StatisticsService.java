@@ -10,7 +10,6 @@ import java.util.Map;
 
 import com.semi.statistics.model.dao.StatisticsDao;
 import com.semi.statistics.model.vo.Statistics;
-import com.semi.statistics.model.vo.StatisticsDays;
 
 public class StatisticsService {
 	
