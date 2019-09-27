@@ -194,6 +194,16 @@ td span:after {
   width: 53%;
 }
 
+td span p {
+  content:'';
+  display: inline-block;
+  height: .7rem;
+  vertical-align: top;
+  border-radius: 2.5rem;
+  background: #D87A80;
+  width: 65%;
+}
+
 .italia span:before{opacity: .4}
 .grecia span:before{opacity: .7}
 .alemania span:before{opacity: .2}
@@ -394,7 +404,7 @@ table>caption>tbody>tr td{
 					  </script>
 						 <td><%=p.getEmpName() %></td>
 						<td><%=p.getPayRoll() %> <p style="float:right"><%=forWidth %> %</p>
-						<span class='dos' style="width:<%=forWidth%>%" ></span></td>
+						<span class='dos' ></span><p style="width:<%=forWidth%>%"></p></td>
 						 <td><%=p.getWorkTime() %></td>
 						  <td><%=p.getLateCount() %></td>
 						  <td><%=p.getEarlyCount() %></td>
