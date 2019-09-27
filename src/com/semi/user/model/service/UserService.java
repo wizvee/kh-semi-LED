@@ -64,61 +64,61 @@ public class UserService {
 		close(conn);
 		return r;
 	}
-	
-	public ArrayList<Notification> getNotiList(String busId, String userId) {
+
+	public ArrayList<Notification> getNotiList(String userId) {
 		Connection conn = getConnection();
-		ArrayList<Notification> list = dao.getNotiList(conn, busId, userId);
+		ArrayList<Notification> list = dao.getNotiList(conn, userId);
 		close(conn);
 		return list;
 	}
-	
+
 	public User selectOne(String userId) {
 		Connection conn = getConnection();
-		User u = dao.selectOne(conn,userId);
+		User u = dao.selectOne(conn, userId);
 		close(conn);
 		return u;
 	}
-	
+
 	public User CheckUser(String userId, String pw) {
-		Connection conn=getConnection();
+		Connection conn = getConnection();
 		User u = dao.CheckUser(conn, userId, pw);
 		close(conn);
 		return u;
 	}
 
 	public int UpdatePw(String userId, String nPw) {
-		Connection conn=getConnection();
-		int result=0;
+		Connection conn = getConnection();
+		int result = 0;
 		result = dao.UpdatePw(conn, userId, nPw);
-		if(result>0) {
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);
 		return result;
 	}
-	
+
 	public int UpdatePhone(String userId, String phone) {
-		Connection conn=getConnection();
-		int result=0;
+		Connection conn = getConnection();
+		int result = 0;
 		result = dao.UpdatePhone(conn, userId, phone);
-		if(result>0) {
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);
 		return result;
 	}
-	
+
 	public int UpdateName(String userId, String name) {
-		Connection conn=getConnection();
-		int result=0;
+		Connection conn = getConnection();
+		int result = 0;
 		result = dao.UpdateName(conn, userId, name);
-		if(result>0) {
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);

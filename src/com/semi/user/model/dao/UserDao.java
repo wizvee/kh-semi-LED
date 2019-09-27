@@ -169,15 +169,14 @@ public class UserDao {
 		return r;
 	}
 
-	public ArrayList<Notification> getNotiList(Connection conn, String busId, String userId) {
+	public ArrayList<Notification> getNotiList(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("getNotiList");
 		ArrayList<Notification> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, busId);
-			pstmt.setString(2, userId);
+			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Notification n = new Notification();
@@ -257,56 +256,53 @@ public class UserDao {
 		}
 		return u;
 	}
-	
+
 	public int UpdatePw(Connection conn, String userId, String nPw) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("updatePW");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updatePW");
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nPw);
 			pstmt.setString(2, userId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			close(pstmt);
 		}
 		return result;
 	}
-	
+
 	public int UpdatePhone(Connection conn, String userId, String phone) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("updatePhone");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updatePhone");
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, phone);
 			pstmt.setString(2, userId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			close(pstmt);
 		}
 		return result;
 	}
-	
+
 	public int UpdateName(Connection conn, String userId, String name) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("updateName");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateName");
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, userId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			close(pstmt);
 		}
 		return result;

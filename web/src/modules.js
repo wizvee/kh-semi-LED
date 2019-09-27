@@ -8,8 +8,6 @@ socket.onmessage = e => {
   if(e.data == "N") {
     alert.viewCount();
     console.log("알림");
-  } if(e.data == "T") {
-    console.log("테스트트트");
   }
 };
 

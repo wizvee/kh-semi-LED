@@ -60,11 +60,10 @@ public class ApprovalEmpServlet extends HttpServlet {
 		n.setNotiMsg(e.getUserId() + " 입사 승인");
 		n.setNotiUrl("owner/manageEmp.do");
 
-		Notification nNoti = new BusinessService().approvalEmp(busId, e, n);
+		int r = new BusinessService().approvalEmp(busId, e, n);
 
-		if (nNoti != null) {
+		if (r == 2) {
 			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-			ui.getNotiList().add(nNoti);
 			ui.setFlag("N");
 
 			session.setAttribute("userInfo", ui);

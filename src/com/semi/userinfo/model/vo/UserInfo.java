@@ -53,7 +53,7 @@ public class UserInfo {
 				Iterator<String> ir = set.iterator();
 				this.setSelectBusId(ir.next());
 			}
-			ArrayList<Notification> notiList = new UserService().getNotiList(this.getSelectBusId(), this.getUserId());
+			ArrayList<Notification> notiList = new UserService().getNotiList(this.getUserId());
 			this.setNotiList(notiList);
 		}
 	}

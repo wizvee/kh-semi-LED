@@ -15,6 +15,7 @@
 		document.querySelector("#test").addEventListener("click", () => {
 			userInfo.flag = "T";
 			socket.send(JSON.stringify(userInfo));
+			console.log("!");
 		})
 	</script>
 </div>

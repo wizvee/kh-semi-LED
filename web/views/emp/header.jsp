@@ -42,7 +42,7 @@
 	<script>
 		const userInfo = <%=parsingInfo %>;
 	</script>
-	<script src="<%=request.getContextPath()%>/dist/modules.js"></script>
+	<script src="<%=request.getContextPath()%>/src/modules.js"></script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /> <label for="ck_snb"></label>
 		<!-- 사이드 메뉴 -->
