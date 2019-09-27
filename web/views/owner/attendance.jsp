@@ -7,9 +7,7 @@ java.util.List"%>
 <%
 	List<Employee> list = (List) request.getAttribute("empList");
 %>
-<%-- <!-- <%=request.getPatameter() -->
 
- --%>
 <%@ include file="header.jsp"%>
 <style>
 .item .item_atd {
@@ -273,6 +271,12 @@ java.util.List"%>
       -webkit-transform: translate(-50%, -50%);
     }
 </style>
+<script type="text/javascript">
+
+console.log("jsp 테스트");
+console.log(<%=list.get(0).getEmpEnd()%>);
+console.log(<%=list.get(4).getEmpEnd()%>);
+</script>
 
 <div id="content">
 
@@ -297,9 +301,12 @@ java.util.List"%>
 		<div class="item_body item_atd">
 			<%
 				for (Employee e : list) {
+					if(e.getEmpEnd()!=null) {
+						continue;
+					}
 			%>
 			<%
-				if (e.getSftId() != null) {
+				if (e.getSftId() != null && e.getAttendance() != null) {
 			%>
 
 			<div>
@@ -417,9 +424,9 @@ java.util.List"%>
 						<h1><%=e.getUserName()%></h1>
 						<hr>
 						<p style="margin:10%">
-						<%=e.getAttendance().getAtdOn().substring(0, 4)%> 년 
-						<%=e.getAttendance().getAtdOn().substring(4, 6)%> 월
-						<%=e.getAttendance().getAtdOn().substring(6, 8)%> 일의
+						<%=e.getAttendance()!=null&&e.getAttendance().getAtdOn()!=null?e.getAttendance().getAtdOn().substring(0, 4):""%> 년 
+						<%=e.getAttendance()!=null&&e.getAttendance().getAtdOn()!=null?e.getAttendance().getAtdOn().substring(4, 6):""%> 월
+						<%=e.getAttendance()!=null&&e.getAttendance().getAtdOn()!=null?e.getAttendance().getAtdOn().substring(6, 8):""%> 일의
 						<br> 근무 기록 입니다.
 						</p>
 						<div class="atd_check_late">
@@ -428,13 +435,13 @@ java.util.List"%>
 								~
 								<%=e.getShift().getSftOff()%></p>
 							<input type="hidden" id="stAtTime"
-								value=<%=e.getAttendance().getStAtdTime()%>> <input
+								value=<%=e.getAttendance()!=null?e.getAttendance().getStAtdTime():""%>> <input
 								type="hidden" id="enAtTime"
-								value=<%=e.getAttendance().getEnAtdTime()%>> <input
+								value=<%=e.getAttendance()!=null?e.getAttendance().getEnAtdTime():""%>> <input
 								type="hidden" id="stSftime"
-								value=<%=e.getAttendance().getStSftTime()%>> <input
+								value=<%=e.getAttendance()!=null?e.getAttendance().getStSftTime():""%>> <input
 								type="hidden" id="enSftime"
-								value=<%=e.getAttendance().getEnSftTime()%>>
+								value=<%=e.getAttendance()!=null?e.getAttendance().getEnSftTime():""%>>
 							<!-- 	<progress value="20" max="100"></progress> -->
 							<div class="atd_progress_color">
 								<div style="background-color: red;"></div>
@@ -447,14 +454,16 @@ java.util.List"%>
 							<div class="atd_progress_wraper">
 
 								<%
+									double widthLate = 0;
+									double widthEarly = 0;
+									double widthNomal = 0;
+									if(e.getAttendance()!=null){
 									double stAtd = e.getAttendance().getStAtdTime();
 												double enAtd = e.getAttendance().getEnAtdTime();
 												double stSft = e.getAttendance().getStSftTime();
 												double enSft = e.getAttendance().getEnSftTime();
 
-												double widthLate = 0;
-												double widthEarly = 0;
-												double widthNomal = 0;
+												
 
 												if (stSft < stAtd) {
 													widthLate = ((100 - ((((enSft - stSft) - (stAtd - stSft)) / (enSft - stSft)) * 100)));
@@ -463,6 +472,7 @@ java.util.List"%>
 													widthEarly = ((100 - ((((enSft - stSft) - (enSft - enAtd)) / (enSft - stSft)) * 100)));
 												}
 												widthNomal = 100 - (widthLate + widthEarly);
+									}
 								%>
 
 								<div
@@ -480,27 +490,6 @@ java.util.List"%>
 				</div>
 			</div>
 
-
-
-
-		<%-- <div class="item_atd_employeeList">
-				<h1
-					style="text-align: right; font-weight: bolder; color: red; font-size: 2em;"><%=e.getUserType()%></h1>
-				<br>
-				<p>
-					직원 명 :
-					<%=e.getUserName()%></p>
-				<p>
-					근무 조 :
-					<%=e.getShift().getSftName()%></p>
-				<p>
-					근무 시간
-					<%=e.getShift().getSftOn()%>
-					~
-					<%=e.getShift().getSftOff()%></p>
-
-			</div>
- --%>
 		<%
 			} else {
 		%>
@@ -628,28 +617,6 @@ java.util.List"%>
 			</div>
 </div>
 
-
-
-
-
-
-
-
-
-<%-- <div class="item_atd_employeeList">
-				<h1
-					style="text-align: right; font-weight: bolder; color: red; font-size: 2em;">신입</h1>
-				<br>
-				<p>
-					직원 명 :
-					<%=e.getUserName()%></p>
-				<p>직원의 근무시간을 설정해 주세요</p>
-			</div> --%>
-
-
-<!-- <div class="atd_check_late">
-			<p>근무 시간</p>
-			</div> -->
 <%
 	}
 %>

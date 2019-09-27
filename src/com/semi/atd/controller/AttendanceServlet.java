@@ -55,7 +55,7 @@ public class AttendanceServlet extends HttpServlet {
 					Attendance atd = new AttendanceService().setAttendance(e, busId);
 					if(e.getShift() != null && atd.getAtdOn() != null) {
 						if(atd.getAtdOff() == null) {
-							atd.setTimeforLong(atd.getAtdOn(), e.getShift().getSftOff(), e.getShift().getSftOn(), e.getShift().getSftOff());
+							atd.setTimeforLong(atd.getAtdOn(), atd.getAtdOn(), e.getShift().getSftOn(), e.getShift().getSftOff());
 						}else {
 							atd.setTimeforLong(atd.getAtdOn(), atd.getAtdOff(), e.getShift().getSftOn(), e.getShift().getSftOff());
 						}
