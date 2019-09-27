@@ -44,11 +44,12 @@ public class StatisticsEndServlet extends HttpServlet {
 		System.out.println("사업장 이름은 :"+busId);
 		
 		Map<String, List<Statistics>> dataMap = new HashMap<String, List<Statistics>>();
-		dataMap=ss.getAllData(busId);
 		
+		dataMap=ss.getAllData(busId);
 		
 		if(!dataMap.isEmpty()) {
 			System.out.println("데이터있음!");
+			System.out.println(dataMap.get("forWageLine").get(0).getAllDays().get(0).getYear());
 			data = new Gson().toJson(dataMap);
 		}	
 		
