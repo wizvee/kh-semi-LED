@@ -9,6 +9,11 @@
 		totalPay += p.getPayRoll();
 	}
 %>
+<script>
+console.log(<%=totalPay%>);
+var test = 100 - (((510300 - 72900)/510300)*100;
+		  console.log(test);
+</script>
 <style>
 
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,500);
@@ -155,7 +160,7 @@ tr td:nth-child(5) {
 td span {
   background: #e5e5e5;
   display: inline-block;
-  width: 80%;
+  width: 100%;
   height: .7rem;
   border-radius: .3rem;
 }
@@ -167,7 +172,6 @@ td span:before {
   border-radius: 2.5rem;
 }
 td span:after {
-  content: attr(data-valor) '%';
   position: absolute;
   right: -30%;
   top: 0;
@@ -358,7 +362,7 @@ table>caption>tbody>tr td{
 					  <tr> 
 						 <td>신지섭</td>
 						<td> 여기에 수령금액 적용하고 %값 밑에 width
-						<span class='uno' data-valor='65'></span></td>
+						<span class='uno' data-valor='100'></span></td>
 						 <td>345</td>
 						   <td>지각</td>
 						  <td>조퇴</td>
@@ -380,10 +384,17 @@ table>caption>tbody>tr td{
 						  <td>지각</td>
 						  <td>조퇴</td>
 					  </tr>
+					  <%
+					  int forWidth = 100 - (((totalPay - p.getPayRoll()) / totalPay) * 100);
+					  %>
 					  <tr> 
+					  <script>
+					  console.log(<%=100 - (((totalPay - p.getPayRoll()) / totalPay) * 100)%>);
+					
+					  </script>
 						 <td><%=p.getEmpName() %></td>
-						<td><%=p.getPayRoll() %>
-						<span class='dos' data-valor='65' style="width:<%=(p.getPayRoll() / totalPay)*100%>%"></span></td>
+						<td><%=p.getPayRoll() %> <p style="float:right"><%=forWidth %> %</p>
+						<span class='dos' style="width:<%=forWidth%>%" ></span></td>
 						 <td><%=p.getWorkTime() %></td>
 						  <td><%=p.getLateCount() %></td>
 						  <td><%=p.getEarlyCount() %></td>
