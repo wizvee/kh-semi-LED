@@ -74,7 +74,6 @@ public class StatisticsDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(list.get(0));
 		return list;
 	}
 	

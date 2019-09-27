@@ -4,9 +4,6 @@ import java.sql.Date;
 
 public class Statistics {
 	
-	private int hourlyWage;
-	private int dailyWage;
-	private int monthlyWage;
 	private int totalWage;
 	private String Date;
 	private String empName;
@@ -27,14 +24,11 @@ public class Statistics {
 
 	
 
-	public Statistics(int hourlyWage, int dailyWage, int monthlyWage, int totalWage, String date, String empName,
+	public Statistics(int totalWage, String date, String empName,
 			boolean workingNow, java.sql.Date empStart, java.sql.Date empEnd, int hourlyWorkedHours,
 			int dailyWorkedHours, int monthlyWorkedHours, int totalWorkedHours, int lateDays, int earlyLeaveDays, 
 			int empCount) {
 		super();
-		this.hourlyWage = hourlyWage;
-		this.dailyWage = dailyWage;
-		this.monthlyWage = monthlyWage;
 		this.totalWage = totalWage;
 		Date = date;
 		this.empName = empName;
@@ -51,40 +45,6 @@ public class Statistics {
 	}
 
 
-
-	public int getHourlyWage() {
-		return hourlyWage;
-	}
-
-
-
-	public void setHourlyWage(int hourlyWage) {
-		this.hourlyWage = hourlyWage;
-	}
-
-
-
-	public int getDailyWage() {
-		return dailyWage;
-	}
-
-
-
-	public void setDailyWage(int dailyWage) {
-		this.dailyWage = dailyWage;
-	}
-
-
-
-	public int getMonthlyWage() {
-		return monthlyWage;
-	}
-
-
-
-	public void setMonthlyWage(int monthlyWage) {
-		this.monthlyWage = monthlyWage;
-	}
 
 
 
