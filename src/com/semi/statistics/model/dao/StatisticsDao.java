@@ -46,7 +46,7 @@ public class StatisticsDao {
 				s.setSumWage(rs.getInt(3));
 				lists.add(s);
 			}
-			st.setAllDays(lists);
+			st.setYears(lists);
 			list.add(st);
 		}catch(SQLException e) {
 			e.printStackTrace();

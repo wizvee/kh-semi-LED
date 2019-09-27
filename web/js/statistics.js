@@ -5,7 +5,7 @@ $.ajax({url: "/p_190826_semi/owner/requestStatistics.do",
 	type: "post", 
 	async: false, 
     success: function(data){
-    	json = JSON.parse(data);
+      json = JSON.parse(data);
     },
     error: function(data) {
         alert('데이터 안넘어 옴!');
@@ -27,25 +27,30 @@ function addComma(value) {
 
 // ============================== 직원 급여 월별 라인 그래프 ===================================
 
-var chartYearList = document.querySelectorAll(".area_chart");
 var pathOne=json.forWageLine[0]; 
 var firstYear=2017;
 var yearNow=new Date().getFullYear();
-var firstChart=document.getElementById("firstChart");
 
-
-for(var y=firstYear;y<yearNow;y++){
-    firstChart.append('<div class="year">'+y+'>')
+for(var y=firstYear;y<=yearNow;y++){
+  $("#firstChartList").append('<div class="area_chart">'+y+'년</div>');
 }
 
+var chartYearList = document.querySelectorAll(".area_chart");
 
 Array.from(chartYearList).forEach(function(e) {
     e.addEventListener('click', function(){
-        console.log(e.innerHTML);
+        
+        var no=parseInt(e.textContent)-firstYear
+        console.log(no);
+        console.log(pathOne);
+
+        // for(var i=0;i<12;i++){
+        //   pathOne.allDays[no].year
+        //   pathOne.allDays[no].
+        // }
+
     });
 });
-
-
 
 
         google.charts.load('current', {'packages':['corechart']});

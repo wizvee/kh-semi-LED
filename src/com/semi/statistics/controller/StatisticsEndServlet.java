@@ -49,7 +49,7 @@ public class StatisticsEndServlet extends HttpServlet {
 		
 		if(!dataMap.isEmpty()) {
 			System.out.println("데이터있음!");
-			System.out.println(dataMap.get("forWageLine").get(0).getAllDays().get(0).getYear());
+//			System.out.println(dataMap.get("forWageLine").get(0).getYears().get(0).getYear());
 			data = new Gson().toJson(dataMap);
 		}	
 		
