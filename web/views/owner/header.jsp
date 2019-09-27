@@ -41,7 +41,7 @@
 
 <body>
 	<script>
-		const userInfo = <%=parsingInfo %>;
+		var userInfo = <%=parsingInfo %>;
 	</script>
 	<script src="<%=request.getContextPath()%>/dist/modules.js"></script>
 	<div id="wrap">
