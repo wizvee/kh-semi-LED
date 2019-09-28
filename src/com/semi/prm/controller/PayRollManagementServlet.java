@@ -42,10 +42,39 @@ public class PayRollManagementServlet extends HttpServlet {
 		String type = "H";
 		int length = 0;
 			
-			List <PayRollManagement> prmList = new PayRollManagementService().makePayRollList(busId, type, length);
+			List <PayRollManagement> monList1 = new PayRollManagementService().makePayRollList(busId, "H", 0);
+			List <PayRollManagement> monList3 = new PayRollManagementService().makePayRollList(busId, "H", 3);
+			List <PayRollManagement> monList6 = new PayRollManagementService().makePayRollList(busId, "H", 6);
+			List <PayRollManagement> yList = new PayRollManagementService().makePayRollList(busId, "H", 12);
 
-			request.setAttribute("list", prmList);
-	request.getRequestDispatcher("/views/owner/payRollManagement.jsp").forward(request, response);
+			List <PayRollManagement> monList1D = new PayRollManagementService().makePayRollList(busId, "D", 0);
+			List <PayRollManagement> monList3D = new PayRollManagementService().makePayRollList(busId, "D", 3);
+			List <PayRollManagement> monList6D = new PayRollManagementService().makePayRollList(busId, "D", 6);
+			List <PayRollManagement> yListD = new PayRollManagementService().makePayRollList(busId, "D", 12);
+
+			List <PayRollManagement> monList1M = new PayRollManagementService().makePayRollList(busId, "M", 0);
+			List <PayRollManagement> monList3M = new PayRollManagementService().makePayRollList(busId, "M", 3);
+			List <PayRollManagement> monList6M = new PayRollManagementService().makePayRollList(busId, "M", 6);
+			List <PayRollManagement> yListM = new PayRollManagementService().makePayRollList(busId, "M", 12);
+
+			request.setAttribute("HmonList1", monList1);
+			request.setAttribute("HmonList3", monList3);
+			request.setAttribute("HmonList6", monList6);
+			request.setAttribute("HyList1", yList);
+
+			request.setAttribute("DmonList1", monList1D);
+			request.setAttribute("DmonList3", monList3D);
+			request.setAttribute("DmonList6", monList6D);
+			request.setAttribute("DyList1", yListD);
+
+			request.setAttribute("MmonList1", monList1M);
+			request.setAttribute("MmonList3", monList3M);
+			request.setAttribute("MmonList6", monList6M);
+			request.setAttribute("MyList1", yListM);
+
+			
+			
+			request.getRequestDispatcher("/views/owner/payRollManagement.jsp").forward(request, response);
 	
 	}
 
