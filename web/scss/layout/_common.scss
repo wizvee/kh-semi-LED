@@ -8,6 +8,7 @@
 
 input[class="ly"] {
   display: none;
+
   &+label {
     @include label-bg;
   }
@@ -39,6 +40,25 @@ input[id="ck_snb"]:checked {
   @include respond-to("large") {
     position: sticky;
     transform: translateX(0);
+  }
+
+  nav {
+    @include grid;
+    grid-template-rows: 100px repeat(8, 50px);
+    margin: 0 auto;
+
+    img,
+    span {
+      text-align: center;
+    }
+
+    a {
+      display: inline-block;
+      margin-left: 30px;
+      &:hover {
+        border-right: 2px solid $primary;
+      }
+    }
   }
 
   .snb_profile {
@@ -167,6 +187,7 @@ input[id="ck_snb"]:checked {
     height: $title-height;
     line-height: $title-height;
     box-sizing: border-box;
+
     // background: blue;
     @include respond-to("medium") {
       padding: 0 30px;
@@ -181,6 +202,7 @@ input[id="ck_snb"]:checked {
     height: auto;
     min-height: 100px;
     box-sizing: border-box;
+
     @include respond-to("medium") {
       padding: 20px 50px;
     }
