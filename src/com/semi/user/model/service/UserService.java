@@ -124,5 +124,18 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+	
+	public int UpdatePic(String userId, String upfile) {
+		Connection conn = getConnection();
+		int result = 0;
+		result = dao.UpdatePic(conn, userId, upfile);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }

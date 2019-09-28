@@ -307,5 +307,22 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	public int UpdatePic(Connection conn, String userId, String upfile) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updatePic");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, upfile);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

@@ -30,6 +30,25 @@
 
 .item .item_mypage_pic, .item .item_mypage_pw, .item .item_mypage_phone, .item .item_mypage_name, .item .item_mypage_email {
 	display: none;
+    margin-top: 5px;
+    grid-template-columns: 50px 1fr 100px;
+    line-height: 50px;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+.item_mypage .btn_pic, .item_mypage .btn_email, .item_mypage .btn_name, .item_mypage .btn_phone, .item_mypage .btn_password, .item_mypage .btn_quit{
+    display: grid;
+    margin-top: 5px;
+    grid-template-columns: 50px 1fr 100px;
+    height: 70px;
+    line-height: 50px;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+.item .item_mypage_pic, .item .item_mypage_pw, .item .item_mypage_phone, .item .item_mypage_name, .item .item_mypage_email {
+	display: none;
 }
 
 /* .item .item_mypage_pic{
@@ -59,6 +78,7 @@
 				<div class="item_body item_mypage_pic">
 					<button id="btn_orgin_pic" class="btn-primary" onclick="return false;">기본 프로필로 변경</button>
 					<label id="btn_new_pic" class="btn-primary" for="profile">새 프로필 변경</label>
+					<%-- <input type="hidden" name="ori_file" value="<%=loginOwner.getProfilePic()%>" id="profile"/> --%>
 					<input type="file" name="profile" id="profile">
 				</div>
 
@@ -95,9 +115,9 @@
 				</button>
 				<div class="item_body item_mypage_phone">
 					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 휴대폰 번호 : </i> 
-					<input type="text" class="inpt-outline" name="phone" id="phone" placeholder="-포함 입력하세요.">
+					<input type="text" class="inpt-outline" name="new_phone" id="new_phone" placeholder="-포함 입력하세요.">
 					<div id="result_phone"></div>
-					<button id="btn_phone" class="btn-primary" onclick="return false;"> 휴대폰 번호 변경</button>
+					<button id="btn__new_phone" class="btn-primary" onclick="return false;"> 휴대폰 번호 변경</button>
 				</div>
 				
 
@@ -144,23 +164,6 @@
 </div>
 
 <script>
-	$(function(){
-		$("#profile").change(function(){
-			var fd = new FormDate();
-			
-			$.ajax({
-				url:"<%=request.getContextPath()%>/ajaxproFile.do",
-				data:fd,
-				type:"post",
-				processData:false,
-				contentType:false,
-				success:function(data){
-					console.log(data);
-				}
-			});
-		});
-	});
-
 	$(function(){
 	 	$(".btn_pic").click(function(){
 	 		var area = document.querySelectorAll(".item_mypage_pic")[0];
@@ -212,6 +215,25 @@
 	 });
 
 	$(function(){
+		$("#profile").change(function(){
+			var fd = new FormData();
+			fd.append("upfile",$(this)[0].files[0]);
+			fd.append("userId",userInfo.userId);
+			$.ajax({
+				url:"<%=request.getContextPath()%>/ajaxproFile.do",
+				data:fd,
+				type:"post",
+				processData:false,
+				contentType:false,
+				success:function(data){
+					console.log(data);
+					$('.snb_profile').html($('#profile').val().trim());
+				}
+			});
+		});
+	});
+	
+	$(function(){
 		$('#btn_name').click(function(){
 			var area = document.querySelectorAll(".item_mypage_name")[0];
 			$("#result_name").html("");
@@ -226,6 +248,7 @@
 						if(!data){
 							$("#result_name").html("이름 변경 실패. 다시 시도해 주세요.").css("color","red");
 						} else{
+							consolo.log("나옴?");
 							area.style.display = "none";
 							$('#btn_name_view').find('div>span').last().html($('#name').val().trim());
 							$('.snb_own').find('nav>ul>li').eq(1).html($('#name').val().trim());
@@ -237,7 +260,7 @@
 	});
 	
 	$(function(){
-		$('#btn_phone').click(function(){
+		$('#btn_new_phone').click(function(){
 			var regExp = /01(0|1|6|7|8|9)-(\d{4}|\d{3})-\d{4}$/g;
 			var area = document.querySelectorAll(".item_mypage_phone")[0];
 			$("#result_phone").html("");
@@ -251,7 +274,7 @@
 			else{
 				$.ajax({
 					url:"<%=request.getContextPath()%>/changeAjaxinfoUpdatePhone.do",
-					data:{phone : $('#phone').val().trim(), userId:userInfo.userId},
+					data:{phone : $('#new_phone').val().trim(), userId:userInfo.userId},
 					success:function(data){
 						if(!data){
 							$("#result_phone").html("휴대폰 번호 변경 실패. 다시 시도해 주세요.").css("color","red");
