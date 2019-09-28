@@ -1,3 +1,11 @@
+class Task {
+  constructor(taskDate, userId, taskMsg) {
+    this.taskDate = taskDate;
+    this.userId = userId;
+    this.taskMsg = taskMsg;
+  }
+}
+
 class Calendar {
   constructor() {
     this.now = new Date();
@@ -7,10 +15,17 @@ class Calendar {
     this.body = selectElements(".calendar_body")[0];
     this.header = selectElements(".calendar_header span")[0];
 
+    this.calList;
+    this.taskCount = 0;
+
     this.setInit();
   }
 
   setInit() {
+    // get calendar list
+    this.getResult("getCalList.do", "", this.setCalList);
+
+    // create week cells
     const week = ["일", "월", "화", "수", "목", "금", "토"];
     week.map(w => {
       const cell = document.createElement("div");
@@ -20,16 +35,61 @@ class Calendar {
     });
     this.createCal();
 
+    // button event
     const pre = document.querySelector("#btn_calPrv");
     const nxt = document.querySelector("#btn_calNxt");
 
     pre.addEventListener("click", this.previous);
     nxt.addEventListener("click", this.next);
 
+    // add task div
+    const addTask = document.querySelector("#btn_addTask");
+    addTask.addEventListener("click", () => {
+      const area = document.querySelectorAll(".subCal_area .taskList")[0];
+      const sftId = document.getElementsByName("sftId")[0].value;
+      const containEmp = empList.filter(e => e.sftId == sftId);
+
+      if ([...containEmp].length == 0) console.log("modal! alert!");
+      else {
+        const targetEmpList = document.createElement("div");
+        targetEmpList.setAttribute("class", "targetEmpList");
+        const inpt = document.createElement("input");
+        inpt.setAttribute("type", "hidden");
+        inpt.setAttribute("name", "taskUserId");
+        inpt.value = [...containEmp][0].userId;
+        const targetEmp = document.createElement("span");
+        targetEmp.setAttribute("class", "selectTargetUser");
+        targetEmp.textContent = [...containEmp][0].userName;
+        const ul = document.createElement("ul");
+        ul.setAttribute("class", "dropMenu");
+        [...containEmp].map(e => {
+          const li = document.createElement("li");
+          li.setAttribute("id", e.userId);
+          li.setAttribute("class", "taskUser");
+          li.textContent = e.userName;
+          ul.appendChild(li);
+        });
+
+        targetEmpList.appendChild(inpt);
+        targetEmpList.appendChild(targetEmp);
+        targetEmpList.appendChild(ul);
+
+        const task = document.createElement("input");
+        task.setAttribute("class", "inpt-outline");
+        task.setAttribute("name", "taskMsg");
+
+        area.appendChild(targetEmpList);
+        area.appendChild(task);
+
+        ++this.taskCount;
+      }
+    });
+
     const istCal = document.querySelector("#btn_insertCal");
     istCal.addEventListener("click", this.setCal);
   }
 
+  // create date cells
   createCal() {
     const firstDay = this.target.getDay();
     const lastDate = this.getMyDate(1, 0).getDate();
@@ -52,12 +112,30 @@ class Calendar {
       }
       this.body.appendChild(cell);
       cell.addEventListener("click", ({ target }) => {
+        const targetDate = target.getAttribute("id");
+        // 일정 추가 event
         const date = document.getElementsByName("date")[0];
         const title = document.getElementsByName("title")[0];
         const content = document.getElementsByName("content")[0];
-        date.value = target.getAttribute("id");
+        date.value = targetDate;
         title.value = "";
         content.value = "";
+        // 일정 보기 event
+        const calTitle = document.querySelectorAll(
+          ".viewCal_area .calTitle"
+        )[0];
+        const calDetail = document.querySelectorAll(
+          ".viewCal_area .calDetail"
+        )[0];
+        this.calList.map(c => {
+          if (c.calDate == targetDate) {
+            calTitle.textContent = c.calTitle;
+            calDetail.textContent = c.calDetail;
+          } else {
+            calTitle.textContent = "";
+            calDetail.textContent = "";
+          }
+        });
       });
     }
     this.header.innerHTML = `${this.target.getFullYear()}년 <b>${this.target.getMonth() +
@@ -81,7 +159,16 @@ class Calendar {
     const title = document.getElementsByName("title")[0].value;
     const content = document.getElementsByName("content")[0].value;
 
-    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}`;
+    const taskUserId = document.getElementsByName("taskUserId");
+    const taskMsg = document.getElementsByName("taskMsg");
+    const taskArr = [];
+
+    for (let i = 0; i < this.taskCount; i++) {
+      const task = new Task(date, taskUserId[i].value, taskMsg[i].value);
+      taskArr.push(task);
+    }
+
+    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(taskArr)}`;
     this.getResult("owner/insertCal.do", data, this.insertCal);
     // console.log(data);
   };
@@ -90,8 +177,12 @@ class Calendar {
     if (respText != "fail") {
       document.getElementsByName("title")[0].value = "";
       document.getElementsByName("content")[0].value = "";
-      console.log("추가는 OK");
+      location.href = contextPath + "/owner/calendar.do";
     } else console.log("실패");
+  };
+
+  setCalList = respText => {
+    this.calList = JSON.parse(respText);
   };
 
   getResult(servletURL, data, fn) {
@@ -135,20 +226,3 @@ sfts.map(s =>
     id.value = target.getAttribute("id");
   })
 );
-
-document.querySelector("#btn_addTask").addEventListener("click", () => {
-  const area = document.querySelectorAll(".subCal_area .taskList")[0];
-  const sftId = document.getElementsByName("sftId")[0].value;
-  const emps = empList.find(e => e.sftId == sftId);
-
-  const targetEmp = document.createElement("span");
-  targetEmp.setAttribute("class", "inpt-outline");
-  const task = document.createElement("input");
-  task.setAttribute("class", "inpt-outline");
-
-  if (emps == undefined) console.log("modal! alert!");
-  else {
-    area.appendChild(targetEmp);
-    area.appendChild(task);
-  }
-});
