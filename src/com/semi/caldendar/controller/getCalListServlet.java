@@ -28,8 +28,12 @@ public class getCalListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		UserInfo ui = (UserInfo) request.getSession().getAttribute("userInfo");
-		
+
 		ArrayList<Cal> list = new CalendarService().getCalList(ui.getSelectBusId());
+
+		for (Cal c : list)
+			System.out.println(c);
+
 		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		out.print(gs.toJson(list));
 	}

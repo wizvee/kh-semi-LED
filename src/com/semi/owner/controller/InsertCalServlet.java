@@ -55,23 +55,19 @@ public class InsertCalServlet extends HttpServlet {
 		
 		String task = request.getParameter("taskArr");
 		Task[] taskArr = gs.fromJson(task, Task[].class);
-		
-		for(Task t : taskArr) {
-			System.out.println(t.getTaskMsg());
-		}
 
 //		알림 추가
 
 		int r = new CalendarService().insertCal(cal, taskArr);
-//
-//		if (r > 0) {
-//			Gson gs1 = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-//			ui.setFlag("N");
-//
-//			session.setAttribute("userInfo", ui);
-//			out.print(gs1.toJson(ui));
-//		} else
-//			out.print("fail");
+
+		if (r > 0) {
+			Gson gs1 = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			ui.setFlag("N");
+
+			session.setAttribute("userInfo", ui);
+			out.print(gs1.toJson(ui));
+		} else
+			out.print("fail");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

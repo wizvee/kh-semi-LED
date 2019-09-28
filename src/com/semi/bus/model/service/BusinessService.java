@@ -27,9 +27,8 @@ public class BusinessService {
 		String busId = null;
 		int r = dao.insertBusiness(conn, bus);
 		int r2 = 0;
-		for (Shift s : sftArr) {
+		for (Shift s : sftArr)
 			r2 += sftDao.insertSft(conn, s);
-		}
 
 		if (r > 0 && r2 == sftArr.length) {
 			commit(conn);

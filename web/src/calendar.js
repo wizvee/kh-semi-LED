@@ -7,7 +7,7 @@ class Task {
 }
 
 class Calendar {
-  constructor() {
+  constructor(calList) {
     this.now = new Date();
     this.target = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
     this.countDate = 1;
@@ -15,16 +15,13 @@ class Calendar {
     this.body = selectElements(".calendar_body")[0];
     this.header = selectElements(".calendar_header span")[0];
 
-    this.calList;
+    this.calList = calList;
     this.taskCount = 0;
 
     this.setInit();
   }
 
   setInit() {
-    // get calendar list
-    this.getResult("getCalList.do", "", this.setCalList);
-
     // create week cells
     const week = ["일", "월", "화", "수", "목", "금", "토"];
     week.map(w => {
@@ -86,7 +83,7 @@ class Calendar {
     });
 
     const istCal = document.querySelector("#btn_insertCal");
-    istCal.addEventListener("click", this.setCal);
+    istCal.addEventListener("click", this.setCalData);
   }
 
   // create date cells
@@ -120,28 +117,36 @@ class Calendar {
         date.value = targetDate;
         title.value = "";
         content.value = "";
-        // 일정 보기 event
-        const calTitle = document.querySelectorAll(
-          ".viewCal_area .calTitle"
-        )[0];
-        const calDetail = document.querySelectorAll(
-          ".viewCal_area .calDetail"
-        )[0];
-        this.calList.map(c => {
-          if (c.calDate == targetDate) {
-            calTitle.textContent = c.calTitle;
-            calDetail.textContent = c.calDetail;
-          } else {
-            calTitle.textContent = "";
-            calDetail.textContent = "";
-          }
-        });
       });
     }
     this.header.innerHTML = `${this.target.getFullYear()}년 <b>${this.target.getMonth() +
       1}월</b>`;
     this.countDate = 1;
+    this.markEvent();
   }
+
+  markEvent = () => {
+    selectElements(".calendar_body .date").map(cell => {
+      const targetDate = cell.getAttribute("id");
+      const contianCals = this.calList.filter(c => c.calDate == targetDate);
+      contianCals.map(e => {
+        const div = document.createElement("div");
+        div.setAttribute("id", e.calId);
+        div.textContent = e.calTitle;
+        cell.appendChild(div);
+        div.addEventListener("click", ({ target }) => {
+          // 일정 보기 event
+          const calTitle = document.querySelectorAll(".calTitle")[0];
+          const calDetail = document.querySelectorAll(".calDetail")[0];
+          const calId = target.getAttribute("id");
+          const thisEvent = this.calList.find(e => e.calId == calId);
+          calTitle.textContent = thisEvent.calTitle;
+          calDetail.textContent = thisEvent.calDetail;
+          console.log("일정보기");
+        });
+      });
+    });
+  };
 
   previous = () => {
     this.target = this.getMyDate(-1, 1);
@@ -153,7 +158,7 @@ class Calendar {
     this.createCal();
   };
 
-  setCal = () => {
+  setCalData = () => {
     const date = document.getElementsByName("date")[0].value;
     const sftId = document.getElementsByName("sftId")[0].value;
     const title = document.getElementsByName("title")[0].value;
@@ -168,7 +173,9 @@ class Calendar {
       taskArr.push(task);
     }
 
-    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(taskArr)}`;
+    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(
+      taskArr
+    )}`;
     this.getResult("owner/insertCal.do", data, this.insertCal);
     // console.log(data);
   };
@@ -179,10 +186,6 @@ class Calendar {
       document.getElementsByName("content")[0].value = "";
       location.href = contextPath + "/owner/calendar.do";
     } else console.log("실패");
-  };
-
-  setCalList = respText => {
-    this.calList = JSON.parse(respText);
   };
 
   getResult(servletURL, data, fn) {
@@ -213,7 +216,8 @@ class Calendar {
   }
 }
 
-const calendar = new Calendar();
+// Calendar 객체 생성!
+promiseGetDefault("getCalList.do").then(res => new Calendar(JSON.parse(res)));
 
 const sfts = selectElements(".sftList .sft");
 sfts.map(s =>

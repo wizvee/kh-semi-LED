@@ -27,10 +27,42 @@ var Task = function Task(taskDate, userId, taskMsg) {
 var Calendar =
 /*#__PURE__*/
 function () {
-  function Calendar() {
+  function Calendar(calList) {
     var _this = this;
 
     _classCallCheck(this, Calendar);
+
+    _defineProperty(this, "markEvent", function () {
+      selectElements(".calendar_body .date").map(function (cell) {
+        var targetDate = cell.getAttribute("id");
+
+        var contianCals = _this.calList.filter(function (c) {
+          return c.calDate == targetDate;
+        });
+
+        contianCals.map(function (e) {
+          var div = document.createElement("div");
+          div.setAttribute("id", e.calId);
+          div.textContent = e.calTitle;
+          cell.appendChild(div);
+          div.addEventListener("click", function (_ref) {
+            var target = _ref.target;
+            // 일정 보기 event
+            var calTitle = document.querySelectorAll(".calTitle")[0];
+            var calDetail = document.querySelectorAll(".calDetail")[0];
+            var calId = target.getAttribute("id");
+
+            var thisEvent = _this.calList.find(function (e) {
+              return e.calId == calId;
+            });
+
+            calTitle.textContent = thisEvent.calTitle;
+            calDetail.textContent = thisEvent.calDetail;
+            console.log("일정보기");
+          });
+        });
+      });
+    });
 
     _defineProperty(this, "previous", function () {
       _this.target = _this.getMyDate(-1, 1);
@@ -44,7 +76,7 @@ function () {
       _this.createCal();
     });
 
-    _defineProperty(this, "setCal", function () {
+    _defineProperty(this, "setCalData", function () {
       var date = document.getElementsByName("date")[0].value;
       var sftId = document.getElementsByName("sftId")[0].value;
       var title = document.getElementsByName("title")[0].value;
@@ -72,16 +104,12 @@ function () {
       } else console.log("실패");
     });
 
-    _defineProperty(this, "setCalList", function (respText) {
-      _this.calList = JSON.parse(respText);
-    });
-
     this.now = new Date();
     this.target = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
     this.countDate = 1;
     this.body = selectElements(".calendar_body")[0];
     this.header = selectElements(".calendar_header span")[0];
-    this.calList;
+    this.calList = calList;
     this.taskCount = 0;
     this.setInit();
   }
@@ -91,9 +119,7 @@ function () {
     value: function setInit() {
       var _this2 = this;
 
-      // get calendar list
-      this.getResult("getCalList.do", "", this.setCalList); // create week cells
-
+      // create week cells
       var week = ["일", "월", "화", "수", "목", "금", "토"];
       week.map(function (w) {
         var cell = document.createElement("div");
@@ -149,14 +175,12 @@ function () {
         }
       });
       var istCal = document.querySelector("#btn_insertCal");
-      istCal.addEventListener("click", this.setCal);
+      istCal.addEventListener("click", this.setCalData);
     } // create date cells
 
   }, {
     key: "createCal",
     value: function createCal() {
-      var _this3 = this;
-
       var firstDay = this.target.getDay();
       var lastDate = this.getMyDate(1, 0).getDate();
       selectElements(".calendar_body .date").map(function (v) {
@@ -178,8 +202,8 @@ function () {
         }
 
         this.body.appendChild(cell);
-        cell.addEventListener("click", function (_ref) {
-          var target = _ref.target;
+        cell.addEventListener("click", function (_ref2) {
+          var target = _ref2.target;
           var targetDate = target.getAttribute("id"); // 일정 추가 event
 
           var date = document.getElementsByName("date")[0];
@@ -187,25 +211,13 @@ function () {
           var content = document.getElementsByName("content")[0];
           date.value = targetDate;
           title.value = "";
-          content.value = ""; // 일정 보기 event
-
-          var calTitle = document.querySelectorAll(".viewCal_area .calTitle")[0];
-          var calDetail = document.querySelectorAll(".viewCal_area .calDetail")[0];
-
-          _this3.calList.map(function (c) {
-            if (c.calDate == targetDate) {
-              calTitle.textContent = c.calTitle;
-              calDetail.textContent = c.calDetail;
-            } else {
-              calTitle.textContent = "";
-              calDetail.textContent = "";
-            }
-          });
+          content.value = "";
         });
       }
 
       this.header.innerHTML = "".concat(this.target.getFullYear(), "\uB144 <b>").concat(this.target.getMonth() + 1, "\uC6D4</b>");
       this.countDate = 1;
+      this.markEvent();
     }
   }, {
     key: "getResult",
@@ -233,13 +245,16 @@ function () {
   }]);
 
   return Calendar;
-}();
+}(); // Calendar 객체 생성!
 
-var calendar = new Calendar();
+
+promiseGetDefault("getCalList.do").then(function (res) {
+  return new Calendar(JSON.parse(res));
+});
 var sfts = selectElements(".sftList .sft");
 sfts.map(function (s) {
-  return s.addEventListener("click", function (_ref2) {
-    var target = _ref2.target;
+  return s.addEventListener("click", function (_ref3) {
+    var target = _ref3.target;
     var id = document.getElementsByName("sftId")[0];
     var name = selectElements(".sftList .selectSft")[0];
     sfts.map(function (e) {

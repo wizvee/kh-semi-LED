@@ -29,7 +29,7 @@ public class TaskDao {
 	
 	public int addTask(Connection conn, Task t) {
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("");
+		String sql = prop.getProperty("addTask");
 		int r = -1;
 		try {
 			pstmt = conn.prepareStatement(sql);
