@@ -21,56 +21,79 @@
 	List<PayRollManagement> monList1H = (List) request.getAttribute("HmonList1");
 	List<PayRollManagement> monList3H = (List) request.getAttribute("HmonList3");
 	List<PayRollManagement> monList6H = (List) request.getAttribute("HmonList6");
-	List<PayRollManagement> yList = (List) request.getAttribute("yList");
+	List<PayRollManagement> yList = (List) request.getAttribute("HyList1");
 
-	List<PayRollManagement> monList1D = (List) request.getAttribute("HmonList1D");
-	List<PayRollManagement> monList3D = (List) request.getAttribute("HmonList3D");
-	List<PayRollManagement> monList6D = (List) request.getAttribute("HmonList6D");
-	List<PayRollManagement> yListD = (List) request.getAttribute("yListD");
-	List<PayRollManagement> monList1M = (List) request.getAttribute("HmonList1M");
-	List<PayRollManagement> monList3M = (List) request.getAttribute("HmonList3M");
-	List<PayRollManagement> monList6M = (List) request.getAttribute("HmonList6M");
-	List<PayRollManagement> yListM = (List) request.getAttribute("yListM");
+	List<PayRollManagement> monList1D = (List) request.getAttribute("DmonList1");
+	List<PayRollManagement> monList3D = (List) request.getAttribute("DmonList3");
+	List<PayRollManagement> monList6D = (List) request.getAttribute("DmonList6");
+	List<PayRollManagement> yListD = (List) request.getAttribute("DyList1");
+	List<PayRollManagement> monList1M = (List) request.getAttribute("MmonList1");
+	List<PayRollManagement> monList3M = (List) request.getAttribute("MmonList3");
+	List<PayRollManagement> monList6M = (List) request.getAttribute("MmonList6");
+	List<PayRollManagement> yListM = (List) request.getAttribute("MyList1");
 
+		if(!monList1H.isEmpty()) {
 	for (PayRollManagement p : monList1H) {
 		totalPayH1 += p.getPayRoll();
+		}
 	}
+		if(!monList3H.isEmpty()) {
 	for (PayRollManagement p : monList3H) {
 		totalPayH3 += p.getPayRoll();
+		}
 	}
+		if(!monList6H.isEmpty()) {
 	for (PayRollManagement p : monList6H) {
 		totalPayH6 += p.getPayRoll();
 	}
+	}
+		if(!yList.isEmpty()) {
 	for (PayRollManagement p : yList) {
 		totalPayH12 += p.getPayRoll();
 	}
+	}
 	
+		if(!monList1D.isEmpty()) {
 	for (PayRollManagement p : monList1D) {
 		totalPayD1 += p.getPayRoll();
 	}
+	}
+		if(!monList3D.isEmpty()) {
 	for (PayRollManagement p : monList3D) {
 		totalPayD3 += p.getPayRoll();
+		}
 	}
+		if(!monList6D.isEmpty()) {
 	for (PayRollManagement p : monList6D) {
 		totalPayD6 += p.getPayRoll();
+		}
 	}
+		if(!yListD.isEmpty()) {
 	for (PayRollManagement p : yListD) {
 		totalPayD12 += p.getPayRoll();
+		}
 	}
 	
+		if(!monList1M.isEmpty()) {
 	for (PayRollManagement p : monList1M) {
 		totalPayM1 += p.getPayRoll();
+		}
 	}
+		if(!monList3M.isEmpty()) {
 	for (PayRollManagement p : monList3M) {
 		totalPayM3 += p.getPayRoll();
+		}
 	}
+		if(!monList6M.isEmpty()) {
 	for (PayRollManagement p : monList6M) {
 		totalPayM6 += p.getPayRoll();
+		}
 	}
+		if(!yListM.isEmpty()) {
 	for (PayRollManagement p : yListM) {
 		totalPayM12 += p.getPayRoll();
+		}
 	}
-	
 %>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,500);
@@ -388,7 +411,7 @@ scalex
 	height: 100%;
 }
 
-table>caption>tbody>tr td {
+table>caption>tbody>tr>td {
 	background-color: #e5e5e5;
 }
 </style>
@@ -451,20 +474,13 @@ table>caption>tbody>tr td {
 				</nav>
 
 
-
-
-
-
-
-
-
-
 				<div class="chart_content">
 					<article class='europa'>
 						<div class='pais espana'>
 							<table>
 								<caption>Monthly_Wage For One-Month</caption>
 								<tbody>
+								<% if(!monList1H.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -490,6 +506,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+										}
 									%>
 								</tbody>
 							</table>
@@ -499,6 +516,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Monthly_Wage For Three-Month</caption>
 								<tbody>
+								<% if(!monList3H.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -510,7 +528,7 @@ table>caption>tbody>tr td {
 										for (PayRollManagement p : monList3H) {
 										double forWidth = 100 - ((totalPayH3 - (double) p.getPayRoll()) / totalPayH3) * 100;
 									%>
-									<tr>
+									<tr style="backgroundCollor:">
 										<td><%=p.getEmpName()%></td>
 										<td><%=p.getPayRoll()%> 원<br> <span class='dos'><p
 													style="width:<%=forWidth%>%"></p></span>
@@ -524,6 +542,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 							</table>
@@ -532,7 +551,8 @@ table>caption>tbody>tr td {
 						<div class='pais grecia'>
 							<table>
 								<caption>Monthly_Wage For Six-Month</caption>
-																<tbody>
+								<tbody>
+								<% if(!monList6H.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -558,6 +578,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+										}
 									%>
 								</tbody>
 							</table>
@@ -567,6 +588,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Monthly_Wage For One-Year</caption>
 								<tbody>
+								<% if(!yList.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -592,6 +614,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 							</table>
@@ -603,6 +626,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Daily_Wage For One-Month</caption>
 								<tbody>
+								<% if(!monList1D.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -628,6 +652,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 							</table>
@@ -637,6 +662,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Daily_Wage For Three-Month</caption>
 								<tbody>
+								<% if(!monList3D.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -662,6 +688,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 
@@ -672,6 +699,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Daily_Wage For Six-Month</caption>
 								<tbody>
+								<% if(!monList6D.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -697,6 +725,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 
@@ -707,6 +736,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Daily_Wage For One-Year</caption>
 								<tbody>
+								<% if(!yListD.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -732,6 +762,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 
@@ -745,6 +776,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Hourly_Wage For One-Month</caption>
 								<tbody>
+								<% if(!monList1M.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -770,6 +802,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 							</table>
@@ -779,6 +812,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Hourly_Wage For Three-Month</caption>
 								<tbody>
+								<% if(!monList3M.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -804,6 +838,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 							</table>
@@ -813,6 +848,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Hourly_Wage For Six-Month</caption>
 								<tbody>
+								<% if(!monList6M.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -838,6 +874,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 							</table>
@@ -847,6 +884,7 @@ table>caption>tbody>tr td {
 							<table>
 								<caption>Hourly_Wage For One-Year</caption>
 								<tbody>
+								<% if(!yListM.isEmpty()) { %>
 									<tr>
 										<td>이름</td>
 										<td>급여 지급액</td>
@@ -872,6 +910,7 @@ table>caption>tbody>tr td {
 
 									<%
 										}
+								}
 									%>
 								</tbody>
 							</table>
@@ -881,7 +920,7 @@ table>caption>tbody>tr td {
 				</div>
 			</div>
 
-			<p>전체 직원 지급 예정 금액 : 여기에 더한값 넣기</p>
+			<p>< 최근 1년 기준 ></p>
 			<p></p>
 		</div>
 	</section>
