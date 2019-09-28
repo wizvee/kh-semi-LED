@@ -24,6 +24,9 @@ class Calendar {
 
     pre.addEventListener("click", this.previous);
     nxt.addEventListener("click", this.next);
+
+    const istCal = document.querySelector("#btn_insertCal");
+    istCal.addEventListener("click", this.setCal);
   }
 
   createCal() {
@@ -71,6 +74,25 @@ class Calendar {
     this.createCal();
   };
 
+  setCal() {
+    const date = document.getElementsByName("date")[0].value;
+    const title = document.getElementsByName("title")[0].value;
+    const content = document.getElementsByName("content")[0].value;
+
+    const data = `calDate=${date}&calTitle=${title}&calDetail=${content}`;
+    console.log(data);
+  }
+
+  getResult(servletURL, data, fn) {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", () => {
+      fn(xhr.responseText);
+    });
+    xhr.open("post", "/p_190826_semi/" + servletURL);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(data);
+  }
+
   getMyDate(month, date) {
     return new Date(
       this.target.getFullYear(),
@@ -113,8 +135,7 @@ document.querySelector("#btn_addTask").addEventListener("click", () => {
   const task = document.createElement("input");
   task.setAttribute("class", "inpt-outline");
 
-  if (emps == undefined)
-    console.log("modal! alert!");
+  if (emps == undefined) console.log("modal! alert!");
   else {
     area.appendChild(targetEmp);
     area.appendChild(task);
