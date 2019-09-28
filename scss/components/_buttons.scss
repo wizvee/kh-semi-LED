@@ -1,0 +1,50 @@
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+button {
+  margin: 0;
+  padding: 7px 13px;
+  height: 30px;
+  box-sizing: border-box;
+  vertical-align: top;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  outline: none;
+  background: transparent;
+}
+
+.btn {
+  &-primary {
+    background: $primary;
+    color: $white;
+    transition: all 1s;
+    @include cursor-pointer;
+    &:hover {
+      background: $secondary;
+    }
+  }
+  &-gradient {
+    background: $gradient-point;
+    background-size: 230%;
+    color: $white;
+    transition: all 1s;
+    @include shadow;
+    @include cursor-pointer;
+    &:hover {
+      background-position: right;
+    }
+  }
+  &-outline {
+    padding-top: 6px;
+    border: 1px solid $primary;
+    color: $primary;
+    transition: all 1s;
+    @include cursor-pointer;
+    &:hover {
+      border: 1px solid $secondary;
+      background: $secondary;
+      color: $white;
+    }
+  }
+}
