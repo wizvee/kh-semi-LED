@@ -135,23 +135,23 @@ tr td:nth-child(1) {
   width: 20%;
 }
 tr td:nth-child(2) {
-  width: 40%;
+  width: 55%;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
 tr td:nth-child(3) {
-  width: 17%;
+  width: 10%;
   font-weight: 500;
   text-align: right;
 }
 tr td:nth-child(4) {
-  width: 12%;
+  width: 7.5%;
   font-weight: 500;
   text-align: center;
   border-left: 1px solid #ddd;
 }
 tr td:nth-child(5) {
-  width: 12%;
+  width: 7.5%;
   font-weight: 500;
   text-align: center;
     border-left: 1px solid #ddd;
@@ -160,24 +160,24 @@ tr td:nth-child(5) {
 td span {
   background: #e5e5e5;
   display: inline-block;
-  width: 100%;
+  width: 80%;
   height: .7rem;
   border-radius: .3rem;
 }
-td span:before {
+/* td span:before {
   content:'';
   display: inline-block;
   height: .7rem;
   vertical-align: top;
   border-radius: 2.5rem;
-}
+} */
 td span:after {
   position: absolute;
   right: -30%;
   top: 0;
   font-weight: 500;
 }
-.uno:before {
+/*  .uno:before {
   background: #D87A80;
   width: 65%;
 }
@@ -192,17 +192,21 @@ td span:after {
 .cuatro:before {
   background: #2EC7C9;
   width: 53%;
-}
+} 
+ */
 
-td span p {
+
+.dos > p {
   content:'';
   display: inline-block;
   height: .7rem;
   vertical-align: top;
   border-radius: 2.5rem;
   background: #D87A80;
-  width: 65%;
+  width: 85%;
+  float: left;
 }
+
 
 .italia span:before{opacity: .4}
 .grecia span:before{opacity: .7}
@@ -395,16 +399,19 @@ table>caption>tbody>tr td{
 						  <td>조퇴</td>
 					  </tr>
 					  <%
-					  int forWidth = 100 - (((totalPay - p.getPayRoll()) / totalPay) * 100);
+					  double forWidth = 100 - ((totalPay - p.getPayRoll()) / totalPay) * 100;
 					  %>
 					  <tr> 
 					  <script>
-					  console.log(<%=100 - (((totalPay - p.getPayRoll()) / totalPay) * 100)%>);
-					
+					  console.log("totalPay : " + <%=totalPay%>);
+					  console.log("p.getPayRoll() : " + <%=p.getPayRoll()%>);
+					  console.log("forWidth : " + <%=forWidth%>);
+					  console.log(100 - ((<%=totalPay%> - <%=p.getPayRoll()%>) / <%=totalPay%>) * 100);
+					  
 					  </script>
 						 <td><%=p.getEmpName() %></td>
-						<td><%=p.getPayRoll() %> <p style="float:right"><%=forWidth %> %</p>
-						<span class='dos' ></span><p style="width:<%=forWidth%>%"></p></td>
+						<td><%=p.getPayRoll() %> 
+						<span class='dos' ><p style="width:10%"></p></span><p style="float:right"><%=forWidth %> %</p></td>
 						 <td><%=p.getWorkTime() %></td>
 						  <td><%=p.getLateCount() %></td>
 						  <td><%=p.getEarlyCount() %></td>
