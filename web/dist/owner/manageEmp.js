@@ -107,9 +107,9 @@ function () {
     key: "getDate",
     value: function getDate(time) {
       var year = time.getFullYear();
-      var month = time.getMonth() < 10 ? "0".concat(time.getMonth() + 1) : time.getMonth() + 1;
-      var date = time.getDate();
-      return "".concat(year, "/").concat(month, "/").concat(date);
+      var month = time.getMonth() + 1 < 10 ? "0".concat(time.getMonth() + 1) : time.getMonth() + 1;
+      var date = time.getDate() < 10 ? "0".concat(time.getDate()) : time.getDate();
+      return "".concat(year, "-").concat(month, "-").concat(date);
     }
   }]);
 

@@ -37,7 +37,7 @@ public class ApprovalEmpServlet extends HttpServlet {
 		String busId = ui.getSelectBusId();
 		
 		String from =request.getParameter("empStart");
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		Date empStart = null;
 		try {
 			empStart = sf.parse(from);
