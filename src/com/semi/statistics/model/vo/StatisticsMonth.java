@@ -1,12 +1,10 @@
 package com.semi.statistics.model.vo;
 
-import java.sql.Date;
-
 public class StatisticsMonth {
 	
 	private int year;
 	private int jan;
-	private int fab;
+	private int feb;
 	private int mar;
 	private int apr;
 	private int may;
@@ -22,12 +20,12 @@ public class StatisticsMonth {
 		// TODO Auto-generated constructor stub
 	}
 
-	public StatisticsMonth(int year, int jan, int fab, int mar, int apr, int may, int jun, int july, int aug, int sep,
+	public StatisticsMonth(int year, int jan, int feb, int mar, int apr, int may, int jun, int july, int aug, int sep,
 			int oct, int nov, int dec) {
 		super();
 		this.year = year;
 		this.jan = jan;
-		this.fab = fab;
+		this.feb = feb;
 		this.mar = mar;
 		this.apr = apr;
 		this.may = may;
@@ -56,12 +54,12 @@ public class StatisticsMonth {
 		this.jan = jan;
 	}
 
-	public int getFab() {
-		return fab;
+	public int getFeb() {
+		return feb;
 	}
 
-	public void setFab(int fab) {
-		this.fab = fab;
+	public void setFeb(int feb) {
+		this.feb = feb;
 	}
 
 	public int getMar() {
