@@ -28,11 +28,23 @@ function () {
       _this.createCal();
     });
 
+    _defineProperty(this, "setCal", function () {
+      var date = document.getElementsByName("date")[0].value;
+      var sftId = document.getElementsByName("sftId")[0].value;
+      var title = document.getElementsByName("title")[0].value;
+      var content = document.getElementsByName("content")[0].value;
+      var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content);
+
+      _this.getResult("owner/insertCal.do", data, _this.insertCal); // console.log(data);
+
+    });
+
     _defineProperty(this, "insertCal", function (respText) {
       if (respText != "fail") {
         document.getElementsByName("title")[0].value = "";
-        document.getElementsByName("content")[0].value = ""; // socket.send(respText);
-      }
+        document.getElementsByName("content")[0].value = "";
+        console.log("추가는 OK");
+      } else console.log("실패");
     });
 
     this.now = new Date();
@@ -103,24 +115,13 @@ function () {
       this.countDate = 1;
     }
   }, {
-    key: "setCal",
-    value: function setCal() {
-      var date = document.getElementsByName("date")[0].value;
-      var sftId = document.getElementsByName("sftId")[0].value;
-      var title = document.getElementsByName("title")[0].value;
-      var content = document.getElementsByName("content")[0].value;
-      var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content); // this.getResult("owner/insertCal.do", data, this.insertCal);
-
-      console.log(data);
-    }
-  }, {
     key: "getResult",
     value: function getResult(servletURL, data, fn) {
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", function () {
         fn(xhr.responseText);
       });
-      xhr.open("post", "/p_190826_semi/" + servletURL);
+      xhr.open("post", contextPath + servletURL);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(data);
     }

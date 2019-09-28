@@ -27,14 +27,14 @@ public class AccessEmpFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-//		HttpServletRequest req = (HttpServletRequest) request;
-//		HttpSession session = req.getSession();
-//		
-//		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-//		userInfo.getParameters("E");
-//		session.setAttribute("userInfo", userInfo);
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpSession session = req.getSession();
+		
+		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+		userInfo.getParameters("E");
+		session.setAttribute("userInfo", userInfo);
 
-//		System.out.println("emp:UserInfo갱신");
+		System.out.println("emp:UserInfo갱신");
 		
 		chain.doFilter(request, response);
 	}

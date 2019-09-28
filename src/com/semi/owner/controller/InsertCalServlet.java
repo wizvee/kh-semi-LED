@@ -31,11 +31,11 @@ public class InsertCalServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		
+
 		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
 		Cal cal = new Cal();
-		
-		String from =request.getParameter("calDate");
+
+		String from = request.getParameter("calDate");
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		Date calDate = null;
 		try {
@@ -43,20 +43,19 @@ public class InsertCalServlet extends HttpServlet {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		
-		String sftId = request.getParameter("sftId");
-		
+
+
 		cal.setCalDate(calDate);
 		cal.setBusId(ui.getSelectBusId());
-		cal.setSftId(sftId == null ? "NULL" : sftId);
+		cal.setSftId(request.getParameter("sftId"));
 		cal.setCalTitle(request.getParameter("calTitle"));
 		cal.setCalDetail(request.getParameter("calDetail"));
-		
+
 //		알림 추가
-		
+
 		int r = new CalendarService().insertCal(cal);
-		
-		if(r>0) {
+
+		if (r > 0) {
 			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			ui.setFlag("N");
 
