@@ -19,7 +19,7 @@ public class Statistics {
 	private int earlyLeaveDays;
 	private int empCount;
 	
-	private List<StatisticsDays> allDays;
+	private List<StatisticsMonth> years;
 	
 	
 	public Statistics() {
@@ -29,7 +29,7 @@ public class Statistics {
 	
 	public Statistics(int totalWage, String date, String empName, boolean workingNow, java.sql.Date empStart,
 			java.sql.Date empEnd, int hourlyWorkedHours, int dailyWorkedHours, int monthlyWorkedHours,
-			int totalWorkedHours, int lateDays, int earlyLeaveDays, int empCount, List<StatisticsDays> allDays) {
+			int totalWorkedHours, int lateDays, int earlyLeaveDays, int empCount, List<StatisticsMonth> years) {
 		super();
 		this.totalWage = totalWage;
 		Date = date;
@@ -44,7 +44,7 @@ public class Statistics {
 		this.lateDays = lateDays;
 		this.earlyLeaveDays = earlyLeaveDays;
 		this.empCount = empCount;
-		this.allDays = allDays;
+		this.years = years;
 	}
 
 
@@ -178,14 +178,17 @@ public class Statistics {
 	}
 
 
-	public List<StatisticsDays> getAllDays() {
-		return allDays;
+	public List<StatisticsMonth> getYears() {
+		return years;
 	}
 
 
-	public void setAllDays(List<StatisticsDays> allDays) {
-		this.allDays = allDays;
+	public void setYears(List<StatisticsMonth> years) {
+		this.years = years;
 	}
+
+
+
 
 
 

@@ -36,9 +36,7 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 					<div class="columns">
 						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
 						<div id="firstChart">
-							<div class="area_chart"  style="border: 1px solid blue">2017</div>
-							<div class="area_chart"  style="border: 1px solid blue">2018</div>
-							<div class="area_chart"  style="border: 1px solid blue">2019</div>
+							<div id="firstChartList"></div>
 							<div id="area_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>	
 						</div>	
 						<br>
@@ -46,16 +44,19 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 						<br>
 						<div id="time_line" style="width:700px ; height: 500px; border: 1px solid red"></div>
 						<br>
-						<div id="combo_chart_div" style="width: 700px; height: 500px;border: 1px solid red"></div>
+						<div id="forthChart">
+							<div id="forthChartList"></div>
+							<div id="combo_chart_div" style="width: 700px; height: 500px;border: 1px solid red"></div>
+						</div>
 						<br>
 						<div id="dailyWorkerCount_div" style="width:700px; height:500px; border: 1px solid red"></div>
 						<br>
-						<div id="barchart_div" style="width: 700px; height:500px; border: 1px solid red"></div>
+						<div id="lateEarly_chart" style="width: 700px; height:500px; border: 1px solid red"></div>
 					</div>
 			</div>
 		</div>
 	</section>
 </div>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/owner/statistics.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/statistics.js"></script>
 
 <%@ include file="footer.jsp"%>

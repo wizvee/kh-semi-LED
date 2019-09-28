@@ -62,7 +62,7 @@
 					<li><a href="<%=request.getContextPath()%>/views/attendance.do">근태 관리</a></li>
 					<li><a href="<%=request.getContextPath()%>/owner/payRollManagement.do">급여 관리</a></li>
 					<li><a href="<%=request.getContextPath()%>/owner/statistics.do">직원 통계</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/owner/calendar.jsp">캘린더</a></li>
+					<li><a href="<%=request.getContextPath()%>/owner/calendar.do">캘린더</a></li>
 				</ul>
 			</nav>
 		</aside>

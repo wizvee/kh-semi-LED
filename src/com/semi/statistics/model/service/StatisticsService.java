@@ -10,7 +10,6 @@ import java.util.Map;
 
 import com.semi.statistics.model.dao.StatisticsDao;
 import com.semi.statistics.model.vo.Statistics;
-import com.semi.statistics.model.vo.StatisticsDays;
 
 public class StatisticsService {
 	
@@ -22,15 +21,15 @@ public class StatisticsService {
 		Connection conn=getConnection();
 		List<Statistics>forWageLine=dao.forWageLine(conn, busId);
 		List<Statistics>forWageTable=dao.forWageTable(conn, busId);
-//		List<Statistics>forTimeLine=dao.forTimeLine(conn,busId);
-//		List<Statistics>forWorkingHour=dao.forWorkingHour(conn,busId);
+		List<Statistics>forTimeLine=dao.forTimeLine(conn,busId);
+		List<Statistics>forWorkingHour=dao.forWorkingHour(conn,busId);
 //		List<Statistics>forTotalEmp=dao.forTotalEmp(conn,busId);
 //		List<Statistics>forLateLeave=dao.forLateLeave(conn,busId);
 		
 		allData.put("forWageLine", forWageLine);
 		allData.put("forWageTable", forWageTable);
-//		allData.put("forTimeLine", forTimeLine);
-//		allData.put("forWorkingHour", forWorkingHour);
+		allData.put("forTimeLine", forTimeLine);
+		allData.put("forWorkingHour", forWorkingHour);
 //		allData.put("forTotalEmp", forTotalEmp);
 //		allData.put("forLateLeave", forLateLeave);
 		close(conn);

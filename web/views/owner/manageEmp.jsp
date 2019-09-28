@@ -86,22 +86,26 @@
 								<span><i class="fa fa-sort-desc" aria-hidden="true"></i></span>
 							</div>
 						<%
-							}
+								for(int i = 1; i < sftList.size(); i++) {
+									days = new ArrayList<>(Arrays.asList(sftList.get(i).getSftDay().split(",")));
 						%>
-						
-						
-						
-						
-						
-						
-						
-						<%
-							if(sftList != null && !sftList.isEmpty()) {
-								for(int i = 0; i < sftList.size(); i++) {
-								ArrayList<String> days= new ArrayList<>(Arrays.asList(sftList.get(i).getSftDay().split(",")));
-						%>
-						
-						
+							<div class="temp dropMenu">
+								<input type="hidden" name="sftId" value="<%=sftList.get(i).getSftId()%>">
+								<span><%=sftList.get(i).getSftName() %></span>
+								<div class="sftDay">
+									<span <%=days.contains("일") ? "class='work'" : "" %>>일</span>
+									<span <%=days.contains("월") ? "class='work'" : "" %>>월</span>
+									<span <%=days.contains("화") ? "class='work'" : "" %>>화</span>
+									<span <%=days.contains("수") ? "class='work'" : "" %>>수</span>
+									<span <%=days.contains("목") ? "class='work'" : "" %>>목</span>
+									<span <%=days.contains("금") ? "class='work'" : "" %>>금</span>
+									<span <%=days.contains("토") ? "class='work'" : "" %>>토</span>
+								</div>
+								<span><%=sftList.get(i).getSftOn() %></span>
+								<span><strong>~</strong></span>
+								<span><%=sftList.get(i).getSftOff() %></span>
+								<span><i class="fa fa-sort-desc" aria-hidden="true"></i></span>
+							</div>
 						<%
 								}
 							}
