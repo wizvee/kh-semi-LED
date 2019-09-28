@@ -56,7 +56,7 @@
 			<div class="taskList">
 				
 			</div>
-			<button id="" class="btn-primary">일정 추가</button>
+			<button id="btn_insertCal" class="btn-primary">일정 추가</button>
 		</div>
 	</section>
 

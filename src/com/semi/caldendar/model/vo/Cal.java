@@ -2,7 +2,7 @@ package com.semi.caldendar.model.vo;
 
 import java.util.Date;
 
-public class Canlendar {
+public class Cal {
 
 	private String calId;
 	private Date calDate;
@@ -12,10 +12,10 @@ public class Canlendar {
 	private String calDetail;
 	private boolean done;
 
-	public Canlendar() {
+	public Cal() {
 	}
 
-	public Canlendar(String calId, Date calDate, String busId, String sftId, String calTitle, String calDetail,
+	public Cal(String calId, Date calDate, String busId, String sftId, String calTitle, String calDetail,
 			boolean done) {
 		super();
 		this.calId = calId;

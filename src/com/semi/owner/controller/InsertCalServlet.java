@@ -15,17 +15,15 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.semi.bus.model.service.BusinessService;
-import com.semi.emp.model.vo.Employee;
-import com.semi.noti.model.service.NotiService;
-import com.semi.noti.model.vo.Notification;
+import com.semi.caldendar.model.service.CalendarService;
+import com.semi.caldendar.model.vo.Cal;
 import com.semi.userinfo.model.vo.UserInfo;
 
-@WebServlet("/owner/ApprovalEmp.do")
-public class ApprovalEmpServlet extends HttpServlet {
+@WebServlet("/owner/insertCal.do")
+public class InsertCalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ApprovalEmpServlet() {
+	public InsertCalServlet() {
 		super();
 	}
 
@@ -33,38 +31,32 @@ public class ApprovalEmpServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-
-		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
-		String busId = ui.getSelectBusId();
 		
-		String from =request.getParameter("empStart");
+		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
+		Cal cal = new Cal();
+		
+		String from =request.getParameter("calDate");
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		Date empStart = null;
+		Date calDate = null;
 		try {
-			empStart = sf.parse(from);
+			calDate = sf.parse(from);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-
-		Employee e = new Employee();
-		e.setUserId(request.getParameter("empId"));
-		e.setEmpType(request.getParameter("empType"));
-		e.setEmpWage(Integer.parseInt(request.getParameter("empWage")));
-		e.setSftId(request.getParameter("sftId"));
-		e.setEmpStart(empStart);
-
-		Notification n = new Notification();
-		n.setUserId(ui.getUserId());
-		n.setTargetUserId(e.getUserId());
-		n.setTargetBusId(busId);
-		n.setNotiType("approvalEmp");
-		n.setNotiMsg(e.getUserId() + " 입사 승인");
-		n.setNotiUrl("owner/manageEmp.do");
-
-		int r = new BusinessService().approvalEmp(busId, e);
-		int r2 = new NotiService().insertNoti(n);
-
-		if (r + r2 > 0) {
+		
+		String sftId = request.getParameter("sftId");
+		
+		cal.setCalDate(calDate);
+		cal.setBusId(ui.getSelectBusId());
+		cal.setSftId(sftId == null ? "NULL" : sftId);
+		cal.setCalTitle(request.getParameter("calTitle"));
+		cal.setCalDetail(request.getParameter("calDetail"));
+		
+//		알림 추가
+		
+		int r = new CalendarService().insertCal(cal);
+		
+		if(r>0) {
 			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			ui.setFlag("N");
 
