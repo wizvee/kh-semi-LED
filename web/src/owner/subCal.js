@@ -49,16 +49,11 @@ class SubCal {
       }
       this.body.appendChild(cell);
       cell.addEventListener("click", ({ target }) => {
-        const date = document.getElementsByName("date")[0];
-        const title = document.getElementsByName("title")[0];
-        const content = document.getElementsByName("content")[0];
-        date.value = target.getAttribute("id");
-        title.value = "";
-        content.value = "";
+        // 날짜 클릭 이벤트
       });
     }
-    this.header.innerHTML = `${this.target.getFullYear()}년 ${this.target.getMonth() +
-      1}월`;
+    this.header.innerHTML = `${this.target.getFullYear()}년 <b>${this.target.getMonth() +
+      1}월</b>`;
     this.countDate = 1;
   }
 
