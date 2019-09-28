@@ -63,15 +63,14 @@ public class BusinessService {
 		return list;
 	}
 
-	public int approvalEmp(String busId, Employee e, Notification n) {
+	public int approvalEmp(String busId, Employee e) {
 		Connection conn = getConnection();
 		int r = dao.approvalEmp(conn, busId, e);
-		int r2 = nDao.insertNoti(conn, n);
-		if (r > 0 && r2 > 0)
+		if (r > 0)
 			commit(conn);
 		else
 			rollback(conn);
 		close(conn);
-		return r + r2;
+		return r;
 	}
 }

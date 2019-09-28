@@ -28,6 +28,13 @@ function () {
       _this.createCal();
     });
 
+    _defineProperty(this, "insertCal", function (respText) {
+      if (respText != "fail") {
+        document.getElementsByName("title")[0].value = "";
+        document.getElementsByName("content")[0].value = ""; // socket.send(respText);
+      }
+    });
+
     this.now = new Date();
     this.target = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
     this.countDate = 1;
@@ -54,6 +61,8 @@ function () {
       var nxt = document.querySelector("#btn_calNxt");
       pre.addEventListener("click", this.previous);
       nxt.addEventListener("click", this.next);
+      var istCal = document.querySelector("#btn_insertCal");
+      istCal.addEventListener("click", this.setCal);
     }
   }, {
     key: "createCal",
@@ -92,6 +101,28 @@ function () {
 
       this.header.innerHTML = "".concat(this.target.getFullYear(), "\uB144 <b>").concat(this.target.getMonth() + 1, "\uC6D4</b>");
       this.countDate = 1;
+    }
+  }, {
+    key: "setCal",
+    value: function setCal() {
+      var date = document.getElementsByName("date")[0].value;
+      var sftId = document.getElementsByName("sftId")[0].value;
+      var title = document.getElementsByName("title")[0].value;
+      var content = document.getElementsByName("content")[0].value;
+      var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content); // this.getResult("owner/insertCal.do", data, this.insertCal);
+
+      console.log(data);
+    }
+  }, {
+    key: "getResult",
+    value: function getResult(servletURL, data, fn) {
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", function () {
+        fn(xhr.responseText);
+      });
+      xhr.open("post", "/p_190826_semi/" + servletURL);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(data);
     }
   }, {
     key: "getMyDate",
