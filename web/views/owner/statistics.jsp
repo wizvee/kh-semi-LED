@@ -37,7 +37,7 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
 						<div id="firstChart">
 							<div id="firstChartList"></div>
-							<div id="area_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>	
+							<div id="arealine_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>	
 						</div>	
 						<br>
 						<div id="table_div" style="width:700px ; height: 500px; border: 1px solid red"></div>

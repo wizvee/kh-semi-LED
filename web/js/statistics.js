@@ -73,7 +73,7 @@ function drawChart() {
       },
   };
   
-  var chart = new google.visualization.AreaChart(document.getElementById('area_chart'));
+  var chart = new google.visualization.AreaChart(document.getElementById('arealine_chart'));
   chart.draw(data, options);
 }
 
@@ -403,112 +403,54 @@ for(var y=firstYear;y<=yearNow;y++){
   console.log(dis7);
   
 
-
-// google.charts.load('current', {'packages':['line']});
-// google.charts.setOnLoadCallback(drawChartLate);
-
-
-// function drawChartLate() {
-//   var data = google.visualization.DataTable();
-//   data.addColumn('number', '월');
-//   data.addColumn('number', '지각 수');
-//   data.addColumn('number', '조퇴 수');
-//   data.addColumn('number', '연장근무 수');
-
-//   data.addRows([
-//     [1,  dis6.jan,      dis7.jan,    dis8.jan],
-//     [2,  dis6.feb,      dis7.feb,     dis8.feb],
-//     [3,  dis6.mar,       dis7.mar,    dis8.mar],
-//     [4,  dis6.apr,      dis7.apr,     dis8.apr],
-//     [5,  dis6.may,      dis7.may,      dis8.may],
-//     [6,  dis6.jun,      dis7.jun,      dis8.jun],
-//     [7,  dis6.july,      dis7.july,     dis8.july],
-//     [8,  dis6.aug,      dis7.aug,      dis8.aug],
-//     [9,  dis6.sep,      dis7.sep,      dis8.sep],
-//     [10,  dis6.oct,      dis7.oct,     dis8.oct],
-//     [11,  dis6.nov,      dis7.nov,      dis8.nov],
-//     [12,  dis6.dec,      dis7.dec,      dis8.dec],
-//   ]);
-
-//   var options = {
-//     title: '월별 총 지각/조퇴/연장근무  수',
-//     chartArea: {
-// 			width: '80%',
-// 			height:'70%'
-//     },
-//     animation:{
-// 			easing:'inAndOut',
-// 			startup:true,
-// 			duration:3000
-//     },
-//     hAxis: {
-//       title: '인원수(명)',
-//       minValue: 0
-//     },
-//     vAxis: {
-//       title: '월'
-//     },
-//     // curveType: 'function',
-//     // legend: { position: 'bottom' }
-//   };
-
-//   var chart = new google.charts.Line(document.getElementById('lateEarly_chart'));
-
-//   chart.draw(data, google.charts.Line.convertOptions(options));
-// }
-
-      google.charts.load('current', {'packages':['line']});
-      google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', '월');
-      data.addColumn('number', '지각 수');
-      data.addColumn('number', '조퇴 수');
-      data.addColumn('number', '연장근무 수');
-
- data.addRows([
-      [1,  dis6.jan,      dis7.jan,    dis8.jan],
-      [2,  dis6.feb,      dis7.feb,     dis8.feb],
-      [3,  dis6.mar,       dis7.mar,    dis8.mar], 
-      [4,  dis6.apr,      dis7.apr,     dis8.apr],
-      [5,  dis6.may,      dis7.may,      dis8.may],
-      [6,  dis6.jun,      dis7.jun,      dis8.jun],
-      [7,  dis6.july,      dis7.july,     dis8.july],
-      [8,  dis6.aug,      dis7.aug,      dis8.aug],
-      [9,  dis6.sep,      dis7.sep,      dis8.sep],
-      [10,  dis6.oct,      dis7.oct,     dis8.oct],
-      [11,  dis6.nov,      dis7.nov,      dis8.nov],
-      [12,  dis6.dec,      dis7.dec,      dis8.dec],
-     ]);
-
-      var options = {
-        chart: {
-          title: '월별 근태관리 차트',
-          subtitle: '지각 / 조퇴 / 연장근무 순'
-        },
-        width: '50%',
-        height: '50%',
-        animation:{
-          easing:'inAndOut',
-          startup:true,
-          duration:3000
-        },
-        hAxis: {
-        title: '월'
-        },
-        vAxis: {
-        title: '인원수'
-        },
-      };
-
-      var chart = new google.charts.Line(document.getElementById('lateEarly_chart'));
-
-      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
+google.charts.load('current', {'packages':['line']});
+google.charts.setOnLoadCallback(drawChartLate);
 
 
+function drawChartLate() {
+  var data = google.visualization.arrayToDataTable([
+    ['월', '지각', '조퇴' ,'연장근무'],
+    [1,  dis6.jan,      dis7.jan,    dis8.jan],
+    [2,  dis6.feb,      dis7.feb,     dis8.feb],
+    [3,  dis6.mar,       dis7.mar,    dis8.mar],
+    [4,  dis6.apr,      dis7.apr,     dis8.apr],
+    [5,  dis6.may,      dis7.may,      dis8.may],
+    [6,  dis6.jun,      dis7.jun,      dis8.jun],
+    [7,  dis6.july,      dis7.july,     dis8.july],
+    [8,  dis6.aug,      dis7.aug,      dis8.aug],
+    [9,  dis6.sep,      dis7.sep,      dis8.sep],
+    [10,  dis6.oct,      dis7.oct,     dis8.oct],
+    [11,  dis6.nov,      dis7.nov,      dis8.nov],
+    [12,  dis6.dec,      dis7.dec,      dis8.dec],
+  ]);
+
+  var options = {
+    title: '월별 총 지각/조퇴/연장근무  수',
+    chartArea: {
+			width: '80%',
+			height:'70%'
+    },
+    animation:{
+			easing:'inAndOut',
+			startup:true,
+			duration:3000
+    },
+    hAxis: {
+      title: '월',
+      maxValue: 12
+    },
+    vAxis: {
+      title: '인원수(명)',
+      minValue: 0
+    },
+    curveType: 'none',
+    legend: { position: 'bottom' }
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('lateEarly_chart'));
+
+  chart.draw(data, google.charts.Line.convertOptions(options));
+}
 
 var chartYearList = document.querySelectorAll(".area_chart");
     
@@ -538,24 +480,21 @@ Array.from(chartYearList).forEach(function(e) {
     
       var options = {
         title: '월별 총 지각/조퇴/연장근무  수',
-        chartArea: {
-          width: '80%',
-          height:'70%'
-        },
         animation:{
           easing:'inAndOut',
           startup:true,
           duration:3000
         },
         hAxis: {
-          title: '인원수(명)',
-          minValue: 0
+          title: '월',
+          maxValue: 12
         },
         vAxis: {
-          title: '월'
+          title: '인원수(명)',
+          minValue: 0,
         },
-        curveType: 'function',
-        legend: { position: 'bottom' }
+        curveType: 'none',
+        legend: { position: 'in' }
       };
     
       var chart = new google.visualization.LineChart(document.getElementById('lateEarly_chart'));
