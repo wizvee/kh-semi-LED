@@ -6,6 +6,7 @@ import static common.template.JDBCTemplate.getConnection;
 import static common.template.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.semi.caldendar.model.dao.CalendarDao;
 import com.semi.caldendar.model.vo.Cal;
@@ -23,6 +24,13 @@ public class CalendarService {
 			rollback(conn);
 		close(conn);
 		return r;
+	}
+	
+	public ArrayList<Cal> getCalList(String busId) {
+		Connection conn = getConnection();
+		ArrayList<Cal> list = dao.getCalList(conn, busId);
+		close(conn);
+		return list;
 	}
 
 }

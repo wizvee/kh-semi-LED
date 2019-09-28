@@ -43,8 +43,13 @@ function () {
       if (respText != "fail") {
         document.getElementsByName("title")[0].value = "";
         document.getElementsByName("content")[0].value = "";
-        console.log("추가는 OK");
+        location.href = contextPath + "/owner/calendar.do";
       } else console.log("실패");
+    });
+
+    _defineProperty(this, "setCalList", function (respText) {
+      console.log(JSON.parse(respText));
+      _this.calList = JSON.parse(respText);
     });
 
     this.now = new Date();
@@ -52,6 +57,7 @@ function () {
     this.countDate = 1;
     this.body = selectElements(".calendar_body")[0];
     this.header = selectElements(".calendar_header span")[0];
+    this.calList;
     this.setInit();
   }
 
@@ -59,6 +65,9 @@ function () {
     key: "setInit",
     value: function setInit() {
       var _this2 = this;
+
+      // get calendar list
+      this.getResult("getCalList.do", "", this.setCalList); // create week cells
 
       var week = ["일", "월", "화", "수", "목", "금", "토"];
       week.map(function (w) {
@@ -68,7 +77,8 @@ function () {
 
         _this2.body.appendChild(cell);
       });
-      this.createCal();
+      this.createCal(); // button event
+
       var pre = document.querySelector("#btn_calPrv");
       var nxt = document.querySelector("#btn_calNxt");
       pre.addEventListener("click", this.previous);
@@ -79,6 +89,8 @@ function () {
   }, {
     key: "createCal",
     value: function createCal() {
+      var _this3 = this;
+
       var firstDay = this.target.getDay();
       var lastDate = this.getMyDate(1, 0).getDate();
       selectElements(".calendar_body .date").map(function (v) {
@@ -102,12 +114,21 @@ function () {
         this.body.appendChild(cell);
         cell.addEventListener("click", function (_ref) {
           var target = _ref.target;
+          var targetDate = target.getAttribute("id"); // 일정 추가 event
+
           var date = document.getElementsByName("date")[0];
           var title = document.getElementsByName("title")[0];
           var content = document.getElementsByName("content")[0];
-          date.value = target.getAttribute("id");
+          date.value = targetDate;
           title.value = "";
-          content.value = "";
+          content.value = ""; // 일정 보기 event
+
+          var view = document.querySelectorAll(".viewCal_area")[0];
+
+          _this3.calList.map(function (c) {
+            console.log("ㅠㅠ");
+            if (c.calDate == targetDate) view.textContent = c.calTitle;
+          });
         });
       }
 

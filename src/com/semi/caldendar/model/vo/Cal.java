@@ -12,11 +12,13 @@ public class Cal {
 	private String calDetail;
 	private boolean done;
 
+	private String sftName;
+
 	public Cal() {
 	}
 
-	public Cal(String calId, Date calDate, String busId, String sftId, String calTitle, String calDetail,
-			boolean done) {
+	public Cal(String calId, Date calDate, String busId, String sftId, String calTitle, String calDetail, boolean done,
+			String sftName) {
 		super();
 		this.calId = calId;
 		this.calDate = calDate;
@@ -25,6 +27,7 @@ public class Cal {
 		this.calTitle = calTitle;
 		this.calDetail = calDetail;
 		this.done = done;
+		this.sftName = sftName;
 	}
 
 	public String getCalId() {
@@ -81,6 +84,14 @@ public class Cal {
 
 	public void setDone(boolean done) {
 		this.done = done;
+	}
+
+	public String getSftName() {
+		return sftName;
+	}
+
+	public void setSftName(String sftName) {
+		this.sftName = sftName;
 	}
 
 }

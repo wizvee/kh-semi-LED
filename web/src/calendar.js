@@ -7,10 +7,16 @@ class Calendar {
     this.body = selectElements(".calendar_body")[0];
     this.header = selectElements(".calendar_header span")[0];
 
+    this.calList;
+
     this.setInit();
   }
 
   setInit() {
+    // get calendar list
+    this.getResult("getCalList.do", "", this.setCalList);
+
+    // create week cells
     const week = ["일", "월", "화", "수", "목", "금", "토"];
     week.map(w => {
       const cell = document.createElement("div");
@@ -20,6 +26,7 @@ class Calendar {
     });
     this.createCal();
 
+    // button event
     const pre = document.querySelector("#btn_calPrv");
     const nxt = document.querySelector("#btn_calNxt");
 
@@ -52,12 +59,20 @@ class Calendar {
       }
       this.body.appendChild(cell);
       cell.addEventListener("click", ({ target }) => {
+        const targetDate = target.getAttribute("id");
+        // 일정 추가 event
         const date = document.getElementsByName("date")[0];
         const title = document.getElementsByName("title")[0];
         const content = document.getElementsByName("content")[0];
-        date.value = target.getAttribute("id");
+        date.value = targetDate;
         title.value = "";
         content.value = "";
+        // 일정 보기 event
+        const view = document.querySelectorAll(".viewCal_area")[0];
+        this.calList.map(c => {
+          console.log("ㅠㅠ");
+          if (c.calDate == targetDate) view.textContent = c.calTitle;
+        });
       });
     }
     this.header.innerHTML = `${this.target.getFullYear()}년 <b>${this.target.getMonth() +
@@ -90,8 +105,13 @@ class Calendar {
     if (respText != "fail") {
       document.getElementsByName("title")[0].value = "";
       document.getElementsByName("content")[0].value = "";
-      console.log("추가는 OK");
+      location.href = contextPath + "/owner/calendar.do";
     } else console.log("실패");
+  };
+
+  setCalList = respText => {
+    console.log(JSON.parse(respText));
+    this.calList = JSON.parse(respText);
   };
 
   getResult(servletURL, data, fn) {
