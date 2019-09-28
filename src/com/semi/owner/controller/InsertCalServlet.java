@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.semi.caldendar.model.service.CalendarService;
 import com.semi.caldendar.model.vo.Cal;
-import com.semi.noti.model.vo.Notification;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/owner/insertCal.do")

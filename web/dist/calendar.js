@@ -28,6 +28,13 @@ function () {
       _this.createCal();
     });
 
+    _defineProperty(this, "insertCal", function (respText) {
+      if (respText != "fail") {
+        document.getElementsByName("title")[0].value = "";
+        document.getElementsByName("content")[0].value = ""; // socket.send(respText);
+      }
+    });
+
     this.now = new Date();
     this.target = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
     this.countDate = 1;
@@ -99,9 +106,11 @@ function () {
     key: "setCal",
     value: function setCal() {
       var date = document.getElementsByName("date")[0].value;
+      var sftId = document.getElementsByName("sftId")[0].value;
       var title = document.getElementsByName("title")[0].value;
       var content = document.getElementsByName("content")[0].value;
-      var data = "calDate=".concat(date, "&calTitle=").concat(title, "&calDetail=").concat(content);
+      var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content); // this.getResult("owner/insertCal.do", data, this.insertCal);
+
       console.log(data);
     }
   }, {

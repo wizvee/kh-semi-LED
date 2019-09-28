@@ -76,12 +76,22 @@ class Calendar {
 
   setCal() {
     const date = document.getElementsByName("date")[0].value;
+    const sftId = document.getElementsByName("sftId")[0].value;
     const title = document.getElementsByName("title")[0].value;
     const content = document.getElementsByName("content")[0].value;
 
-    const data = `calDate=${date}&calTitle=${title}&calDetail=${content}`;
+    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}`;
+    // this.getResult("owner/insertCal.do", data, this.insertCal);
     console.log(data);
   }
+
+  insertCal = respText => {
+    if (respText != "fail") {
+      document.getElementsByName("title")[0].value = "";
+      document.getElementsByName("content")[0].value = "";
+      // socket.send(respText);
+    }
+  };
 
   getResult(servletURL, data, fn) {
     const xhr = new XMLHttpRequest();
