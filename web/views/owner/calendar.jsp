@@ -30,6 +30,15 @@
 
 	<section class="item">
 		<div class="item_header">
+			<h2>일정 보기</h2>
+		</div>
+		<div class="item_body">
+			<span></span>
+		</div>
+	</section>
+
+	<section class="item">
+		<div class="item_header">
 			<h2>일정 추가</h2>
 		</div>
 		<div class="item_body subCal_area">

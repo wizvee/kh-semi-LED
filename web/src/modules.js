@@ -8,4 +8,5 @@ socket.onmessage = e => {
   }
 };
 
+const contextPath = "/p_190826_semi/";
 const selectElements = src => Array.from(document.querySelectorAll(src));

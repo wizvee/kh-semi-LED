@@ -11,6 +11,8 @@ socket.onmessage = function (e) {
   }
 };
 
+var contextPath = "/p_190826_semi/";
+
 var selectElements = function selectElements(src) {
   return Array.from(document.querySelectorAll(src));
 };
