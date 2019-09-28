@@ -283,19 +283,19 @@ google.charts.setOnLoadCallback(dailyWorkerCount);
 function dailyWorkerCount() {
 
       var data = new google.visualization.DataTable();
-      data.addColumn('String', '월');
+      data.addColumn('number', '월');
       data.addColumn('number', '근무자수');
 
       data.addRows([
-        [1, 9],   [2, 10],  [3, 4],  [4, 4],  [5, 8],  [6, 9],
+        [1, 8],   [2, 9],  [3, 4],  [4, 4],  [5, 8],  [6, 9],
 		    [7, 8],  [8, 6],  [9, 9],  [10, 10],  [11, 9], [12, 13],
       ]);
-
+      
       var options = {
 		title:'월별 총 근무자 수',
 		hAxis: {
           title: '월',
-          format:'10, 7.5'
+          format:'long'
         },
         vAxis: {
           title: '인원수(명)'
