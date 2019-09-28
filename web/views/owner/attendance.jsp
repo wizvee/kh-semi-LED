@@ -270,14 +270,52 @@ java.util.List"%>
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
     }
-    
-    fieldset {
-	border:5px solid #8B9EB1;
+
+#calendar {
+  width: 80%;
+  
 }
 
-	fieldset > legend {
+
+/* ------- Agenda View ------- */
+#agendaView > table{
+    width: 100%;
+    min-height: 500px;
+    background: #FFF;
+    
+}
+
+#agendaView .fc-agendaView-event-start,
+#agendaView .fc-agendaView-event-end{
+    width: 20%;
+}
+
+#agendaView .fc-agendaView-event-title{
+    width: 60%;
+}
+#agendaView th{
+    height: 30px;
+    font-size: 14px;
+    vertical-align: text-bottom;
+    font-weight: bold;
+    padding: 10px 0 0 10px;
+}
+
+#agendaView td{
+    height: 30px;
+    padding: 10px 0 0 10px;
+    font-size: 14px;
+    vertical-align: text-bottom;    
+}
+
+fieldset {
+	border: 4px solid #e5e5e5;
+}
+
+fieldset > legend {
 	font-size: 1.5em;
 }
+
 </style>
 
 
@@ -289,28 +327,11 @@ java.util.List"%>
 		</div>
 
 		<%if (!list.isEmpty()) {%>
-		<div class="item_body">
-			<div class="calendar_header">
-            <i id="btn_calPrv" class="fa fa-chevron-left" aria-hidden="true"></i>
-            <span>월</span> <i id="btn_calNxt" class="fa fa-chevron-right" aria-hidden="true"></i>
-			<div class="calendar_body"></div>
-         </div>
-	
 
+	<div id="calendar">
+  
+</div>
 
-
-
-
-
-
-			
-			
-			
-		</div>
-		<script src="<%=request.getContextPath()%>/dist/calendar.js"></script>
-		<script>
-			var calendar = new Calendar();
-		</script>
 		
 		<fieldset>
 		<legend> 사업장 근무자 리스트 </legend>
@@ -331,7 +352,7 @@ java.util.List"%>
 						<div class="user-card">
 							<div class="level center">LEVEL <%=e.getEmpLevel()!=null?e.getEmpLevel():"미설정"%></div>
 							<div class="points center"><%=e.getShift().getSftName()%></div>
-							<img alt="/upload/profil/emp_default.png" src=<%=e.getProfilePic()%>>
+							<img alt="" src=<%=request.getContextPath()%>"/upload/profile/"<%=e.getProfilePic()%>>
 						</div>
 						<div class="more-info">
 							<h1><%=e.getUserName()%></h1>
@@ -427,7 +448,7 @@ java.util.List"%>
 					<div class="user-card">
 						<div class="level center">Level 13</div>
 						<div class="points center">5,312 Points</div>
-							<img alt=<%=request.getContextPath()%>"/upload/profil/emp_default.png" src=<%=e.getProfilePic()%>>
+						<img alt="" src=<%=request.getContextPath()%>"/upload/profile/emp_default.png">
 					</div>
 					<div class="more-info">
 							<h1><%=e.getUserName()%></h1>
