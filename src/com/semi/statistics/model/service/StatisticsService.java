@@ -23,14 +23,14 @@ public class StatisticsService {
 		List<Statistics>forWageTable=dao.forWageTable(conn, busId);
 		List<Statistics>forTimeLine=dao.forTimeLine(conn,busId);
 		List<Statistics>forWorkingHour=dao.forWorkingHour(conn,busId);
-//		List<Statistics>forTotalEmp=dao.forTotalEmp(conn,busId);
+		List<Statistics>forTotalEmp=dao.forTotalEmp(conn,busId);
 //		List<Statistics>forLateLeave=dao.forLateLeave(conn,busId);
 		
 		allData.put("forWageLine", forWageLine);
 		allData.put("forWageTable", forWageTable);
 		allData.put("forTimeLine", forTimeLine);
 		allData.put("forWorkingHour", forWorkingHour);
-//		allData.put("forTotalEmp", forTotalEmp);
+		allData.put("forTotalEmp", forTotalEmp);
 //		allData.put("forLateLeave", forLateLeave);
 		close(conn);
 		return allData;

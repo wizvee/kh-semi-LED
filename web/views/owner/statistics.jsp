@@ -49,7 +49,10 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 							<div id="combo_chart_div" style="width: 700px; height: 500px;border: 1px solid red"></div>
 						</div>
 						<br>
-						<div id="dailyWorkerCount_div" style="width:700px; height:500px; border: 1px solid red"></div>
+						<div id="fifthChart">
+							<div id="fifthChartList"></div>
+							<div id="dailyWorkerCount_div" style="width:700px; height:500px; border: 1px solid red"></div>
+						</div>
 						<br>
 						<div id="lateEarly_chart" style="width: 700px; height:500px; border: 1px solid red"></div>
 					</div>
