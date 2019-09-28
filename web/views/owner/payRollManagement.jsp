@@ -3,7 +3,7 @@
 <%@ page
 	import="com.semi.prm.model.vo.PayRollManagement,java.util.List"%>
 <%
-	int totalPay = 0;
+	double totalPay = 0;
 	List<PayRollManagement> list = (List) request.getAttribute("list");
 	for(PayRollManagement p : list) {
 		totalPay += p.getPayRoll();
@@ -11,8 +11,6 @@
 %>
 <script>
 console.log(<%=totalPay%>);
-var test = 100 - (((510300 - 72900)/510300)*100;
-		  console.log(test);
 </script>
 <style>
 
@@ -135,12 +133,12 @@ tr td:nth-child(1) {
   width: 20%;
 }
 tr td:nth-child(2) {
-  width: 55%;
+  width: 50%;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
 tr td:nth-child(3) {
-  width: 10%;
+  width: 15%;
   font-weight: 500;
   text-align: right;
 }
@@ -390,7 +388,6 @@ table>caption>tbody>tr td{
 				<table>
 				   <caption>Monthly_Wage For Three-Month</caption>
 				   	     <tbody>
-				   	     <%for(PayRollManagement p : list) { %>
 					  <tr> 
 						 <td>이름</td>
 						<td>급여 지급액</td>
@@ -398,8 +395,9 @@ table>caption>tbody>tr td{
 						  <td>지각</td>
 						  <td>조퇴</td>
 					  </tr>
+				   	     <%for(PayRollManagement p : list) { %>
 					  <%
-					  double forWidth = 100 - ((totalPay - p.getPayRoll()) / totalPay) * 100;
+					  double forWidth = 100 - ((totalPay - (double)p.getPayRoll()) / totalPay) * 100;
 					  %>
 					  <tr> 
 					  <script>
@@ -410,8 +408,8 @@ table>caption>tbody>tr td{
 					  
 					  </script>
 						 <td><%=p.getEmpName() %></td>
-						<td><%=p.getPayRoll() %> 
-						<span class='dos' ><p style="width:10%"></p></span><p style="float:right"><%=forWidth %> %</p></td>
+						<td><%=p.getPayRoll() %> 원<br>
+						<span class='dos' ><p style="width:<%=forWidth%>%"></p></span><p style="float:right"><%=(int)forWidth %> %</p></td>
 						 <td><%=p.getWorkTime() %></td>
 						  <td><%=p.getLateCount() %></td>
 						  <td><%=p.getEarlyCount() %></td>
