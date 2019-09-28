@@ -42,7 +42,7 @@ public class StatisticsDao {
 				StatisticsMonth s=new StatisticsMonth();
 				s.setYear(rs.getInt(1));
 				s.setJan(rs.getInt(2));
-				s.setFab(rs.getInt(3));
+				s.setFeb(rs.getInt(3));
 				s.setMar(rs.getInt(4));
 				s.setApr(rs.getInt(5));
 				s.setMay(rs.getInt(6));
@@ -134,7 +134,7 @@ public class StatisticsDao {
 				StatisticsMonth s=new StatisticsMonth();
 				s.setYear(rs.getInt(1));
 				s.setJan(rs.getInt(2));
-				s.setFab(rs.getInt(3));
+				s.setFeb(rs.getInt(3));
 				s.setMar(rs.getInt(4));
 				s.setApr(rs.getInt(5));
 				s.setMay(rs.getInt(6));

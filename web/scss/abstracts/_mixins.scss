@@ -16,6 +16,14 @@
   display: grid;
 }
 
+@mixin cfix {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
 // position
 @mixin position-center($top: 50%, $left: 50%) {
   position: absolute;
@@ -141,7 +149,7 @@
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: #ccc; 
+    background-color: #ccc;
   }
 
   /* set button(top and bottom of the scrollbar) */

@@ -81,9 +81,11 @@ class MngEmp {
   getDate(time) {
     const year = time.getFullYear();
     const month =
-      time.getMonth() < 10 ? `0${time.getMonth() + 1}` : time.getMonth() + 1;
-    const date = time.getDate();
-    return `${year}/${month}/${date}`;
+      time.getMonth() + 1 < 10
+        ? `0${time.getMonth() + 1}`
+        : time.getMonth() + 1;
+    const date = time.getDate() < 10 ? `0${time.getDate()}` : time.getDate();
+    return `${year}-${month}-${date}`;
   }
 }
 

@@ -20,7 +20,7 @@
 .calendar_header {
   @include grid;
   grid-template-columns: 25px 1fr 25px;
-  font-size: 90%;
+  font-size: 95%;
 }
 
 .calendar_body {
@@ -28,7 +28,7 @@
   grid-template-columns: repeat(7, 1fr);
 
   div {
-    font-size: 90%;
+    // font-size: 90%;
     text-align: center;
     box-sizing: border-box;
 
@@ -42,6 +42,7 @@
     &.date {
       height: 50px;
       font-size: 85%;
+      @include cursor-pointer;
     }
 
     &.today {
@@ -52,12 +53,77 @@
 
 .subCal_area {
   @include grid;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
+
+  $height: 40px;
 
   input[name="title"],
   textarea,
   button {
     grid-column-end: span 2;
+  }
+
+  input {
+    padding-left: 15px;
+    font-size: 90%;
+  }
+
+  textarea {
+    padding: 15px;
+    font-size: 90%;
+    resize: none;
+  }
+
+  .sftList {
+    position: relative;
+    border: 1px solid $border-default;
+    border-radius: 5px;
+    line-height: $height;
+    @include cursor-pointer;
+
+    &:hover {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      .dropMenu {
+        display: block;
+      }
+    }
+
+    span,
+    li {
+      padding-left: 15px;
+      font-size: 90%;
+    }
+
+    .dropMenu {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      border: 1px solid $border-default;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background: $white;
+      transform: translateX(-1px);
+
+      li {
+        &:hover {
+          background: rgba($secondary, 0.2);
+        }
+      }
+
+      .select {
+        background: rgba($secondary, 0.2);
+      }
+    }
+  }
+
+  .taskList {
+    grid-column-end: span 2;
+    @include grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
   }
 }

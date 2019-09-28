@@ -17,13 +17,13 @@ function () {
     _classCallCheck(this, Calendar);
 
     _defineProperty(this, "previous", function () {
-      _this.target = new Date(_this.target.getFullYear(), _this.target.getMonth() - 1, 1);
+      _this.target = _this.getMyDate(-1, 1);
 
       _this.createCal();
     });
 
     _defineProperty(this, "next", function () {
-      _this.target = new Date(_this.target.getFullYear(), _this.target.getMonth() + 1, 1);
+      _this.target = _this.getMyDate(1, 1);
 
       _this.createCal();
     });
@@ -59,7 +59,7 @@ function () {
     key: "createCal",
     value: function createCal() {
       var firstDay = this.target.getDay();
-      var lastDate = new Date(this.target.getFullYear(), this.target.getMonth() + 1, 0).getDate();
+      var lastDate = this.getMyDate(1, 0).getDate();
       selectElements(".calendar_body .date").map(function (v) {
         return v.remove();
       });
@@ -69,6 +69,7 @@ function () {
         cell.setAttribute("class", "date");
 
         if (firstDay <= i && this.countDate <= lastDate) {
+          cell.setAttribute("id", this.setDateId(this.countDate));
           cell.textContent = this.countDate;
           var compareY = this.target.getFullYear() == this.now.getFullYear();
           var compareM = this.target.getMonth() == this.now.getMonth();
@@ -78,10 +79,31 @@ function () {
         }
 
         this.body.appendChild(cell);
+        cell.addEventListener("click", function (_ref) {
+          var target = _ref.target;
+          var date = document.getElementsByName("date")[0];
+          var title = document.getElementsByName("title")[0];
+          var content = document.getElementsByName("content")[0];
+          date.value = target.getAttribute("id");
+          title.value = "";
+          content.value = "";
+        });
       }
 
-      this.header.textContent = "".concat(this.target.getFullYear(), "\uB144 ").concat(this.target.getMonth(), "\uC6D4");
+      this.header.innerHTML = "".concat(this.target.getFullYear(), "\uB144 <b>").concat(this.target.getMonth() + 1, "\uC6D4</b>");
       this.countDate = 1;
+    }
+  }, {
+    key: "getMyDate",
+    value: function getMyDate(month, date) {
+      return new Date(this.target.getFullYear(), this.target.getMonth() + month, date);
+    }
+  }, {
+    key: "setDateId",
+    value: function setDateId(date) {
+      var month = this.target.getMonth() + 1 < 10 ? "0".concat(this.target.getMonth() + 1) : this.target.getMonth() + 1;
+      date = date < 10 ? "0".concat(date) : date;
+      return "".concat(this.target.getFullYear(), "-").concat(month, "-").concat(date);
     }
   }]);
 
@@ -89,3 +111,32 @@ function () {
 }();
 
 var calendar = new Calendar();
+var sfts = selectElements(".sftList .sft");
+sfts.map(function (s) {
+  return s.addEventListener("click", function (_ref2) {
+    var target = _ref2.target;
+    var id = document.getElementsByName("sftId")[0];
+    var name = selectElements(".sftList .selectSft")[0];
+    sfts.map(function (e) {
+      return e.classList.remove("select");
+    });
+    target.classList.add("select");
+    name.textContent = target.textContent;
+    id.value = target.getAttribute("id");
+  });
+});
+document.querySelector("#btn_addTask").addEventListener("click", function () {
+  var area = document.querySelectorAll(".subCal_area .taskList")[0];
+  var sftId = document.getElementsByName("sftId")[0].value;
+  var emps = empList.find(function (e) {
+    return e.sftId == sftId;
+  });
+  var targetEmp = document.createElement("span");
+  targetEmp.setAttribute("class", "inpt-outline");
+  var task = document.createElement("input");
+  task.setAttribute("class", "inpt-outline");
+  if (emps == undefined) console.log("modal! alert!");else {
+    area.appendChild(targetEmp);
+    area.appendChild(task);
+  }
+});
