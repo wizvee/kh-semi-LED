@@ -34,7 +34,8 @@
 			<h2>일정 보기</h2>
 		</div>
 		<div class="item_body viewCal_area">
-			
+			<div class="calTitle"></div>
+			<div class="calDetail"></div>
 		</div>
 	</section>
 

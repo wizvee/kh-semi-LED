@@ -1,12 +1,28 @@
 "use strict";
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Task = function Task(taskDate, userId, taskMsg) {
+  _classCallCheck(this, Task);
+
+  this.taskDate = taskDate;
+  this.userId = userId;
+  this.taskMsg = taskMsg;
+};
 
 var Calendar =
 /*#__PURE__*/
@@ -33,7 +49,16 @@ function () {
       var sftId = document.getElementsByName("sftId")[0].value;
       var title = document.getElementsByName("title")[0].value;
       var content = document.getElementsByName("content")[0].value;
-      var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content);
+      var taskUserId = document.getElementsByName("taskUserId");
+      var taskMsg = document.getElementsByName("taskMsg");
+      var taskArr = [];
+
+      for (var i = 0; i < _this.taskCount; i++) {
+        var task = new Task(date, taskUserId[i].value, taskMsg[i].value);
+        taskArr.push(task);
+      }
+
+      var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content, "&taskArr=").concat(JSON.stringify(taskArr));
 
       _this.getResult("owner/insertCal.do", data, _this.insertCal); // console.log(data);
 
@@ -48,7 +73,6 @@ function () {
     });
 
     _defineProperty(this, "setCalList", function (respText) {
-      console.log(JSON.parse(respText));
       _this.calList = JSON.parse(respText);
     });
 
@@ -58,6 +82,7 @@ function () {
     this.body = selectElements(".calendar_body")[0];
     this.header = selectElements(".calendar_header span")[0];
     this.calList;
+    this.taskCount = 0;
     this.setInit();
   }
 
@@ -82,10 +107,51 @@ function () {
       var pre = document.querySelector("#btn_calPrv");
       var nxt = document.querySelector("#btn_calNxt");
       pre.addEventListener("click", this.previous);
-      nxt.addEventListener("click", this.next);
+      nxt.addEventListener("click", this.next); // add task div
+
+      var addTask = document.querySelector("#btn_addTask");
+      addTask.addEventListener("click", function () {
+        var area = document.querySelectorAll(".subCal_area .taskList")[0];
+        var sftId = document.getElementsByName("sftId")[0].value;
+        var containEmp = empList.filter(function (e) {
+          return e.sftId == sftId;
+        });
+        if (_toConsumableArray(containEmp).length == 0) console.log("modal! alert!");else {
+          var targetEmpList = document.createElement("div");
+          targetEmpList.setAttribute("class", "targetEmpList");
+          var inpt = document.createElement("input");
+          inpt.setAttribute("type", "hidden");
+          inpt.setAttribute("name", "taskUserId");
+          inpt.value = _toConsumableArray(containEmp)[0].userId;
+          var targetEmp = document.createElement("span");
+          targetEmp.setAttribute("class", "selectTargetUser");
+          targetEmp.textContent = _toConsumableArray(containEmp)[0].userName;
+          var ul = document.createElement("ul");
+          ul.setAttribute("class", "dropMenu");
+
+          _toConsumableArray(containEmp).map(function (e) {
+            var li = document.createElement("li");
+            li.setAttribute("id", e.userId);
+            li.setAttribute("class", "taskUser");
+            li.textContent = e.userName;
+            ul.appendChild(li);
+          });
+
+          targetEmpList.appendChild(inpt);
+          targetEmpList.appendChild(targetEmp);
+          targetEmpList.appendChild(ul);
+          var task = document.createElement("input");
+          task.setAttribute("class", "inpt-outline");
+          task.setAttribute("name", "taskMsg");
+          area.appendChild(targetEmpList);
+          area.appendChild(task);
+          ++_this2.taskCount;
+        }
+      });
       var istCal = document.querySelector("#btn_insertCal");
       istCal.addEventListener("click", this.setCal);
-    }
+    } // create date cells
+
   }, {
     key: "createCal",
     value: function createCal() {
@@ -123,11 +189,17 @@ function () {
           title.value = "";
           content.value = ""; // 일정 보기 event
 
-          var view = document.querySelectorAll(".viewCal_area")[0];
+          var calTitle = document.querySelectorAll(".viewCal_area .calTitle")[0];
+          var calDetail = document.querySelectorAll(".viewCal_area .calDetail")[0];
 
           _this3.calList.map(function (c) {
-            console.log("ㅠㅠ");
-            if (c.calDate == targetDate) view.textContent = c.calTitle;
+            if (c.calDate == targetDate) {
+              calTitle.textContent = c.calTitle;
+              calDetail.textContent = c.calDetail;
+            } else {
+              calTitle.textContent = "";
+              calDetail.textContent = "";
+            }
           });
         });
       }
@@ -177,19 +249,4 @@ sfts.map(function (s) {
     name.textContent = target.textContent;
     id.value = target.getAttribute("id");
   });
-});
-document.querySelector("#btn_addTask").addEventListener("click", function () {
-  var area = document.querySelectorAll(".subCal_area .taskList")[0];
-  var sftId = document.getElementsByName("sftId")[0].value;
-  var emps = empList.find(function (e) {
-    return e.sftId == sftId;
-  });
-  var targetEmp = document.createElement("span");
-  targetEmp.setAttribute("class", "inpt-outline");
-  var task = document.createElement("input");
-  task.setAttribute("class", "inpt-outline");
-  if (emps == undefined) console.log("modal! alert!");else {
-    area.appendChild(targetEmp);
-    area.appendChild(task);
-  }
 });
