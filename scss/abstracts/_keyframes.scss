@@ -1,0 +1,102 @@
+@import "../abstracts/mixins";
+@import "../abstracts/variables";
+
+@keyframes ani_typo {
+  0% {
+    margin-bottom: -40px;
+  }
+
+  30% {
+    margin-bottom: -20px;
+    letter-spacing: 25px;
+  }
+
+  85% {
+    margin-bottom: 0px;
+    letter-spacing: 8px;
+  }
+}
+
+@keyframes ani_login {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  75% {
+    visibility: hidden;
+    margin-bottom: -20px;
+    opacity: 0;
+  }
+}
+
+@keyframes ani_typoline {
+  0% {
+    border: 0;
+  }
+
+  95% {
+    border-top: 1px solid rgba($white, 0.3);
+    border-bottom: 1px solid rgba($white, 0.3);
+  }
+}
+
+@keyframes ani_slideDown {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  50% {
+    visibility: visible;
+    opacity: 0.5;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ani_slideUp {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  50% {
+    visibility: visible;
+    opacity: 0.5;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ani_alert {
+  50% {
+    transform: rotateZ(-15deg);
+  }
+
+  100% {
+    transform: rotateZ(15deg);
+  }
+}
+
+@keyframes ani_badge {
+  0% {
+    transform: scale(.9);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
