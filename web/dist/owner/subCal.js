@@ -8,13 +8,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Calendar =
+var SubCal =
 /*#__PURE__*/
 function () {
-  function Calendar() {
+  function SubCal() {
     var _this = this;
 
-    _classCallCheck(this, Calendar);
+    _classCallCheck(this, SubCal);
 
     _defineProperty(this, "previous", function () {
       _this.target = _this.getMyDate(-1, 1);
@@ -28,25 +28,6 @@ function () {
       _this.createCal();
     });
 
-    _defineProperty(this, "setCal", function () {
-      var date = document.getElementsByName("date")[0].value;
-      var sftId = document.getElementsByName("sftId")[0].value;
-      var title = document.getElementsByName("title")[0].value;
-      var content = document.getElementsByName("content")[0].value;
-      var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content);
-
-      _this.getResult("owner/insertCal.do", data, _this.insertCal); // console.log(data);
-
-    });
-
-    _defineProperty(this, "insertCal", function (respText) {
-      if (respText != "fail") {
-        document.getElementsByName("title")[0].value = "";
-        document.getElementsByName("content")[0].value = "";
-        console.log("추가는 OK");
-      } else console.log("실패");
-    });
-
     this.now = new Date();
     this.target = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
     this.countDate = 1;
@@ -55,7 +36,7 @@ function () {
     this.setInit();
   }
 
-  _createClass(Calendar, [{
+  _createClass(SubCal, [{
     key: "setInit",
     value: function setInit() {
       var _this2 = this;
@@ -73,8 +54,6 @@ function () {
       var nxt = document.querySelector("#btn_calNxt");
       pre.addEventListener("click", this.previous);
       nxt.addEventListener("click", this.next);
-      var istCal = document.querySelector("#btn_insertCal");
-      istCal.addEventListener("click", this.setCal);
     }
   }, {
     key: "createCal",
@@ -100,30 +79,14 @@ function () {
         }
 
         this.body.appendChild(cell);
-        cell.addEventListener("click", function (_ref) {
+        cell.addEventListener("click", function (_ref) {// 날짜 클릭 이벤트
+
           var target = _ref.target;
-          var date = document.getElementsByName("date")[0];
-          var title = document.getElementsByName("title")[0];
-          var content = document.getElementsByName("content")[0];
-          date.value = target.getAttribute("id");
-          title.value = "";
-          content.value = "";
         });
       }
 
       this.header.innerHTML = "".concat(this.target.getFullYear(), "\uB144 <b>").concat(this.target.getMonth() + 1, "\uC6D4</b>");
       this.countDate = 1;
-    }
-  }, {
-    key: "getResult",
-    value: function getResult(servletURL, data, fn) {
-      var xhr = new XMLHttpRequest();
-      xhr.addEventListener("load", function () {
-        fn(xhr.responseText);
-      });
-      xhr.open("post", contextPath + servletURL);
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.send(data);
     }
   }, {
     key: "getMyDate",
@@ -139,36 +102,7 @@ function () {
     }
   }]);
 
-  return Calendar;
+  return SubCal;
 }();
 
-var calendar = new Calendar();
-var sfts = selectElements(".sftList .sft");
-sfts.map(function (s) {
-  return s.addEventListener("click", function (_ref2) {
-    var target = _ref2.target;
-    var id = document.getElementsByName("sftId")[0];
-    var name = selectElements(".sftList .selectSft")[0];
-    sfts.map(function (e) {
-      return e.classList.remove("select");
-    });
-    target.classList.add("select");
-    name.textContent = target.textContent;
-    id.value = target.getAttribute("id");
-  });
-});
-document.querySelector("#btn_addTask").addEventListener("click", function () {
-  var area = document.querySelectorAll(".subCal_area .taskList")[0];
-  var sftId = document.getElementsByName("sftId")[0].value;
-  var emps = empList.find(function (e) {
-    return e.sftId == sftId;
-  });
-  var targetEmp = document.createElement("span");
-  targetEmp.setAttribute("class", "inpt-outline");
-  var task = document.createElement("input");
-  task.setAttribute("class", "inpt-outline");
-  if (emps == undefined) console.log("modal! alert!");else {
-    area.appendChild(targetEmp);
-    area.appendChild(task);
-  }
-});
+var subCal = new SubCal();

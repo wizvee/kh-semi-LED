@@ -6,6 +6,7 @@ class Calendar {
 
     this.body = selectElements(".calendar_body")[0];
     this.header = selectElements(".calendar_header span")[0];
+
     this.setInit();
   }
 
@@ -74,23 +75,23 @@ class Calendar {
     this.createCal();
   };
 
-  setCal() {
+  setCal = () => {
     const date = document.getElementsByName("date")[0].value;
     const sftId = document.getElementsByName("sftId")[0].value;
     const title = document.getElementsByName("title")[0].value;
     const content = document.getElementsByName("content")[0].value;
 
     const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}`;
-    // this.getResult("owner/insertCal.do", data, this.insertCal);
-    console.log(data);
-  }
+    this.getResult("owner/insertCal.do", data, this.insertCal);
+    // console.log(data);
+  };
 
   insertCal = respText => {
     if (respText != "fail") {
       document.getElementsByName("title")[0].value = "";
       document.getElementsByName("content")[0].value = "";
-      // socket.send(respText);
-    }
+      console.log("추가는 OK");
+    } else console.log("실패");
   };
 
   getResult(servletURL, data, fn) {
@@ -98,7 +99,7 @@ class Calendar {
     xhr.addEventListener("load", () => {
       fn(xhr.responseText);
     });
-    xhr.open("post", "/p_190826_semi/" + servletURL);
+    xhr.open("post", contextPath + servletURL);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
   }

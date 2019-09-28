@@ -280,9 +280,7 @@ java.util.List"%>
 			<h2>근태 관리</h2>
 		</div>
 
-		<%
-			if (!list.isEmpty()) {
-		%>
+		<%if (!list.isEmpty()) {%>
 		<div class="item_body_select">
 			<select name="term">
 				<option value="">조회 기간 선택</option>

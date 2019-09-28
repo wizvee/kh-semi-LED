@@ -26,14 +26,14 @@ public class AccessOwnerFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-//		HttpServletRequest req = (HttpServletRequest) request;
-//		HttpSession session = req.getSession();
-//		
-//		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-//		userInfo.getParameters("O");
-//		session.setAttribute("userInfo", userInfo);
-//
-//		System.out.println("own:UserInfo갱신");
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpSession session = req.getSession();
+		
+		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+		userInfo.getParameters("O");
+		session.setAttribute("userInfo", userInfo);
+
+		System.out.println("own:UserInfo갱신");
 		
 		chain.doFilter(request, response);
 	}
