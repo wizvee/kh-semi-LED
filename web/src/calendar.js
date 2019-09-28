@@ -138,11 +138,25 @@ class Calendar {
           // 일정 보기 event
           const calTitle = document.querySelectorAll(".calTitle")[0];
           const calDetail = document.querySelectorAll(".calDetail")[0];
+          const calTask = document.querySelectorAll(".calTask")[0];
+          [...calTask.children].map(e => e.remove());
+
           const calId = target.getAttribute("id");
           const thisEvent = this.calList.find(e => e.calId == calId);
           calTitle.textContent = thisEvent.calTitle;
           calDetail.textContent = thisEvent.calDetail;
-          console.log("일정보기");
+          thisEvent.taskList.map(t => {
+            const ck = document.createElement("input");
+            ck.setAttribute("type", "checkbox");
+            ck.setAttribute("id", t.taskId);
+            const lb = document.createElement("label");
+            lb.setAttribute("for", t.taskId);
+            if (t.userId != userInfo.userId) ck.disabled = true;
+            if (t.done == true) ck.checked = true;
+            lb.innerHTML = `<b>[ ${t.userName} ] </b>${t.taskMsg}`;
+            calTask.appendChild(ck);
+            calTask.appendChild(lb);
+          });
         });
       });
     });
@@ -177,7 +191,6 @@ class Calendar {
       taskArr
     )}`;
     this.getResult("owner/insertCal.do", data, this.insertCal);
-    // console.log(data);
   };
 
   insertCal = respText => {

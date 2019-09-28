@@ -50,6 +50,12 @@ function () {
             // 일정 보기 event
             var calTitle = document.querySelectorAll(".calTitle")[0];
             var calDetail = document.querySelectorAll(".calDetail")[0];
+            var calTask = document.querySelectorAll(".calTask")[0];
+
+            _toConsumableArray(calTask.children).map(function (e) {
+              return e.remove();
+            });
+
             var calId = target.getAttribute("id");
 
             var thisEvent = _this.calList.find(function (e) {
@@ -58,7 +64,18 @@ function () {
 
             calTitle.textContent = thisEvent.calTitle;
             calDetail.textContent = thisEvent.calDetail;
-            console.log("일정보기");
+            thisEvent.taskList.map(function (t) {
+              var ck = document.createElement("input");
+              ck.setAttribute("type", "checkbox");
+              ck.setAttribute("id", t.taskId);
+              var lb = document.createElement("label");
+              lb.setAttribute("for", t.taskId);
+              if (t.userId != userInfo.userId) ck.disabled = true;
+              if (t.done == true) ck.checked = true;
+              lb.innerHTML = "<b>[ ".concat(t.userName, " ] </b>").concat(t.taskMsg);
+              calTask.appendChild(ck);
+              calTask.appendChild(lb);
+            });
           });
         });
       });
@@ -92,8 +109,7 @@ function () {
 
       var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content, "&taskArr=").concat(JSON.stringify(taskArr));
 
-      _this.getResult("owner/insertCal.do", data, _this.insertCal); // console.log(data);
-
+      _this.getResult("owner/insertCal.do", data, _this.insertCal);
     });
 
     _defineProperty(this, "insertCal", function (respText) {

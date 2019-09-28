@@ -36,6 +36,8 @@ public class CalendarService {
 	public ArrayList<Cal> getCalList(String busId) {
 		Connection conn = getConnection();
 		ArrayList<Cal> list = dao.getCalList(conn, busId);
+		for (Cal c : list)
+			c.setTaskList(taskDao.getTask(conn, c.getCalId()));
 		close(conn);
 		return list;
 	}

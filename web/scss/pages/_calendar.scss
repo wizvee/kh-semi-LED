@@ -129,4 +129,15 @@
   }
 }
 
-.viewCal_area {}
+.viewCal_area {
+  input[type="checkbox"] {
+    &[disabled]+label {
+      color: $text-gray;
+    }
+
+    &:checked+label {
+      color: $primary;
+      text-decoration: line-through;
+    }
+  }
+}

@@ -36,6 +36,7 @@
 		<div class="item_body viewCal_area">
 			<div class="calTitle"></div>
 			<div class="calDetail"></div>
+			<div class="calTask"></div>
 		</div>
 	</section>
 

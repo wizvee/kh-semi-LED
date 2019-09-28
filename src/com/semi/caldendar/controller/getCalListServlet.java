@@ -31,9 +31,6 @@ public class getCalListServlet extends HttpServlet {
 
 		ArrayList<Cal> list = new CalendarService().getCalList(ui.getSelectBusId());
 
-		for (Cal c : list)
-			System.out.println(c);
-
 		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		out.print(gs.toJson(list));
 	}
