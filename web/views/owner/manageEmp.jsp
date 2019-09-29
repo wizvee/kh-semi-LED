@@ -79,7 +79,7 @@
 						}
 						} else {
 					%>
-					<span>재직중인 직원이 없습니다.</span>
+					<span class="mngEmpMsg_area">재직중인 직원이 없습니다.</span>
 					<%
 						}
 					%>
@@ -94,7 +94,7 @@
 						}
 						} else {
 					%>
-					<span>퇴직한 직원이 없습니다.</span>
+					<span class="mngEmpMsg_area">퇴직한 직원이 없습니다.</span>
 					<%
 						}
 					%>
@@ -124,7 +124,10 @@
 					%>
 				</div>
 				<div class="editEmp_area">
-					수정 페이지 만들 것것거석서거서
+					<span>이름</span>
+					<span>유형</span>
+					<span>근무조</span>
+					<span>시급</span>
 				</div>
 				<div class="approvalEmpInfo_area">
 					<div>

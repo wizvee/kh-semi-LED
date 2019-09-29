@@ -42,6 +42,7 @@ public class ChattingServlet extends HttpServlet {
 		ChattingService service=new ChattingService();
 		
 		List<Chatting>list=service.getHistory(busId);
+		
 		String chatHistory;
 		
 		if(!list.isEmpty()) {
