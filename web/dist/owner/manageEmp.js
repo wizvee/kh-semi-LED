@@ -35,7 +35,7 @@ function () {
       var _this2 = this;
 
       var mngHeader = selectElements(".mngEmp_header span");
-      var mngBody = selectElements(".mngEmp_body div");
+      var mngBody = selectElements(".mngEmp_body .mngDiv");
       var empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
       var sftItem = selectElements(".busShift_area .sftItem");
       var btnApproval = selectElements(".btn_Approval");
