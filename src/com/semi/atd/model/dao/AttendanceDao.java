@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.semi.atd.model.vo.Attendance;
@@ -46,7 +48,9 @@ public class AttendanceDao {
 				a.setSftId(rs.getString("SFT_ID"));
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));
-				a.setAtdType(rs.getString("ATD_TYPE"));
+				if(rs.getString("ATD_TYPE")!= null) {
+					a.setAtdType(rs.getString("ATD_TYPE").split(","));
+				}
 			}
 		} catch (SQLException b) {
 			b.printStackTrace();
@@ -56,5 +60,53 @@ public class AttendanceDao {
 		}return a;
 
 	}
+	
+	
+	public List<Attendance> getAttendanceList(Connection conn, String date, String id) {
+		List<Attendance> list = new ArrayList<Attendance>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println(id);
+		System.out.println(date);
+		String sql = prop.getProperty("setAttendanceList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, date);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Attendance a = new Attendance();
+				
+				a.setEmpId(rs.getString("EMP_ID"));
+				a.setSftId(rs.getString("SFT_ID"));
+				a.setSftName(rs.getString("SFT_NAME"));
+				a.setSftOn(rs.getString("SFT_ON"));
+				a.setSftOff(rs.getString("SFT_OFF"));
+				if(rs.getString("ATD_TYPE")!= null) {
+					a.setAtdType(rs.getString("ATD_TYPE").split(","));
+				}
+				a.setAtdOn(rs.getString("ATD_ON"));
+				a.setAtdOff(rs.getString("ATD_OFF"));
+				
+				list.add(a);
+				
+			}
+			
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+		
+		
+		
+		
+	}
+	
+	
 }
 
