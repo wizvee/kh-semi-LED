@@ -29,6 +29,12 @@ import com.semi.emp.model.vo.Employee;
 			return list;
 		}
 	
+		public List getDayList(String id) {
+			Connection conn = getConnection();
+			List dayList = dao.getDayList(conn, id);
+			close(conn);
+			return dayList;
+		}
 	
 	
 	

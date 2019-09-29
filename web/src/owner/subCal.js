@@ -38,6 +38,8 @@ class SubCal {
       cell.setAttribute("class", "date");
       if (firstDay <= i && this.countDate <= lastDate) {
         cell.setAttribute("id", this.setDateId(this.countDate));
+        if()
+        cell.setAttribute("style","border-bottom:3px solid red;");
         cell.textContent = this.countDate;
 
         const compareY = this.target.getFullYear() == this.now.getFullYear();
@@ -131,8 +133,18 @@ class SubCal {
   }
 
   previous = () => {
-    this.target = this.getMyDate(-1, 1);
-    this.createCal();
+    $.ajax({
+      url: contextPath + "ajaxPrevCal.do",
+      data : {"date" : this.getMyDate()},
+        method : "post",
+        dataType: "json",
+        success: function(data) {
+
+          this.target = this.getMyDate(-1, 1);
+          this.createCal();
+        }
+    });
+
   };
 
   next = () => {
