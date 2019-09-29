@@ -30,6 +30,7 @@ public class Chatting {
 		this.readed = readed;
 		this.userName = userName;
 		this.profilePic = profilePic;
+		
 	}
 
 	public String getBusId() {

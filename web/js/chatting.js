@@ -86,24 +86,34 @@ btnChatBack.addEventListener("click", () => {
 });
 
 	
-// socket 연결 
-//	var socket=new WebSocket("ws://localhost:9000/p_190826_semi/ws")
-
+//채팅 객체 생성 
+var chatInfo=function(flag, busId, userId, chatType, chatMsg, readed) {
+	this.flag = flag;
+	this.busId = busId;
+	this.userId = userId;
+	this.chatType = chatType;
+	this.chatMsg = chatMsg;
+	this.readed= readed;
+}
 
 //textArea 엔터키 이벤트
 document.getElementById('content').addEventListener('keydown', function(event) {
 	if (event.keyCode == 13) {
-		const content=$("#content").val();
-		const targetId=$()
-		const chatType="msg";
-		const send={
-				"busId":busId, 
-				"userId":userId, 
-				"chatType":"msg", 
-				"chatMsg":content
-				};
-		console.log(send);
+		var chatMsg=$("#content").val();
+		var websocket=new chatInfo("C",busId,userId,"msg",chatMsg,"F");
+		socket.send(JSON.stringify(websocket));
+		
+//		const content=$("#content").val();
+//		const targetId=$()
+//		const chatType="msg";
+//		const send={
+//				"busId":busId, 
+//				"userId":userId, 
+//				"chatType":"msg", 
+//				"chatMsg":content
+//				};
 //		socket.send(JSON.stringify(send));
+		
 		event.preventDefault();
 		document.getElementById('content').value = "";
 	}
