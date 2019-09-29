@@ -43,6 +43,11 @@
       height: 50px;
       font-size: 85%;
       @include cursor-pointer;
+      div {
+        width: 100%;
+        white-space: nowrap;
+        
+      }
     }
 
     &.today {
