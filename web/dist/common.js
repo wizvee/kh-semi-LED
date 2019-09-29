@@ -130,3 +130,6 @@ dropToggle.map(function (e) {
 $(".fa-sign-out").on("click", function () {
   location.href = "/p_190826_semi/logout.do";
 });
+document.querySelectorAll(".fa-cog")[0].addEventListener("click", function () {
+  location.href = contextPath + "businfo.do";
+});
