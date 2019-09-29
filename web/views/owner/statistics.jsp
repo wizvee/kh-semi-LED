@@ -28,16 +28,12 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 				<div class="statistics_list">월별 근무자 수 라인 차트</div>
 				<div class="statistics_list">월별 총 지각 조퇴 바 차트</div>
 			</div>
-			<br>
-			<% if (dataMap!=null){ %>
-			<div><%=dataMap.get("forWageTable").get(0).getEmpName()%></div>
-			<% } %>
 			<div class="statistics_view">
 					<div class="columns">
 						<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
 						<div id="firstChart">
 							<div id="firstChartList"></div>
-							<div id="area_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>	
+							<div id="arealine_chart" style="width: 700px; height: 500px; border: 1px solid red"></div>	
 						</div>	
 						<br>
 						<div id="table_div" style="width:700px ; height: 500px; border: 1px solid red"></div>
@@ -49,9 +45,15 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 							<div id="combo_chart_div" style="width: 700px; height: 500px;border: 1px solid red"></div>
 						</div>
 						<br>
-						<div id="dailyWorkerCount_div" style="width:700px; height:500px; border: 1px solid red"></div>
+						<div id="fifthChart">
+							<div id="fifthChartList"></div>
+							<div id="dailyWorkerCount_div" style="width:700px; height:500px; border: 1px solid red"></div>
+						</div>
 						<br>
-						<div id="lateEarly_chart" style="width: 700px; height:500px; border: 1px solid red"></div>
+						<div id="sixthChart">
+							<div id="sixthChartList"></div>
+							<div id="lateEarly_chart" style="width: 700px; height:500px; border: 1px solid red"></div>
+						</div>
 					</div>
 			</div>
 		</div>

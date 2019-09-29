@@ -49,21 +49,15 @@
 		<!-- 사이드 메뉴 -->
 		<aside class="snb snb_own">
 			<nav>
-				<ul>
-					<li><img class="snb_profile"
-							src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic()%>"
-							alt="프로필 사진"></li>
-					<li><%=loginOwner.getUserName()%></li>
-					<li>
-						<p>============</p>
-					</li>
-					<li><a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/owner/pwdck.jsp">개인 정보</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/attendance.do">근태 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/owner/payRollManagement.do">급여 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/owner/statistics.do">직원 통계</a></li>
-					<li><a href="<%=request.getContextPath()%>/owner/calendar.do">캘린더</a></li>
-				</ul>
+				<img class="snb_profile"
+					src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic()%>" alt="프로필 사진">
+				<span><%=loginOwner.getUserName()%></span>
+				<a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a>
+				<a href="<%=request.getContextPath()%>/views/owner/pwdck.jsp">개인 정보</a>
+				<a href="<%=request.getContextPath()%>/views/attendance.do">근태 관리</a>
+				<a href="<%=request.getContextPath()%>/owner/payRollManagement.do">급여 관리</a>
+				<a href="<%=request.getContextPath()%>/owner/statistics.do">직원 통계</a>
+				<a href="<%=request.getContextPath()%>/owner/calendar.do">캘린더</a>
 			</nav>
 		</aside>
 		<!-- //사이드 메뉴 -->

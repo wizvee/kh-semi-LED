@@ -164,15 +164,31 @@ public class StatisticsDao {
 		ResultSet rs=null;
 		String sql=prop.getProperty("forTotalEmp");
 		List<Statistics>list=new ArrayList<Statistics>();
+		Statistics st= new Statistics();
+		List<StatisticsMonth>lists=new ArrayList<StatisticsMonth>();
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Statistics s=new Statistics();
-				s.setEmpCount(rs.getInt(1));
-				list.add(s);
+				StatisticsMonth s=new StatisticsMonth();
+				s.setYear(rs.getInt(1));
+				s.setJan(rs.getInt(2));
+				s.setFeb(rs.getInt(3));
+				s.setMar(rs.getInt(4));
+				s.setApr(rs.getInt(5));
+				s.setMay(rs.getInt(6));
+				s.setJun(rs.getInt(7));
+				s.setJuly(rs.getInt(8));
+				s.setAug(rs.getInt(9));
+				s.setSep(rs.getInt(10));
+				s.setOct(rs.getInt(11));
+				s.setNov(rs.getInt(12));
+				s.setDec(rs.getInt(13));
+				lists.add(s);
 			}
+			st.setYears(lists);
+			list.add(st);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -182,22 +198,117 @@ public class StatisticsDao {
 		return list;
 	}
 	
-	//6번째 통계 데이
-	public List<Statistics> forLateLeave(Connection conn, String busId){
+	//6번째 통계 데이터 - 지각
+	public List<Statistics> forTotalLate(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("forLateLeave");
+		String sql=prop.getProperty("forTotalLate");
 		List<Statistics>list=new ArrayList<Statistics>();
+		Statistics st= new Statistics();
+		List<StatisticsMonth>lista=new ArrayList<StatisticsMonth>();
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Statistics s=new Statistics();
-				s.setLateDays(rs.getInt(1));
-				s.setEarlyLeaveDays(rs.getInt(2));
-				list.add(s);
+				StatisticsMonth s=new StatisticsMonth();
+				s.setYear(rs.getInt(1));
+				s.setJan(rs.getInt(2));
+				s.setFeb(rs.getInt(3));
+				s.setMar(rs.getInt(4));
+				s.setApr(rs.getInt(5));
+				s.setMay(rs.getInt(6));
+				s.setJun(rs.getInt(7));
+				s.setJuly(rs.getInt(8));
+				s.setAug(rs.getInt(9));
+				s.setSep(rs.getInt(10));
+				s.setOct(rs.getInt(11));
+				s.setNov(rs.getInt(12));
+				s.setDec(rs.getInt(13));
+				lista.add(s);
 			}
+			st.setYears(lista);
+			list.add(st);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	//6번째 통계 데이터 - 조퇴
+	public List<Statistics> forTotalEarlyLeave(Connection conn, String busId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("forTotalEarlyLeave");
+		List<Statistics>list=new ArrayList<Statistics>();
+		Statistics st= new Statistics();
+		List<StatisticsMonth>liste=new ArrayList<StatisticsMonth>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				StatisticsMonth s=new StatisticsMonth();
+				s.setYear(rs.getInt(1));
+				s.setJan(rs.getInt(2));
+				s.setFeb(rs.getInt(3));
+				s.setMar(rs.getInt(4));
+				s.setApr(rs.getInt(5));
+				s.setMay(rs.getInt(6));
+				s.setJun(rs.getInt(7));
+				s.setJuly(rs.getInt(8));
+				s.setAug(rs.getInt(9));
+				s.setSep(rs.getInt(10));
+				s.setOct(rs.getInt(11));
+				s.setNov(rs.getInt(12));
+				s.setDec(rs.getInt(13));
+				liste.add(s);
+			}
+			st.setYears(liste);
+			list.add(st);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	//6번째 통계 데이터 - 연장근무
+	public List<Statistics> forTotalOverTime(Connection conn, String busId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("forTotalOverTime");
+		List<Statistics>list=new ArrayList<Statistics>();
+		Statistics st= new Statistics();
+		List<StatisticsMonth>listp=new ArrayList<StatisticsMonth>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				StatisticsMonth s=new StatisticsMonth();
+				s.setYear(rs.getInt(1));
+				s.setJan(rs.getInt(2));
+				s.setFeb(rs.getInt(3));
+				s.setMar(rs.getInt(4));
+				s.setApr(rs.getInt(5));
+				s.setMay(rs.getInt(6));
+				s.setJun(rs.getInt(7));
+				s.setJuly(rs.getInt(8));
+				s.setAug(rs.getInt(9));
+				s.setSep(rs.getInt(10));
+				s.setOct(rs.getInt(11));
+				s.setNov(rs.getInt(12));
+				s.setDec(rs.getInt(13));
+				listp.add(s);
+			}
+			st.setYears(listp);
+			list.add(st);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
