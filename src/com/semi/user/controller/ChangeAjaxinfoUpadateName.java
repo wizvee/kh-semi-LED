@@ -34,7 +34,6 @@ public class ChangeAjaxinfoUpadateName extends HttpServlet {
 		String name = request.getParameter("name");
 		
 		int resultName = new UserService().UpdateName(userId, name);
-		
 		boolean flag=resultName>0?true:false;
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(flag,response.getWriter());
