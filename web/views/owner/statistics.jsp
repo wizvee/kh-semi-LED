@@ -37,22 +37,22 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 			<div class="statistics_view">
 				<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
 				<div id="firstChart" class="chart focus">
-					<div id="firstChartList"></div>
-					<div id="arealine_chart" style="width:100%; height: 500px; border: 1px solid red"></div>
+					<div id="firstChartList" class="yearSet"></div>
+					<div id="arealine_chart" style="height: 500px;"></div>
 				</div>
-				<div id="table_div" class="chart" style="width:100%; height: 500px; border: 1px solid red"></div>
-				<div id="time_line" class="chart" style="width:100%; height: 500px; border: 1px solid red"></div>
+				<div id="table_div" class="chart" style="height: 500px;"></div>
+				<div id="time_line" class="chart" style="height: 500px;"></div>
 				<div id="forthChart" class="chart">
-					<div id="forthChartList"></div>
-					<div id="combo_chart_div" style="width: 100%; height: 500px;border: 1px solid red"></div>
+					<div id="forthChartList" class="yearSet"></div>
+					<div id="combo_chart_div" style="height: 500px;"></div>
 				</div>
 				<div id="fifthChart" class="chart">
-					<div id="fifthChartList"></div>
-					<div id="dailyWorkerCount_div" style="width:100%; height:500px; border: 1px solid red"></div>
+					<div id="fifthChartList" class="yearSet"></div>
+					<div id="dailyWorkerCount_div" style="height: 500px;"></div>
 				</div>
 				<div id="sixthChart" class="chart">
-					<div id="sixthChartList"></div>
-					<div id="lateEarly_chart" style="width:100%; height:500px; border: 1px solid red"></div>
+					<div id="sixthChartList" class="yearSet"></div>
+					<div id="lateEarly_chart" style="height: 500px;"></div>
 				</div>
 			</div>
 		</div>
@@ -62,13 +62,13 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 	const statisHeader = selectElements(".statis_body span");
 	const statisBody = selectElements(".statistics_view .chart");
 	statisHeader.map((e, index) => {
-		e.addEventListener("click", ({
-			target
-		}) => {
+		e.addEventListener("click", ({target}) => {
 			statisHeader.map(s => s.classList.remove("focus"));
 			target.classList.add("focus");
-			statisBody.map(s => s.classList.remove("focus"));
-			statisBody[index].classList.add("focus");
+			var height = -(500 * index);
+			statisBody.map(s => {
+				s.style.transform = "translateY(" + height + "px)";
+			})
 		});
 	});
 </script>

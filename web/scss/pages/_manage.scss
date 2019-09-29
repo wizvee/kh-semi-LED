@@ -48,6 +48,41 @@
             }
         }
 
+        .viewEmp_area {
+            @include grid;
+            grid-template-columns: 100px 1fr;
+            border-radius: 10px;
+            border: 1px solid $border-default;
+
+            .pic {
+                text-align: center;
+
+                .square_profile {
+                    $size: 100px;
+                    width: $size;
+                    height: $size;
+                    border-radius: 50%;
+                }
+            }
+
+            .text {
+                @include grid;
+                grid-template-rows: repeat(6, 35px);
+                // background: blue;
+                font-size: 95%;
+
+                div {
+                    @include grid;
+                    grid-template-columns: 90px 1fr;
+                }
+
+                span {
+                    padding-left: 15px;
+                    // line-height: 33px;
+                }
+            }
+        }
+
         .empList_area {
             @include grid;
             grid-template-columns: 50px 1fr 100px;
@@ -120,7 +155,7 @@
                 .dropToggle {
                     position: relative;
                 }
-                
+
                 .dropMenu {
                     // display: none;
                     position: absolute;

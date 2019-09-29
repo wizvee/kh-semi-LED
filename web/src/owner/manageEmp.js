@@ -7,7 +7,7 @@ class MngEmp {
 
   setInit() {
     const mngHeader = selectElements(".mngEmp_header span");
-    const mngBody = selectElements(".mngEmp_body div");
+    const mngBody = selectElements(".mngEmp_body .mngDiv");
     const empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
 
     const sftItem = selectElements(".busShift_area .sftItem");

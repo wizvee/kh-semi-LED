@@ -32,19 +32,43 @@
 				<span class="focus">재직</span> <span>퇴직</span> <span>진행</span>
 			</div>
 			<div class="mngEmp_body">
-				<div class="mngEmpWork_area focus">
+				<div class="mngEmpWork_area mngDiv focus">
 					<%
 						if (!workList.isEmpty()) {
 							for (Employee e : workList) {
 					%>
-					<div class="empList_area">
-						<img class="item_profile"
-							src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
-						<%=e.getUserName()%>
-						<div>
-							<!-- <button class="btn-primary btn_Approval">승인</button> -->
-							<input type="hidden" value="<%=e.getUserId()%>">
-							<!-- <button class="btn-outline btn_Reject">거절</button> -->
+					<div class="viewEmp_area">
+						<input type="hidden" value="<%=e.getUserId()%>">
+						<div class="pic">
+							<img class="square_profile"
+								src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
+							<span><%=e.getUserName()%></span>
+						</div>
+						<div class="text">
+							<div>
+								<span>입사일</span>
+								<span><%=e.getEmpStart() %></span>
+							</div>
+							<div>
+								<span>전화번호</span>
+								<span><%=e.getUserPhone() %></span>
+							</div>
+							<div>
+								<span>이메일</span>
+								<span><%=e.getEmail() %></span>
+							</div>
+							<div>
+								<span>유형</span>
+								<span><%=e.getEmpType() %></span>
+							</div>
+							<div>
+								<span>급여</span>
+								<span><%=e.getEmpWage()%></span>
+							</div>
+							<div>
+								<span>근무조</span>
+								<span><%=e.getSftId() %></span>
+							</div>
 						</div>
 					</div>
 					<%
@@ -56,7 +80,7 @@
 						}
 					%>
 				</div>
-				<div class="mngEmpResign_area">
+				<div class="mngEmpResign_area mngDiv">
 					<%
 						if (!resignList.isEmpty()) {
 							for (Employee e : resignList) {
@@ -71,7 +95,7 @@
 						}
 					%>
 				</div>
-				<div class="mngEmpEnroll_area">
+				<div class="mngEmpEnroll_area mngDiv">
 					<%
 						if (!enrollList.isEmpty()) {
 							for (Employee e : enrollList) {
@@ -100,9 +124,11 @@
 						<span>고용 형태</span>
 						<div>
 							<input type="radio" name="empType" value="H" id="et-h" checked>
-							<label for="et-h">시급직</label> <input type="radio" name="empType" value="D" id="et-d"> <label
-								for="et-d">일당직</label> <input type="radio" name="empType" value="M" id="et-M"> <label
-								for="et-M">월급직</label>
+							<label for="et-h">시급직</label>
+							<input type="radio" name="empType" value="D" id="et-d">
+							<label for="et-d">일당직</label>
+							<input type="radio" name="empType" value="M" id="et-M">
+							<label for="et-M">월급직</label>
 						</div>
 					</div>
 					<div>
@@ -118,17 +144,18 @@
 							<input type="hidden" name="sftId" value="<%=sftList.get(0).getSftId()%>">
 							<span><%=sftList.get(0).getSftName()%></span>
 							<div class="sftDay">
-								<span <%=days.contains("일") ? "class='work'" : ""%>>일</span> <span
-									<%=days.contains("월") ? "class='work'" : ""%>>월</span> <span
-									<%=days.contains("화") ? "class='work'" : ""%>>화</span> <span
-									<%=days.contains("수") ? "class='work'" : ""%>>수</span> <span
-									<%=days.contains("목") ? "class='work'" : ""%>>목</span> <span
-									<%=days.contains("금") ? "class='work'" : ""%>>금</span> <span
-									<%=days.contains("토") ? "class='work'" : ""%>>토</span>
+								<span <%=days.contains("일") ? "class='work'" : ""%>>일</span>
+								<span <%=days.contains("월") ? "class='work'" : ""%>>월</span>
+								<span <%=days.contains("화") ? "class='work'" : ""%>>화</span>
+								<span <%=days.contains("수") ? "class='work'" : ""%>>수</span>
+								<span <%=days.contains("목") ? "class='work'" : ""%>>목</span>
+								<span <%=days.contains("금") ? "class='work'" : ""%>>금</span>
+								<span <%=days.contains("토") ? "class='work'" : ""%>>토</span>
 							</div>
-							<span><%=sftList.get(0).getSftOn()%></span> <span><strong>~</strong></span>
-							<span><%=sftList.get(0).getSftOff()%></span> <span><i class="fa fa-sort-desc"
-									aria-hidden="true"></i></span>
+							<span><%=sftList.get(0).getSftOn()%></span>
+							<span><strong>~</strong></span>
+							<span><%=sftList.get(0).getSftOff()%></span>
+							<span><i class="fa fa-sort-desc" ria-hidden="true"></i></span>
 						</div>
 						<%
 							for (int i = 1; i < sftList.size(); i++) {

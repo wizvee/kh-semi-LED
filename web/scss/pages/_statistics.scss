@@ -31,20 +31,20 @@
 }
 
 .statistics_view {
+    overflow: hidden;
+    height: 500px;
+
     &>.chart {
-        display: none;
-        visibility: hidden;
+        position: relative;
         width: 100%;
         height: 500px;
-        opacity: 0;
         transition: all 0.7s;
 
-        &.focus {
-            display: block;
-            visibility: visible;
-            opacity: 1;
-            animation: ani_slideUp 1s 1;
-            animation-fill-mode: both;
+        .yearSet {
+            z-index: 30;
+            position: absolute;
+            right: 0;
+            background: green;
         }
     }
 }
