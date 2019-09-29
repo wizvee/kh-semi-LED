@@ -29,41 +29,42 @@
 		</div>
 	</section>
 
-	<section class="item">
-		<div class="item_header">
-			<h2>일정 보기</h2>
-		</div>
-		<div class="item_body viewCal_area">
-			<div class="calTitle"></div>
-			<div class="calDetail"></div>
-			<div class="calTask"></div>
-		</div>
-	</section>
-
-	<section class="item">
-		<div class="item_header">
-			<h2>일정 추가</h2>
-		</div>
-		<div class="item_body subCal_area">
-			<input type="text" name="date" class="inpt-outline" readonly>
-			<div class="sftList">
-				<input type="hidden" name="sftId" value="<%=sftList.get(0).getSftId() %>">
-				<span class="selectSft"><%=sftList.get(0).getSftName() %></span>
-				<ul class="dropMenu">
-					<%
-						for (Shift s : sftList) {
-					%>
-					<li id="<%=s.getSftId()%>" class="sft"><%=s.getSftName()%></li>
-					<%
-						}
-					%>
-				</ul>
+	<section class="item cal_item">
+		<div class="viewCalendar_area focus">
+			<div class="item_header">
+				<h2>일정 보기</h2>
 			</div>
-			<input type="text" name="title" class="inpt-outline">
-			<textarea name="content" class="inpt-outline" cols="30" rows="10"></textarea>
-			<button id="btn_addTask" class="btn-primary">할일 추가</button>
-			<div class="taskList"></div>
-			<button id="btn_insertCal" class="btn-primary">일정 추가</button>
+			<div class="item_body viewCal_area">
+				<div class="calTitle"></div>
+				<div class="calDetail"></div>
+				<div class="calTask"></div>
+			</div>
+		</div>
+		<div class="addCal_area">
+			<div class="item_header">
+				<h2>일정 추가</h2>
+			</div>
+			<div class="item_body subCal_area">
+				<input type="text" name="date" class="inpt-outline" readonly>
+				<div class="sftList">
+					<input type="hidden" name="sftId" value="<%=sftList.get(0).getSftId() %>">
+					<span class="selectSft"><%=sftList.get(0).getSftName() %></span>
+					<ul class="dropMenu">
+						<%
+							for (Shift s : sftList) {
+						%>
+						<li id="<%=s.getSftId()%>" class="sft"><%=s.getSftName()%></li>
+						<%
+							}
+						%>
+					</ul>
+				</div>
+				<input type="text" name="title" class="inpt-outline">
+				<textarea name="content" class="inpt-outline" cols="30" rows="10"></textarea>
+				<button id="btn_addTask" class="btn-primary">할일 추가</button>
+				<div class="taskList"></div>
+				<button id="btn_insertCal" class="btn-primary">일정 추가</button>
+			</div>
 		</div>
 	</section>
 

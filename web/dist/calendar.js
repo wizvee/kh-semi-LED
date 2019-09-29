@@ -45,9 +45,13 @@ function () {
           div.setAttribute("id", e.calId);
           div.textContent = e.calTitle;
           cell.appendChild(div);
-          div.addEventListener("click", function (_ref) {
-            var target = _ref.target;
-            // 일정 보기 event
+          div.addEventListener("click", function (event) {
+            event.stopPropagation();
+            var view = document.querySelectorAll(".viewCalendar_area")[0];
+            var add = document.querySelectorAll(".addCal_area")[0];
+            view.classList.add("focus");
+            add.classList.remove("focus"); // 일정 보기 event
+
             var calTitle = document.querySelectorAll(".calTitle")[0];
             var calDetail = document.querySelectorAll(".calDetail")[0];
             var calTask = document.querySelectorAll(".calTask")[0];
@@ -56,7 +60,7 @@ function () {
               return e.remove();
             });
 
-            var calId = target.getAttribute("id");
+            var calId = event.target.getAttribute("id");
 
             var thisEvent = _this.calList.find(function (e) {
               return e.calId == calId;
@@ -218,8 +222,18 @@ function () {
         }
 
         this.body.appendChild(cell);
-        cell.addEventListener("click", function (_ref2) {
-          var target = _ref2.target;
+        cell.addEventListener("click", function (_ref) {
+          var target = _ref.target;
+          var view = document.querySelectorAll(".viewCalendar_area")[0];
+          var add = document.querySelectorAll(".addCal_area")[0];
+          view.classList.remove("focus");
+          add.classList.add("focus");
+          selectElements(".taskList div").map(function (e) {
+            return e.remove();
+          });
+          selectElements(".taskList input").map(function (e) {
+            return e.remove();
+          });
           var targetDate = target.getAttribute("id"); // 일정 추가 event
 
           var date = document.getElementsByName("date")[0];
@@ -269,8 +283,14 @@ promiseGetDefault("getCalList.do").then(function (res) {
 });
 var sfts = selectElements(".sftList .sft");
 sfts.map(function (s) {
-  return s.addEventListener("click", function (_ref3) {
-    var target = _ref3.target;
+  return s.addEventListener("click", function (_ref2) {
+    var target = _ref2.target;
+    selectElements(".taskList div").map(function (e) {
+      return e.remove();
+    });
+    selectElements(".taskList input").map(function (e) {
+      return e.remove();
+    });
     var id = document.getElementsByName("sftId")[0];
     var name = selectElements(".sftList .selectSft")[0];
     sfts.map(function (e) {
