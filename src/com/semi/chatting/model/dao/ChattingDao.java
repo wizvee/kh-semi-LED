@@ -68,7 +68,7 @@ public class ChattingDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			pstmt.setString(2, userId);
-			pstmt.setString(3, "NULL");
+			pstmt.setString(3, null);
 			pstmt.setString(4, chatType);
 			pstmt.setString(5, chatMsg);
 			result=pstmt.executeUpdate();

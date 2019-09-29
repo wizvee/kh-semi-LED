@@ -14,9 +14,24 @@
 			<h2>근무</h2>
 		</div>
 		<div class="item_body">
-
+			<button id="test">테스트</button>
 		</div>
 	</section>
-	
+
+	<script>
+		document.querySelector("#test").addEventListener("click", () => {
+			const test = {
+				flag: "C",
+				busId: "BUS5",
+				userId: "USER1",
+				chatType: "type",
+				chatMsg: "다시 테스트"
+			};
+
+			socket.send(JSON.stringify(test));
+		})
+	</script>
+
+
 </div>
 <%@ include file="footer.jsp"%>
