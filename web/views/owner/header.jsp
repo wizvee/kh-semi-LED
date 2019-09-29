@@ -84,7 +84,6 @@
 					<div class="chatRoom_area" style="display: none;">
 						<button class="btn_chatBack">돌아가기</button>
 						<div class="chatMsg_area">
-							<p></p>
 						</div>
 						<div class="chatMsg_enter">
 							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white"

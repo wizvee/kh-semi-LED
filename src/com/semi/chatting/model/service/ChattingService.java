@@ -24,9 +24,9 @@ public class ChattingService {
 	}
 	
 	// 채팅 내역 DB에 저장하기
-	public int insertChat(Chatting c) {
+	public int insertChat(String busId,String userId,String chatType,String chatMsg) {
 		Connection conn=getConnection();
-		int result=dao.insertChatting(conn,c);
+		int result=dao.insertChatting(conn,busId,userId,chatType,chatMsg);
 		if(result>0) {
 			commit(conn);
 		}else {

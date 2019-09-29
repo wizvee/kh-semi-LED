@@ -65,27 +65,29 @@ public class SemiWebSocket {
 			System.out.println(flag);
 			
 			System.out.println("여기까진옴?");
-			chat.setBusId(jsonObject.get("busId").toString());
-			chat.setUserId(jsonObject.get("userId").toString());
-			chat.setChatType(jsonObject.get("chatType").toString());
-			chat.setChatMsg(jsonObject.get("chatMsg").toString());
-			chat.setReaded(jsonObject.get("readed").toString());
-			session.getUserProperties().put("chatting", chat);
+			String busId=(jsonObject.get("busId").toString());
+			String userId=(jsonObject.get("userId").toString());
+			String chatType=(jsonObject.get("chatType").toString());
+			String chatMsg=(jsonObject.get("chatMsg").toString());
+			String readed=(jsonObject.get("readed").toString());
+			
+			session.getUserProperties().put("busId", busId);
+			session.getUserProperties().put("userId", userId);
+			session.getUserProperties().put("chatType", chatType);
+			session.getUserProperties().put("chatMsg", chatMsg);
+			session.getUserProperties().put("readed", readed);
 			
 			for(Session s:session.getOpenSessions()) {
-				if(s.getUserProperties().get("chatting")!=null) {
-					Chatting c=(Chatting)s.getUserProperties().get("chatting");
-					if(c.getBusId().equals(chat.getBusId())) {
+				if(s.getUserProperties().get("busId")!=null) {
 						try {
-							System.out.println("여기까지오나?");
-							s.getBasicRemote().sendObject(chat);
+							System.out.println("이값음?"+chatMsg);
+							s.getBasicRemote().sendText(chatMsg);
 						}catch(Exception e) {
 							e.printStackTrace();
 						}
 					}
-				}
-			int result=service.insertChat(chat);
-			System.out.println("저장결과:"+result);
+				int result=service.insertChat(busId,userId,chatType,chatMsg);
+				System.out.println("저장결과:"+result);
 		}
 		
 		
