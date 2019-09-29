@@ -12,12 +12,12 @@
 	grid-template-rows: repeat(1, 1fr);
 }
 
-.item .item_mypage .pic {
+.item .item_mypage #pic {
 	display: table-cell;
 	vertical-align: middle;
 }
 
-.item .item_mypage .pic .snb_profile {
+.item .item_mypage #pic .snb_profile {
 	border: 2px solid #fff;
     width: 50px;
     height: 50px;
@@ -69,33 +69,29 @@
     box-shadow: 5px 5px 7px rgba(0,0,0,0.1);
 }
 
-/* .item .item_mypage_pic{
-	height: 80px;
-} */
-
 #profile, #ori_profile {
 	display:none;
 }
 
-#chevron-right-name{
+/* #chevron-right-name{
 	position: relative;
 	/* left:950px; */
-	left:88.8%;
-}
+	/* left:88.8%; */
+} */
 
 #chevron-right-phone{
-	position: relative;
-	left:81.3%;
+	/* position: relative;
+	left:81.3%; */
 }
 
 #chevron-right-pw{
-	position: relative;
-	left:84.6%;
+	/* position: relative;
+	left:84.6%; */
 }
 
 #chevron-right-quit{
-	position: relative;
-	left:75%;
+	/* position: relative;
+	left:75%; */
 }
 
 label {
@@ -110,6 +106,14 @@ label {
     outline: none;
 }
 
+.mypage_header {
+	display: grid;
+	grid-template-columns: 70px 1fr 40px;
+    font-size: 95%;
+}
+.mypage_header .mypage_frist_span {
+	
+}
 </style>
 
 <div id="content">
@@ -122,8 +126,9 @@ label {
 				<input type="hidden" name="userId" value=<%=infoUser.getUserId() %>>
 				<input type="hidden" name="infoUserPwd" value=<%=infoUser.getPassword() %>>
 				<button id="btn_pic_view" class="btn_pic" onclick="return false;">
-					<div class="pic">
-						<b>사진 :</b> <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic">
+					<div class="mypage_header" id="pic">
+						<span class="mypage_frist_span"><b>프로필 :</b></span>
+						<span><img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic"></span>
 					</div>
 				</button>
 				<div class="item_body item_mypage_pic">
@@ -133,20 +138,22 @@ label {
 				</div>
 
 				<button id="btn_email_view" class="btn_email" onclick="return false;">
-					<div>
-						<span><b>이메일 :</b></span>
+					<div class="mypage_header">
+						<span class="mypage_frist_span"><b>이메일 :</b></span>
 						<span><%=infoUser.getEmail() %></span>
 					</div>
 				</button>
 				<div class="item_body item_mypage_email">
 					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 이메일 : </i> 
 					<input type="email" class="inpt-outline" name="email" id="email" placeholder="이메일을 입력하세요.">
+					<input type="text" class="inpt-outline" name="email_number" id="email_number" placeholder="인증번호를 입력하세요.">
+					<button id="btn_email" class="btn-primary" onclick="return false;">인증번호 전송</button>
 					<button id="btn_email" class="btn-primary" onclick="return false;">이메일 변경</button>
 				</div>
 
 				<button id="btn_name_view" class="btn_name" onclick="return false;">
-					<div>
-						<span><b>이름 :</b></span>
+					<div class="mypage_header">
+						<span><b>이&nbsp;&nbsp;&nbsp;름 :</b></span>
 						<span><%=infoUser.getUserName() %></span>
 						<span><i class="fa fa-chevron-right" id="chevron-right-name" aria-hidden="true"></i></span>
 					</div>
@@ -159,7 +166,7 @@ label {
 				</div>
 
 				<button id="btn_phone_view" class="btn_phone" onclick="return false;">
-					<div>
+					<div class="mypage_header">
 						<span><b>휴대폰 :</b></span>
 						<span><%=infoUser.getUserPhone()%></span>
 						<span><i class="fa fa-chevron-right" id="chevron-right-phone" aria-hidden="true"></i></span>
@@ -174,7 +181,7 @@ label {
 				
 
 				<button id="btn_password_view" class="btn_password" onclick="return false;">
-					<div>
+					<div class="mypage_header">
 						<span><b>비밀번호 :</b></span>
 						<span>********</span>
 						<span><i class="fa fa-chevron-right" id="chevron-right-pw" aria-hidden="true"></i></span>
@@ -202,7 +209,7 @@ label {
 				</div>
 				
 				<button id="btn_quit_view" class="btn_quit" onclick="return false;">
-					<div>
+					<div class="mypage_header">
 						<span><b>회원탈퇴 :</b></span>
 						<span>회원 가입일 <%=infoUser.getJoinDate()%></span>
 						<span><i class="fa fa-chevron-right" id="chevron-right-quit" aria-hidden="true"></i></span>
@@ -224,6 +231,7 @@ label {
 
 <script>
 	 	var picarea = document.querySelectorAll(".item_mypage_pic")[0];
+	 	var emailarea = document.querySelectorAll(".item_mypage_email")[0];
 	 	var namearea = document.querySelectorAll(".item_mypage_name")[0];
 	 	var phonearea = document.querySelectorAll(".item_mypage_phone")[0];
 	 	var pwdarea = document.querySelectorAll(".item_mypage_pw")[0];
@@ -233,6 +241,7 @@ label {
 	 	$(".btn_pic").click(function(){	
 	 		if(picarea.style.display==""||picarea.style.display == "none") {
 	 			picarea.style.display = "block";
+	 			emailarea.style.display = "none";
 	 			namearea.style.display = "none";
 	 			phonearea.style.display = "none";
 	 			pwdarea.style.display = "none";
@@ -244,21 +253,27 @@ label {
 	 	});
 	 });
 	
-/* 	$(function(){
+	$(function(){
 	 	$(".btn_email").click(function(){
-	 		var area = document.querySelectorAll(".item_mypage_email")[0];
-	 		if(area.style.display==""||area.style.display == "none")
-	 			area.style.display = "block";
+	 		if(emailarea.style.display==""||emailarea.style.display == "none") {
+	 			picarea.style.display = "none";
+	 			emailarea.style.display = "block";
+				namearea.style.display = "none";
+				phonearea.style.display = "none";
+				pwdarea.style.display = "none";
+				quitarea.style.display = "none";	 			
+	 		}
 	 		else
-	 			area.style.display = "none";
+	 			emailarea.style.display = "none";
 	 	});
-	 }); */
+	 });
 	
 	$(function(){
 	 	$(".btn_name").click(function(){
 	 		
 	 		if(namearea.style.display==""||namearea.style.display == "none") {
 	 			picarea.style.display = "none";
+	 			emailarea.style.display = "none";
  				namearea.style.display = "block";
  				phonearea.style.display = "none";
  				pwdarea.style.display = "none";
@@ -274,6 +289,7 @@ label {
 	 		
 	 		if(phonearea.style.display==""||phonearea.style.display == "none"){
 	 			picarea.style.display = "none";
+	 			emailarea.style.display = "none";
  				namearea.style.display = "none";
  				phonearea.style.display = "block";
  				pwdarea.style.display = "none";
@@ -289,6 +305,7 @@ label {
 	 		
 	 		if(pwdarea.style.display==""||pwdarea.style.display == "none") {
 	 			picarea.style.display = "none";
+	 			emailarea.style.display = "none";
 				namearea.style.display = "none";
 				phonearea.style.display = "none";
 				pwdarea.style.display = "block";
@@ -304,6 +321,7 @@ label {
 	 		
 	 		if(quitarea.style.display==""||quitarea.style.display == "none"){
 	 			picarea.style.display = "none";
+	 			emailarea.style.display = "none";
 				namearea.style.display = "none";
 				phonearea.style.display = "none";
 				pwdarea.style.display = "none";

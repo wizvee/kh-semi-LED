@@ -102,10 +102,23 @@ public class AttendanceDao {
 			close(pstmt);
 		}return list;
 		
+	}
+	
+
+	public List getDayList (Connection conn, String id) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("setMonth");
 		
 		
 		
 	}
+	
+	
+	
+	
+	
 	
 	
 }
