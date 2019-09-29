@@ -26,24 +26,22 @@ public class BusInfoDao {
 		}
 	}
 	
-	public List<Business>getBusInfo(Connection conn, String busId){
+	public Business getBusInfo(Connection conn, String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("getBusInfo");
-		List<Business>list=new ArrayList<Business>();
+		Business b= new Business();
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			rs=pstmt.executeQuery();
-		while(rs.next()) {
-			Business b= new Business();
+		if(rs.next()) {
 			b.setOwnName(rs.getString(1));
 			b.setBusName(rs.getString(2));
 			b.setBusNum(rs.getString(3));
 			b.setBusAddr(rs.getString(4));
 			b.setBusPhone(rs.getString(5));
 			b.setBusDate(rs.getInt(6));
-			list.add(b);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -51,7 +49,7 @@ public class BusInfoDao {
 			close(rs);
 			close(pstmt);
 		}
-		return list;
+		return b;
 	}
 
 }

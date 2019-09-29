@@ -1,7 +1,6 @@
 package com.semi.businfo.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,9 +37,9 @@ public class businfoServlet extends HttpServlet {
 		String busId = user.getSelectBusId();
 		System.out.println("사업장 이름은 :"+busId);
 	
-		List<Business>list=service.getBusInfo(busId);
+		Business busInfo=service.getBusInfo(busId);
 		
-		
+		request.setAttribute("busInfo", busInfo);
 		request.getRequestDispatcher("/views/common/editBus.jsp").forward(request, response);
 	}
 
