@@ -81,6 +81,7 @@ input[id="ck_snb"]:checked {
 
 .gnb_main {
   $gnb_height: 60px;
+  z-index: 100;
   @include grid;
   grid-template-columns: 45px 160px repeat(3, 35px) 1fr;
   grid-template-rows: $gnb_height;
