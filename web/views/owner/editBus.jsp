@@ -19,7 +19,6 @@
 			<div>사업장 전화번호 : <%=bi.getBusPhone() %></div>
 			<div>사업장 주소: <%=bi.getBusAddr() %></div>
 			<div>월급일 : <%=bi.getBusDate() %></div>
-			<div></div>
 		</div>
 	</section>
 </div>

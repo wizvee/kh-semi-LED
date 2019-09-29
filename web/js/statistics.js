@@ -20,8 +20,8 @@ function addComma(value) {
 
 // object 값 없으면 0으로 리턴하는 함수
 function solutionObj(object) {
-  if (object == undefined) {
-    var newVal = {
+  if (typeof object == 'undefined') {
+      var newVal= {
       jan: 0,
       feb: 0,
       mar: 0,
@@ -42,16 +42,24 @@ function solutionObj(object) {
 
 // ============================== 1.직원 급여 월별 라인 그래프 ===================================
 
-var firstYear = json.forWageLine[0].years[0].year;
-console.log(firstYear);
+var firstYear;
 var yearNow = new Date().getFullYear();
+
+if(typeof json.forWageLine[0].years[0]!='undefined'){
+  firstYear = json.forWageLine[0].years[0].year;
+}
+else{
+  firstYear=yearNow;
+}
+
+console.log(firstYear);
 
 var dispNo = yearNow - firstYear;
 
 var dis1 = solutionObj(json.forWageLine[0].years[dispNo]);
 
 for (var y = firstYear; y <= yearNow; y++) {
-  $("#firstChartList").append('<div class="area_chart">' + y + "년</div>");
+  $("#firstChartList").append('<div class="area_chart1">' + y + "년</div>");
 }
 
 google.charts.load("current", { packages: ["corechart"] });
@@ -75,7 +83,7 @@ function drawChart() {
   ]);
 
   var options = {
-    title: dis1.year + " 년 월별 직원 급여 지출",
+    title: yearNow + "년 월별 직원 급여 지출",
     hAxis: { title: "월별", titleTextStyle: { color: "#333" } },
     vAxis: { title: "만원", minValue: 0 },
     animation: {
@@ -91,7 +99,7 @@ function drawChart() {
   chart.draw(data, options);
 }
 
-var chartYearList = document.querySelectorAll(".area_chart");
+var chartYearList = document.querySelectorAll(".area_chart1");
 
 Array.from(chartYearList).forEach(function(e) {
   e.addEventListener("click", function() {
@@ -119,7 +127,7 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: temp.year + " 년 월별 직원 급여 지출",
+        title: temp.year + "년 월별 직원 급여 지출",
         hAxis: { title: "월별", titleTextStyle: { color: "#333" } },
         vAxis: { title: "만원", minValue: 0 },
         animation: {
@@ -130,13 +138,16 @@ Array.from(chartYearList).forEach(function(e) {
       };
 
       var chart = new google.visualization.AreaChart(
-        document.getElementById("area_chart")
+        document.getElementById("arealine_chart")
       );
       chart.draw(data, options);
     }
   });
 });
-
+// }
+// else{ 
+// $('#arealine_chart').append("데이터가 존재하지 않습니다.");
+// };
 // =============================== 2.알바생별 받은 총 인권비 테이블차트 ==============================
 
 google.charts.load("current", { packages: ["table"] });
@@ -204,6 +215,7 @@ function drawTimeLine() {
   }
 
   var options = {
+    title: "직원 타임라인",
     timeline: { groupByRowLabel: false },
     chartArea: {
       width: "70%",
@@ -218,7 +230,7 @@ function drawTimeLine() {
 // ================================ 4.평균 월별 근무 시간 콤보 차트 ==================================
 
 for (var y = firstYear; y <= yearNow; y++) {
-  $("#forthChartList").append('<div class="area_chart">' + y + "년</div>");
+  $("#forthChartList").append('<div class="area_chart2">' + y + "년</div>");
 }
 var dis4 = solutionObj(json.forWorkingHour[0].years[dispNo]);
 
@@ -242,7 +254,7 @@ function drawVisualization() {
   ]);
 
   var options = {
-    title: "월별 근무자 전체 근무시간",
+    title: yearNow+"년 월별 근무자 전체 근무시간",
     vAxis: { title: "시간" },
     hAxis: { title: "월별" },
     seriesType: "bars",
@@ -263,7 +275,7 @@ function drawVisualization() {
   );
   chart.draw(data, options);
 }
-var chartYearList = document.querySelectorAll(".area_chart");
+var chartYearList = document.querySelectorAll(".area_chart2");
 
 Array.from(chartYearList).forEach(function(e) {
   e.addEventListener("click", function() {
@@ -290,7 +302,7 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: "월별 근무자 전체 근무시간",
+        title: temp.year+"년 월별 근무자 전체 근무시간",
         vAxis: { title: "시간" },
         hAxis: { title: "월별" },
         seriesType: "bars",
@@ -317,7 +329,7 @@ Array.from(chartYearList).forEach(function(e) {
 // ================================= 5.월별 근무자 수 라인차트  ==================================
 
 for (var y = firstYear; y <= yearNow; y++) {
-  $("#fifthChartList").append('<div class="area_chart">' + y + "년</div>");
+  $("#fifthChartList").append('<div class="area_chart3">' + y + "년</div>");
 }
 var dis5 = solutionObj(json.forTotalEmp[0].years[dispNo]);
 
@@ -345,7 +357,7 @@ function dailyWorkerCount() {
   ]);
 
   var options = {
-    title: "월별 총 근무자 수",
+    title: yearNow+"년 월별 총 근무자 수",
     hAxis: {
       title: "월",
       format: "long"
@@ -374,7 +386,7 @@ function dailyWorkerCount() {
   chart.draw(data, options);
 }
 
-var chartYearList = document.querySelectorAll(".area_chart");
+var chartYearList = document.querySelectorAll(".area_chart3");
 
 Array.from(chartYearList).forEach(function(e) {
   e.addEventListener("click", function() {
@@ -404,7 +416,7 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: "월별 총 근무자 수",
+        title: temp.year+"년 월별 총 근무자 수",
         hAxis: {
           title: "월",
           format: "long"
@@ -438,17 +450,17 @@ Array.from(chartYearList).forEach(function(e) {
 // ================================= 6.월별 총 지각 조퇴 바 차트  ==================================
 
 for (var y = firstYear; y <= yearNow; y++) {
-  $("#sixthChartList").append('<div class="area_chart">' + y + "년</div>");
+  $("#sixthChartList").append('<div class="area_chart4">' + y + "년</div>");
 }
-console.log(json.forTotalLate[0]);
-console.log(json.forTotalEarlyLeave[0]);
-console.log(json.forTotalOverTime[0]);
 
-var dis6 = solutionObj(json.forTotalLate[0].years[dispNo]);
-var dis7 = solutionObj(json.forTotalEarlyLeave[0].years[dispNo]);
-var dis8 = solutionObj(json.forTotalOverTime[0].years[dispNo]);
+console.log(json.forTotalEarlyLeave[0].years[1]);
 
-console.log(dis7);
+  var dis6 = solutionObj(json.forTotalLate[0].years[dispNo]);
+
+  var dis7 = solutionObj(json.forTotalEarlyLeave[0].years[dispNo]);
+
+  var dis8 = solutionObj(json.forTotalOverTime[0].years[dispNo]);
+
 
 google.charts.load("current", { packages: ["line"] });
 google.charts.setOnLoadCallback(drawChartLate);
@@ -471,7 +483,7 @@ function drawChartLate() {
   ]);
 
   var options = {
-    title: "월별 총 지각/조퇴/연장근무  수",
+    title: yearNow+"년 월별 총 지각/조퇴/연장근무 수",
     chartArea: {
       width: "80%",
       height: "70%"
@@ -489,8 +501,8 @@ function drawChartLate() {
       title: "인원수(명)",
       minValue: 0
     },
-    curveType: "none",
-    legend: { position: "bottom" }
+    curveType: "function",
+    legend: { position: "right" }
   };
 
   var chart = new google.visualization.LineChart(
@@ -500,34 +512,52 @@ function drawChartLate() {
   chart.draw(data, google.charts.Line.convertOptions(options));
 }
 
-var chartYearList = document.querySelectorAll(".area_chart");
+  
+var chartYearList = document.querySelectorAll(".area_chart4");
 
 Array.from(chartYearList).forEach(function(e) {
   e.addEventListener("click", function() {
+  
     var no = parseInt(e.textContent) - firstYear;
-    var temp = json.forTotalEmp[0].years[no];
+    
+    var t1, t2, t3; 
+    if(typeof json.forTotalLate[0].years[no]=='undefined'){
+      t1= {jan: 0,feb: 0,mar: 0,apr: 0,may: 0,jun: 0,july: 0,aug: 0,sep: 0,oct: 0,nov: 0,dec: 0}
+    }else{
+      t1 = json.forTotalLate[0].years[no];
+    }
+    if(typeof json.forTotalEarlyLeave[0].years[no]=='undefined'){
+      t2= {jan: 0,feb: 0,mar: 0,apr: 0,may: 0,jun: 0,july: 0,aug: 0,sep: 0,oct: 0,nov: 0,dec: 0}
+    }else{
+      t2 = json.forTotalEarlyLeave[0].years[no];
+    }
+    if(typeof json.forTotalOverTime[0].years[no]=='undefined'){
+      t3= {jan: 0,feb: 0,mar: 0,apr: 0,may: 0,jun: 0,july: 0,aug: 0,sep: 0,oct: 0,nov: 0,dec: 0}
+    }else{
+      t3 = json.forTotalOverTime[0].years[no];
+    }
 
     google.charts.setOnLoadCallback(drawChartLate);
 
     function drawChartLate() {
       var data = google.visualization.arrayToDataTable([
         ["월", "지각", "조퇴", "연장근무"],
-        ["1월", 3, 0, 2],
-        ["2월", 5, 1, 5],
-        ["3월", 3, 2, 5],
-        ["4월", 6, 0, 3],
-        ["5월", 3, 0, 0],
-        ["6월", 1, 5, 2],
-        ["7월", 2, 0, 2],
-        ["8월", 3, 2, 5],
-        ["9월", 5, 1, 9],
-        ["10월", 1, 2, 3],
-        ["11월", 3, 1, 2],
-        ["12월", 4, 2, 1]
+        ["1월", t1.jan, t2.jan, t3.jan],
+        ["2월", t1.feb, t2.feb, t3.feb],
+        ["3월", t1.mar, t2.mar, t3.mar],
+        ["4월", t1.apr, t2.apr, t3.apr],
+        ["5월", t1.may, t2.may, t3.may],
+        ["6월", t1.jun, t2.jun, t3.jun],
+        ["7월", t1.july, t2.july, t3.july],
+        ["8월", t1.aug, t2.aug, t3.aug],
+        ["9월", t1.sep, t2.sep, t3.sep],
+        ["10월", t1.oct, t2.oct, t3.oct],
+        ["11월", t1.nov, t2.nov, t3.nov],
+        ["12월", t1.dec, t2.dec, t3.dec]
       ]);
 
       var options = {
-        title: "월별 총 지각/조퇴/연장근무  수",
+        title: e.textContent+"년 월별 총 지각/조퇴/연장근무 수",
         animation: {
           easing: "inAndOut",
           startup: true,
@@ -541,8 +571,8 @@ Array.from(chartYearList).forEach(function(e) {
           title: "인원수(명)",
           minValue: 0
         },
-        curveType: "none",
-        legend: { position: "in" }
+        curveType: "function",
+        legend: { position: "right" }
       };
 
       var chart = new google.visualization.LineChart(
