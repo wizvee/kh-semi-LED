@@ -48,7 +48,9 @@ public class AttendanceDao {
 				a.setSftId(rs.getString("SFT_ID"));
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));
-				a.setAtdType(rs.getString("ATD_TYPE").split(","));
+				if(rs.getString("ATD_TYPE")!= null) {
+					a.setAtdType(rs.getString("ATD_TYPE").split(","));
+				}
 			}
 		} catch (SQLException b) {
 			b.printStackTrace();
@@ -81,20 +83,14 @@ public class AttendanceDao {
 				a.setSftName(rs.getString("SFT_NAME"));
 				a.setSftOn(rs.getString("SFT_ON"));
 				a.setSftOff(rs.getString("SFT_OFF"));
-				a.setAtdType(rs.getString("ATD_TYPE").split(","));
+				if(rs.getString("ATD_TYPE")!= null) {
+					a.setAtdType(rs.getString("ATD_TYPE").split(","));
+				}
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));
 				
 				list.add(a);
 				
-				System.out.println(a.getEmpId());
-				System.out.println(a.getSftId());
-				System.out.println(a.getSftName());
-				System.out.println(a.getAtdOn());
-				System.out.println(a.getAtdOff());
-				System.out.println(a.getAtdType());
-				System.out.println(a.getAtdOn());
-				System.out.println(a.getAtdOff());
 			}
 			
 			

@@ -76,6 +76,8 @@ public class AttendanceAjaxServlet extends HttpServlet {
 			json.put("sftOff", a.getEnSftTime());
 			json.put("sAtd", a.getAtdOn());
 			json.put("nAtd", a.getAtdOff());
+			json.put("sSft", a.getSftOn());
+			json.put("nSft", a.getSftOff());
 			json.put("atdOn", a.getStAtdTime());
 			json.put("atdOff", a.getEnAtdTime());
 			json.put("atdType", a.getAtdType());

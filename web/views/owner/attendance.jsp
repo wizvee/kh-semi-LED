@@ -17,14 +17,9 @@ java.util.List"%>
 	grid-column-gap: 10%;
 }
 
-.calendar_body {
-
-
-}
-
 .item .item_atd div {
-	margin-left: 20%
-	margin-right:20%
+	margin-left: 20%;
+	margin-right:20%;
 }
 
 .item .item_atd div p {
@@ -89,7 +84,7 @@ java.util.List"%>
 }
 
 @import url('https://fonts.googleapis.com/css?family=Abel');
-
+/* 
 .skin {
 	fill: #eab38f;
 }
@@ -106,7 +101,7 @@ java.util.List"%>
 	fill: none;
 	stroke: #2f1b0d;
 	stroke-width: 2px;
-}
+} */
 
 .card {
 	width: 450px;
@@ -337,8 +332,14 @@ fieldset > legend {
 		<script src="<%=request.getContextPath()%>/src/owner/subCal.js"></script>
 
 		<%if (!list.isEmpty()) {%>
-	<div class="makeCard">
+			<fieldset>
+					<legend> 사업장 근무자 리스트 </legend>
+					<div class="item_atd">
+
+
 	</div>
+
+	</fieldset>
 <%
 	}
 %>
