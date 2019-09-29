@@ -1,0 +1,50 @@
+.statis_body {
+    grid-template-rows: 1fr;
+    grid-template-columns: 120px 1fr;
+    padding: 10px;
+}
+
+
+.statis_header {
+    @include grid;
+    grid-template-rows: repeat(6, 35px) 1fr;
+    height: 35px;
+    // border-bottom: 1px solid $border-default;
+    text-align: left;
+    line-height: 35px;
+    color: $text-gray;
+    transition: all 0.7s;
+
+    span {
+        display: inline-block;
+        padding-left: 10px;
+        height: 35px;
+        @include cursor-pointer;
+
+        &.focus {
+            color: $text-default;
+            font-weight: 900;
+            border-left: 2px solid $primary;
+            // transform: translateY(-1px);
+        }
+    }
+}
+
+.statistics_view {
+    &>.chart {
+        display: none;
+        visibility: hidden;
+        width: 100%;
+        height: 500px;
+        opacity: 0;
+        transition: all 0.7s;
+
+        &.focus {
+            display: block;
+            visibility: visible;
+            opacity: 1;
+            animation: ani_slideUp 1s 1;
+            animation-fill-mode: both;
+        }
+    }
+}
