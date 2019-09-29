@@ -29,6 +29,7 @@
 
   div {
     // font-size: 90%;
+    padding: 2px;
     text-align: center;
     box-sizing: border-box;
 
@@ -40,13 +41,21 @@
     }
 
     &.date {
-      height: 50px;
+      overflow: hidden;
+      height: auto;
+      min-height: 50px;
+      max-height: 100px;
       font-size: 85%;
       @include cursor-pointer;
+
       div {
-        width: 100%;
+        overflow: hidden;
+        margin-bottom: 2px;
+        border-radius: 5px;
+        background: red;
+        text-overflow: ellipsis;
+        text-align: left;
         white-space: nowrap;
-        
       }
     }
 

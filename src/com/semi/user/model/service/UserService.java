@@ -124,5 +124,44 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+	
+	public int UpdatePic(String userId, String upfile) {
+		Connection conn = getConnection();
+		int result = 0;
+		result = dao.UpdatePic(conn, userId, upfile);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int originPic(String userId) {
+		Connection conn = getConnection();
+		int result = 0;
+		result = dao.originPic(conn, userId);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int QuitUser(String userId, String email, String pw) {
+		Connection conn = getConnection();
+		int result = 0;
+		result = dao.QuitUser(conn,userId,email,pw);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }
