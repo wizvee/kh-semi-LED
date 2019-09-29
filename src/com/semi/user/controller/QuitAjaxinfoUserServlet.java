@@ -40,8 +40,7 @@ public class QuitAjaxinfoUserServlet extends HttpServlet {
 		String quittype = request.getParameter("quittype");
 		
 		int resultQuit = new UserService().QuitUser(email,pw,quittype);
-		System.out.println("회원탈퇴 가능?");
-		System.out.println(resultQuit);
+		
 		boolean flag=resultQuit>0?true:false;
 		
 		response.setContentType("application/json;charset=utf-8");
