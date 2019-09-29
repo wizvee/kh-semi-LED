@@ -17,9 +17,14 @@ java.util.List"%>
 	grid-column-gap: 10%;
 }
 
+.calendar_body {
+
+
+}
+
 .item .item_atd div {
-	margin-left: 20%;
-	margin-right:20%;
+	margin-left: 20%
+	margin-right:20%
 }
 
 .item .item_atd div p {
@@ -84,7 +89,7 @@ java.util.List"%>
 }
 
 @import url('https://fonts.googleapis.com/css?family=Abel');
-/* 
+
 .skin {
 	fill: #eab38f;
 }
@@ -101,7 +106,7 @@ java.util.List"%>
 	fill: none;
 	stroke: #2f1b0d;
 	stroke-width: 2px;
-} */
+}
 
 .card {
 	width: 450px;
@@ -321,6 +326,7 @@ fieldset > legend {
 			<h2>근태 관리</h2>
 		</div>
 
+		<%if (!list.isEmpty()) {%>
 
 		<div class="item_body calendar_area">
 			<div class="calendar_header">
@@ -329,20 +335,126 @@ fieldset > legend {
 			</div>
 			<div class="calendar_body"></div>
 		</div>
+
 		<script src="<%=request.getContextPath()%>/src/owner/subCal.js"></script>
+		
+		<fieldset>
+		<legend> 사업장 근무자 리스트 </legend>
+		<div class="item_atd">
+			<%
+				for (Employee e : list) {
+					if(e.getEmpEnd()!=null) {
+						continue;
+					}
+			%>
+			<%
+				if (e.getSftId() != null && e.getAttendance() != null) {
+			%>
 
-		<%if (!list.isEmpty()) {%>
-			<fieldset>
-					<legend> 사업장 근무자 리스트 </legend>
-					<div class="item_atd">
+			<div class="makeCard">
+				<div class="card">
+					<div class="additional">
+						<div class="user-card">
+							<div class="level center">LEVEL <%=e.getEmpLevel()!=null?e.getEmpLevel():"미설정"%></div>
+							<div class="points center"><%=e.getShift().getSftName()%></div>
+							<img alt="" src=<%=request.getContextPath()%>"/upload/profile/"<%=e.getProfilePic()%>>
+						</div>
+						<div class="more-info">
+							<h1><%=e.getUserName()%></h1>
+							<div class="coords">
+								<span>지정 근무 시간</span> <span><%=e.getShift().getSftOn()%> ~ <%=e.getShift().getSftOff()%></span>
+							</div>
+							<div class="coords">
+								<span>Position/Role</span> <span>City, Country</span>
+							</div>
+					
+						</div>
+					</div>
+					<div class="general">
+						<h1><%=e.getUserName()%></h1>
+						<hr>
+						<p style="margin:10%">
+						<%=e.getAttendance()!=null&&e.getAttendance().getAtdOn()!=null?e.getAttendance().getAtdOn().substring(0, 4):""%> 년 
+						<%=e.getAttendance()!=null&&e.getAttendance().getAtdOn()!=null?e.getAttendance().getAtdOn().substring(4, 6):""%> 월
+						<%=e.getAttendance()!=null&&e.getAttendance().getAtdOn()!=null?e.getAttendance().getAtdOn().substring(6, 8):""%> 일의
+						<br> 근무 기록 입니다.
+						</p>
+						<div class="atd_check_late">
+							<p>근무 시간</p>
+							<p><%=e.getShift().getSftOn()%>
+								~
+								<%=e.getShift().getSftOff()%></p>
+							<input type="hidden" id="stAtTime"
+								value=<%=e.getAttendance()!=null?e.getAttendance().getStAtdTime():""%>> <input
+								type="hidden" id="enAtTime"
+								value=<%=e.getAttendance()!=null?e.getAttendance().getEnAtdTime():""%>> <input
+								type="hidden" id="stSftime"
+								value=<%=e.getAttendance()!=null?e.getAttendance().getStSftTime():""%>> <input
+								type="hidden" id="enSftime"
+								value=<%=e.getAttendance()!=null?e.getAttendance().getEnSftTime():""%>>
+							<!-- 	<progress value="20" max="100"></progress> -->
+							<div class="atd_progress_color">
+								<div style="background-color: red;"></div>
+								: 지각
+								<div style="background-color: chartreuse;"></div>
+								: 근무 시간
+								<div style="background-color: dodgerblue;"></div>
+								: 조퇴
+							</div>
+							<div class="atd_progress_wraper">
+
+								<%
+									double widthLate = 0;
+									double widthEarly = 0;
+									double widthNomal = 0;
+									if(e.getAttendance()!=null){
+									double stAtd = e.getAttendance().getStAtdTime();
+												double enAtd = e.getAttendance().getEnAtdTime();
+												double stSft = e.getAttendance().getStSftTime();
+												double enSft = e.getAttendance().getEnSftTime();
+
+												
+
+												if (stSft < stAtd) {
+													widthLate = ((100 - ((((enSft - stSft) - (stAtd - stSft)) / (enSft - stSft)) * 100)));
+												}
+												if (enSft > enAtd) {
+													widthEarly = ((100 - ((((enSft - stSft) - (enSft - enAtd)) / (enSft - stSft)) * 100)));
+												}
+												widthNomal = 100 - (widthLate + widthEarly);
+									}
+								%>
+
+								<div
+									style="float:left; height:100%;  background-color: red; width:<%=widthLate%>%;"></div>
+								<div
+									style="float:left; height:100%; background-color: chartreuse; width :<%=widthNomal%>%;"></div>
+								<div
+									style="float:left; height:100%; background-color: dodgerblue; width :<%=widthEarly%>%;"></div>
+
+							</div>
+						</div>
+
+						<span class="more">Mouse over the card for more info</span>
+					</div>
+				</div>
+			</div>
+</fieldset>
 
 
-	</div>
 
-	</fieldset>
-<%
-	}
-%>
+
+</div>
+<div class="item_atd_divB">
+	<p>아직 근무하는 직원이 없어요..!</p>
+</div>
+<div class="item_atd">
+	<button class="atd_none_btn"
+		onclick="location.href = '<%=request.getContextPath()%>/#'">근무조
+		편성하기</button>
+	<button class="atd_none_btn"
+		onclick="location.href='<%=request.getContextPath()%>/views/owner/main.jsp'">돌아가기</button>
+</div>
 
 </section>
 </div>
