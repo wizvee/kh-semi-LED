@@ -18,7 +18,7 @@ public class BusInfoDao {
 	
 	private Properties prop=new Properties();
 	public BusInfoDao() {
-		String path=StatisticsDao.class.getResource("/sql/statistics/statistics-query.properties").getPath();
+		String path=StatisticsDao.class.getResource("/sql/busInfo/busInfo-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		}catch (Exception e) {

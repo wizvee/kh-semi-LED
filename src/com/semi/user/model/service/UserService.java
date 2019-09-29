@@ -151,10 +151,10 @@ public class UserService {
 		return result;
 	}
 	
-	public int QuitUser(String userId, String email, String pw) {
+	public int QuitUser(String email, String pw, String quittype) {
 		Connection conn = getConnection();
 		int result = 0;
-		result = dao.QuitUser(conn,userId,email,pw);
+		result = dao.QuitUser(conn,email,pw,quittype);
 		if (result > 0) {
 			commit(conn);
 		} else {
