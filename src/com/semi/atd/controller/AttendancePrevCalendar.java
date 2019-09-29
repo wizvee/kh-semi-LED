@@ -1,29 +1,27 @@
-package com.semi.chatting.controller;
+package com.semi.atd.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.semi.chatting.model.service.ChattingService;
-import com.semi.chatting.model.vo.Chatting;
+import com.semi.atd.model.Service.AttendanceService;
+import com.semi.userinfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class ChattingServlet
+ * Servlet implementation class AttendanceSetCalendar
  */
-@WebServlet("/chat.do")
-public class ChattingServlet extends HttpServlet {
+@WebServlet("/ajaxPrevCal.do")
+public class AttendancePrevCalendar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChattingServlet() {
+    public AttendancePrevCalendar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +30,20 @@ public class ChattingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//ajax 로 보낸 busId 값 받기 
-		String busId =request.getParameter("data");
-		System.out.println(busId);
-		
-		// 채팅 타입,채팅 내역, 채팅 날짜, 유저 이름, 사진 정보 DB 에서 가지고 오기 
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
+		String busId = ui.getSelectBusId();
 	
-		ChattingService service=new ChattingService();
-		
-		List<Chatting>list=service.getHistory(busId);
-		
-		String chatHistory;
-		
-		if(!list.isEmpty()) {
-			chatHistory = new Gson().toJson(list);
-		}else {
-			chatHistory="none";
-		}
-		
-		// chatting.js 로 list 보내기
-		response.getWriter().print(chatHistory);
+	List dayList = new AttendanceService().getDayList(busId);
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 
 	/**

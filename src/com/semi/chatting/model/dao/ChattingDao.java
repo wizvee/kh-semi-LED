@@ -4,7 +4,6 @@ import static common.template.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,11 +38,11 @@ public class ChattingDao {
 			System.out.println("불러울 사업장 아이디: "+busId);
 			while(rs.next()){
 				Chatting c=new Chatting();
-				c.setChatType(rs.getString("chat_type"));
-				c.setChatMsg(rs.getString("chat_msg"));
-				c.setChatDate(rs.getDate("chat_date"));
-				c.setUserName(rs.getString("user_name"));
-				c.setProfilePic(rs.getString("profile_pic"));
+				c.setChatType(rs.getString(1));
+				c.setChatDate(rs.getDate(2));
+				c.setChatMsg(rs.getString(3));
+				c.setUserName(rs.getString(4));
+				c.setProfilePic(rs.getString(5));
 				list.add(c);
 			}
 			}catch(SQLException e) {
@@ -52,6 +51,7 @@ public class ChattingDao {
 				close(rs);
 				close(pstmt);
 			}
+			System.out.println(list);
 			return list;			
 		}
 	
@@ -60,14 +60,17 @@ public class ChattingDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("insertChatting");
+		System.out.println(c.getBusId());
+		System.out.println(c.getUserId());
+		System.out.println(c.getChatType());
+		System.out.println(c.getChatMsg());
 		try {
 			pstmt=conn.prepareStatement(sql);
+			System.out.println(sql);
 			pstmt.setString(1, c.getBusId());
 			pstmt.setString(2, c.getUserId());
-			pstmt.setString(3, c.getTargetUserId());
-			pstmt.setString(4, c.getChatType());
-			pstmt.setString(5, c.getChatMsg());
-			pstmt.setDate(6, (Date) c.getChatDate());
+			pstmt.setString(3, c.getChatType());
+			pstmt.setString(4, c.getChatMsg());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

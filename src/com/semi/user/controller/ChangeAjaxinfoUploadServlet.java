@@ -16,7 +16,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.owner.model.vo.Owner;
 import com.semi.user.model.service.UserService;
-import com.semi.user.model.vo.User;
 
 /**
  * Servlet implementation class ChangeAjaxinfoUploadServlet
