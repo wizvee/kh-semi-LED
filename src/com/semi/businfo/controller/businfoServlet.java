@@ -1,31 +1,28 @@
-package com.semi.user.controller;
+package com.semi.businfo.controller;
 
 import java.io.IOException;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.semi.user.model.service.UserService;
-
-import common.util.SHA512;
+import com.semi.bus.model.vo.Business;
+import com.semi.businfo.model.service.BusInfoService;
+import com.semi.userinfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class QuitAjaxinfoUserServlet
+ * Servlet implementation class businfoServlet
  */
-@WebServlet("/quitAjaxinfoUser.do")
-public class QuitAjaxinfoUserServlet extends HttpServlet {
+@WebServlet("/businfo.do")
+public class businfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuitAjaxinfoUserServlet() {
+    public businfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +31,16 @@ public class QuitAjaxinfoUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BusInfoService service=new BusInfoService();
 		
-		String email = request.getParameter("email");
-		String pw = SHA512.getSHA512(request.getParameter("pw"));
-		String quittype = request.getParameter("quittype");
+		UserInfo user = (UserInfo)request.getSession().getAttribute("userInfo");
+		String busId = user.getSelectBusId();
+		System.out.println("사업장 이름은 :"+busId);
+	
+		Business busInfo=service.getBusInfo(busId);
 		
-		int resultQuit = new UserService().QuitUser(email,pw,quittype);
-		System.out.println("회원탈퇴 가능?");
-		System.out.println(resultQuit);
-		boolean flag=resultQuit>0?true:false;
-		
-		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(flag,response.getWriter());
-		
+		request.setAttribute("busInfo", busInfo);
+		request.getRequestDispatcher("/views/owner/editBus.jsp").forward(request, response);
 	}
 
 	/**

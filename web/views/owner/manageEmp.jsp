@@ -7,30 +7,98 @@
 <%
 	ArrayList<Employee> empList = (ArrayList<Employee>) request.getAttribute("empList");
 	ArrayList<Shift> sftList = (ArrayList<Shift>) request.getAttribute("sftList");
+
+	ArrayList<Employee> workList = new ArrayList<>();
+	ArrayList<Employee> resignList = new ArrayList<>();
+	ArrayList<Employee> enrollList = new ArrayList<>();
+
+	for (Employee e : empList) {
+		if (e.getEmpType() == null)
+			enrollList.add(e);
+		else if (e.getEmpEnd() != null)
+			resignList.add(e);
+		else
+			workList.add(e);
+	}
 %>
 <div id="content">
-	
+
 	<section class="item">
 		<div class="item_header">
 			<h2>전체 직원 관리</h2>
 		</div>
 		<div class="item_body item_mngEmp">
 			<div class="mngEmp_header">
-				<span class="focus">재직</span>
-				<span>퇴직</span>
-				<span>진행</span>
+				<span class="focus">재직</span> <span>퇴직</span> <span>진행</span>
 			</div>
 			<div class="mngEmp_body">
-				<div class="mngEmpWork_area focus">
-					1
-				</div>
-				<div class="mngEmpResign_area">
-					2
-				</div>
-				<div class="mngEmpEnroll_area">
+				<div class="mngEmpWork_area mngDiv focus">
 					<%
-						for (Employee e : empList) {
-							if (e.getEmpType() == null) {
+						if (!workList.isEmpty()) {
+							for (Employee e : workList) {
+					%>
+					<div class="viewEmp_area">
+						<input type="hidden" value="<%=e.getUserId()%>">
+						<div class="pic">
+							<img class="square_profile"
+								src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
+							<span><%=e.getUserName()%></span>
+						</div>
+						<div class="text">
+							<div>
+								<span>입사일</span>
+								<span><%=e.getEmpStart() %></span>
+							</div>
+							<div>
+								<span>전화번호</span>
+								<span><%=e.getUserPhone() %></span>
+							</div>
+							<div>
+								<span>이메일</span>
+								<span><%=e.getEmail() %></span>
+							</div>
+							<div>
+								<span>유형</span>
+								<span><%=e.getEmpType() %></span>
+							</div>
+							<div>
+								<span>급여</span>
+								<span><%=e.getEmpWage()%></span>
+							</div>
+							<div>
+								<span>근무조</span>
+								<span><%=e.getSftId() %></span>
+							</div>
+						</div>
+					</div>
+					<%
+						}
+						} else {
+					%>
+					<span>재직중인 직원이 없습니다.</span>
+					<%
+						}
+					%>
+				</div>
+				<div class="mngEmpResign_area mngDiv">
+					<%
+						if (!resignList.isEmpty()) {
+							for (Employee e : resignList) {
+					%>
+
+					<%
+						}
+						} else {
+					%>
+					<span>퇴직한 직원이 없습니다.</span>
+					<%
+						}
+					%>
+				</div>
+				<div class="mngEmpEnroll_area mngDiv">
+					<%
+						if (!enrollList.isEmpty()) {
+							for (Employee e : enrollList) {
 					%>
 					<div class="empList_area">
 						<img class="item_profile"
@@ -43,7 +111,11 @@
 						</div>
 					</div>
 					<%
-							}
+						}
+						} else {
+					%>
+					<span>진행중인 직원이 없습니다.</span>
+					<%
 						}
 					%>
 				</div>
@@ -60,61 +132,58 @@
 						</div>
 					</div>
 					<div>
-						<span>급여</span>
-						<input type="text" class="inpt-outline" name="empWage" value="8350">
+						<span>급여</span> <input type="text" class="inpt-outline" name="empWage" value="8350">
 					</div>
 					<div>
 						<span>근무조 설정</span>
 						<%
-							if(sftList != null && !sftList.isEmpty()) {
-								ArrayList<String> days= new ArrayList<>(Arrays.asList(sftList.get(0).getSftDay().split(",")));
+							if (sftList != null && !sftList.isEmpty()) {
+								ArrayList<String> days = new ArrayList<>(Arrays.asList(sftList.get(0).getSftDay().split(",")));
 						%>
-							<div class="temp dropToggle select">
-								<input type="hidden" name="sftId" value="<%=sftList.get(0).getSftId()%>">
-								<span><%=sftList.get(0).getSftName() %></span>
-								<div class="sftDay">
-									<span <%=days.contains("일") ? "class='work'" : "" %>>일</span>
-									<span <%=days.contains("월") ? "class='work'" : "" %>>월</span>
-									<span <%=days.contains("화") ? "class='work'" : "" %>>화</span>
-									<span <%=days.contains("수") ? "class='work'" : "" %>>수</span>
-									<span <%=days.contains("목") ? "class='work'" : "" %>>목</span>
-									<span <%=days.contains("금") ? "class='work'" : "" %>>금</span>
-									<span <%=days.contains("토") ? "class='work'" : "" %>>토</span>
-								</div>
-								<span><%=sftList.get(0).getSftOn() %></span>
-								<span><strong>~</strong></span>
-								<span><%=sftList.get(0).getSftOff() %></span>
-								<span><i class="fa fa-sort-desc" aria-hidden="true"></i></span>
+						<div class="temp dropToggle select">
+							<input type="hidden" name="sftId" value="<%=sftList.get(0).getSftId()%>">
+							<span><%=sftList.get(0).getSftName()%></span>
+							<div class="sftDay">
+								<span <%=days.contains("일") ? "class='work'" : ""%>>일</span>
+								<span <%=days.contains("월") ? "class='work'" : ""%>>월</span>
+								<span <%=days.contains("화") ? "class='work'" : ""%>>화</span>
+								<span <%=days.contains("수") ? "class='work'" : ""%>>수</span>
+								<span <%=days.contains("목") ? "class='work'" : ""%>>목</span>
+								<span <%=days.contains("금") ? "class='work'" : ""%>>금</span>
+								<span <%=days.contains("토") ? "class='work'" : ""%>>토</span>
 							</div>
+							<span><%=sftList.get(0).getSftOn()%></span>
+							<span><strong>~</strong></span>
+							<span><%=sftList.get(0).getSftOff()%></span>
+							<span><i class="fa fa-sort-desc" ria-hidden="true"></i></span>
+						</div>
 						<%
-								for(int i = 1; i < sftList.size(); i++) {
+							for (int i = 1; i < sftList.size(); i++) {
 									days = new ArrayList<>(Arrays.asList(sftList.get(i).getSftDay().split(",")));
 						%>
-							<div class="temp dropMenu">
-								<input type="hidden" name="sftId" value="<%=sftList.get(i).getSftId()%>">
-								<span><%=sftList.get(i).getSftName() %></span>
-								<div class="sftDay">
-									<span <%=days.contains("일") ? "class='work'" : "" %>>일</span>
-									<span <%=days.contains("월") ? "class='work'" : "" %>>월</span>
-									<span <%=days.contains("화") ? "class='work'" : "" %>>화</span>
-									<span <%=days.contains("수") ? "class='work'" : "" %>>수</span>
-									<span <%=days.contains("목") ? "class='work'" : "" %>>목</span>
-									<span <%=days.contains("금") ? "class='work'" : "" %>>금</span>
-									<span <%=days.contains("토") ? "class='work'" : "" %>>토</span>
-								</div>
-								<span><%=sftList.get(i).getSftOn() %></span>
-								<span><strong>~</strong></span>
-								<span><%=sftList.get(i).getSftOff() %></span>
-								<span><i class="fa fa-sort-desc" aria-hidden="true"></i></span>
+						<div class="temp dropMenu">
+							<input type="hidden" name="sftId" value="<%=sftList.get(i).getSftId()%>">
+							<span><%=sftList.get(i).getSftName()%></span>
+							<div class="sftDay">
+								<span <%=days.contains("일") ? "class='work'" : ""%>>일</span> <span
+									<%=days.contains("월") ? "class='work'" : ""%>>월</span> <span
+									<%=days.contains("화") ? "class='work'" : ""%>>화</span> <span
+									<%=days.contains("수") ? "class='work'" : ""%>>수</span> <span
+									<%=days.contains("목") ? "class='work'" : ""%>>목</span> <span
+									<%=days.contains("금") ? "class='work'" : ""%>>금</span> <span
+									<%=days.contains("토") ? "class='work'" : ""%>>토</span>
 							</div>
+							<span><%=sftList.get(i).getSftOn()%></span> <span><strong>~</strong></span>
+							<span><%=sftList.get(i).getSftOff()%></span> <span><i class="fa fa-sort-desc"
+									aria-hidden="true"></i></span>
+						</div>
 						<%
-								}
+							}
 							}
 						%>
 					</div>
 					<div>
-						<span>적용 시작일</span>
-						<input type="text" class="input-outline" name="empStart">
+						<span>적용 시작일</span> <input type="text" class="input-outline" name="empStart">
 					</div>
 					<button class="btn-outline btn_arvEmp">저장</button>
 				</div>

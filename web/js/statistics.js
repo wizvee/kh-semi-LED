@@ -199,10 +199,7 @@ function drawTimeLine() {
       json.forTimeLine[a].empName,
       new Date(json.forTimeLine[a].empStart),
       new Date(
-        json.forTimeLine[a].empEnd == undefined
-          ? thisDay
-          : json.forTimeLine[a].empEnd
-      )
+        json.forTimeLine[a].empEnd == undefined? thisDay: json.forTimeLine[a].empEnd)
     ]);
   }
 

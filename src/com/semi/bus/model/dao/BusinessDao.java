@@ -110,10 +110,12 @@ public class BusinessDao {
 				e.setEmpWage(rs.getInt("EMP_WAGE"));
 				e.setBankAccount(rs.getString("BANK_ACCOUNT"));
 				e.setSftId(rs.getString("SFT_ID"));
-				e.setUserName(rs.getString("USER_NAME"));
-				e.setProfilePic(rs.getString("PROFILE_PIC"));
 				e.setEmpStart(rs.getDate("EMP_START"));
 				e.setEmpEnd(rs.getDate("EMP_END"));
+				e.setUserName(rs.getString("USER_NAME"));
+				e.setProfilePic(rs.getString("PROFILE_PIC"));
+				e.setEmail(rs.getString("EMAIL"));
+				e.setUserPhone(rs.getString("USER_PHONE"));
 				list.add(e);
 			}
 		} catch (SQLException e) {
