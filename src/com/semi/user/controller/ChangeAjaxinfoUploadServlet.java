@@ -1,6 +1,8 @@
 package com.semi.user.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.semi.owner.model.vo.Owner;
 import com.semi.user.model.service.UserService;
+import com.semi.user.model.vo.User;
 
 /**
  * Servlet implementation class ChangeAjaxinfoUploadServlet
@@ -34,7 +38,9 @@ public class ChangeAjaxinfoUploadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//이건 왜 써야되지? 모르겠음 -> 파일 형식이 맞게 들어왔는지 확인을 해주려고 쓰는 것.
+		PrintWriter out = response.getWriter();
+		
+		// 파일 형식이 맞게 들어왔는지 확인을 해주려고 쓰는 것. -> 멀티파트요청인지 확인을 해주려고 쓰는 것.
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			response.sendRedirect("/");
 			return;
@@ -53,14 +59,27 @@ public class ChangeAjaxinfoUploadServlet extends HttpServlet {
 		String upfile = mr.getFilesystemName("upfile");
 		
 		int resultPic = new UserService().UpdatePic(userId, upfile);
+		out.print(upfile);
+		
+		//로그인 오너에 프로필을 넣고 세션을 업데이트?
+		Owner o = (Owner) request.getSession().getAttribute("loginOwner");
+		String old = o.getProfilePic();
+		System.out.println(old);
 		
 		//파일 삭제 방법.
-		/*
-		 * if(filename!=null && filename.length()>0) { File deleteFile=new
-		 * File(path+"/"+); boolean result=deleteFile.delete(); } else {
-		 * fileName=oriFile; }
-		 */
-		
+		  if(upfile!=null && upfile.length()>0) { 
+			  if(!old.equals("own_default.png")) {
+				  File deleteFile=new File(path+"/"+old);
+				  boolean result=deleteFile.delete();
+				  o.setProfilePic(upfile);
+				  request.getSession().setAttribute("loginOwner", o);
+			  } else if(old.equals("own_default.png")){
+				  o.setProfilePic(upfile);
+				  request.getSession().setAttribute("loginOwner", o);
+			  }
+		  } else {
+			  return;
+		  }
 	}
 
 	/**
