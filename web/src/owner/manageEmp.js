@@ -8,12 +8,15 @@ class MngEmp {
   setInit() {
     const mngHeader = selectElements(".mngEmp_header span");
     const mngBody = selectElements(".mngEmp_body .mngDiv");
+    const empEdit = document.querySelectorAll(".editEmp_area")[0];
     const empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
+
+    const btnEditEmp = selectElements(".btn_editEmp");
 
     const sftItem = selectElements(".busShift_area .sftItem");
 
-    const btnApproval = selectElements(".btn_Approval");
-    const btnReject = selectElements(".btn_Reject");
+    const btnApproval = selectElements(".btn_approval");
+    const btnReject = selectElements(".btn_reject");
 
     const btnApvEmp = document.querySelectorAll(".btn_arvEmp")[0];
 
@@ -21,15 +24,25 @@ class MngEmp {
       e.addEventListener("click", ({ target }) => {
         mngHeader.map(e => e.classList.remove("focus"));
         target.classList.add("focus");
+        empEdit.classList.remove("focus");
         empInfo.classList.remove("focus");
         mngBody.map(e => e.classList.remove("focus"));
         mngBody[index].classList.add("focus");
       });
     });
 
+    btnEditEmp.map(b => {
+      b.addEventListener("click", ({target}) => {
+        mngBody.map(e => e.classList.remove("focus"));
+        empEdit.classList.add("focus");
+        empInfo.classList.remove("focus");
+      })
+    })
+
     btnApproval.map(e =>
       e.addEventListener("click", ({ target }) => {
         mngBody.map(e => e.classList.remove("focus"));
+        empEdit.classList.remove("focus");
         empInfo.classList.add("focus");
         const id = target.nextElementSibling.value;
         this.aprEmp = id;
