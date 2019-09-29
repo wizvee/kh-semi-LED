@@ -40,7 +40,7 @@ public class businfoServlet extends HttpServlet {
 		Business busInfo=service.getBusInfo(busId);
 		
 		request.setAttribute("busInfo", busInfo);
-		request.getRequestDispatcher("/views/common/editBus.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/owner/editBus.jsp").forward(request, response);
 	}
 
 	/**
