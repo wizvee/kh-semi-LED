@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.semi.caldendar.model.service.CalendarService;
 import com.semi.caldendar.model.vo.Cal;
+import com.semi.task.model.vo.Task;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/owner/insertCal.do")
@@ -44,23 +45,27 @@ public class InsertCalServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 
-
 		cal.setCalDate(calDate);
 		cal.setBusId(ui.getSelectBusId());
 		cal.setSftId(request.getParameter("sftId"));
 		cal.setCalTitle(request.getParameter("calTitle"));
 		cal.setCalDetail(request.getParameter("calDetail"));
+		
+		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		String task = request.getParameter("taskArr");
+		Task[] taskArr = gs.fromJson(task, Task[].class);
 
 //		알림 추가
 
-		int r = new CalendarService().insertCal(cal);
+		int r = new CalendarService().insertCal(cal, taskArr);
 
 		if (r > 0) {
-			Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			Gson gs1 = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			ui.setFlag("N");
 
 			session.setAttribute("userInfo", ui);
-			out.print(gs.toJson(ui));
+			out.print(gs1.toJson(ui));
 		} else
 			out.print("fail");
 	}

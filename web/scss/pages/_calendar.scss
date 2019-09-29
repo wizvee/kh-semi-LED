@@ -75,7 +75,8 @@
     resize: none;
   }
 
-  .sftList {
+  .sftList,
+  .taskList .targetEmpList {
     position: relative;
     border: 1px solid $border-default;
     border-radius: 5px;
@@ -125,5 +126,18 @@
     @include grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 10px;
+  }
+}
+
+.viewCal_area {
+  input[type="checkbox"] {
+    &[disabled]+label {
+      color: $text-gray;
+    }
+
+    &:checked+label {
+      color: $primary;
+      text-decoration: line-through;
+    }
   }
 }

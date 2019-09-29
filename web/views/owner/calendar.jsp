@@ -1,3 +1,4 @@
+<%@page import="com.semi.caldendar.model.vo.Cal"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="com.semi.sft.model.vo.Shift"%>
 <%@page import="com.semi.emp.model.vo.Employee"%>
@@ -7,7 +8,7 @@
 <%
 	ArrayList<Employee> empList = (ArrayList<Employee>) request.getAttribute("empList");
 	ArrayList<Shift> sftList = (ArrayList<Shift>) request.getAttribute("sftList");
-	
+
 	String parsingEmpList = gs.toJson(empList);
 %>
 <script>
@@ -32,8 +33,10 @@
 		<div class="item_header">
 			<h2>일정 보기</h2>
 		</div>
-		<div class="item_body">
-			<span></span>
+		<div class="item_body viewCal_area">
+			<div class="calTitle"></div>
+			<div class="calDetail"></div>
+			<div class="calTask"></div>
 		</div>
 	</section>
 
@@ -42,29 +45,24 @@
 			<h2>일정 추가</h2>
 		</div>
 		<div class="item_body subCal_area">
-			<input type="text" name="date" class="inpt-outline">
+			<input type="text" name="date" class="inpt-outline" readonly>
 			<div class="sftList">
-				<input type="hidden" name="sftId" value="all">
-				<span class="selectSft">전체</span>
+				<input type="hidden" name="sftId" value="<%=sftList.get(0).getSftId() %>">
+				<span class="selectSft"><%=sftList.get(0).getSftName() %></span>
 				<ul class="dropMenu">
-					<li id="all" class="sft select">전체</li>
 					<%
-					if (!sftList.isEmpty()) {
-						for(Shift s : sftList) {
-				%>
-					<li id="<%=s.getSftId() %>" class="sft"><%=s.getSftName() %></li>
+						for (Shift s : sftList) {
+					%>
+					<li id="<%=s.getSftId()%>" class="sft"><%=s.getSftName()%></li>
 					<%
 						}
-					}
-				%>
+					%>
 				</ul>
 			</div>
 			<input type="text" name="title" class="inpt-outline">
 			<textarea name="content" class="inpt-outline" cols="30" rows="10"></textarea>
 			<button id="btn_addTask" class="btn-primary">할일 추가</button>
-			<div class="taskList">
-				
-			</div>
+			<div class="taskList"></div>
 			<button id="btn_insertCal" class="btn-primary">일정 추가</button>
 		</div>
 	</section>

@@ -11,10 +11,13 @@ public class Task {
 	private String taskMsg;
 	private boolean done;
 
+	private String userName;
+
 	public Task() {
 	}
 
-	public Task(String taskId, Date taskDate, String calId, String userId, String taskMsg, boolean done) {
+	public Task(String taskId, Date taskDate, String calId, String userId, String taskMsg, boolean done,
+			String userName) {
 		super();
 		this.taskId = taskId;
 		this.taskDate = taskDate;
@@ -22,6 +25,7 @@ public class Task {
 		this.userId = userId;
 		this.taskMsg = taskMsg;
 		this.done = done;
+		this.userName = userName;
 	}
 
 	public String getTaskId() {
@@ -70,6 +74,14 @@ public class Task {
 
 	public void setDone(boolean done) {
 		this.done = done;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

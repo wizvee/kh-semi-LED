@@ -1,6 +1,7 @@
-package com.semi.owner.controller;
+package com.semi.caldendar.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,29 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.bus.model.service.BusinessService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.semi.caldendar.model.service.CalendarService;
 import com.semi.caldendar.model.vo.Cal;
-import com.semi.emp.model.vo.Employee;
-import com.semi.sft.model.vo.Shift;
 import com.semi.userinfo.model.vo.UserInfo;
 
-@WebServlet("/owner/calendar.do")
-public class CalendarServlet extends HttpServlet {
+@WebServlet("/getCalList.do")
+public class getCalListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CalendarServlet() {
+	public getCalListServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		UserInfo ui = (UserInfo) request.getSession().getAttribute("userInfo");
-		ArrayList<Employee> empList = new BusinessService().getEmpList(ui.getSelectBusId());
-		ArrayList<Shift> sftList = new BusinessService().getSftList(ui.getSelectBusId());
-		request.setAttribute("empList", empList);
-		request.setAttribute("sftList", sftList);
-		request.getRequestDispatcher("/views/owner/calendar.jsp").forward(request, response);
+
+		ArrayList<Cal> list = new CalendarService().getCalList(ui.getSelectBusId());
+
+		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		out.print(gs.toJson(list));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

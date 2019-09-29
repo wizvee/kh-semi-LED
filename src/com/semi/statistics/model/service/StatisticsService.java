@@ -23,15 +23,19 @@ public class StatisticsService {
 		List<Statistics>forWageTable=dao.forWageTable(conn, busId);
 		List<Statistics>forTimeLine=dao.forTimeLine(conn,busId);
 		List<Statistics>forWorkingHour=dao.forWorkingHour(conn,busId);
-//		List<Statistics>forTotalEmp=dao.forTotalEmp(conn,busId);
-//		List<Statistics>forLateLeave=dao.forLateLeave(conn,busId);
+		List<Statistics>forTotalEmp=dao.forTotalEmp(conn,busId);
+		List<Statistics>forTotalLate=dao.forTotalLate(conn,busId);
+		List<Statistics>forTotalEarlyLeave=dao.forTotalEarlyLeave(conn,busId);
+		List<Statistics>forTotalOverTime=dao.forTotalOverTime(conn,busId);
 		
 		allData.put("forWageLine", forWageLine);
 		allData.put("forWageTable", forWageTable);
 		allData.put("forTimeLine", forTimeLine);
 		allData.put("forWorkingHour", forWorkingHour);
-//		allData.put("forTotalEmp", forTotalEmp);
-//		allData.put("forLateLeave", forLateLeave);
+		allData.put("forTotalEmp", forTotalEmp);
+		allData.put("forTotalLate", forTotalLate);
+		allData.put("forTotalEarlyLeave", forTotalEarlyLeave);
+		allData.put("forTotalOverTime", forTotalOverTime);
 		close(conn);
 		return allData;
 	}
