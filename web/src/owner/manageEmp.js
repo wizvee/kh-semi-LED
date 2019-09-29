@@ -38,6 +38,14 @@ class MngEmp {
       })
     );
 
+    btnReject.map(e =>
+      e.addEventListener("click", ({ target }) => {
+        const id = target.previousElementSibling.value;
+        const data = `empId=${id}`;
+        this.getResult("owner/rejectEmp.do", data, this.rejectEmp);
+      })
+    );
+
     sftItem.map(e =>
       e.addEventListener("click", ({ target }) => {
         sftItem.map(e => e.classList.remove("selected"));
@@ -51,7 +59,7 @@ class MngEmp {
         e => e.checked
       ).value;
       const empWage = selectElements("input[name='empWage']")[0].value;
-      const sftId = selectElements(".select input[name='sftId']")[0].value;
+      const sftId = document.querySelectorAll(".sftItem")[0].getAttribute("id");
       const empStart = selectElements("input[name='empStart']")[0].value;
 
       const data = `empId=${this.aprEmp}&empType=${empType}&empWage=${empWage}&sftId=${sftId}&empStart=${empStart}`;
@@ -63,18 +71,23 @@ class MngEmp {
     if (respText != "fail") {
       this.aprEmp = "";
       socket.send(respText);
-      location.href = "/p_190826_semi/owner/manageEmp.do";
+      location.href = contextPath + "owner/manageEmp.do";
     }
   };
 
-  rejectEmp(respText) {}
+  rejectEmp(respText) {
+    if (respText != "fail") {
+      socket.send(respText);
+      location.href = contextPath + "owner/manageEmp.do";
+    }
+  }
 
   getResult(servletURL, data, fn) {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", () => {
       fn(xhr.responseText);
     });
-    xhr.open("post", "/p_190826_semi/" + servletURL);
+    xhr.open("post", contextPath + servletURL);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
   }

@@ -137,7 +137,7 @@
 								ArrayList<String> days = new ArrayList<>(Arrays.asList(sftList.get(0).getSftDay().split(",")));
 							%>
 							<div class="sftSelect">
-								<div class="sftItem">
+								<div id="<%=sftList.get(0).getSftId()%>" class="sftItem">
 									<span><b><%=sftList.get(0).getSftName()%></b></span>
 									<div class="sftDay">
 										<span <%=days.contains("일") ? "class='work'" : ""%>>일</span>
