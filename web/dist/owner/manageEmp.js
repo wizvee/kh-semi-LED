@@ -48,6 +48,7 @@ function () {
             return e.classList.remove("focus");
           });
           target.classList.add("focus");
+          empInfo.classList.remove("focus");
           mngBody.map(function (e) {
             return e.classList.remove("focus");
           });
@@ -117,3 +118,13 @@ function () {
 }();
 
 var mngEmp = new MngEmp();
+var dropShift = selectElements(".dropMenu .sftItem");
+dropShift.map(function (s) {
+  s.addEventListener("click", function (_ref4) {
+    var currentTarget = _ref4.currentTarget;
+    var target = document.querySelectorAll(".sftSelect")[0];
+    var copy = currentTarget.cloneNode(true);
+    target.firstElementChild.remove();
+    target.appendChild(copy);
+  });
+});

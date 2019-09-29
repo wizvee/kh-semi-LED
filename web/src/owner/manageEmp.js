@@ -21,6 +21,7 @@ class MngEmp {
       e.addEventListener("click", ({ target }) => {
         mngHeader.map(e => e.classList.remove("focus"));
         target.classList.add("focus");
+        empInfo.classList.remove("focus");
         mngBody.map(e => e.classList.remove("focus"));
         mngBody[index].classList.add("focus");
       });
@@ -90,3 +91,13 @@ class MngEmp {
 }
 
 const mngEmp = new MngEmp();
+
+const dropShift = selectElements(".dropMenu .sftItem");
+dropShift.map(s => {
+  s.addEventListener("click", ({ currentTarget }) => {
+    const target = document.querySelectorAll(".sftSelect")[0];
+    const copy = currentTarget.cloneNode(true);
+    target.firstElementChild.remove();
+    target.appendChild(copy);
+  });
+});
