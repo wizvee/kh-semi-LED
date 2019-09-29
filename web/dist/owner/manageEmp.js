@@ -36,10 +36,12 @@ function () {
 
       var mngHeader = selectElements(".mngEmp_header span");
       var mngBody = selectElements(".mngEmp_body .mngDiv");
+      var empEdit = document.querySelectorAll(".editEmp_area")[0];
       var empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
+      var btnEditEmp = selectElements(".btn_editEmp");
       var sftItem = selectElements(".busShift_area .sftItem");
-      var btnApproval = selectElements(".btn_Approval");
-      var btnReject = selectElements(".btn_Reject");
+      var btnApproval = selectElements(".btn_approval");
+      var btnReject = selectElements(".btn_reject");
       var btnApvEmp = document.querySelectorAll(".btn_arvEmp")[0];
       mngHeader.map(function (e, index) {
         e.addEventListener("click", function (_ref) {
@@ -48,6 +50,7 @@ function () {
             return e.classList.remove("focus");
           });
           target.classList.add("focus");
+          empEdit.classList.remove("focus");
           empInfo.classList.remove("focus");
           mngBody.map(function (e) {
             return e.classList.remove("focus");
@@ -55,12 +58,23 @@ function () {
           mngBody[index].classList.add("focus");
         });
       });
-      btnApproval.map(function (e) {
-        return e.addEventListener("click", function (_ref2) {
+      btnEditEmp.map(function (b) {
+        b.addEventListener("click", function (_ref2) {
           var target = _ref2.target;
           mngBody.map(function (e) {
             return e.classList.remove("focus");
           });
+          empEdit.classList.add("focus");
+          empInfo.classList.remove("focus");
+        });
+      });
+      btnApproval.map(function (e) {
+        return e.addEventListener("click", function (_ref3) {
+          var target = _ref3.target;
+          mngBody.map(function (e) {
+            return e.classList.remove("focus");
+          });
+          empEdit.classList.remove("focus");
           empInfo.classList.add("focus");
           var id = target.nextElementSibling.value;
           _this2.aprEmp = id;
@@ -69,8 +83,8 @@ function () {
         });
       });
       btnReject.map(function (e) {
-        return e.addEventListener("click", function (_ref3) {
-          var target = _ref3.target;
+        return e.addEventListener("click", function (_ref4) {
+          var target = _ref4.target;
           var id = target.previousElementSibling.value;
           var data = "empId=".concat(id);
 
@@ -78,8 +92,8 @@ function () {
         });
       });
       sftItem.map(function (e) {
-        return e.addEventListener("click", function (_ref4) {
-          var target = _ref4.target;
+        return e.addEventListener("click", function (_ref5) {
+          var target = _ref5.target;
           sftItem.map(function (e) {
             return e.classList.remove("selected");
           });
@@ -134,8 +148,8 @@ function () {
 var mngEmp = new MngEmp();
 var dropShift = selectElements(".dropMenu .sftItem");
 dropShift.map(function (s) {
-  s.addEventListener("click", function (_ref5) {
-    var currentTarget = _ref5.currentTarget;
+  s.addEventListener("click", function (_ref6) {
+    var currentTarget = _ref6.currentTarget;
     var target = document.querySelectorAll(".sftSelect")[0];
     var copy = currentTarget.cloneNode(true);
     target.firstElementChild.remove();
