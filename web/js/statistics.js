@@ -83,7 +83,7 @@ function drawChart() {
   ]);
 
   var options = {
-    title: yearNow + " 년 월별 직원 급여 지출",
+    title: yearNow + "년 월별 직원 급여 지출",
     hAxis: { title: "월별", titleTextStyle: { color: "#333" } },
     vAxis: { title: "만원", minValue: 0 },
     animation: {
@@ -127,7 +127,7 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: temp.year + " 년 월별 직원 급여 지출",
+        title: temp.year + "년 월별 직원 급여 지출",
         hAxis: { title: "월별", titleTextStyle: { color: "#333" } },
         vAxis: { title: "만원", minValue: 0 },
         animation: {
@@ -254,7 +254,7 @@ function drawVisualization() {
   ]);
 
   var options = {
-    title: yearNow+"월별 근무자 전체 근무시간",
+    title: yearNow+"년 월별 근무자 전체 근무시간",
     vAxis: { title: "시간" },
     hAxis: { title: "월별" },
     seriesType: "bars",
@@ -302,7 +302,7 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: temp.year+"월별 근무자 전체 근무시간",
+        title: temp.year+"년 월별 근무자 전체 근무시간",
         vAxis: { title: "시간" },
         hAxis: { title: "월별" },
         seriesType: "bars",
@@ -357,7 +357,7 @@ function dailyWorkerCount() {
   ]);
 
   var options = {
-    title: yearNow+" 월별 총 근무자 수",
+    title: yearNow+"년 월별 총 근무자 수",
     hAxis: {
       title: "월",
       format: "long"
@@ -416,7 +416,7 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: temp.year+" 월별 총 근무자 수",
+        title: temp.year+"년 월별 총 근무자 수",
         hAxis: {
           title: "월",
           format: "long"
@@ -455,18 +455,12 @@ for (var y = firstYear; y <= yearNow; y++) {
 
 console.log(json.forTotalEarlyLeave[0].years[1]);
 
-// if(typeof json.forTotalLate[0].years[dispNo]!='undefied'){
   var dis6 = solutionObj(json.forTotalLate[0].years[dispNo]);
-// }
-// else if(typeof json.forTotalEarlyLeave[0].years[dispNo]!='undefined'){
-  var dis7 = solutionObj(json.forTotalEarlyLeave[0].years[dispNo]);
-// }
-// else if(typeof json.forTotalOverTime[0].years[dispNo]!='undefined'){
-  var dis8 = solutionObj(json.forTotalOverTime[0].years[dispNo]);
-// }
-// else{
 
-// }
+  var dis7 = solutionObj(json.forTotalEarlyLeave[0].years[dispNo]);
+
+  var dis8 = solutionObj(json.forTotalOverTime[0].years[dispNo]);
+
 
 google.charts.load("current", { packages: ["line"] });
 google.charts.setOnLoadCallback(drawChartLate);
@@ -489,7 +483,7 @@ function drawChartLate() {
   ]);
 
   var options = {
-    title: yearNow+" 월별 총 지각/조퇴/연장근무 수",
+    title: yearNow+"년 월별 총 지각/조퇴/연장근무 수",
     chartArea: {
       width: "80%",
       height: "70%"
@@ -507,7 +501,7 @@ function drawChartLate() {
       title: "인원수(명)",
       minValue: 0
     },
-    curveType: "none",
+    curveType: "function",
     legend: { position: "right" }
   };
 
@@ -563,7 +557,7 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: t1.year+"월별 총 지각/조퇴/연장근무 수",
+        title: e.textContent+"년 월별 총 지각/조퇴/연장근무 수",
         animation: {
           easing: "inAndOut",
           startup: true,
@@ -577,7 +571,7 @@ Array.from(chartYearList).forEach(function(e) {
           title: "인원수(명)",
           minValue: 0
         },
-        curveType: "none",
+        curveType: "function",
         legend: { position: "right" }
       };
 
