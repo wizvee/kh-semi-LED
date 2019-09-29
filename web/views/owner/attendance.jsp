@@ -326,7 +326,6 @@ fieldset > legend {
 			<h2>근태 관리</h2>
 		</div>
 
-		<%if (!list.isEmpty()) {%>
 
 		<div class="item_body calendar_area">
 			<div class="calendar_header">
@@ -335,34 +334,14 @@ fieldset > legend {
 			</div>
 			<div class="calendar_body"></div>
 		</div>
-
 		<script src="<%=request.getContextPath()%>/src/owner/subCal.js"></script>
-		
-		<fieldset>
-		<legend> 사업장 근무자 리스트 </legend>
-		<div class="item_atd">
 
-			
-				</div>
-</fieldset>
-
-
-
+		<%if (!list.isEmpty()) {%>
+	<div class="makeCard">
+	</div>
 <%
 	}
 %>
-
-<div class="item_atd_divB">
-	<p>아직 근무하는 직원이 없어요..!</p>
-</div>
-<div class="item_atd">
-	<button class="atd_none_btn"
-		onclick="location.href = '<%=request.getContextPath()%>/#'">근무조
-		편성하기</button>
-	<button class="atd_none_btn"
-		onclick="location.href='<%=request.getContextPath()%>/views/owner/main.jsp'">돌아가기</button>
-</div>
-
 
 </section>
 </div>

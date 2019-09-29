@@ -86,6 +86,15 @@ public class AttendanceDao {
 				a.setAtdOff(rs.getString("ATD_OFF"));
 				
 				list.add(a);
+				
+				System.out.println(a.getEmpId());
+				System.out.println(a.getSftId());
+				System.out.println(a.getSftName());
+				System.out.println(a.getAtdOn());
+				System.out.println(a.getAtdOff());
+				System.out.println(a.getAtdType());
+				System.out.println(a.getAtdOn());
+				System.out.println(a.getAtdOff());
 			}
 			
 			
