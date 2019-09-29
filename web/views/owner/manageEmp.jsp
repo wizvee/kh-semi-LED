@@ -35,6 +35,7 @@
 				<div class="mngEmpWork_area mngDiv focus">
 					<%
 						if (!workList.isEmpty()) {
+						int count = 0;
 							for (Employee e : workList) {
 								String type = null;
 								switch (e.getEmpType()) {
@@ -48,21 +49,29 @@
 									type = "월급";
 									break;
 								}
+
+								String sftName = null;
+								for(Shift s : sftList) {
+									if(e.getSftId().equals(s.getSftId()))
+										sftName = s.getSftName();
+								}
 					%>
 					<div class="viewEmp_area">
-						<div class="view_header"></div>
+						<div class="view_header">
+							<b># <%=++count %></b>
+						</div>
 						<div class="view_body">
 							<img src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
 							<span><%=e.getUserName()%></span>
 							<span><%=e.getUserPhone()%></span>
 							<div class="detailInfo">
-								<span class="<%=e.getEmpType() %>"><%=type %></span>
-								<span><%=e.getEmpWage() %></span>
-								<span></span>
+								<span class="<%=e.getEmpType()%> tag"><%=type %></span>
+								<span class="tag"><%=String.format("%,d", e.getEmpWage()) %></span>
+								<span class="tag"><%=sftName %></span>
 							</div>
 						</div>
 						<div class="view_footer">
-							<button class="btn-primary">편집</button>
+							<button class="btn-primary btn_editEmp">편집</button>
 							<input type="hidden" value="<%=e.getUserId()%>">
 						</div>
 					</div>
@@ -100,9 +109,9 @@
 							src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
 						<%=e.getUserName()%>
 						<div>
-							<button class="btn-primary btn_Approval">승인</button>
+							<button class="btn-primary btn_approval">승인</button>
 							<input type="hidden" value="<%=e.getUserId()%>">
-							<button class="btn-outline btn_Reject">거절</button>
+							<button class="btn-outline btn_reject">거절</button>
 						</div>
 					</div>
 					<%
@@ -113,6 +122,9 @@
 					<%
 						}
 					%>
+				</div>
+				<div class="editEmp_area">
+					수정 페이지 만들 것것거석서거서
 				</div>
 				<div class="approvalEmpInfo_area">
 					<div>

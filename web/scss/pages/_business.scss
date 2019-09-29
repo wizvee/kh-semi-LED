@@ -54,12 +54,12 @@
         }
 
         &:hover::placeholder {
-          color: $text-placeholder;
+          color: $text-gray;
         }
 
         &:hover+span,
         &:focus+span {
-          color: $text-placeholder;
+          color: $text-gray;
         }
       }
     }
