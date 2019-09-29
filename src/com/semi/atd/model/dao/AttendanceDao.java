@@ -110,7 +110,19 @@ public class AttendanceDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("setMonth");
+		List list = new ArrayList();
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.set
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
 		
 		
 	}
