@@ -18,11 +18,9 @@
 }
 
 .item .item_mypage .pic .snb_profile {
-	width: 50px;
-	height: 50px;
 	border: 2px solid #fff;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
@@ -393,7 +391,7 @@ label {
 							$("#result_phone").html("휴대폰 번호 변경 실패. 다시 시도해 주세요.").css("color","red");
 						} else{
 							area.style.display = "none";
-							$('#btn_phone_view').find('div>span').last().html($('#new_phone').val().trim());
+							$('#btn_phone_view').find('div>span').eq(1).html($('#new_phone').val().trim());
 						}
 					}
 				});
@@ -439,12 +437,11 @@ label {
 		$('#btn_quit').click(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/quitAjaxinfoUser.do",
-				data:{email:$("#quit_email").val().trim(), pw:$("#quit_pw").val().trim(), quittype:$("#quit_type")},
+				data:{email:$('#quit_email').val(), pw:$('#quit_pw').val(), quittype:$('#quit_type').val()},
 				success:function(data){
 					if(!data){
 						$("#result_quit").html("회원탈퇴 실패. 다시 시도해 주세요.").css("color","red");
-					} else {
-						console.log("잘가요..");
+					} else {					
 						location.href="/p_190826_semi";
 					}
 				}

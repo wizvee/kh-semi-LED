@@ -1,14 +1,19 @@
 package com.semi.user.controller;
 
 import java.io.IOException;
+
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.semi.user.model.service.UserService;
+
+import common.util.SHA512;
 
 /**
  * Servlet implementation class QuitAjaxinfoUserServlet
@@ -31,7 +36,7 @@ public class QuitAjaxinfoUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String email = request.getParameter("email");
-		String pw = request.getParameter("pw");
+		String pw = SHA512.getSHA512(request.getParameter("pw"));
 		String quittype = request.getParameter("quittype");
 		
 		int resultQuit = new UserService().QuitUser(email,pw,quittype);
