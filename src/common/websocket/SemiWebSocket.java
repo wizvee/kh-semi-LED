@@ -12,6 +12,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.semi.chatting.model.service.ChattingService;
 import com.semi.chatting.model.vo.Chatting;
 import com.semi.userinfo.model.vo.UserInfo;
 
@@ -21,7 +22,8 @@ public class SemiWebSocket {
 	private static final HashMap<Session, HttpSession> SESSIONS = new HashMap<>();
 	private static final HashMap<String, Session> USERS = new HashMap<>();
 	JsonParser jsonParser = new JsonParser();
-	Chatting chat=new Chatting();
+	ChattingService service=new ChattingService();
+	
 	
 
 	@OnOpen
@@ -39,6 +41,9 @@ public class SemiWebSocket {
 
 	@OnMessage
 	public void onMessage(Session session, String str) {
+		JsonObject jsonObject = (JsonObject) jsonParser.parse(str);
+		String flag=jsonObject.get("flag").toString();
+		
 //		String flag = websocket.getFlag();
 //		if (flag.equals("T")) {
 //			HashSet<String> to = new NotiService().getAlertTarget(userInfo.getSelectBusId());
@@ -57,14 +62,30 @@ public class SemiWebSocket {
 //				}
 //			}
 //		}
-		JsonObject jsonObject = (JsonObject) jsonParser.parse(str);
-		String flag=jsonObject.get("flag").toString();
-		if (flag=="C") {
+			System.out.println(flag);
+			
+			System.out.println("여기까진옴?");
 			chat.setBusId(jsonObject.get("busId").toString());
 			chat.setUserId(jsonObject.get("userId").toString());
 			chat.setChatType(jsonObject.get("chatType").toString());
-			chat.setChatMsg(jsonObject.get("chatType").toString());
-			chat.setReaded(jsonObject.get("chatType").toString()=="F"?false:true);
+			chat.setChatMsg(jsonObject.get("chatMsg").toString());
+			chat.setReaded(jsonObject.get("readed").toString());
+			session.getUserProperties().put("chatting", chat);
+			
+			for(Session s:session.getOpenSessions()) {
+				if(s.getUserProperties().get("chatting")!=null) {
+					Chatting c=(Chatting)s.getUserProperties().get("chatting");
+					if(c.getBusId().equals(chat.getBusId())) {
+						try {
+							System.out.println("여기까지오나?");
+							s.getBasicRemote().sendObject(chat);
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			int result=service.insertChat(chat);
+			System.out.println("저장결과:"+result);
 		}
 		
 		

@@ -119,3 +119,9 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 	}
 });
 
+socket.onmessage=function(e){
+	console.log("onmessage이다: "+e);
+	var message=JSON.parse(e.data);
+	$('.chatMsg_area').append("<p>"+message["userId"]+" : "+message["chatMsg"]+"</p>");
+}
+
