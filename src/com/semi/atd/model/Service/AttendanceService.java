@@ -3,6 +3,7 @@ package com.semi.atd.model.Service;
 import static common.template.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.semi.atd.model.dao.AttendanceDao;
 import com.semi.atd.model.vo.Attendance;
@@ -21,7 +22,19 @@ import com.semi.emp.model.vo.Employee;
 		}
 		
 
+		public List<Attendance> setAttendanceList(String date, String id) {
+			Connection conn = getConnection();
+			List<Attendance> list = dao.getAttendanceList(conn, date, id);
+			close(conn);
+			return list;
+		}
 	
+		public List getDayList(String id) {
+			Connection conn = getConnection();
+			List dayList = dao.getDayList(conn, id);
+			close(conn);
+			return dayList;
+		}
 	
 	
 	

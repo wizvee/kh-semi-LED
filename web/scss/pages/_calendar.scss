@@ -92,8 +92,8 @@
   .sftList,
   .taskList .targetEmpList {
     position: relative;
-    border: 1px solid $border-default;
     border-radius: 5px;
+    border: 1px solid $border-default;
     line-height: $height;
     @include cursor-pointer;
 

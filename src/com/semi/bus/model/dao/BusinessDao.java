@@ -174,5 +174,22 @@ public class BusinessDao {
 		}
 		return r;
 	}
+	
+	public int rejectEmp(Connection conn, String busId, String empId) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("rejectEmp");
+		int r = -1;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			pstmt.setString(2, empId);
+			r = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return r;
+	}
 
 }

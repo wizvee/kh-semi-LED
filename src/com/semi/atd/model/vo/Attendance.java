@@ -16,7 +16,7 @@ public class Attendance {
 	private String sftOn;
 	private String sftOff;
 	
-	private String atdType;
+	private String[] atdType;
 	private String atdOn;
 	private String atdOff;
 	private int empWage;
@@ -31,8 +31,9 @@ public class Attendance {
 	}
 
 	
+	
 	public Attendance(String busId, String empId, String userName, String sftId, String sftName, String sftOn,
-			String sftOff, String atdType, String atdOn, String atdOff, int empWage, long stAtdTime, long enAtdTime,
+			String sftOff, String[] atdType, String atdOn, String atdOff, int empWage, long stAtdTime, long enAtdTime,
 			long stSftTime, long enSftTime) {
 		super();
 		this.busId = busId;
@@ -51,8 +52,7 @@ public class Attendance {
 		this.stSftTime = stSftTime;
 		this.enSftTime = enSftTime;
 	}
-	
-	
+
 
 
 	public String getBusId() {
@@ -60,9 +60,11 @@ public class Attendance {
 	}
 
 
+
 	public void setBusId(String busId) {
 		this.busId = busId;
 	}
+
 
 
 	public String getEmpId() {
@@ -70,9 +72,11 @@ public class Attendance {
 	}
 
 
+
 	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
+
 
 
 	public String getUserName() {
@@ -80,9 +84,11 @@ public class Attendance {
 	}
 
 
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 
 
 	public String getSftId() {
@@ -90,9 +96,11 @@ public class Attendance {
 	}
 
 
+
 	public void setSftId(String sftId) {
 		this.sftId = sftId;
 	}
+
 
 
 	public String getSftName() {
@@ -100,9 +108,11 @@ public class Attendance {
 	}
 
 
+
 	public void setSftName(String sftName) {
 		this.sftName = sftName;
 	}
+
 
 
 	public String getSftOn() {
@@ -110,9 +120,11 @@ public class Attendance {
 	}
 
 
+
 	public void setSftOn(String sftOn) {
 		this.sftOn = sftOn;
 	}
+
 
 
 	public String getSftOff() {
@@ -120,19 +132,23 @@ public class Attendance {
 	}
 
 
+
 	public void setSftOff(String sftOff) {
 		this.sftOff = sftOff;
 	}
 
 
-	public String getAtdType() {
+
+	public String[] getAtdType() {
 		return atdType;
 	}
 
 
-	public void setAtdType(String atdType) {
+
+	public void setAtdType(String[] atdType) {
 		this.atdType = atdType;
 	}
+
 
 
 	public String getAtdOn() {
@@ -140,9 +156,11 @@ public class Attendance {
 	}
 
 
+
 	public void setAtdOn(String atdOn) {
 		this.atdOn = atdOn;
 	}
+
 
 
 	public String getAtdOff() {
@@ -150,9 +168,11 @@ public class Attendance {
 	}
 
 
+
 	public void setAtdOff(String atdOff) {
 		this.atdOff = atdOff;
 	}
+
 
 
 	public int getEmpWage() {
@@ -160,9 +180,11 @@ public class Attendance {
 	}
 
 
+
 	public void setEmpWage(int empWage) {
 		this.empWage = empWage;
 	}
+
 
 
 	public long getStAtdTime() {
@@ -170,9 +192,11 @@ public class Attendance {
 	}
 
 
+
 	public void setStAtdTime(long stAtdTime) {
 		this.stAtdTime = stAtdTime;
 	}
+
 
 
 	public long getEnAtdTime() {
@@ -180,9 +204,11 @@ public class Attendance {
 	}
 
 
+
 	public void setEnAtdTime(long enAtdTime) {
 		this.enAtdTime = enAtdTime;
 	}
+
 
 
 	public long getStSftTime() {
@@ -190,9 +216,11 @@ public class Attendance {
 	}
 
 
+
 	public void setStSftTime(long stSftTime) {
 		this.stSftTime = stSftTime;
 	}
+
 
 
 	public long getEnSftTime() {
@@ -200,9 +228,11 @@ public class Attendance {
 	}
 
 
+
 	public void setEnSftTime(long enSftTime) {
 		this.enSftTime = enSftTime;
 	}
+
 
 
 	public void setAtdTimeForLong(String stAtdT, String enAtdT) {

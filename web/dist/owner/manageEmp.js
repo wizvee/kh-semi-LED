@@ -20,7 +20,7 @@ function () {
       if (respText != "fail") {
         _this.aprEmp = "";
         socket.send(respText);
-        location.href = "/p_190826_semi/owner/manageEmp.do";
+        location.href = contextPath + "owner/manageEmp.do";
       }
     });
 
@@ -48,6 +48,7 @@ function () {
             return e.classList.remove("focus");
           });
           target.classList.add("focus");
+          empInfo.classList.remove("focus");
           mngBody.map(function (e) {
             return e.classList.remove("focus");
           });
@@ -67,9 +68,18 @@ function () {
           inptStart.value = _this2.getDate(_this2.now);
         });
       });
-      sftItem.map(function (e) {
+      btnReject.map(function (e) {
         return e.addEventListener("click", function (_ref3) {
           var target = _ref3.target;
+          var id = target.previousElementSibling.value;
+          var data = "empId=".concat(id);
+
+          _this2.getResult("owner/rejectEmp.do", data, _this2.rejectEmp);
+        });
+      });
+      sftItem.map(function (e) {
+        return e.addEventListener("click", function (_ref4) {
+          var target = _ref4.target;
           sftItem.map(function (e) {
             return e.classList.remove("selected");
           });
@@ -82,7 +92,7 @@ function () {
           return e.checked;
         }).value;
         var empWage = selectElements("input[name='empWage']")[0].value;
-        var sftId = selectElements(".select input[name='sftId']")[0].value;
+        var sftId = document.querySelectorAll(".sftItem")[0].getAttribute("id");
         var empStart = selectElements("input[name='empStart']")[0].value;
         var data = "empId=".concat(_this2.aprEmp, "&empType=").concat(empType, "&empWage=").concat(empWage, "&sftId=").concat(sftId, "&empStart=").concat(empStart);
 
@@ -91,7 +101,12 @@ function () {
     }
   }, {
     key: "rejectEmp",
-    value: function rejectEmp(respText) {}
+    value: function rejectEmp(respText) {
+      if (respText != "fail") {
+        socket.send(respText);
+        location.href = contextPath + "owner/manageEmp.do";
+      }
+    }
   }, {
     key: "getResult",
     value: function getResult(servletURL, data, fn) {
@@ -99,7 +114,7 @@ function () {
       xhr.addEventListener("load", function () {
         fn(xhr.responseText);
       });
-      xhr.open("post", "/p_190826_semi/" + servletURL);
+      xhr.open("post", contextPath + servletURL);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(data);
     }
@@ -117,3 +132,13 @@ function () {
 }();
 
 var mngEmp = new MngEmp();
+var dropShift = selectElements(".dropMenu .sftItem");
+dropShift.map(function (s) {
+  s.addEventListener("click", function (_ref5) {
+    var currentTarget = _ref5.currentTarget;
+    var target = document.querySelectorAll(".sftSelect")[0];
+    var copy = currentTarget.cloneNode(true);
+    target.firstElementChild.remove();
+    target.appendChild(copy);
+  });
+});
