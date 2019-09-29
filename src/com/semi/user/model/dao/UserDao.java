@@ -343,13 +343,13 @@ public class UserDao {
 		return result;
 	}
 	
-	public int QuitUser(Connection conn, String userId, String email, String pw) {
+	public int QuitUser(Connection conn, String email, String pw, String quittype) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("QuitUser");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
+			pstmt.setString(1, quittype);
 			pstmt.setString(2, email);
 			pstmt.setString(3, pw);
 			result = pstmt.executeUpdate();

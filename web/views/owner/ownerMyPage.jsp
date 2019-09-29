@@ -20,6 +20,10 @@
 .item .item_mypage .pic .snb_profile {
 	width: 50px;
 	height: 50px;
+	border: 2px solid #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 }
 
 .btn_pic, .btn_email, .btn_name, .btn_phone, .btn_password, .btn_quit{
@@ -55,8 +59,8 @@
 
 .item .item_mypage_pic {
 	display: none;
-	padding-top: 10px;
 	padding-bottom: 10px;
+	height: 80px;
 }
 
 .sub_profile {
@@ -96,6 +100,18 @@
 	left:75%;
 }
 
+label {
+	margin: 0;
+    padding: 7px 13px;
+    height: 30px;
+	box-sizing: border-box;
+    vertical-align: top;
+    -webkit-appearance: none;
+	border: 0;
+    border-radius: 5px;
+    outline: none;
+}
+
 </style>
 
 <div id="content">
@@ -106,15 +122,14 @@
 		<form name="updateUserFrm" method="POST">
 			<div class="item_body item_mypage">
 				<input type="hidden" name="userId" value=<%=infoUser.getUserId() %>>
-				<input type="hidden" name="infoUserPwd"
-					value=<%=infoUser.getPassword() %>>
+				<input type="hidden" name="infoUserPwd" value=<%=infoUser.getPassword() %>>
 				<button id="btn_pic_view" class="btn_pic" onclick="return false;">
 					<div class="pic">
 						<b>사진 :</b> <img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic">
 					</div>
 				</button>
 				<div class="item_body item_mypage_pic">
-					<button id="btn_ori_pic" class="btn-primary" onclick="return false;">기본 프로필로 변경</button>
+					<button id="btn_ori_pic" class="btn-primary" onclick="return false;">기본 프로필 변경</button>
 					<label id="btn_new_pic" class="btn-primary" for="profile">새 프로필 변경</label>
 					<input type="file" name="profile" id="profile">
 				</div>
@@ -139,7 +154,7 @@
 					</div>
 				</button>
 				<div class="item_body item_mypage_name">
-					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 이름 : </i>
+					<i class="fa far fa-id-badge" aria-hidden="true"> 변경 할 이름 : </i>
 					<input type="text" class="inpt-outline" name="name" id="name" placeholder="이름을 입력하세요.">
 					<div id="result_name"></div>
 					<button id="btn_name" class="btn-primary" onclick="return false;">이름 변경</button>
@@ -153,7 +168,7 @@
 					</div>
 				</button>
 				<div class="item_body item_mypage_phone">
-					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 휴대폰 번호 : </i> 
+					<i class="fa fas fa-phone" aria-hidden="true"> 변경 할 휴대폰 번호 : </i> 
 					<input type="text" class="inpt-outline" name="new_phone" id="new_phone" placeholder="-포함 입력하세요.">
 					<div id="result_phone"></div>
 					<button id="btn_new_phone" class="btn-primary" onclick="return false;"> 휴대폰 번호 변경</button>
@@ -196,9 +211,10 @@
 					</div>
 				</button>
 				<div class="item_body item_mypage_quit">
-					<i class="fa fa-unlock-alt" aria-hidden="true"> 정상적인 회원 탈퇴를 위해 이메일과 비밀번호를 입력하세요.</i> 
-					<input type="text" class="inpt-outline" name="quit-email" id="quit-email" placeholder="이메일를 입력하세요.">
-					<input type="password" class="inpt-outline" name="quit-pw" id="quit-pw" placeholder="비밀번호를 입력하세요.">
+					<i class="fa fas fa-exclamation" aria-hidden="true"> 정상적인 회원 탈퇴를 위해 이메일과 비밀번호를 입력하세요.</i> 
+					<input type="email" class="inpt-outline" name="quit_email" id="quit_email" placeholder="이메일를 입력하세요.">
+					<input type="password" class="inpt-outline" name="quit_pw" id="quit_pw" placeholder="비밀번호를 입력하세요.">
+					<input type="hidden" name="quit_type" id="quit_type" value="T">
 					<div id="result_quit"></div>
 					<button id="btn_quit" class="btn-primary" onclick="return false;">회원탈퇴</button>
 				</div>
@@ -209,21 +225,28 @@
 </div>
 
 <script>
+	 	var picarea = document.querySelectorAll(".item_mypage_pic")[0];
+	 	var namearea = document.querySelectorAll(".item_mypage_name")[0];
+	 	var phonearea = document.querySelectorAll(".item_mypage_phone")[0];
+	 	var pwdarea = document.querySelectorAll(".item_mypage_pw")[0];
+	 	var quitarea = document.querySelectorAll(".item_mypage_quit")[0];
+	 	
 	$(function(){
-	 	$(".btn_pic").click(function(){
-	 		var area = document.querySelectorAll(".item_mypage_pic")[0];
-	 		var area1 = document.querySelectorAll(".item_mypage_email")[0];
-	 		if(area.style.display==""||area.style.display == "none") {
-	 			area.style.display = "block";
-				area1.style.display = "none"; 	 			
+	 	$(".btn_pic").click(function(){	
+	 		if(picarea.style.display==""||picarea.style.display == "none") {
+	 			picarea.style.display = "block";
+	 			namearea.style.display = "none";
+	 			phonearea.style.display = "none";
+	 			pwdarea.style.display = "none";
+	 			quitarea.style.display = "none";
 	 		}
 	 		else{
-	 			area.style.display = "none";	 			
+	 			picarea.style.display = "none";	 			
 	 		}
 	 	});
 	 });
 	
-	$(function(){
+/* 	$(function(){
 	 	$(".btn_email").click(function(){
 	 		var area = document.querySelectorAll(".item_mypage_email")[0];
 	 		if(area.style.display==""||area.style.display == "none")
@@ -231,45 +254,66 @@
 	 		else
 	 			area.style.display = "none";
 	 	});
-	 });
+	 }); */
 	
 	$(function(){
 	 	$(".btn_name").click(function(){
-	 		var area = document.querySelectorAll(".item_mypage_name")[0];
-	 		if(area.style.display==""||area.style.display == "none")
-	 			area.style.display = "block";
+	 		
+	 		if(namearea.style.display==""||namearea.style.display == "none") {
+	 			picarea.style.display = "none";
+ 				namearea.style.display = "block";
+ 				phonearea.style.display = "none";
+ 				pwdarea.style.display = "none";
+ 				quitarea.style.display = "none";	 			
+	 		}
 	 		else
-	 			area.style.display = "none";
+	 			namearea.style.display = "none";
 	 	});
 	 });
 	
 	$(function(){
 	 	$(".btn_phone").click(function(){
-	 		var area = document.querySelectorAll(".item_mypage_phone")[0];
-	 		if(area.style.display==""||area.style.display == "none")
-	 			area.style.display = "block";
+	 		
+	 		if(phonearea.style.display==""||phonearea.style.display == "none"){
+	 			picarea.style.display = "none";
+ 				namearea.style.display = "none";
+ 				phonearea.style.display = "block";
+ 				pwdarea.style.display = "none";
+ 				quitarea.style.display = "none";		 			
+	 		}
 	 		else
-	 			area.style.display = "none";
+	 			phonearea.style.display = "none";
 	 	});
 	 });
 	
 	$(function(){
 	 	$(".btn_password").click(function(){
-	 		var area = document.querySelectorAll(".item_mypage_pw")[0];
-	 		if(area.style.display==""||area.style.display == "none")
-	 			area.style.display = "block";
+	 		
+	 		if(pwdarea.style.display==""||pwdarea.style.display == "none") {
+	 			picarea.style.display = "none";
+				namearea.style.display = "none";
+				phonearea.style.display = "none";
+				pwdarea.style.display = "block";
+				quitarea.style.display = "none";	 			
+	 		}
 	 		else
-	 			area.style.display = "none";
+	 			pwdarea.style.display = "none";
 	 	});
 	 });
 
 	$(function(){
 	 	$(".btn_quit").click(function(){
-	 		var area = document.querySelectorAll(".item_mypage_quit")[0];
-	 		if(area.style.display==""||area.style.display == "none")
-	 			area.style.display = "block";
+	 		
+	 		if(quitarea.style.display==""||quitarea.style.display == "none"){
+	 			picarea.style.display = "none";
+				namearea.style.display = "none";
+				phonearea.style.display = "none";
+				pwdarea.style.display = "none";
+				quitarea.style.display = "block";
+	 			
+	 		}
 	 		else
-	 			area.style.display = "none";
+	 			quitarea.style.display = "none";
 	 	});
 	 });
 	
@@ -320,7 +364,7 @@
 						} else{
 							area.style.display = "none";
 							$('#btn_name_view').find('div>span').eq(1).html($('#name').val().trim());
-							$('.snb_own').find('nav>ul>li').eq(1).html($('#name').val().trim());
+							$('.snb_own').find('nav>span').html($('#name').val().trim());
 						}
 					}
 				});
@@ -395,7 +439,7 @@
 		$('#btn_quit').click(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/quitAjaxinfoUser.do",
-				data:{email:$("#quit-email").val().trim(), pw:$("#quit-pw").val().trim(), userId:userInfo.userId},
+				data:{email:$("#quit_email").val().trim(), pw:$("#quit_pw").val().trim(), quittype:$("#quit_type")},
 				success:function(data){
 					if(!data){
 						$("#result_quit").html("회원탈퇴 실패. 다시 시도해 주세요.").css("color","red");
@@ -404,7 +448,6 @@
 						location.href="/p_190826_semi";
 					}
 				}
-				
 			});
 		});
 	});

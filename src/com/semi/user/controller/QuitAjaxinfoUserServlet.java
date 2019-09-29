@@ -29,14 +29,15 @@ public class QuitAjaxinfoUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+		
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
+		String quittype = request.getParameter("quittype");
 		
-		int resultQuit = new UserService().QuitUser(userId,email,pw);
+		int resultQuit = new UserService().QuitUser(email,pw,quittype);
 		System.out.println("회원탈퇴 가능?");
 		System.out.println(resultQuit);
-		boolean flag=resultQuit>0?false:true;
+		boolean flag=resultQuit>0?true:false;
 		
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(flag,response.getWriter());
