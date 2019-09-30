@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.semi.bus.model.service.BusinessService;
 import com.semi.bus.model.vo.Business;
 import com.semi.chatting.model.vo.Chatting;
 import com.semi.emp.model.service.EmpService;
+import com.semi.emp.model.vo.Employee;
 import com.semi.noti.model.vo.Notification;
 import com.semi.owner.model.service.OwnerService;
+import com.semi.sft.model.vo.Shift;
 import com.semi.user.model.service.UserService;
 
 public class UserInfo {
@@ -18,6 +21,9 @@ public class UserInfo {
 	private String selectBusId;
 	private HashMap<String, Business> busMap;
 	private ArrayList<Notification> notiList;
+	private ArrayList<Shift> sftList;
+	private ArrayList<Employee> empList;
+
 	private ArrayList<Chatting> chatList;
 
 	private String flag;
@@ -26,12 +32,15 @@ public class UserInfo {
 	}
 
 	public UserInfo(String userId, String selectBusId, HashMap<String, Business> busMap,
-			ArrayList<Notification> notiList, ArrayList<Chatting> chatList, String flag) {
+			ArrayList<Notification> notiList, ArrayList<Shift> sftList, ArrayList<Employee> empList,
+			ArrayList<Chatting> chatList, String flag) {
 		super();
 		this.userId = userId;
 		this.selectBusId = selectBusId;
 		this.busMap = busMap;
 		this.notiList = notiList;
+		this.sftList = sftList;
+		this.empList = empList;
 		this.chatList = chatList;
 		this.flag = flag;
 	}
@@ -54,7 +63,13 @@ public class UserInfo {
 				this.setSelectBusId(ir.next());
 			}
 			ArrayList<Notification> notiList = new UserService().getNotiList(this.getUserId());
+			ArrayList<Shift> sftList = new BusinessService().getSftList(this.getSelectBusId());
+			this.setSftList(sftList);
 			this.setNotiList(notiList);
+			if (userType.equals("O")) {
+				ArrayList<Employee> empList = new BusinessService().getEmpList(this.getSelectBusId());
+				this.setEmpList(empList);
+			}
 		}
 	}
 
@@ -88,6 +103,22 @@ public class UserInfo {
 
 	public void setNotiList(ArrayList<Notification> notiList) {
 		this.notiList = notiList;
+	}
+
+	public ArrayList<Shift> getSftList() {
+		return sftList;
+	}
+
+	public void setSftList(ArrayList<Shift> sftList) {
+		this.sftList = sftList;
+	}
+
+	public ArrayList<Employee> getEmpList() {
+		return empList;
+	}
+
+	public void setEmpList(ArrayList<Employee> empList) {
+		this.empList = empList;
 	}
 
 	public ArrayList<Chatting> getChatList() {

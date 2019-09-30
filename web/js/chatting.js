@@ -100,7 +100,7 @@ var chatInfo=function(flag, busId, userId, chatType, chatMsg, readed) {
 document.getElementById('content').addEventListener('keydown', function(event) {
 	if (event.keyCode == 13) {
 		var chatMsg=$("#content").val();
-		var websocket=new chatInfo("C",busId,userId,"msg",chatMsg,"F");
+		var websocket=new chatInfo("C",busId,userId,"MSG",chatMsg,"T");
 		socket.send(JSON.stringify(websocket));
 		
 //		const content=$("#content").val();
@@ -119,9 +119,16 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 	}
 });
 
+
+//userName 그리고 userProfile 불러와야함 
+	
+
 socket.onmessage=function(e){
-	console.log("onmessage이다: "+e);
-	var message=JSON.parse(e.data);
-	$('.chatMsg_area').append("<p>"+message["userId"]+" : "+message["chatMsg"]+"</p>");
+	$('.chatMsg_area').append("<p>"+userId+" : "+e.data+"</p>");
 }
+
+
+
+
+
 

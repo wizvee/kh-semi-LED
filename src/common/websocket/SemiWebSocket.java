@@ -10,6 +10,10 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.semi.chatting.model.service.ChattingService;
@@ -22,9 +26,7 @@ public class SemiWebSocket {
 	private static final HashMap<Session, HttpSession> SESSIONS = new HashMap<>();
 	private static final HashMap<String, Session> USERS = new HashMap<>();
 	JsonParser jsonParser = new JsonParser();
-	ChattingService service=new ChattingService();
-	
-	
+	ChattingService service = new ChattingService();
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig config) {
@@ -41,9 +43,44 @@ public class SemiWebSocket {
 
 	@OnMessage
 	public void onMessage(Session session, String str) {
-		JsonObject jsonObject = (JsonObject) jsonParser.parse(str);
-		String flag=jsonObject.get("flag").toString();
+
+		String flag = null;
+		JSONParser jp = new JSONParser();
+		JSONObject json = null;
+		try {
+			json = (JSONObject) jp.parse(str);
+
+			flag = (String) json.get("flag");
+			System.out.println(flag);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		if (flag.equals("C")) {
+			String busId = (String) json.get("busId");
+			String userId = (String) json.get("userId");
+			String chatType = (String) json.get("chatType");
+			String chatMsg = (String) json.get("chatMsg");
+			session.getUserProperties().put("busId", busId);
+
+			int result = service.insertChat(busId, userId, chatType, chatMsg);
+			System.out.println(result);
+	
+		for(Session s:session.getOpenSessions()) {
+		if(s.getUserProperties().get("busId")!=null) {
+				try {
+					s.getBasicRemote().sendText(chatMsg);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		}
 		
+		
+//		JsonObject jsonObject = (JsonObject) jsonParser.parse(str);
+//		String flag=jsonObject.get("flag").toString();
+
 //		String flag = websocket.getFlag();
 //		if (flag.equals("T")) {
 //			HashSet<String> to = new NotiService().getAlertTarget(userInfo.getSelectBusId());
@@ -62,35 +99,34 @@ public class SemiWebSocket {
 //				}
 //			}
 //		}
-			System.out.println(flag);
-			
-			System.out.println("여기까진옴?");
-			chat.setBusId(jsonObject.get("busId").toString());
-			chat.setUserId(jsonObject.get("userId").toString());
-			chat.setChatType(jsonObject.get("chatType").toString());
-			chat.setChatMsg(jsonObject.get("chatMsg").toString());
-			chat.setReaded(jsonObject.get("readed").toString());
-			session.getUserProperties().put("chatting", chat);
-			
-			for(Session s:session.getOpenSessions()) {
-				if(s.getUserProperties().get("chatting")!=null) {
-					Chatting c=(Chatting)s.getUserProperties().get("chatting");
-					if(c.getBusId().equals(chat.getBusId())) {
-						try {
-							System.out.println("여기까지오나?");
-							s.getBasicRemote().sendObject(chat);
-						}catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			int result=service.insertChat(chat);
-			System.out.println("저장결과:"+result);
-		}
-		
-		
-		
-		
+//			System.out.println(flag);
+
+//			System.out.println("여기까진옴?");
+//			String busId=(jsonObject.get("busId").toString());
+//			String userId=(jsonObject.get("userId").toString());
+//			String chatType=(jsonObject.get("chatType").toString());
+//			String chatMsg=(jsonObject.get("chatMsg").toString());
+//			String readed=(jsonObject.get("readed").toString());
+
+//			session.getUserProperties().put("busId", busId);
+//			session.getUserProperties().put("userId", userId);
+//			session.getUserProperties().put("chatType", chatType);
+//			session.getUserProperties().put("chatMsg", chatMsg);
+//			session.getUserProperties().put("readed", readed);
+
+//			for(Session s:session.getOpenSessions()) {
+//				if(s.getUserProperties().get("busId")!=null) {
+//						try {
+//							System.out.println("이값음?"+chatMsg);
+//							s.getBasicRemote().sendText(chatMsg);
+//						}catch(Exception e) {
+//							e.printStackTrace();
+//						}
+//					}
+//				int result=service.insertChat(busId,userId,chatType,chatMsg);
+//				System.out.println("저장결과:"+result);
+//		}
+
 	}
 
 }

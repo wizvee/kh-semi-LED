@@ -51,26 +51,26 @@ public class ChattingDao {
 				close(rs);
 				close(pstmt);
 			}
-			System.out.println(list);
 			return list;			
 		}
 	
 	// 채팅 내역 DB에 저장하기
-	public int insertChatting(Connection conn,Chatting c) {
+	public int insertChatting(Connection conn,String busId,String userId,String chatType,String chatMsg) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("insertChatting");
-		System.out.println(c.getBusId());
-		System.out.println(c.getUserId());
-		System.out.println(c.getChatType());
-		System.out.println(c.getChatMsg());
+		System.out.println(busId);
+		System.out.println(userId);
+		System.out.println(chatType);
+		System.out.println(chatMsg);
+		System.out.println(sql);
 		try {
 			pstmt=conn.prepareStatement(sql);
-			System.out.println(sql);
-			pstmt.setString(1, c.getBusId());
-			pstmt.setString(2, c.getUserId());
-			pstmt.setString(3, c.getChatType());
-			pstmt.setString(4, c.getChatMsg());
+			pstmt.setString(1, busId);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, null);
+			pstmt.setString(4, chatType);
+			pstmt.setString(5, chatMsg);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
