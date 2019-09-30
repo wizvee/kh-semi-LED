@@ -1,7 +1,7 @@
 var json;
 
 $.ajax({
-  url: "/p_190826_semi/owner/requestStatistics.do",
+  url: contextPath+"owner/requestStatistics.do",
   type: "post",
   async: false,
   success: function(data) {
@@ -59,7 +59,8 @@ var dispNo = yearNow - firstYear;
 var dis1 = solutionObj(json.forWageLine[0].years[dispNo]);
 
 for (var y = firstYear; y <= yearNow; y++) {
-  $("#firstChartList").append('<div class="area_chart1">' + y + "년</div>");
+  // $("#firstChartList").append('<div class="area_chart1">' + y + "년</div>");
+  $("#firstChartList").append('<li class="area_chart1"><a href="#">' + y + "년</a></li>");
 }
 
 google.charts.load("current", { packages: ["corechart"] });
@@ -208,9 +209,9 @@ function drawTimeLine() {
     dataTable.addRow([
       String(parseInt(a) + 1),
       json.forTimeLine[a].empName,
-      new Date(json.forTimeLine[a].empStart),
+      new Date(json.forTimeLine[a].empStartStr),
       new Date(
-        json.forTimeLine[a].empEnd == undefined? thisDay: json.forTimeLine[a].empEnd)
+        json.forTimeLine[a].empEndStr == undefined? thisDay: json.forTimeLine[a].empEndStr)
     ]);
   }
 

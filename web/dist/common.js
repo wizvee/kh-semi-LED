@@ -103,7 +103,7 @@ function () {
           location.href = "/p_190826_semi/".concat(url);
         }
       });
-      xhr.open("post", "/p_190826_semi/notiRead.do");
+      xhr.open("post", contextPath + "notiRead.do");
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(data);
     }
@@ -113,22 +113,24 @@ function () {
 }();
 
 var alert = new Alert();
-document.querySelector("#btn_alert").addEventListener("click", function () {
+document.querySelector("#btn_alert").addEventListener("click", function (_ref) {
+  var target = _ref.target;
   alert.viewNoti();
-  var target = document.querySelector("#alert");
-  target.classList.toggle("view");
+  var area = document.querySelector("#alert");
+  target.classList.toggle("focus");
+  area.classList.toggle("view");
 }); // OLD????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 var dropToggle = selectElements(".dropdown_toggle");
 dropToggle.map(function (e) {
-  e.addEventListener("click", function (_ref) {
-    var target = _ref.target;
+  e.addEventListener("click", function (_ref2) {
+    var target = _ref2.target;
     var menu = target.nextElementSibling;
     if (menu.style.display == "none") menu.style.display = "block";else menu.style.display = "none";
   });
 });
 $(".fa-sign-out").on("click", function () {
-  location.href = "/p_190826_semi/logout.do";
+  location.href = contextPath + "logout.do";
 });
 document.querySelectorAll(".fa-cog")[0].addEventListener("click", function () {
   location.href = contextPath + "businfo.do";

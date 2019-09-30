@@ -1,4 +1,5 @@
 const selectElements = src => Array.from(document.querySelectorAll(src));
+const contextPath="/p_190826_semi/";
 
 class Register {
   constructor() {
@@ -105,7 +106,7 @@ class Register {
   submitRegister = respText => {
     if (respText == "success") {
       const mail = document.querySelector("#uMail").value;
-      location.href = "/p_190826_semi/emailSend.do?email=" + mail;
+      location.href = contextPath+"emailSend.do?email=" + mail;
     } else {
       const area = document.querySelectorAll(".frm_register .msg_area")[0];
       this.insertError(area, "회원가입 실패");
@@ -113,7 +114,7 @@ class Register {
   };
 
   submitLogin = respText => {
-    if (respText == "success") location.href = "/p_190826_semi/main.do";
+    if (respText == "success") location.href = contextPath+"main.do";
     else {
       const area = document.querySelectorAll(".frm_login .msg_area")[0];
       this.insertError(area, "로그인 실패");
@@ -138,7 +139,7 @@ class Register {
     xhr.addEventListener("load", () => {
       fn(xhr.responseText);
     });
-    xhr.open("post", "/p_190826_semi/" + servletURL);
+    xhr.open("post", contextPath + servletURL);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
   }

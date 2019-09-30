@@ -20,12 +20,75 @@ function () {
       _this.target = _this.getMyDate(-1, 1);
 
       _this.createCal();
+
+      $.ajax({
+        url: contextPath + "ajaxPrevCal.do",
+        data: {
+          "date": _this.target.getMonth() + 1
+        },
+        method: "post",
+        dataType: "json",
+        success: function success(data) {
+          //setAjaxCalendar(data);
+          var date = $(".date");
+
+          for (var i = 0; i < data.length; i++) {
+            if (data[i][1] == 0) {
+              var flagDate = data[i][0];
+              $.each(date, function (i, v) {
+                var dateId = $(v).attr("id");
+
+                if (dateId != undefined) {
+                  var temp = flagDate.substring(flagDate.length - 2);
+                  var temp2 = dateId.substring(dateId.length - 2);
+
+                  if (temp == temp2) {
+                    $(v).css("borderBottom", "5px solid red");
+                  }
+                }
+              });
+            }
+          }
+        }
+      });
     });
 
     _defineProperty(this, "next", function () {
       _this.target = _this.getMyDate(1, 1);
 
       _this.createCal();
+
+      if (_this.now.getFullYear() >= _this.target.getFullYear() && _this.target.getMonth() + 1 < _this.now.getMonth() + 1) {
+        $.ajax({
+          url: contextPath + "ajaxNexCal.do",
+          data: {
+            "date": _this.target.getMonth() + 1
+          },
+          method: "post",
+          dataType: "json",
+          success: function success(data) {
+            var date = $(".date");
+
+            for (var i = 0; i < data.length; i++) {
+              if (data[i][1] == 0) {
+                var flagDate = data[i][0];
+                $.each(date, function (i, v) {
+                  var dateId = $(v).attr("id");
+
+                  if (dateId != undefined) {
+                    var temp = flagDate.substring(flagDate.length - 2);
+                    var temp2 = dateId.substring(dateId.length - 2);
+
+                    if (temp == temp2) {
+                      $(v).css("borderBottom", "5px solid red");
+                    }
+                  }
+                });
+              }
+            }
+          }
+        });
+      }
     });
 
     this.now = new Date();
@@ -69,7 +132,8 @@ function () {
         cell.setAttribute("class", "date");
 
         if (firstDay <= i && this.countDate <= lastDate) {
-          cell.setAttribute("id", this.setDateId(this.countDate));
+          cell.setAttribute("id", this.setDateId(this.countDate)); //cell.setAttribute("style","border-bottom:3px solid red;");
+
           cell.textContent = this.countDate;
           var compareY = this.target.getFullYear() == this.now.getFullYear();
           var compareM = this.target.getMonth() == this.now.getMonth();
@@ -82,7 +146,6 @@ function () {
         cell.addEventListener("click", function (_ref) {
           var target = _ref.target;
           // 날짜 클릭 이벤트
-          console.log(target.getAttribute("id"));
           $.ajax({
             url: contextPath + "ajaxAtd.do",
             data: {
@@ -91,7 +154,6 @@ function () {
             method: "post",
             dataType: "json",
             success: function success(data) {
-              console.log(data);
               var cardSet = "";
 
               for (var j = 0; j < data.length; j++) {
@@ -170,6 +232,29 @@ function () {
       var month = this.target.getMonth() + 1 < 10 ? "0".concat(this.target.getMonth() + 1) : this.target.getMonth() + 1;
       date = date < 10 ? "0".concat(date) : date;
       return "".concat(this.target.getFullYear(), "-").concat(month, "-").concat(date);
+    }
+  }, {
+    key: "setAjaxCalendar",
+    value: function setAjaxCalendar(data) {
+      var date = $(".date");
+
+      for (var i = 0; i < data.length; i++) {
+        if (data[i][1] == 0) {
+          var flagDate = data[i][0];
+          $.each(date, function (i, v) {
+            var dateId = $(v).attr("id");
+
+            if (dateId != undefined) {
+              var temp = flagDate.substring(flagDate.length - 2);
+              var temp2 = dateId.substring(dateId.length - 2);
+
+              if (temp == temp2) {
+                $(v).css("borderBottom", "5px solid red");
+              }
+            }
+          });
+        }
+      }
     }
   }]);
 

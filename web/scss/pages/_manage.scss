@@ -38,7 +38,7 @@
                 visibility: visible;
                 @include grid;
                 grid-template-rows: 1fr;
-                grid-gap: 15px;
+                grid-gap: 10px;
                 opacity: 1;
                 animation: ani_slideUp 1s 1;
                 animation-fill-mode: both;
@@ -48,7 +48,7 @@
                 }
 
                 @include respond-to("large") {
-                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-columns: repeat(3, 1fr);
                 }
             }
         }
@@ -56,7 +56,6 @@
         .viewEmp_area {
             @include grid;
             grid-template-rows: 30px 1fr 45px;
-            padding: 25px;
             padding-bottom: 15px;
             border: 1px solid $border-default;
             border-radius: 5px;
@@ -87,7 +86,6 @@
                     grid-row-start: 5;
 
                     .tag {
-                        margin-right: 5px;
                         padding: 0 5px;
                         border-radius: 5px;
                         background: $lightGray;
