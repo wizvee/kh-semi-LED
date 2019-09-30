@@ -329,7 +329,7 @@ fieldset > legend {
 				<i id="btn_calPrv" class="fa fa-chevron-left" aria-hidden="true"></i>
 				<span>월</span> <i id="btn_calNxt" class="fa fa-chevron-right" aria-hidden="true"></i>
 			</div>
-			<div class="calendar_body"></div>
+			<div class="calendar_body subCal_body"></div>
 		</div>
 		<script src="<%=request.getContextPath()%>/src/owner/subCal.js"></script>
 

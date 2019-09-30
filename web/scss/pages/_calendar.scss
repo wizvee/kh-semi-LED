@@ -65,6 +65,21 @@
   }
 }
 
+
+.subCal_body {
+
+  .week {
+    margin-bottom: 0 !important;
+    height: 35px;
+    border-bottom: 1px solid $border-default;
+    line-height: 35px;
+  }
+
+  .date {
+    margin: 0 2px;
+  }
+}
+
 .subCal_area {
   @include grid;
   grid-template-columns: repeat(2, 1fr);

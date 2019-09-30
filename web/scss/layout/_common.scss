@@ -83,7 +83,7 @@ input[id="ck_snb"]:checked {
         }
 
         &:hover {
-          border-left: 5px solid $primary;
+          border-left: 5px solid $primary-dark;
           background: #4F5269;
 
           a {
@@ -93,16 +93,12 @@ input[id="ck_snb"]:checked {
         }
 
         &.focus {
-          border-left: 5px solid $primary;
+          border-left: 5px solid $primary-dark;
           background: #4F5269;
 
           a {
             color: #D8DCDF;
             transform: translateX(-5px);
-
-            i {
-              color: $primary;
-            }
           }
         }
       }
@@ -177,11 +173,11 @@ input[id="ck_snb"]:checked {
       @include cursor-pointer;
 
       &:hover {
-        color: #9292CC;
+        color: #8A8EA5;
       }
 
       &.focus {
-        color: #9292CC;
+        color: $primary;
       }
     }
   }
@@ -230,8 +226,8 @@ input[id="ck_snb"]:checked {
   width: 100%;
   height: auto;
   border-radius: 5px;
-  background: $white;
-  @include shadow;
+  background: $item-bg;
+  @include shadow-flat;
 
   .item_header {
     $title-height: 60px;
@@ -241,7 +237,6 @@ input[id="ck_snb"]:checked {
     line-height: $title-height;
     box-sizing: border-box;
 
-    // background: blue;
     @include respond-to("medium") {
       padding: 0 30px;
     }
