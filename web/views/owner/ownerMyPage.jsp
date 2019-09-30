@@ -212,7 +212,7 @@ label {
 
 <script>
 	 	var picarea = document.querySelectorAll(".item_mypage_pic")[0];
-	 	var emailarea = document.querySelectorAll(".item_mypage_email")[0];
+	 	/* var emailarea = document.querySelectorAll(".item_mypage_email")[0]; */
 	 	var namearea = document.querySelectorAll(".item_mypage_name")[0];
 	 	var phonearea = document.querySelectorAll(".item_mypage_phone")[0];
 	 	var pwdarea = document.querySelectorAll(".item_mypage_pw")[0];
@@ -222,7 +222,7 @@ label {
 	 	$(".btn_pic").click(function(){	
 	 		if(picarea.style.display==""||picarea.style.display == "none") {
 	 			picarea.style.display = "block";
-	 			emailarea.style.display = "none";
+	 			/* emailarea.style.display = "none"; */
 	 			namearea.style.display = "none";
 	 			phonearea.style.display = "none";
 	 			pwdarea.style.display = "none";
@@ -234,7 +234,7 @@ label {
 	 	});
 	 });
 	
-	$(function(){
+	/* $(function(){
 	 	$(".btn_email").click(function(){
 	 		if(emailarea.style.display==""||emailarea.style.display == "none") {
 	 			picarea.style.display = "none";
@@ -247,14 +247,14 @@ label {
 	 		else
 	 			emailarea.style.display = "none";
 	 	});
-	 });
+	 }); */
 	
 	$(function(){
 	 	$(".btn_name").click(function(){
 	 		
 	 		if(namearea.style.display==""||namearea.style.display == "none") {
 	 			picarea.style.display = "none";
-	 			emailarea.style.display = "none";
+	 			/* emailarea.style.display = "none"; */
  				namearea.style.display = "block";
  				phonearea.style.display = "none";
  				pwdarea.style.display = "none";
@@ -270,7 +270,7 @@ label {
 	 		
 	 		if(phonearea.style.display==""||phonearea.style.display == "none"){
 	 			picarea.style.display = "none";
-	 			emailarea.style.display = "none";
+	 			/* emailarea.style.display = "none"; */
  				namearea.style.display = "none";
  				phonearea.style.display = "block";
  				pwdarea.style.display = "none";
@@ -286,7 +286,7 @@ label {
 	 		
 	 		if(pwdarea.style.display==""||pwdarea.style.display == "none") {
 	 			picarea.style.display = "none";
-	 			emailarea.style.display = "none";
+	 			/* emailarea.style.display = "none"; */
 				namearea.style.display = "none";
 				phonearea.style.display = "none";
 				pwdarea.style.display = "block";
@@ -302,7 +302,7 @@ label {
 	 		
 	 		if(quitarea.style.display==""||quitarea.style.display == "none"){
 	 			picarea.style.display = "none";
-	 			emailarea.style.display = "none";
+	 			/* emailarea.style.display = "none"; */
 				namearea.style.display = "none";
 				phonearea.style.display = "none";
 				pwdarea.style.display = "none";
