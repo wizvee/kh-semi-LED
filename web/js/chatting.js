@@ -2,6 +2,10 @@ const btnChat = document.querySelector("#btn_chatting");
 var busId="";
 var userId="";
 
+//var userNow = <%=loginOwner %>;
+//console.log(userNow);
+
+
 btnChat.addEventListener("click", () => {
   const chatArea = document.querySelector("#chat_area");
   if (chatArea.style.display == "none") chatArea.style.display = "block";
@@ -30,15 +34,21 @@ chatListItem.map(e => {
     	url:'/p_190826_semi/chat.do',
     	dataType: 'text',
     	data: {"data": busId},
-    	success:function(chatHistory){		
-    		if(chatHistory!='none'){
-    		const result=JSON.parse(chatHistory);
+    	success:function(data){
+    		const wholeData=JSON.parse(data);
+    		if(wholeData.chatHistory!='none'){
+    		const result=JSON.parse(wholeData.chatHistory);
     		result.forEach(function(msg){
     			addChat (msg.profilePic, msg.userName, msg.chatMsg, msg.chatDate, msg.chatType);
     		})
     		
     		}else{
     			$('.chatMsg_area').append('<p> 대화내용이 없습니다. </p>');
+    		}
+    		if(wholeData.userList!='none'){
+    			// 리스트 뿌려줘야함 
+    		}else{
+    			
     		}
     	},
     	error:function(e){
@@ -55,7 +65,7 @@ function addChat(profilePic, userName, chatMsg, chatDate, chatType){
 			'<div class="main-content">'+
 			'<div class="media">'+
 			'<a class="pull-left" href="#">'+
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src="/p_190826_semi/upload/profile/'+profilePic+'" alt="">'+
+			'<img class="media-object img-circle" style="width:30px; height:30px;" src='+contextPath+'"upload/profile/'+profilePic+'" alt="">'+
 			'</a>'+
 			'<div class="media-body">'+
 			'<h5 class="media-heading">'+
@@ -121,10 +131,8 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 
 
 //userName 그리고 userProfile 불러와야함 
-	
 
 socket.onmessage=function(e){
-	
 	$('.chatMsg_area').append("<p>"+userId+" : "+e.data+"</p>");
 }
 

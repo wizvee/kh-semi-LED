@@ -2,6 +2,7 @@
 <%@ page import="com.semi.user.model.vo.User"%>
 <% User loginUser = (User) session.getAttribute("loginUser"); %>
 <!DOCTYPE html>
+
 <html lang="ko">
 
 <head>

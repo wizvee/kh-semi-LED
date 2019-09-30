@@ -54,6 +54,30 @@ public class ChattingDao {
 			return list;			
 		}
 	
+	// 해당 사업장 유저리스트 불러오기
+	public List<String>getAllUsers(Connection conn,String busId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		System.out.println("아이디: "+busId);
+		String sql=prop.getProperty("getAllUsers");
+		List<String>list=new ArrayList<String>();
+		System.out.println(sql);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
 	// 채팅 내역 DB에 저장하기
 	public int insertChatting(Connection conn,String busId,String userId,String chatType,String chatMsg) {
 		PreparedStatement pstmt=null;
@@ -78,5 +102,6 @@ public class ChattingDao {
 			close(pstmt);
 		}return result;	
 	}
+	
 
 }

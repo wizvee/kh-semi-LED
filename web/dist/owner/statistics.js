@@ -2,7 +2,7 @@
 
 var json;
 $.ajax({
-  url: "/p_190826_semi/owner/requestStatistics.do",
+  url: contextPath+"owner/requestStatistics.do",
   type: "post",
   async: false,
   success: function success(data) {

@@ -105,7 +105,7 @@ function () {
   }, {
     key: "submitBusiness",
     value: function submitBusiness(respText) {
-      if (respText != "fail") location.href = "/p_190826_semi/owner/main.do?selectBus=" + respText;
+      if (respText != "fail") location.href = contextPath+"owner/main.do?selectBus=" + respText;
     }
   }, {
     key: "getResult",
@@ -114,7 +114,7 @@ function () {
       xhr.addEventListener("load", function () {
         fn(xhr.responseText);
       });
-      xhr.open("post", "/p_190826_semi/" + servletURL);
+      xhr.open("post", contextPath + servletURL);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(data);
     }
@@ -134,7 +134,7 @@ function fn_search() {
   $.ajax({
     type: "post",
     async: false,
-    url: "/p_190826_semi/search.do",
+    url: contextPath+"search.do",
     dataType: "text",
     data: {
       data: $("#input").val()
@@ -170,7 +170,7 @@ $("input[name='bNum']").on("blur", function () {
   $.ajax({
     type: "post",
     async: false,
-    url: "/p_190826_semi/owner/checkBusNum.do",
+    url: contextPath+"owner/checkBusNum.do",
     dataType: "text",
     data: {
       bNum: $(this).value
