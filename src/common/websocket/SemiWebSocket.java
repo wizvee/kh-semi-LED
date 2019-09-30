@@ -61,11 +61,23 @@ public class SemiWebSocket {
 			String userId = (String) json.get("userId");
 			String chatType = (String) json.get("chatType");
 			String chatMsg = (String) json.get("chatMsg");
+			session.getUserProperties().put("busId", busId);
 
 			int result = service.insertChat(busId, userId, chatType, chatMsg);
 			System.out.println(result);
+	
+		for(Session s:session.getOpenSessions()) {
+		if(s.getUserProperties().get("busId")!=null) {
+				try {
+					s.getBasicRemote().sendText(chatMsg);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-
+		}
+		
+		
 //		JsonObject jsonObject = (JsonObject) jsonParser.parse(str);
 //		String flag=jsonObject.get("flag").toString();
 
