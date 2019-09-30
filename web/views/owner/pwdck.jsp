@@ -46,7 +46,7 @@
 						if(!data){
 							$("#result").html("비밀번호 일치하지 않습니다.").css("color","red");
 						} else {
-							location.href="/p_190826_semi/views/owner/ownerMyPage.jsp";
+							location.href="<%=request.getContextPath()%>/views/owner/ownerMyPage.jsp";
 						}
 					}
 				});
