@@ -108,7 +108,7 @@ function () {
   }, {
     key: "submitEnroll",
     value: function submitEnroll(respText) {
-      if (respText != "fail") location.href = contextPath+"emp/main.do";
+      if (respText != "fail") location.href = contextPath + "emp/main.do";
     }
   }, {
     key: "getResult",

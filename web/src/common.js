@@ -75,7 +75,7 @@ class Alert {
         location.href = `/p_190826_semi/${url}`;
       }
     });
-    xhr.open("post", contextPath+"notiRead.do");
+    xhr.open("post", contextPath + "notiRead.do");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
   }
@@ -83,13 +83,12 @@ class Alert {
 
 const alert = new Alert();
 
-document.querySelector("#btn_alert").addEventListener("click", () => {
+document.querySelector("#btn_alert").addEventListener("click", ({target}) => {
   alert.viewNoti();
-  const target = document.querySelector("#alert");
-  target.classList.toggle("view");
+  const area = document.querySelector("#alert");
+  target.classList.toggle("focus");
+  area.classList.toggle("view");
 });
-
-
 
 // OLD????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -103,9 +102,9 @@ dropToggle.map(e => {
 });
 
 $(".fa-sign-out").on("click", function() {
-  location.href = contextPath+"logout.do";
+  location.href = contextPath + "logout.do";
 });
 
 document.querySelectorAll(".fa-cog")[0].addEventListener("click", () => {
-  location.href= contextPath + "businfo.do";
+  location.href = contextPath + "businfo.do";
 });

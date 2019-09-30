@@ -21,6 +21,11 @@
 			workList.add(e);
 	}
 %>
+<script>
+	window.onload = function () {
+		document.querySelector("#btnSnbMngEmp").classList.add("focus");
+	}
+</script>
 <div id="content">
 
 	<section class="item">
@@ -146,7 +151,7 @@
 					</div>
 					<div>
 						<span>근무조 설정</span>
-						
+
 						<div class="sftList">
 							<%
 								ArrayList<String> days = new ArrayList<>(Arrays.asList(sftList.get(0).getSftDay().split(",")));
