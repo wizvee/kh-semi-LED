@@ -40,14 +40,19 @@ public class AttendanceCalServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
 		String busId = ui.getSelectBusId();
-		System.out.println(busId);
-		String date = request.getParameter("date");
+		String checkYear = request.getParameter("year");
+		String checkMon = request.getParameter("month");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = new GregorianCalendar();
+		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH) + 1;
-		int check =Integer.parseInt(date); 
-		int term = month - check;
+		int checkY = Integer.parseInt(checkYear);
+		int checkM = Integer.parseInt(checkMon);
+
 		
+		
+		int term = ((year - checkY)*12) + (month - checkM);
+		System.out.println(term);
 	List dayList = new AttendanceService().getDayList(term, busId);
 	
 	new Gson().toJson(dayList,response.getWriter());

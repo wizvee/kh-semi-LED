@@ -27,6 +27,36 @@ class SubCal {
 
     pre.addEventListener("click", this.previous);
     nxt.addEventListener("click", this.next);
+ 
+    $.ajax({
+      url: contextPath + "ajaxCal.do",
+      data : {"month" : this.target.getMonth()+1,
+              "year" : this.target.getFullYear()},
+        method : "post",
+        dataType: "json",
+        success: function(data) {
+          //setAjaxCalendar(data);
+          var date=$(".date");
+          for(var i = 0; i < data.length; i++) {
+            console.log(data);
+                if(data[i][1]==0){
+                    var flagDate=data[i][0];
+                    $.each(date,function(i,v){
+                      var dateId=$(v).attr("id");
+                      if(dateId!=undefined){
+                        var temp=flagDate.substring(flagDate.length-2);
+                        var temp2=dateId.substring(dateId.length-2)
+                        if(temp==temp2){
+                          $(v).css("borderBottom","5px solid red");
+                        }
+                      }
+                  });  
+                }                      
+               }
+          
+            }        
+    });
+
   }
 
   createCal() {
@@ -136,7 +166,8 @@ class SubCal {
     this.createCal();
     $.ajax({
       url: contextPath + "ajaxCal.do",
-      data : {"date" : this.target.getMonth()+1},
+      data : {"month" : this.target.getMonth()+1,
+              "year" : this.target.getFullYear()},
         method : "post",
         dataType: "json",
         success: function(data) {
@@ -167,39 +198,37 @@ class SubCal {
   next = () => {
     this.target = this.getMyDate(1, 1);
     this.createCal();
-    console.log(this.now.getFullYear());
-    console.log(this.target.getFullYear());
-    console.log(this.target.getMonth()+1);
-    console.log(this.now.getMonth()+1);
-
       if(!(this.target.getFullYear() > this.now.getFullYear()) && !(this.target.getMonth()+1 > this.now.getMonth()+1)) {
-    $.ajax({
-      url: contextPath + "ajaxCal.do",
-      data : {"date" : this.target.getMonth()+1},
-        method : "post",
-        dataType: "json",
-        success: function(data) {
-          var date=$(".date");
-          for(var i = 0; i < data.length; i++) {
-                if(data[i][1]==0){
-                    var flagDate=data[i][0];
-                    $.each(date,function(i,v){
-                      var dateId=$(v).attr("id");
-                      if(dateId!=undefined){
-                        var temp=flagDate.substring(flagDate.length-2);
-                        var temp2=dateId.substring(dateId.length-2)
-                        if(temp==temp2){
-                          $(v).css("borderBottom","5px solid red");
-                        }
-                      }
-                  });  
-                }                      
-               }
-
-            }        
-    });
-  }
-
+        $.ajax({
+          url: contextPath + "ajaxCal.do",
+          data : {"month" : this.target.getMonth()+1,
+                  "year" : this.target.getFullYear()},
+            method : "post",
+            dataType: "json",
+            success: function(data) {
+              //setAjaxCalendar(data);
+              var date=$(".date");
+              for(var i = 0; i < data.length; i++) {
+                console.log(data);
+                    if(data[i][1]==0){
+                        var flagDate=data[i][0];
+                        $.each(date,function(i,v){
+                          var dateId=$(v).attr("id");
+                          if(dateId!=undefined){
+                            var temp=flagDate.substring(flagDate.length-2);
+                            var temp2=dateId.substring(dateId.length-2)
+                            if(temp==temp2){
+                              $(v).css("borderBottom","5px solid red");
+                            }
+                          }
+                      });  
+                    }                      
+                   }
+              
+                }        
+        });
+    
+      }
   };
   
 
@@ -239,10 +268,9 @@ class SubCal {
           }                      
          }
   }
-
-
+  
+ 
 
 }
-
 const subCal = new SubCal();
 

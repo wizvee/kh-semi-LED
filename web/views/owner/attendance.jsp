@@ -329,30 +329,7 @@ fieldset > legend {
 		
 		
 		
-		<script src="<%=request.getContextPath()%>/src/owner/subCal.js">
-			$('.calendar_body').ready(function(){
-				$.ajax({
-					url: <%=request.getContextPath()%>"/ajaxCal.do",
-					data : {"date" : this.target.getMonth()+1},
-					method : "post",
-					dataType: "json",
-					success: function(data) {
-						var date=$(".date");
-						for(var i = 0; i < data.length; i++) {
-							if(data[i][1]==0){
-								var flagDate=data[i][0];
-								$.each(date,function(i,v){
-									var dateId=$(v).attr("id");
-									if(dateId!=undefined){
-										var temp=flagDate.substring(flagDate.length-2);
-										var temp2=dateId.substring(dateId.length-2)
-										if(temp==temp2){
-											$(v).css("borderBottom","5px solid red");
-										}
-									}
-								});  
-							});
-		</script>
+		<script src="<%=request.getContextPath()%>/src/owner/subCal.js"></script>
 
 			<fieldset>
 					<legend> 사업장 근무자 리스트 </legend>
