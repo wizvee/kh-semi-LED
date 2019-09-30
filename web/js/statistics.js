@@ -86,6 +86,7 @@ function drawChart() {
     title: yearNow + "년 월별 직원 총 급여 지출",
     hAxis: { title: "월별", titleTextStyle: { color: "#333" } },
     vAxis: { title: "만원", minValue: 0 },
+    backgroundColor:'#F8F8F8',
     animation: {
       easing: "inAndOut",
       startup: true,
@@ -133,6 +134,7 @@ Array.from(chartYearList).forEach(function(e) {
         title: temp.year + "년 월별 총 직원 급여 지출",
         hAxis: { title: "월별", titleTextStyle: { color: "#333" } },
         vAxis: { title: "만원", minValue: 0 },
+        backgroundColor:'#F8F8F8',
         animation: {
           easing: "inAndOut",
           startup: true,
@@ -266,6 +268,7 @@ function drawVisualization() {
       startup: true,
       duration: 3000
     },
+    backgroundColor:'#F8F8F8',
     chartArea: {
       width: "65%",
       height: "70%"
@@ -318,6 +321,7 @@ Array.from(chartYearList).forEach(function(e) {
           startup: true,
           duration: 3000
         },
+        backgroundColor:'#F8F8F8',
         chartArea: {
           width: "65%",
           height: "70%"
@@ -372,6 +376,7 @@ function dailyWorkerCount() {
       title: "월",
       format: 'long'
     },
+    backgroundColor:'#F8F8F8',
     vAxis: {
       title: "인원수(명)"
     },
@@ -438,6 +443,7 @@ Array.from(chartYearList).forEach(function(e) {
         vAxis: {
           title: "인원수(명)"
         },
+        backgroundColor:'#F8F8F8',
         chartArea: {
           width: "70%",
           height: "70%"
@@ -507,6 +513,7 @@ function drawChartLate() {
       startup: true,
       duration: 3000
     },
+    backgroundColor:'#F8F8F8',
     hAxis: {
       title: "월",
       maxValue: 12
@@ -576,12 +583,13 @@ Array.from(chartYearList).forEach(function(e) {
       ]);
 
       var options = {
-        title: e.textContent+"년 월별 총 지각/조퇴/연장근무 수",
+        title: (e.textContent).substr(0,4)+"년 월별 총 지각/조퇴/연장근무 수",
         animation: {
           easing: "inAndOut",
           startup: true,
           duration: 3000
         },
+        backgroundColor:'#F8F8F8',
         hAxis: {
           title: "월",
           maxValue: 12
