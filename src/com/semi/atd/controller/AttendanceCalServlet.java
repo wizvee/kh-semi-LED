@@ -11,21 +11,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.semi.atd.model.Service.AttendanceService;
+import com.semi.userinfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class AttendenceNexServlet
+ * Servlet implementation class AttendanceSetCalendar
  */
-@WebServlet("/ajaxNexCal.do")
-public class AttendenceNexServlet extends HttpServlet {
+@WebServlet("/ajaxCal.do")
+public class AttendanceCalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AttendenceNexServlet() {
+    public AttendanceCalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +36,11 @@ public class AttendenceNexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
+		String busId = ui.getSelectBusId();
+		System.out.println(busId);
 		String date = request.getParameter("date");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = new GregorianCalendar();
@@ -42,12 +48,9 @@ public class AttendenceNexServlet extends HttpServlet {
 		int check =Integer.parseInt(date); 
 		int term = month - check;
 		
-	List dayList = new AttendanceService().getDayList(term);
+	List dayList = new AttendanceService().getDayList(term, busId);
 	
 	new Gson().toJson(dayList,response.getWriter());
-		
-		
-		
 	}
 
 	/**

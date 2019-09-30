@@ -135,7 +135,7 @@ class SubCal {
 	  this.target = this.getMyDate(-1, 1);
     this.createCal();
     $.ajax({
-      url: contextPath + "ajaxPrevCal.do",
+      url: contextPath + "ajaxCal.do",
       data : {"date" : this.target.getMonth()+1},
         method : "post",
         dataType: "json",
@@ -143,6 +143,7 @@ class SubCal {
           //setAjaxCalendar(data);
           var date=$(".date");
           for(var i = 0; i < data.length; i++) {
+            console.log(data);
                 if(data[i][1]==0){
                     var flagDate=data[i][0];
                     $.each(date,function(i,v){
@@ -172,9 +173,8 @@ class SubCal {
     console.log(this.now.getMonth()+1);
 
       if(!(this.target.getFullYear() > this.now.getFullYear()) && !(this.target.getMonth()+1 > this.now.getMonth()+1)) {
-        console.log("통과");
     $.ajax({
-      url: contextPath + "ajaxNexCal.do",
+      url: contextPath + "ajaxCal.do",
       data : {"date" : this.target.getMonth()+1},
         method : "post",
         dataType: "json",
