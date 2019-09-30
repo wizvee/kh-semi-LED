@@ -59,7 +59,8 @@ var dispNo = yearNow - firstYear;
 var dis1 = solutionObj(json.forWageLine[0].years[dispNo]);
 
 for (var y = firstYear; y <= yearNow; y++) {
-  $("#firstChartList").append('<div class="area_chart1">' + y + "년</div>");
+  // $("#firstChartList").append('<div class="area_chart1">' + y + "년</div>");
+  $("#firstChartList").append('<li class="area_chart1">' + y + "년</li>");
 }
 
 google.charts.load("current", { packages: ["corechart"] });
