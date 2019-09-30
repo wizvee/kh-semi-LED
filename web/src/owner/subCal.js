@@ -38,7 +38,7 @@ class SubCal {
       cell.setAttribute("class", "date");
       if (firstDay <= i && this.countDate <= lastDate) {
         cell.setAttribute("id", this.setDateId(this.countDate));
-        cell.setAttribute("style","border-bottom:3px solid red;");
+        //cell.setAttribute("style","border-bottom:3px solid red;");
         cell.textContent = this.countDate;
 
         const compareY = this.target.getFullYear() == this.now.getFullYear();
@@ -51,14 +51,12 @@ class SubCal {
       this.body.appendChild(cell);
       cell.addEventListener("click", ({ target }) => {
         // 날짜 클릭 이벤트
-        console.log(target.getAttribute("id"));
           $.ajax({
             url: contextPath + "ajaxAtd.do",
             data : {"date" : target.getAttribute("id")},
               method : "post",
               dataType: "json",
               success: function(data) {
-            	  console.log(data);
                 var cardSet = "";
             	  for(var j = 0; j < data.length; j ++ ){
                   var card = "";
@@ -133,15 +131,32 @@ class SubCal {
 
   previous = () => {
 	  this.target = this.getMyDate(-1, 1);
-	  console.log(this.getMyDate());
+    this.createCal();
     $.ajax({
       url: contextPath + "ajaxPrevCal.do",
-      data : {"date" : this.getMyDate(-1,1)},
+      data : {"date" : this.target.getMonth()+1},
         method : "post",
         dataType: "json",
         success: function(data) {
-          this.createCal();
-        }
+          //setAjaxCalendar(data);
+          var date=$(".date");
+          for(var i = 0; i < data.length; i++) {
+                if(data[i][1]==0){
+                    var flagDate=data[i][0];
+                    $.each(date,function(i,v){
+                      var dateId=$(v).attr("id");
+                      if(dateId!=undefined){
+                        var temp=flagDate.substring(flagDate.length-2);
+                        var temp2=dateId.substring(dateId.length-2)
+                        if(temp==temp2){
+                          $(v).css("borderBottom","5px solid red");
+                        }
+                      }
+                  });  
+                }                      
+               }
+          
+            }        
     });
 
   };
@@ -149,7 +164,37 @@ class SubCal {
   next = () => {
     this.target = this.getMyDate(1, 1);
     this.createCal();
+  
+      if(this.now.getFullYear() >= this.target.getFullYear() &&this.target.getMonth()+1 < this.now.getMonth()+1) {
+    $.ajax({
+      url: contextPath + "ajaxNexCal.do",
+      data : {"date" : this.target.getMonth()+1},
+        method : "post",
+        dataType: "json",
+        success: function(data) {
+          var date=$(".date");
+          for(var i = 0; i < data.length; i++) {
+                if(data[i][1]==0){
+                    var flagDate=data[i][0];
+                    $.each(date,function(i,v){
+                      var dateId=$(v).attr("id");
+                      if(dateId!=undefined){
+                        var temp=flagDate.substring(flagDate.length-2);
+                        var temp2=dateId.substring(dateId.length-2)
+                        if(temp==temp2){
+                          $(v).css("borderBottom","5px solid red");
+                        }
+                      }
+                  });  
+                }                      
+               }
+
+            }        
+    });
+  }
+
   };
+  
 
   getMyDate(month, date) {
     return new Date(
@@ -167,6 +212,30 @@ class SubCal {
     date = date < 10 ? `0${date}` : date;
     return `${this.target.getFullYear()}-${month}-${date}`;
   }
+
+
+  setAjaxCalendar(data) {
+    var date=$(".date");
+    for(var i = 0; i < data.length; i++) {
+          if(data[i][1]==0){
+              var flagDate=data[i][0];
+              $.each(date,function(i,v){
+                var dateId=$(v).attr("id");
+                if(dateId!=undefined){
+                  var temp=flagDate.substring(flagDate.length-2);
+                  var temp2=dateId.substring(dateId.length-2)
+                  if(temp==temp2){
+                    $(v).css("borderBottom","5px solid red");
+                  }
+                }
+            });  
+          }                      
+         }
+  }
+
+
+
 }
 
 const subCal = new SubCal();
+

@@ -105,30 +105,64 @@ public class AttendanceDao {
 	}
 	
 
-	public List getDayList (Connection conn, String id) {
+	public List getDayList (Connection conn, int date) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("setMonth");
+		String sql = prop.getProperty("setCalendar");
 		List list = new ArrayList();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.set
-			
+			pstmt.setInt(1, date);
+			pstmt.setInt(2, date);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String[] days = new String[2];
+				days[0] = rs.getString(1);
+				days[1] = rs.getString(2);
+				list.add(days);
+			}
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}
+		}return list;
 		
 		
 	}
 	
 	
-	
+public List getNexDayList (Connection conn, int date) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("setNexCalendar");
+		List list = new ArrayList();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, date);
+			pstmt.setInt(2, date);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String[] days = new String[2];
+				days[0] = rs.getString(1);
+				days[1] = rs.getString(2);
+				list.add(days);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+		
+		
+	}
 	
 	
 	
