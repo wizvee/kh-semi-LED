@@ -63,7 +63,7 @@
 					%>
 					<div class="viewEmp_area">
 						<div class="view_header">
-							<b># <%=++count %></b>
+							<b>#<%=++count %></b>
 						</div>
 						<div class="view_body">
 							<img src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">

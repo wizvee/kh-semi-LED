@@ -62,18 +62,18 @@
             text-align: center;
             transition: all 0.5s;
 
-            &:hover {
-                background: $background-default;
+            .view_header {
+                line-height: 30px;
             }
 
             .view_body {
-                $line: 30px;
+                $line: 25px;
 
                 @include grid;
-                grid-template-rows: 120px repeat(2, $line) 10px $line;
+                grid-template-rows: 80px repeat(2, $line) 10px $line;
 
                 img {
-                    @include circle(100px);
+                    @include circle(70px);
                     @include trans-center;
                 }
 
