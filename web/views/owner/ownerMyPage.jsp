@@ -12,11 +12,6 @@
 	grid-template-rows: repeat(1, 1fr);
 }
 
-.item .item_mypage #pic {
-	display: table-cell;
-	vertical-align: middle;
-}
-
 .item .item_mypage #pic .snb_profile {
 	border: 2px solid #fff;
     width: 50px;
@@ -73,27 +68,6 @@
 	display:none;
 }
 
-/* #chevron-right-name{
-	position: relative;
-	/* left:950px; */
-	/* left:88.8%; */
-} */
-
-#chevron-right-phone{
-	/* position: relative;
-	left:81.3%; */
-}
-
-#chevron-right-pw{
-	/* position: relative;
-	left:84.6%; */
-}
-
-#chevron-right-quit{
-	/* position: relative;
-	left:75%; */
-}
-
 label {
 	margin: 0;
     padding: 7px 13px;
@@ -111,9 +85,14 @@ label {
 	grid-template-columns: 70px 1fr 40px;
     font-size: 95%;
 }
-.mypage_header .mypage_frist_span {
-	
+
+.item_mypage .mypage_frist_span {
+	letter-spacing: 3.5px;
 }
+.item_mypage .mypage_frist_span_name {
+	letter-spacing: 6px;
+}
+
 </style>
 
 <div id="content">
@@ -126,12 +105,14 @@ label {
 				<input type="hidden" name="userId" value=<%=infoUser.getUserId() %>>
 				<input type="hidden" name="infoUserPwd" value=<%=infoUser.getPassword() %>>
 				<button id="btn_pic_view" class="btn_pic" onclick="return false;">
-					<div class="mypage_header" id="pic">
+					<div id="pic" class="mypage_header">
 						<span class="mypage_frist_span"><b>프로필 :</b></span>
 						<span><img class="snb_profile" src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic() %>" alt="프로필 사진" name="infoUserPic"></span>
+						<span><i class="fa fa-chevron-right" id="chevron-right-name" aria-hidden="true"></i></span>
 					</div>
 				</button>
 				<div class="item_body item_mypage_pic">
+					<i class="fa far fa-id-badge" aria-hidden="true"> 프로필 변경 : </i>
 					<button id="btn_ori_pic" class="btn-primary" onclick="return false;">기본 프로필 변경</button>
 					<label id="btn_new_pic" class="btn-primary" for="profile">새 프로필 변경</label>
 					<input type="file" name="profile" id="profile">
@@ -143,17 +124,17 @@ label {
 						<span><%=infoUser.getEmail() %></span>
 					</div>
 				</button>
-				<div class="item_body item_mypage_email">
+				<!-- <div class="item_body item_mypage_email">
 					<i class="fa fa-unlock-alt" aria-hidden="true"> 변경 할 이메일 : </i> 
 					<input type="email" class="inpt-outline" name="email" id="email" placeholder="이메일을 입력하세요.">
 					<input type="text" class="inpt-outline" name="email_number" id="email_number" placeholder="인증번호를 입력하세요.">
 					<button id="btn_email" class="btn-primary" onclick="return false;">인증번호 전송</button>
 					<button id="btn_email" class="btn-primary" onclick="return false;">이메일 변경</button>
-				</div>
+				</div> -->
 
 				<button id="btn_name_view" class="btn_name" onclick="return false;">
 					<div class="mypage_header">
-						<span><b>이&nbsp;&nbsp;&nbsp;름 :</b></span>
+						<span class="mypage_frist_span_name"><b>이&nbsp;름 :</b></span>
 						<span><%=infoUser.getUserName() %></span>
 						<span><i class="fa fa-chevron-right" id="chevron-right-name" aria-hidden="true"></i></span>
 					</div>
@@ -167,7 +148,7 @@ label {
 
 				<button id="btn_phone_view" class="btn_phone" onclick="return false;">
 					<div class="mypage_header">
-						<span><b>휴대폰 :</b></span>
+						<span class="mypage_frist_span"><b>휴대폰 :</b></span>
 						<span><%=infoUser.getUserPhone()%></span>
 						<span><i class="fa fa-chevron-right" id="chevron-right-phone" aria-hidden="true"></i></span>
 					</div>
@@ -336,7 +317,7 @@ label {
 	$(function(){
 		$("#btn_ori_pic").click(function(){
 			$.ajax({
-				url: "<%=request.getContextPath()%>/ajaxoriproFile.do",
+				url: "<%=request.getContextPath()%>/ajaxowneroriproFile.do",
 				data: {userId:userInfo.userId},
 				success:function(data){
 					$('.snb_profile').attr("src", contextPath + "upload/profile/own_default.png");
@@ -351,7 +332,7 @@ label {
 			fd.append("upfile",$(this)[0].files[0]);
 			fd.append("userId",userInfo.userId);
 			$.ajax({
-				url:"<%=request.getContextPath()%>/ajaxproFile.do",
+				url:"<%=request.getContextPath()%>/ajaxownerproFile.do",
 				data:fd,
 				type:"post",
 				processData:false,
@@ -443,7 +424,7 @@ label {
 						if(!data){
 							$("#result_nkPw").html("비밀번호 변경 실패. 다시 시도해 주세요.").css("color","red");
 						} else {
-							location.href="/p_190826_semi/views/owner/pwdck.jsp";
+							location.href="<%=request.getContextPath()%>/views/owner/pwdck.jsp";
 						}
 					}
 				});
@@ -460,7 +441,7 @@ label {
 					if(!data){
 						$("#result_quit").html("회원탈퇴 실패. 다시 시도해 주세요.").css("color","red");
 					} else {					
-						location.href="/p_190826_semi";
+						location.href="<%=request.getContextPath()%>";
 					}
 				}
 			});
