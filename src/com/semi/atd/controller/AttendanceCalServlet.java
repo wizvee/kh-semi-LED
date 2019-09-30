@@ -11,21 +11,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.semi.atd.model.Service.AttendanceService;
+import com.semi.userinfo.model.vo.UserInfo;
 
 /**
  * Servlet implementation class AttendanceSetCalendar
  */
-@WebServlet("/ajaxPrevCal.do")
-public class AttendancePrevServlet extends HttpServlet {
+@WebServlet("/ajaxCal.do")
+public class AttendanceCalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AttendancePrevServlet() {
+    public AttendanceCalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +37,23 @@ public class AttendancePrevServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String date = request.getParameter("date");
+		HttpSession session = request.getSession();
+		UserInfo ui = (UserInfo) session.getAttribute("userInfo");
+		String busId = ui.getSelectBusId();
+		String checkYear = request.getParameter("year");
+		String checkMon = request.getParameter("month");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = new GregorianCalendar();
-		System.out.println(date);
+		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH) + 1;
-		int check =Integer.parseInt(date); 
-		System.out.println("check : " + check);
-		int term = month - check;
-		System.out.println(term);
+		int checkY = Integer.parseInt(checkYear);
+		int checkM = Integer.parseInt(checkMon);
+
 		
-	List dayList = new AttendanceService().getDayList(term);
+		
+		int term = ((year - checkY)*12) + (month - checkM);
+		System.out.println(term);
+	List dayList = new AttendanceService().getDayList(term, busId);
 	
 	new Gson().toJson(dayList,response.getWriter());
 	}
