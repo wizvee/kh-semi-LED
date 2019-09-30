@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
+<%-- <%@ page
 	import="com.semi.user.model.vo.User,
 com.semi.emp.model.vo.Employee,
 java.util.List"%>
 <%
 	List<Employee> list = (List) request.getAttribute("empList");
-%>
+%> --%>
 
 <%@ include file="header.jsp"%>
 <style>
