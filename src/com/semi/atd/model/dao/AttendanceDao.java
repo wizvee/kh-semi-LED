@@ -105,7 +105,7 @@ public class AttendanceDao {
 	}
 	
 
-	public List getDayList (Connection conn, int date) {
+	public List getDayList (Connection conn, int date, String busId) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -116,11 +116,13 @@ public class AttendanceDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, date);
 			pstmt.setInt(2, date);
+			pstmt.setString(3, busId);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				String[] days = new String[2];
 				days[0] = rs.getString(1);
 				days[1] = rs.getString(2);
+				
 				list.add(days);
 			}
 			
@@ -135,7 +137,7 @@ public class AttendanceDao {
 	}
 	
 	
-public List getNexDayList (Connection conn, int date) {
+public List getNexDayList (Connection conn, int date, String busId) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -146,6 +148,7 @@ public List getNexDayList (Connection conn, int date) {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, date);
 			pstmt.setInt(2, date);
+			pstmt.setString(3, busId);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				String[] days = new String[2];

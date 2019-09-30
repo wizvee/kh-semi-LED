@@ -52,12 +52,32 @@
 				<img class="snb_profile"
 					src="<%=request.getContextPath()%>/upload/profile/<%=loginOwner.getProfilePic()%>" alt="프로필 사진">
 				<span><%=loginOwner.getUserName()%></span>
-				<a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a>
-				<a href="<%=request.getContextPath()%>/views/owner/pwdck.jsp">개인 정보</a>
-				<a href="<%=request.getContextPath()%>/views/attendance.do">근태 관리</a>
-				<a href="<%=request.getContextPath()%>/owner/payRollManagement.do">급여 관리</a>
-				<a href="<%=request.getContextPath()%>/owner/statistics.do">직원 통계</a>
-				<a href="<%=request.getContextPath()%>/owner/calendar.do">캘린더</a>
+				<ul id="snb_btnList">
+					<li id="btnSnbMngEmp">
+						<a href="<%=request.getContextPath()%>/owner/manageEmp.do">
+							<i class="fa fa-address-card-o" aria-hidden="true"></i>직원 관리</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/views/owner/pwdck.jsp">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>개인 정보</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/views/attendance.do">
+							<i class="fa fa-file-text-o" aria-hidden="true"></i>근태 관리</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/owner/payRollManagement.do">
+							<i class="fa fa-krw" aria-hidden="true"></i>급여 관리</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/owner/statistics.do">
+							<i class="fa fa-bar-chart" aria-hidden="true"></i>직원 통계</a>
+					</li>
+					<li id="btnSnbCalendar">
+						<a href="<%=request.getContextPath()%>/owner/calendar.do">
+							<i class="fa fa-calendar-check-o" aria-hidden="true"></i>캘린더</a>
+					</li>
+				</ul>
 			</nav>
 		</aside>
 		<!-- //사이드 메뉴 -->

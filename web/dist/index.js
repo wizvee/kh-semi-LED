@@ -1,5 +1,4 @@
 "use strict";
-const contextPath="/p_190826_semi/";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -12,6 +11,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var selectElements = function selectElements(src) {
   return Array.from(document.querySelectorAll(src));
 };
+
+var contextPath = "/p_190826_semi/";
 
 var Register =
 /*#__PURE__*/
@@ -32,7 +33,7 @@ function () {
     _defineProperty(this, "submitRegister", function (respText) {
       if (respText == "success") {
         var mail = document.querySelector("#uMail").value;
-        location.href = contextPath+"emailSend.do?email=" + mail;
+        location.href = contextPath + "emailSend.do?email=" + mail;
       } else {
         var area = document.querySelectorAll(".frm_register .msg_area")[0];
 
@@ -41,7 +42,7 @@ function () {
     });
 
     _defineProperty(this, "submitLogin", function (respText) {
-      if (respText == "success") location.href = contextPath+"main.do";else {
+      if (respText == "success") location.href = contextPath + "main.do";else {
         var area = document.querySelectorAll(".frm_login .msg_area")[0];
 
         _this.insertError(area, "로그인 실패");

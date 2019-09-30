@@ -13,6 +13,9 @@
 %>
 <script>
 	var empList = <%=parsingEmpList %>;
+	window.onload = function () {
+		document.querySelector("#btnSnbCalendar").classList.add("focus");
+	}
 </script>
 <div id="content" class="content_calendar">
 

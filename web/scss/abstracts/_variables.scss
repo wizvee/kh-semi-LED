@@ -1,4 +1,5 @@
 $primary: #FF847C;
+$primary-dark: #CB7A9B;
 $secondary: #99B898;
 
 $vivid-primary: #7873f5;
@@ -7,8 +8,8 @@ $text-default: #555;
 $text-gray: #999;
 $text-warining: #e54d26;
 
-$background-default: #f5f5f5;
-$border-default: #e6e6e6;
+$background-default: #E2E5EE;
+$border-default: #D3D8E6;
 
 $white: #FFF;
 $black: #000;
@@ -22,7 +23,8 @@ $gradient-blue: linear-gradient(-225deg, #2cd8d5 0%, #c5c1ff 56%, #ffbac3 100%);
 $base-font-family: "Noto Sans KR";
 $bold-font-family: "Anton";
 
-$aside-bg: $gradient-default;
+$aside-bg: #43455A;
+$item-bg:#F8F8F8;
 
 $breakpoints: ("medium": 720px,
   "large": 960px,

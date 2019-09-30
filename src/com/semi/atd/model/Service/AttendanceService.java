@@ -29,14 +29,13 @@ import com.semi.emp.model.vo.Employee;
 			return list;
 		}
 	
-		public List getDayList(int term) {
+		public List getDayList(int term, String busId) {
 			System.out.println(term);
 			Connection conn = getConnection();
-			List dayList = dao.getDayList(conn, term);
+			List dayList = dao.getDayList(conn, term, busId);
 			close(conn);
 			return dayList;
 		}
-	
 	
 	
 }
