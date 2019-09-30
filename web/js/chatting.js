@@ -124,7 +124,6 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 	
 
 socket.onmessage=function(e){
-	
 	$('.chatMsg_area').append("<p>"+userId+" : "+e.data+"</p>");
 }
 
