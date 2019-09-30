@@ -10,6 +10,8 @@ class SubCal {
     this.setInit();
   }
 
+
+
   setInit() {
     const week = ["일", "월", "화", "수", "목", "금", "토"];
     week.map(w => {
@@ -164,8 +166,13 @@ class SubCal {
   next = () => {
     this.target = this.getMyDate(1, 1);
     this.createCal();
-  
-      if(this.now.getFullYear() >= this.target.getFullYear() &&this.target.getMonth()+1 < this.now.getMonth()+1) {
+    console.log(this.now.getFullYear());
+    console.log(this.target.getFullYear());
+    console.log(this.target.getMonth()+1);
+    console.log(this.now.getMonth()+1);
+
+      if(!(this.target.getFullYear() > this.now.getFullYear()) && !(this.target.getMonth()+1 > this.now.getMonth()+1)) {
+        console.log("통과");
     $.ajax({
       url: contextPath + "ajaxNexCal.do",
       data : {"date" : this.target.getMonth()+1},

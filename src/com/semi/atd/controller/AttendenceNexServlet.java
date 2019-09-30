@@ -38,12 +38,9 @@ public class AttendenceNexServlet extends HttpServlet {
 		String date = request.getParameter("date");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = new GregorianCalendar();
-		System.out.println(date);
 		int month = calendar.get(Calendar.MONTH) + 1;
 		int check =Integer.parseInt(date); 
-		System.out.println("check : " + check);
-		int term = check - month;
-		System.out.println(term);
+		int term = month - check;
 		
 	List dayList = new AttendanceService().getDayList(term);
 	
