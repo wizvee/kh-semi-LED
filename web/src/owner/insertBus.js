@@ -121,7 +121,7 @@ class InsertBus {
 
   submitBusiness(respText) {
     if (respText != "fail")
-      location.href = "/p_190826_semi/owner/main.do?selectBus=" + respText;
+      location.href = contextPath+"owner/main.do?selectBus=" + respText;
   }
 
   getResult(servletURL, data, fn) {
@@ -129,7 +129,7 @@ class InsertBus {
     xhr.addEventListener("load", () => {
       fn(xhr.responseText);
     });
-    xhr.open("post", "/p_190826_semi/" + servletURL);
+    xhr.open("post", contextPath+"" + servletURL);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
   }
@@ -146,7 +146,7 @@ function fn_search() {
   $.ajax({
     type: "post",
     async: false,
-    url: "/p_190826_semi/search.do",
+    url: contextPath+"search.do",
     dataType: "text",
     data: { data: $("#input").val() },
     success: function(data) {
@@ -196,7 +196,7 @@ $("input[name='bNum']").on("blur", function() {
   $.ajax({
     type: "post",
     async: false,
-    url: "/p_190826_semi/owner/checkBusNum.do",
+    url: contextPath+"owner/checkBusNum.do",
     dataType: "text",
     data: { bNum: $(this).value },
     success: function(data) {

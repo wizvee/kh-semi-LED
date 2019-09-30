@@ -1,4 +1,5 @@
 "use strict";
+const contextPath="/p_190826_semi/";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -31,7 +32,7 @@ function () {
     _defineProperty(this, "submitRegister", function (respText) {
       if (respText == "success") {
         var mail = document.querySelector("#uMail").value;
-        location.href = "/p_190826_semi/emailSend.do?email=" + mail;
+        location.href = contextPath+"emailSend.do?email=" + mail;
       } else {
         var area = document.querySelectorAll(".frm_register .msg_area")[0];
 
@@ -40,7 +41,7 @@ function () {
     });
 
     _defineProperty(this, "submitLogin", function (respText) {
-      if (respText == "success") location.href = "/p_190826_semi/main.do";else {
+      if (respText == "success") location.href = contextPath+"main.do";else {
         var area = document.querySelectorAll(".frm_login .msg_area")[0];
 
         _this.insertError(area, "로그인 실패");
@@ -159,7 +160,7 @@ function () {
       xhr.addEventListener("load", function () {
         fn(xhr.responseText);
       });
-      xhr.open("post", "/p_190826_semi/" + servletURL);
+      xhr.open("post", contextPath + servletURL);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(data);
     }

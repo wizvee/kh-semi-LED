@@ -108,7 +108,7 @@ function () {
   }, {
     key: "submitEnroll",
     value: function submitEnroll(respText) {
-      if (respText != "fail") location.href = "/p_190826_semi/emp/main.do";
+      if (respText != "fail") location.href = contextPath+"emp/main.do";
     }
   }, {
     key: "getResult",
@@ -117,7 +117,7 @@ function () {
       xhr.addEventListener("load", function () {
         fn(xhr.responseText);
       });
-      xhr.open("post", "/p_190826_semi/" + servletURL);
+      xhr.open("post", contextPath + servletURL);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(data);
     }

@@ -57,7 +57,7 @@ function () {
       item.setAttribute("class", "alert_item");
       var img = document.createElement("img");
       img.setAttribute("class", "item_profile");
-      img.setAttribute("src", "/p_190826_semi/upload/profile/".concat(n.profilePic));
+      img.setAttribute("src", contextPath+"upload/profile/".concat(n.profilePic));
       var content = document.createElement("div");
       content.setAttribute("class", "alert_content");
       var spanUser = document.createElement("span");
@@ -100,10 +100,10 @@ function () {
 
           _this3.viewNoti();
 
-          location.href = "/p_190826_semi/".concat(url);
+          location.href = contextPath.concat(url);
         }
       });
-      xhr.open("post", "/p_190826_semi/notiRead.do");
+      xhr.open("post", contextPath+"notiRead.do");
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(data);
     }
@@ -128,7 +128,7 @@ dropToggle.map(function (e) {
   });
 });
 $(".fa-sign-out").on("click", function () {
-  location.href = "/p_190826_semi/logout.do";
+  location.href = contextPath+"logout.do";
 });
 document.querySelectorAll(".fa-cog")[0].addEventListener("click", function () {
   location.href = contextPath + "businfo.do";

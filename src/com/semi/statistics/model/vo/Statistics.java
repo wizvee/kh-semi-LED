@@ -1,6 +1,7 @@
 package com.semi.statistics.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Statistics {
@@ -10,7 +11,9 @@ public class Statistics {
 	private String empName;
 	private boolean workingNow;
 	private Date empStart;
+	private String empStartStr;
 	private Date empEnd;
+	private String empEndStr;
 	private int hourlyWorkedHours;
 	private int dailyWorkedHours;
 	private int monthlyWorkedHours;
@@ -95,6 +98,10 @@ public class Statistics {
 
 	public void setEmpStart(Date empStart) {
 		this.empStart = empStart;
+		if(empStart!=null) {
+			SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
+			this.empStartStr=s.format(empStart);
+		}
 	}
 
 
@@ -105,6 +112,21 @@ public class Statistics {
 
 	public void setEmpEnd(Date empEnd) {
 		this.empEnd = empEnd;
+		if(empEnd!=null) {
+			SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
+			this.empEndStr=s.format(empEnd);
+		}
+	}
+
+	
+	
+	public String getEmpStartStr() {
+		return empStartStr;
+	}
+
+
+	public String getEmpEndStr() {
+		return empEndStr;
 	}
 
 

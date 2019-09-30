@@ -3,7 +3,7 @@ const contextPath = "/p_190826_semi/";
 const selectElements = src => Array.from(document.querySelectorAll(src));
 
 // WebSocket
-let socket = new WebSocket("ws://localhost:9090/p_190826_semi/ws");
+let socket = new WebSocket("ws://localhost:9090"+contextPath+"ws");
 
 socket.onmessage = e => {
   console.log(e.data);

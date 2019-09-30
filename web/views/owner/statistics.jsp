@@ -47,7 +47,8 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 				<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
 				<div id="firstChart" class="chart focus">
 					<div class="yearSet">
-						<ul id="firstChartList">년도</ul>
+						년도
+						<ul id="firstChartList"></ul>
 					</div>
 					<div id="arealine_chart" style="height: 500px;"></div>
 				</div>
@@ -82,10 +83,10 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 			})
 		});
 	});
-	$('#firstChartList').hover(function() {
-  	$(this).find('#area_chart1').stop(true, true).delay(200).fadeIn(500);
+	$('.yearSet').hover(function() {
+  	$(this).find('.area_chart1').stop(true, true).delay(200).fadeIn(500);
 	}, function() {
-  	$(this).find('#area_chart1').stop(true, true).delay(200).fadeOut(500);
+  	$(this).find('.area_chart1').stop(true, true).delay(200).fadeOut(500);
 	});
 </script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/statistics.js"></script>

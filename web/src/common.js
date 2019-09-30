@@ -75,7 +75,7 @@ class Alert {
         location.href = `/p_190826_semi/${url}`;
       }
     });
-    xhr.open("post", "/p_190826_semi/notiRead.do");
+    xhr.open("post", contextPath+"notiRead.do");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
   }
@@ -103,7 +103,7 @@ dropToggle.map(e => {
 });
 
 $(".fa-sign-out").on("click", function() {
-  location.href = "/p_190826_semi/logout.do";
+  location.href = contextPath+"logout.do";
 });
 
 document.querySelectorAll(".fa-cog")[0].addEventListener("click", () => {
