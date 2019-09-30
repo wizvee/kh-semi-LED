@@ -8,7 +8,26 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 %>
 <!-- 구글 AJAX API 불러오기 -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+	.statistics_view {
+		overflow: hidden;
+   		 height: 500px;
+	}
 
+	.statistics_view>.chart {
+		position: relative;
+        width: 100%;
+        height: 500px;
+        transition: all 0.7s;
+	}
+
+	.statistics_view>.chart .yearSet {
+		z-index: 30;
+            position: absolute;
+            right: 0;
+            background: red;
+	}
+</style>
 
 <!------------------------------------- script THE END ------------------------------------>
 
