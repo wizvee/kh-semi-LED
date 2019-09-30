@@ -26,13 +26,16 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 				<div class="statistics_list">평균 근무 시간 콤보 차트</div>
 				<div class="statistics_list">월별 근무자 수 라인 차트</div>
 				<div class="statistics_list">월별 총 지각 조퇴 바 차트</div> -->
-				<span class="focus">메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<div>설명설명</div>
+				<br>
+				<br>
+				<br>
+				<span class="focus">급여 라인 차트</span>
+				<span>급여 테이블</span>
+				<span>직원 타임 라인</span>
+				<span>근무시간 차트</span>
+				<span>근무자 수 차트</span>
+				<span>근태관리 차트</span>
+				<div></div>
 			</div>
 			<div class="statistics_view">
 				<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
