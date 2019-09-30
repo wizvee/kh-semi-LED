@@ -26,18 +26,29 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 				<div class="statistics_list">평균 근무 시간 콤보 차트</div>
 				<div class="statistics_list">월별 근무자 수 라인 차트</div>
 				<div class="statistics_list">월별 총 지각 조퇴 바 차트</div> -->
-				<span class="focus">메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<span>메뉴바 메뉴바</span>
-				<div>설명설명</div>
+				<br>
+				<br>
+				<br>
+				<span class="focus">급여 라인 차트</span>
+				<br>
+				<span>급여 테이블</span>
+				<br>
+				<span>직원 타임 라인</span>
+				<br>
+				<span>근무시간 차트</span>
+				<br>
+				<span>근무자 수 차트</span>
+				<br>
+				<span>근태관리 차트</span>
+				<br>
+				<div></div>
 			</div>
 			<div class="statistics_view">
 				<!-- <div id="worker_wage_div" style= "width: 400px; height: 300px; border: 1px solid red"></div> -->
 				<div id="firstChart" class="chart focus">
-					<div id="firstChartList" class="yearSet"></div>
+					<div class="yearSet">
+						<ul id="firstChartList">년도</ul>
+					</div>
 					<div id="arealine_chart" style="height: 500px;"></div>
 				</div>
 				<div id="table_div" class="chart" style="height: 500px;"></div>
@@ -70,6 +81,11 @@ Map<String, List<Statistics>> dataMap = (Map<String, List<Statistics>>) request.
 				s.style.transform = "translateY(" + height + "px)";
 			})
 		});
+	});
+	$('#firstChartList').hover(function() {
+  	$(this).find('#area_chart1').stop(true, true).delay(200).fadeIn(500);
+	}, function() {
+  	$(this).find('#area_chart1').stop(true, true).delay(200).fadeOut(500);
 	});
 </script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/statistics.js"></script>
