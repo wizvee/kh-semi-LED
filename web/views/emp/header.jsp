@@ -45,6 +45,7 @@
 	<script src="<%=request.getContextPath()%>/dist/modules.js"></script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /> <label for="ck_snb"></label>
+		<input type="checkbox" id="ck_chat" class="ly"><label for="ck_chat"></label>
 		<!-- 사이드 메뉴 -->
 		<aside class="snb snb_emp">
 			<nav>
@@ -62,6 +63,42 @@
 					</li>
 				</ul>
 			</nav>
+		</aside>
+		<aside class="chat">
+			<div class="chat_header">
+				<span class="focus">리스트</span>
+				<span>대화방</span>
+			</div>
+			<div class="chat_body">
+				<div class="chatList_area focus">
+					<%
+						for (Map.Entry<String, Business> e : busMap.entrySet()) {
+							Business b = e.getValue();
+					%>
+					<div class="chatListItem_area">
+						<%=b.getBusName()%>
+						<input type="hidden" id="hidden_busId" value='<%=b.getBusId()%>'>
+						<input type="hidden" id="hidden_userId" value='<%=userInfo.getUserId()%>'>
+					</div>
+					<%
+						}
+					%>
+				</div>
+				<div class="chatRoom_area">
+					<div class="chatEmp_area">
+						
+					</div>
+					<div>
+						<div class="chatMsg_area">
+						</div>
+						<div class="chatMsg_enter">
+							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid #F8F8F8"
+								autofocus></textarea>
+							<button id=btn>Send</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</aside>
 		<!-- //사이드 메뉴 -->
 		<!-- container -->
@@ -94,6 +131,7 @@
 						}
 					%>
 				</div>
+				
 				<div id="gnb_alert">
 					<div id="btn_alert">
 						<div id="gnb_alertBadge"></div>
