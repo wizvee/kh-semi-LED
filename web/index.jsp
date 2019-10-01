@@ -2,7 +2,7 @@
 <%@ page import="com.semi.user.model.vo.User"%>
 <% User loginUser = (User) session.getAttribute("loginUser"); %>
 <%
-/* 	Cookie[] cookies = request.getCookies();
+ 	/* Cookie[] cookies = request.getCookies();
 	String loginKeep = null;
 	if (cookies != null) {
 		for (Cookie c : cookies) {
@@ -80,20 +80,20 @@
           <!-- 로그인 폼 -->
           <form method="post" class="frm_login active">
             <div>
-              <input type="email" name="userEmail" class="inpt-gradient" <%-- value='<%=loginKeep!=null?loginKeep:"" %>' --%> required />
+              <input type="email" name="userEmail" id="userEmail" class="inpt-gradient" <%-- value='<%=loginKeep!=null?loginKeep:"" %>' --%> required />
               <span data-placeholder="이메일">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
             </div>
             <div>
-              <input type="password" name="userPw" class="inpt-gradient" required />
+              <input type="password" name="userPw" id="userPw" class="inpt-gradient" required />
               <span data-placeholder="비밀번호">
                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
               </span>
             </div>
             <div>
               <button id="btn_login" class="btn-gradient" onclick="return false;">
-                로그인
+               로그인
               </button>
             </div>
             <div class="option_area">
