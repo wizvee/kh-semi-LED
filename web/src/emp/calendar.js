@@ -38,53 +38,6 @@ class Calendar {
 
     pre.addEventListener("click", this.previous);
     nxt.addEventListener("click", this.next);
-
-    // add task div
-    const addTask = document.querySelector("#btn_addTask");
-    addTask.addEventListener("click", () => {
-      const area = document.querySelectorAll(".subCal_area .taskList")[0];
-      const sftId = document.getElementsByName("sftId")[0].value;
-      const containEmp = empList.filter(e => e.sftId == sftId);
-
-      if ([...containEmp].length == 0) console.log("modal! alert!");
-      else {
-        const targetEmpList = document.createElement("div");
-        targetEmpList.setAttribute("class", "targetEmpList");
-        const targetEmp = document.createElement("span");
-        targetEmp.setAttribute("id", [...containEmp][0].userId);
-        targetEmp.setAttribute("class", "selectTargetUser");
-        targetEmp.textContent = [...containEmp][0].userName;
-        const ul = document.createElement("ul");
-        ul.setAttribute("class", "dropMenu");
-        [...containEmp].map(e => {
-          const li = document.createElement("li");
-          li.setAttribute("id", e.userId);
-          li.setAttribute("class", "taskUser");
-          li.textContent = e.userName;
-          ul.appendChild(li);
-          li.addEventListener("click", ({ target }) => {
-            const selectTaskEmp = target.parentElement.previousElementSibling;
-            selectTaskEmp.textContent = target.textContent;
-            selectTaskEmp.setAttribute("id", target.getAttribute("id"));
-          });
-        });
-
-        targetEmpList.appendChild(targetEmp);
-        targetEmpList.appendChild(ul);
-
-        const task = document.createElement("input");
-        task.setAttribute("class", "inpt-outline");
-        task.setAttribute("name", "taskMsg");
-
-        area.appendChild(targetEmpList);
-        area.appendChild(task);
-
-        ++this.taskCount;
-      }
-    });
-
-    const istCal = document.querySelector("#btn_insertCal");
-    istCal.addEventListener("click", this.setCalData);
   }
 
   // create date cells
@@ -110,24 +63,12 @@ class Calendar {
       }
       this.body.appendChild(cell);
       cell.addEventListener("click", ({ target }) => {
+        const calItem = document.querySelectorAll(".cal_item")[0];
         const view = document.querySelectorAll(".viewCalendar_area")[0];
         const add = document.querySelectorAll(".addCal_area")[0];
+        calItem.classList.add("focus");
         view.classList.remove("focus");
         add.classList.add("focus");
-
-        selectElements(".taskList div").map(e => e.remove());
-        selectElements(".taskList input").map(e => e.remove());
-
-        const targetDate = target.getAttribute("id");
-        // 일정 추가 event
-        const calItem = document.querySelectorAll(".cal_item")[0];
-        const date = document.getElementsByName("date")[0];
-        const title = document.getElementsByName("title")[0];
-        const content = document.getElementsByName("content")[0];
-        calItem.classList.add("focus");
-        date.value = targetDate;
-        title.value = "";
-        content.value = "";
       });
     }
     this.header.innerHTML = `${this.target.getFullYear()}년 <b>${this.target.getMonth() +
@@ -192,37 +133,6 @@ class Calendar {
     this.createCal();
   };
 
-  setCalData = () => {
-    const date = document.getElementsByName("date")[0].value;
-    const sftId = document.getElementsByName("sftId")[0].value;
-    const title = document.getElementsByName("title")[0].value;
-    const content = document.getElementsByName("content")[0].value;
-
-    const taskUserId = document.querySelectorAll(".selectTargetUser");
-    const taskMsg = document.getElementsByName("taskMsg");
-    const taskArr = [];
-
-    for (let i = 0; i < this.taskCount; i++) {
-      const task = new Task(date, taskUserId[i].getAttribute("id"), taskMsg[i].value);
-      taskArr.push(task);
-    }
-
-    this.taskCount = 0;
-    
-    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(
-      taskArr
-    )}`;
-    this.getResult("owner/insertCal.do", data, this.insertCal);
-  };
-
-  insertCal = respText => {
-    if (respText != "fail") {
-      document.getElementsByName("title")[0].value = "";
-      document.getElementsByName("content")[0].value = "";
-      location.href = contextPath + "/owner/calendar.do";
-    } else console.log("실패");
-  };
-
   getResult(servletURL, data, fn) {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", () => {
@@ -253,18 +163,3 @@ class Calendar {
 
 // Calendar 객체 생성!
 promiseGetDefault("getCalList.do").then(res => new Calendar(JSON.parse(res)));
-
-const sfts = selectElements(".sftList .sft");
-sfts.map(s =>
-  s.addEventListener("click", ({ target }) => {
-    selectElements(".taskList div").map(e => e.remove());
-    selectElements(".taskList input").map(e => e.remove());
-
-    const id = document.getElementsByName("sftId")[0];
-    const name = selectElements(".sftList .selectSft")[0];
-    sfts.map(e => e.classList.remove("select"));
-    target.classList.add("select");
-    name.textContent = target.textContent;
-    id.value = target.getAttribute("id");
-  })
-);

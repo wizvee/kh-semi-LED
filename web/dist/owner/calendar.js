@@ -125,8 +125,11 @@ function () {
       if (respText != "fail") {
         document.getElementsByName("title")[0].value = "";
         document.getElementsByName("content")[0].value = "";
+        socket.send(JSON.stringify({
+          flag: respText
+        }));
         location.href = contextPath + "/owner/calendar.do";
-      } else console.log("실패");
+      }
     });
 
     this.now = new Date();

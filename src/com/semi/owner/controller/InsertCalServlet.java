@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -15,8 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.semi.bus.model.service.BusinessService;
 import com.semi.caldendar.model.service.CalendarService;
 import com.semi.caldendar.model.vo.Cal;
+import com.semi.emp.model.vo.Employee;
+import com.semi.noti.model.service.NotiService;
+import com.semi.noti.model.vo.Notification;
 import com.semi.task.model.vo.Task;
 import com.semi.userinfo.model.vo.UserInfo;
 
@@ -50,23 +55,30 @@ public class InsertCalServlet extends HttpServlet {
 		cal.setSftId(request.getParameter("sftId"));
 		cal.setCalTitle(request.getParameter("calTitle"));
 		cal.setCalDetail(request.getParameter("calDetail"));
-		
+
 		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		
+
 		String task = request.getParameter("taskArr");
 		Task[] taskArr = gs.fromJson(task, Task[].class);
 
-//		알림 추가
+		ArrayList<String> empList = new BusinessService().getSftEmpList(cal.getSftId());
 
 		int r = new CalendarService().insertCal(cal, taskArr);
+		int r2 = 0;
+		for (String id : empList) {
+			Notification n = new Notification();
+			n.setUserId(ui.getUserId());
+			n.setTargetUserId(id);
+			n.setTargetBusId(ui.getSelectBusId());
+			n.setNotiType("addCal");
+			n.setNotiMsg("일정 등록");
+			n.setNotiUrl("emp/calendar.do");
+			r2 += new NotiService().insertNoti(n);
+		}
 
-		if (r > 0) {
-			Gson gs1 = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-			ui.setFlag("N");
-
-			session.setAttribute("userInfo", ui);
-			out.print(gs1.toJson(ui));
-		} else
+		if (r > 0 && r2 == empList.size())
+			out.print("N");
+		else
 			out.print("fail");
 	}
 

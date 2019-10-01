@@ -74,5 +74,5 @@
 	</section>
 
 </div>
-<script src="<%=request.getContextPath()%>/dist/calendar.js"></script>
+<script src="<%=request.getContextPath()%>/dist/owner/calendar.js"></script>
 <%@ include file="footer.jsp"%>
