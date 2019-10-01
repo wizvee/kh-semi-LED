@@ -2,18 +2,16 @@
 <%@ page import="com.semi.user.model.vo.User"%>
 <% User loginUser = (User) session.getAttribute("loginUser"); %>
 <%
- 	/* Cookie[] cookies = request.getCookies();
+ 	Cookie[] cookies = request.getCookies();
 	String loginKeep = null;
 	if (cookies != null) {
 		for (Cookie c : cookies) {
-			System.out.println("key : " + c.getName());
-			System.out.println("value : " + c.getValue());
+			//getName()->key값 가져오기, getValue()->값 가져오기
 			 if(c.getName().equals("loginKeep")){
 				 loginKeep=c.getValue();
 			}
 		}
 	}
-	System.out.println("이게 널?"+loginKeep); */
 %>
 <!DOCTYPE html>
 
@@ -80,7 +78,7 @@
           <!-- 로그인 폼 -->
           <form method="post" class="frm_login active">
             <div>
-              <input type="email" name="userEmail" id="userEmail" class="inpt-gradient" <%-- value='<%=loginKeep!=null?loginKeep:"" %>' --%> required />
+              <input type="email" name="userEmail" id="userEmail" class="inpt-gradient" value='<%=loginKeep!=null?loginKeep:"" %>' required />
               <span data-placeholder="이메일">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
@@ -97,7 +95,7 @@
               </button>
             </div>
             <div class="option_area">
-              <input type="checkbox" name="loginKeep" id="loginKeep" <%-- <%=loginKeep!=null?"checked":"" %> --%>/>
+              <input type="checkbox" name="loginKeep" id="loginKeep" <%=loginKeep!=null?"checked":"" %>/>
               <label for="loginKeep" >이메일 저장</label>
               <a href="#">비밀번호 찾기</a>
             </div>

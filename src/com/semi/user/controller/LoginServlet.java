@@ -34,41 +34,34 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		String login = request.getParameter("data");
+		System.out.println(login);
 		
 		UserService service = new UserService();
-		User user = null;
+		User user = null;		
 		
-		try {
-			JSONParser jp = new JSONParser();
-			JSONObject json = (JSONObject) jp.parse(login);
+		try { 
+			JSONParser jp = new JSONParser(); 
+			JSONObject json = (JSONObject) jp.parse(login); 
 			String password = SHA512.getSHA512((String) json.get("password"));
-			user = service.selectUser((String) json.get("email"), password);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		if (user != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", user);
-			out.print("success");
-		} else
-			out.print("fail");
-		
-		
-		/*
-		 * try { JSONParser jp = new JSONParser(); JSONObject json = (JSONObject)
-		 * jp.parse(login); String password = SHA512.getSHA512((String)
-		 * json.get("password")); user = service.selectUser((String) json.get("email"),
-		 * password);
-		 * 
-		 * HttpSession session = request.getSession(); session.setAttribute("loginUser",
-		 * user); out.print("success"); if (loginKeep != null) { if(user.getEmail()
-		 * !=null) { Cookie c = new Cookie("loginKeep",(String) json.get("email"));
-		 * c.setMaxAge(3*24*60*60); //3일 response.addCookie(c); } else { Cookie c = new
-		 * Cookie("loginKeep",(String) json.get("email")); c.setMaxAge(0);
-		 * response.addCookie(c); } } else out.print("fail"); } catch (ParseException e)
-		 * { e.printStackTrace(); }
-		 */
+			user = service.selectUser((String) json.get("email"),password);
+			if (user != null) {
+				HttpSession session = request.getSession(); 
+			    session.setAttribute("loginUser", user); 
+			    out.print("success"); 
+			    if ((boolean) json.get("loginKeep") == true) {
+			    	Cookie c = new Cookie("loginKeep",(String) json.get("email"));
+			    	c.setMaxAge(3*24*60*60); //3일 
+			    	response.addCookie(c);
+			    } else  {
+			    	Cookie c = new Cookie("loginKeep",(String) json.get("email"));
+			    	c.setMaxAge(0);
+		    		response.addCookie(c); 
+			    }
+			}   	
+		} catch (ParseException e){ 
+		    	e.printStackTrace(); 
+		  }
+		 
 		 
 		
 	}
