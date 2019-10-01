@@ -31,6 +31,6 @@ let socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");
 socket.onmessage = e => {
   console.log(e.data);
   if (e.data == "N") {
-    promiseGetDefault("getNotiList.do").then(() => new Promise(res => alert.getNotiList(res))).then(alert.viewCount());
+    promiseGetDefault("getNotiList.do").then(res => alert.getNotiList(res)).then(() => alert.viewCount());
   }
 };

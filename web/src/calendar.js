@@ -202,19 +202,17 @@ class Calendar {
     const taskMsg = document.getElementsByName("taskMsg");
     const taskArr = [];
 
-    console.log(taskUserId);
+    for (let i = 0; i < this.taskCount; i++) {
+      const task = new Task(date, taskUserId[i].getAttribute("id"), taskMsg[i].value);
+      taskArr.push(task);
+    }
 
-    // for (let i = 0; i < this.taskCount; i++) {
-    //   const task = new Task(date, taskUserId[i].value, taskMsg[i].value);
-    //   taskArr.push(task);
-    // }
-
-    // this.taskCount = 0;
+    this.taskCount = 0;
     
-    // const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(
-    //   taskArr
-    // )}`;
-    // this.getResult("owner/insertCal.do", data, this.insertCal);
+    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(
+      taskArr
+    )}`;
+    this.getResult("owner/insertCal.do", data, this.insertCal);
   };
 
   insertCal = respText => {

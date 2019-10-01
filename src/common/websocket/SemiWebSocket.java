@@ -61,35 +61,44 @@ public class SemiWebSocket {
 			session.getUserProperties().put("busId", busId);
 
 			int result = service.insertChat(busId, userId, chatType, chatMsg);
-	
-		for(Session s:session.getOpenSessions()) {
-		if(s.getUserProperties().get("busId")!=null) {
+
+			for (Session s : session.getOpenSessions()) {
+				if (s.getUserProperties().get("busId") != null) {
+					try {
+						s.getBasicRemote().sendText(chatMsg);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		if (flag.equals("T")) {
+			String busId = (String) json.get("busId");
+			String userId = (String) json.get("userId");
+			String chatType = (String) json.get("chatType");
+			String chatMsg = (String) json.get("chatMsg");
+
+			int exist = service.checkTime(busId, chatType, chatMsg);
+			if (exist != 1) {
+				System.out.println("exist: " + exist);
+				int insert = service.insertTime(busId, userId, chatType, chatMsg);
+				System.out.println("insert: " + insert);
+			} else {
+				return;
+			}
+		}
+
+		if (flag.equals("N")) {
+			for (Session s : session.getOpenSessions()) {
 				try {
-					s.getBasicRemote().sendText(chatMsg);
+					s.getBasicRemote().sendText("N");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		}
-		
-		if(flag.equals("T")) {
-			String busId = (String) json.get("busId");
-			String userId = (String) json.get("userId");
-			String chatType = (String) json.get("chatType");
-			String chatMsg = (String) json.get("chatMsg");
-			
-			int exist=service.checkTime(busId,chatType,chatMsg);
-			if(exist!=1) {
-				System.out.println("exist: "+exist);
-				int insert = service.insertTime(busId, userId, chatType, chatMsg);	
-				System.out.println("insert: "+insert);
-			}else {
-				return;
-			}
-		}
-		
-		
+
 //		JsonObject jsonObject = (JsonObject) jsonParser.parse(str);
 //		String flag=jsonObject.get("flag").toString();
 
@@ -111,7 +120,6 @@ public class SemiWebSocket {
 //				}
 //			}
 //		}
-
 
 	}
 
