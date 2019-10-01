@@ -107,13 +107,13 @@
 				</div>
 				<div class="chatRoom_area">
 					<div class="chatEmp_area">
-						zz
+						
 					</div>
 					<div>
 						<div class="chatMsg_area">
 						</div>
 						<div class="chatMsg_enter">
-							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white"
+							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid #F8F8F8"
 								autofocus></textarea>
 							<button id=btn>Send</button>
 						</div>
@@ -121,40 +121,8 @@
 				</div>
 			</div>
 		</aside>
-		<!-- //채팅창 -->
 		<!-- container -->
 		<div id="container" class="container_main">
-			<!-- 채팅창 -->
-			<!-- <div id="chat_area" class="item" style="display: none;">
-				<div class="item_header">채팅창</div>
-				<div class="item_body">
-					<div class="chatList_area" style="display: block;">
-						<%
-							for (Map.Entry<String, Business> e : busMap.entrySet()) {
-								Business b = e.getValue();
-						%>
-						<div class="chatListItem_area">
-							<%=b.getBusName()%>
-							<input type="hidden" id="hidden_busId" value='<%=b.getBusId()%>'>
-							<input type="hidden" id="hidden_userId" value='<%=userInfo.getUserId()%>'>
-						</div>
-						<%
-							}
-						%>
-					</div>
-					<div class="chatRoom_area" style="display: none;">
-						<button class="btn_chatBack">돌아가기</button>
-						<div class="chatMsg_area">
-						</div>
-						<div class="chatMsg_enter">
-							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white"
-								autofocus></textarea>
-							<button id=btn>Send</button>
-						</div>
-					</div>
-				</div>
-			</div> -->
-			<!-- //채팅창 -->
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">
 				<div>

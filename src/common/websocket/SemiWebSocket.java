@@ -49,7 +49,6 @@ public class SemiWebSocket {
 			json = (JSONObject) jp.parse(str);
 
 			flag = (String) json.get("flag");
-			System.out.println(flag);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +61,6 @@ public class SemiWebSocket {
 			session.getUserProperties().put("busId", busId);
 
 			int result = service.insertChat(busId, userId, chatType, chatMsg);
-			System.out.println(result);
 	
 		for(Session s:session.getOpenSessions()) {
 		if(s.getUserProperties().get("busId")!=null) {
@@ -73,6 +71,20 @@ public class SemiWebSocket {
 				}
 			}
 		}
+		}
+		
+		if(flag.equals("T")) {
+			String busId = (String) json.get("busId");
+			String userId = (String) json.get("userId");
+			String chatType = (String) json.get("chatType");
+			String chatMsg = (String) json.get("chatMsg");
+			
+			int exist=service.checkTime(busId,chatType,chatMsg);
+			if(exist!=1) {
+				int insert = service.insertTime(busId, userId, chatType, chatMsg);				
+			}else {
+				return;
+			}
 		}
 		
 		
@@ -97,33 +109,7 @@ public class SemiWebSocket {
 //				}
 //			}
 //		}
-//			System.out.println(flag);
 
-//			System.out.println("여기까진옴?");
-//			String busId=(jsonObject.get("busId").toString());
-//			String userId=(jsonObject.get("userId").toString());
-//			String chatType=(jsonObject.get("chatType").toString());
-//			String chatMsg=(jsonObject.get("chatMsg").toString());
-//			String readed=(jsonObject.get("readed").toString());
-
-//			session.getUserProperties().put("busId", busId);
-//			session.getUserProperties().put("userId", userId);
-//			session.getUserProperties().put("chatType", chatType);
-//			session.getUserProperties().put("chatMsg", chatMsg);
-//			session.getUserProperties().put("readed", readed);
-
-//			for(Session s:session.getOpenSessions()) {
-//				if(s.getUserProperties().get("busId")!=null) {
-//						try {
-//							System.out.println("이값음?"+chatMsg);
-//							s.getBasicRemote().sendText(chatMsg);
-//						}catch(Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				int result=service.insertChat(busId,userId,chatType,chatMsg);
-//				System.out.println("저장결과:"+result);
-//		}
 
 	}
 

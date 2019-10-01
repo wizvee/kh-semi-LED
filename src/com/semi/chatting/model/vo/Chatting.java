@@ -88,7 +88,7 @@ public class Chatting {
 	}
 
 	public void setChatDate(String chatDate) {
-		SimpleDateFormat simple=new SimpleDateFormat("yyyy-MM-DD HH:mm");
+		SimpleDateFormat simple=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		try {
 			this.chatDate = simple.parse(chatDate);
 		} catch (ParseException e) {

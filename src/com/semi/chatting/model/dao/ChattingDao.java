@@ -50,6 +50,7 @@ public class ChattingDao {
 				close(rs);
 				close(pstmt);
 			}
+			System.out.println("날짜: "+list.get(0).getChatDate());
 			return list;			
 		}
 	
@@ -80,6 +81,48 @@ public class ChattingDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("insertChatting");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, null);
+			pstmt.setString(4, chatType);
+			pstmt.setString(5, chatMsg);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;	
+	}
+	
+	//시간 있는지 체크하기 
+	public int checkTime(Connection conn, String busId, String chatType, String chatMsg) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("timeCheck");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, busId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=1;
+			}else {
+				result=0;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertTime(Connection conn, String busId, String userId,String chatType, String chatMsg) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertTime");
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
