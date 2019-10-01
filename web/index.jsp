@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.semi.user.model.vo.User"%>
 <% User loginUser = (User) session.getAttribute("loginUser"); %>
+<%
+	Cookie[] cookies = request.getCookies();
+	String loginKeep = null;
+	if (cookies != null) {
+		for (Cookie c : cookies) {
+			System.out.println("key : " + c.getName());
+			System.out.println("value : " + c.getValue());
+			 if(c.getName().equals("loginKeep")){
+				 loginKeep=c.getValue();
+			}
+		}
+	}
+	System.out.println(loginKeep);
+%>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -66,7 +80,7 @@
           <!-- 로그인 폼 -->
           <form method="post" class="frm_login active">
             <div>
-              <input type="email" name="userEmail" class="inpt-gradient" required />
+              <input type="email" name="userEmail" class="inpt-gradient" value='<%=loginKeep!=null?loginKeep:"" %>' required />
               <span data-placeholder="이메일">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
@@ -83,8 +97,8 @@
               </button>
             </div>
             <div class="option_area">
-              <input type="checkbox" name="loginKeep" id="loginKeep" />
-              <label for="loginKeep">로그인 유지</label>
+              <input type="checkbox" name="loginKeep" id="loginKeep"/>
+              <label for="loginKeep" <%=loginKeep!=null?"checked":"" %> >이메일 저장</label>
               <a href="#">비밀번호 찾기</a>
             </div>
             <div class="msg_area"></div>

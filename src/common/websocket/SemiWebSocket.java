@@ -65,8 +65,8 @@ public class SemiWebSocket {
 		for(Session s:session.getOpenSessions()) {
 		if(s.getUserProperties().get("busId")!=null) {
 				try {
-					s.getBasicRemote().sendText(chatMsg);
-				}catch(Exception e) {
+					s.getBasicRemote().sendText("N");
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}

@@ -19,7 +19,9 @@ function () {
     _defineProperty(this, "approvalEmp", function (respText) {
       if (respText != "fail") {
         _this.aprEmp = "";
-        socket.send(respText);
+        socket.send(JSON.stringify({
+          flag: respText
+        }));
         location.href = contextPath + "owner/manageEmp.do";
       }
     });
@@ -37,11 +39,11 @@ function () {
       var mngHeader = selectElements(".mngEmp_header span");
       var mngBody = selectElements(".mngEmp_body .mngDiv");
       var empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
-      var btnEditEmp = selectElements(".btn_editEmp");
       var sftItem = selectElements(".busShift_area .sftItem");
       var btnApproval = selectElements(".btn_approval");
       var btnReject = selectElements(".btn_reject");
       var btnApvEmp = document.querySelectorAll(".btn_arvEmp")[0];
+      var btnEditEmp = selectElements(".btn_editEmp");
       mngHeader.map(function (e, index) {
         e.addEventListener("click", function (_ref) {
           var target = _ref.target;
@@ -56,10 +58,17 @@ function () {
           mngBody[index].classList.add("focus");
         });
       });
-      btnEditEmp.map(function (b) {
+      btnEditEmp.map(function (b, index) {
         b.addEventListener("click", function (_ref2) {
           var target = _ref2.target;
-          console.log("^^");
+          var s1 = document.querySelectorAll(".editEmpType")[index];
+          var empType = s1.options[s1.selectedIndex].value;
+          var empWage = document.querySelectorAll(".editEmpWage")[index].value;
+          var s2 = document.querySelectorAll(".editSftId")[index];
+          var sftId = s2.options[s2.selectedIndex].value;
+          var data = "empId=".concat(target.nextElementSibling.value, "&empType=").concat(empType, "&empWage=").concat(empWage, "&sftId=").concat(sftId);
+
+          _this2.getResult("owner/editEmp.do", data, _this2.approvalEmp);
         });
       });
       btnApproval.map(function (e) {

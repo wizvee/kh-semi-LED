@@ -1,4 +1,4 @@
-package com.semi.caldendar.controller;
+package com.semi.noti.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.semi.caldendar.model.service.CalendarService;
-import com.semi.caldendar.model.vo.Cal;
+import com.semi.noti.model.vo.Notification;
+import com.semi.user.model.service.UserService;
 import com.semi.userinfo.model.vo.UserInfo;
 
-@WebServlet("/getCalList.do")
-public class GetCalListServlet extends HttpServlet {
+@WebServlet("/getNotiList.do")
+public class GetNotiListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GetCalListServlet() {
+	public GetNotiListServlet() {
 		super();
 	}
 
@@ -29,7 +29,7 @@ public class GetCalListServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		UserInfo ui = (UserInfo) request.getSession().getAttribute("userInfo");
 
-		ArrayList<Cal> list = new CalendarService().getCalList(ui.getSelectBusId());
+		ArrayList<Notification> list = new UserService().getNotiList(ui.getUserId());
 
 		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		out.print(gs.toJson(list));

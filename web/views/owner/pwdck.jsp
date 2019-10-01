@@ -34,6 +34,11 @@
 </div>
 
 <script>
+	history.pushState(null, null, location.href);
+	window.onpopstate = function(event) {
+		history.go(1);
+	};
+
 	$(function(){
 		$('#btn_checkPw').click(function(){
 			if($('#pw').val().trim()<=0){

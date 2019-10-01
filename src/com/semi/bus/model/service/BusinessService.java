@@ -12,7 +12,6 @@ import com.semi.bus.model.dao.BusinessDao;
 import com.semi.bus.model.vo.Business;
 import com.semi.emp.model.vo.Employee;
 import com.semi.noti.model.dao.NotiDao;
-import com.semi.noti.model.vo.Notification;
 import com.semi.sft.model.dao.ShiftDao;
 import com.semi.sft.model.vo.Shift;
 
@@ -84,9 +83,9 @@ public class BusinessService {
 		return r;
 	}
 
-	public int editEmp(String empId, int empWage, String empType, String sftId) {
+	public int editEmp(String busId, Employee e) {
 		Connection conn = getConnection();
-		int r = dao.editEmp(conn, empId, empWage, empType, sftId);
+		int r = dao.editEmp(conn, busId, e);
 		if (r > 0)
 			commit(conn);
 		else
