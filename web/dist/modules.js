@@ -14,8 +14,9 @@ socket.onmessage = function (e) {
   console.log(e.data);
 
   if (e.data == "N") {
-    alert.viewCount();
-    console.log("알림");
+    promiseGetDefault("getNotiList.do").then(function (res) {
+      return alert.getNotiList(res);
+    }).then(alert.viewCount());
   }
 }; // SPA - Basic Data
 

@@ -74,9 +74,28 @@
 								<span class="tag"><%=String.format("%,d", e.getEmpWage()) %></span>
 								<span class="tag"><%=sftName %></span>
 							</div>
+							<button class="btn-primary btn_viewEdit">편집</button>
 						</div>
-						<div class="view_footer">
-							<button class="btn-primary btn_editEmp">편집</button>
+						<div class="edit_body focus">
+							<span><%=e.getUserName()%></span>
+							<select class="editEmpType">
+								<option value="H" <%=e.getEmpType().equals("H") ? "selected" : "" %>>시급</option>
+								<option value="D" <%=e.getEmpType().equals("D") ? "selected" : "" %>>일당</option>
+								<option value="M" <%=e.getEmpType().equals("M") ? "selected" : "" %>>월급</option>
+							</select>
+							<input type="text" class="editEmpWage" value="<%=e.getEmpWage() %>">
+							<select class="editSftId">
+								<%
+									for(Shift s : sftList) {
+								%>
+								<option value="<%=s.getSftId()%>"
+									<%=e.getSftId().equals(s.getSftId()) ? "selected" : "" %>><%=s.getSftName() %>
+								</option>
+								<%
+									}
+								%>
+							</select>
+							<button class="btn-primary btn_editEmp">수정</button>
 							<input type="hidden" value="<%=e.getUserId()%>">
 						</div>
 					</div>

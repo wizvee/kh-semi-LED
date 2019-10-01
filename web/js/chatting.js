@@ -1,10 +1,34 @@
 const btnChat = document.querySelector("#btn_chatting");
 var busId="";
 var userId="";
+var userName="";
+var profilePic="";
+console.log(userInfo.userName);
 
 //var userNow = <%=loginOwner %>;
 //console.log(userNow);
 
+
+// new css
+const chatHeaderBtn = document.querySelectorAll(".chat .chat_header span");
+const chatListAea = document.querySelectorAll(".chat .chat_body .chatList_area")[0];
+const chatRoomArea = document.querySelectorAll(".chat .chat_body .chatRoom_area")[0];
+const chatBusList = selectElements(".chat .chat_body .chatList_area .chatListItem_area");
+chatHeaderBtn[0].addEventListener("click", () => {
+	chatListAea.classList.add("focus");
+	chatRoomArea.classList.remove("focus");
+	chatHeaderBtn[0].classList.add("focus");
+	chatHeaderBtn[1].classList.remove("focus");
+})
+chatBusList.map(l => l.addEventListener("click", () => {
+	chatListAea.classList.remove("focus");
+	chatRoomArea.classList.add("focus");
+	chatHeaderBtn[0].classList.remove("focus");
+	chatHeaderBtn[1].classList.add("focus");
+}))
+
+
+// old css
 
 btnChat.addEventListener("click", () => {
   const chatArea = document.querySelector("#chat_area");
@@ -65,7 +89,7 @@ function addChat(profilePic, userName, chatMsg, chatDate, chatType){
 			'<div class="main-content">'+
 			'<div class="media">'+
 			'<a class="pull-left" href="#">'+
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src='+contextPath+'"upload/profile/'+profilePic+'" alt="">'+
+			'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
 			'</a>'+
 			'<div class="media-body">'+
 			'<h5 class="media-heading">'+
@@ -131,9 +155,54 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 
 
 //userName 그리고 userProfile 불러와야함 
+var Message;
+profilePic=userInfo.profilePic;
+userName=userInfo.userName;
+var d = new Date();
+var hours=d.getHours();
+var minutes=d.getMinutes();
+var ampm="";
+if (hours >12){
+	hours -=12;
+	ampm="오후";
+}else{
+	ampm="오전";
+}
+if(minutes<10){
+	minutes="0"+minutes;
+}
+
+var chatDate= ampm+" "+hours+":"+minutes;
 
 socket.onmessage=function(e){
-	$('.chatMsg_area').append("<p>"+userId+" : "+e.data+"</p>");
+	console.log(e.data);
+	console.log(typeof e.data);
+		if(e.data=="연결"){
+		var message="채팅방에 입장하셨습니다!";
+	}else{
+		message=e.data
+	}
+	$('.chatMsg_area').append('<div class="row">'+
+			'<div class="main-content">'+
+			'<div class="media">'+
+			'<a class="pull-left" href="#">'+
+			'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+			'</a>'+
+			'<div class="media-body">'+
+			'<h5 class="media-heading">'+
+			userName+
+			'<span class="small pull-right">'+
+			chatDate+
+			'</span>' +
+			'</h5>'+
+			'<p>'+
+			message +
+			'</p>'+
+			'</div>'+
+			'</div>'+
+			'</div>'+
+			'</div>'+
+			'<hr>');
 }
 
 

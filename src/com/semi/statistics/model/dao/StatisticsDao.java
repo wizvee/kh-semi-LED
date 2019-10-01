@@ -105,8 +105,8 @@ public class StatisticsDao {
 			while(rs.next()) {
 				Statistics s=new Statistics();
 				s.setEmpName(rs.getString(1));
-				s.setEmpStart(rs.getDate(2));
-				s.setEmpEnd(rs.getDate(3));
+				s.setEmpStart(rs.getString(2));
+				s.setEmpEnd(rs.getString(3));
 				list.add(s);
 			}
 		}catch(SQLException e) {

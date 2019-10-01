@@ -35,7 +35,6 @@ public class ChattingDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			rs = pstmt.executeQuery();
-			System.out.println("불러울 사업장 아이디: "+busId);
 			while(rs.next()){
 				Chatting c=new Chatting();
 				c.setChatType(rs.getString(1));
@@ -58,10 +57,8 @@ public class ChattingDao {
 	public List<String>getAllUsers(Connection conn,String busId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		System.out.println("아이디: "+busId);
 		String sql=prop.getProperty("getAllUsers");
 		List<String>list=new ArrayList<String>();
-		System.out.println(sql);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
@@ -83,11 +80,6 @@ public class ChattingDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("insertChatting");
-		System.out.println(busId);
-		System.out.println(userId);
-		System.out.println(chatType);
-		System.out.println(chatMsg);
-		System.out.println(sql);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);

@@ -20,7 +20,6 @@
                 transform: translateY(-2px);
             }
         }
-
     }
 
     .mngEmp_body {
@@ -69,9 +68,18 @@
             .view_body {
                 $line: 25px;
 
-                @include grid;
-                grid-template-rows: 80px repeat(2, $line) 10px $line;
+                visibility: hidden;
+                display: none;
+                opacity: 0;
+                transition: all 0.5s;
                 font-size: 90%;
+
+                &.focus {
+                    visibility: visible;
+                    @include grid;
+                    grid-template-rows: 80px repeat(2, $line) 10px $line;
+                    opacity: 1;
+                }
 
                 img {
                     @include circle(70px);
@@ -121,6 +129,19 @@
                     transform: translateX(-3px);
                 }
             }
+
+            .edit_body {
+                visibility: hidden;
+                display: none;
+                opacity: 0;
+                transition: all 0.5s;
+
+                &.focus {
+                    visibility: visible;
+                    @include grid;
+                    opacity: 1;
+                }
+            }
         }
 
         .empList_area {
@@ -148,13 +169,7 @@
             }
         }
 
-        .editEmp_area {
-            background: red;
-
-        }
-
-        .approvalEmpInfo_area,
-        .editEmp_area {
+        .approvalEmpInfo_area {
 
             &>div {
                 @include grid;

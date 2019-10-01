@@ -17,6 +17,7 @@ class Alert {
     const area = document.querySelector("#gnb_alert");
     const badge = document.querySelector("#gnb_alertBadge");
     badge.textContent = this.count;
+    console.log(this.count);
 
     if (this.count > 0) {
       area.setAttribute("class", "news");
@@ -63,6 +64,13 @@ class Alert {
         this.getResult(data, url);
       }
     });
+  }
+
+  getNotiList = res => {
+    this.list = JSON.parse(res);
+    this.count = this.list.length;
+    console.log("get List");
+    console.log(this.list);
   }
 
   getResult(data, url) {

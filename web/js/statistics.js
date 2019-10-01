@@ -206,16 +206,16 @@ function drawTimeLine() {
   dataTable.addColumn({ type: "date", id: "End" });
 
   var d = new Date();
-  var thisDay = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  var thisDay = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate()+" "+d.getHours()+":"+d.getMinutes();
   console.log(thisDay);
 
   for (a in json.forTimeLine) {
     dataTable.addRow([
       String(parseInt(a) + 1),
       json.forTimeLine[a].empName,
-      new Date(json.forTimeLine[a].empStartStr),
+      new Date(json.forTimeLine[a].empStart),
       new Date(
-        json.forTimeLine[a].empEndStr == undefined? thisDay: json.forTimeLine[a].empEndStr)
+        json.forTimeLine[a].empEnd == undefined? thisDay: json.forTimeLine[a].empEnd)
     ]);
   }
 
@@ -227,7 +227,6 @@ function drawTimeLine() {
     height: '80%',
     backgroundColor:'#f1f8e9'
   };
-
   chart.draw(dataTable, options);
 }
 

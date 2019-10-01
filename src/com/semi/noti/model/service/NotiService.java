@@ -26,9 +26,9 @@ public class NotiService {
 		close(conn);
 		return r;
 	}
-	
+
 	public int isReadNoti(String notiId) {
-		Connection conn= getConnection();
+		Connection conn = getConnection();
 		int r = dao.isReadNoti(conn, notiId);
 		if (r > 0)
 			commit(conn);
@@ -37,7 +37,7 @@ public class NotiService {
 		close(conn);
 		return r;
 	}
-	
+
 	public HashSet<String> getAlertTarget(String busId) {
 		Connection conn = getConnection();
 		HashSet<String> set = dao.getAlertTarget(conn, busId);

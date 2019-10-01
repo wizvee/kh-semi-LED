@@ -14,10 +14,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.semi.chatting.model.service.ChattingService;
-import com.semi.chatting.model.vo.Chatting;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @ServerEndpoint(value = "/ws", configurator = GetHttpSession.class)
@@ -65,19 +63,26 @@ public class SemiWebSocket {
 
 			int result = service.insertChat(busId, userId, chatType, chatMsg);
 			System.out.println(result);
-	
-		for(Session s:session.getOpenSessions()) {
-		if(s.getUserProperties().get("busId")!=null) {
+
+			for (Session s : session.getOpenSessions()) {
+				if (s.getUserProperties().get("busId") != null) {
+					try {
+						s.getBasicRemote().sendText(chatMsg);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		} else if (flag.equals("N")) {
+			for (Session s : session.getOpenSessions()) {
 				try {
-					s.getBasicRemote().sendText(chatMsg);
-				}catch(Exception e) {
+					s.getBasicRemote().sendText("N");
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		}
-		
-		
+
 //		JsonObject jsonObject = (JsonObject) jsonParser.parse(str);
 //		String flag=jsonObject.get("flag").toString();
 

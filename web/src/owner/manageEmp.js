@@ -8,10 +8,7 @@ class MngEmp {
   setInit() {
     const mngHeader = selectElements(".mngEmp_header span");
     const mngBody = selectElements(".mngEmp_body .mngDiv");
-    const empEdit = document.querySelectorAll(".editEmp_area")[0];
     const empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
-
-    const btnEditEmp = selectElements(".btn_editEmp");
 
     const sftItem = selectElements(".busShift_area .sftItem");
 
@@ -19,30 +16,34 @@ class MngEmp {
     const btnReject = selectElements(".btn_reject");
 
     const btnApvEmp = document.querySelectorAll(".btn_arvEmp")[0];
+    const btnEditEmp = selectElements(".btn_editEmp");
 
     mngHeader.map((e, index) => {
       e.addEventListener("click", ({ target }) => {
         mngHeader.map(e => e.classList.remove("focus"));
         target.classList.add("focus");
-        empEdit.classList.remove("focus");
         empInfo.classList.remove("focus");
         mngBody.map(e => e.classList.remove("focus"));
         mngBody[index].classList.add("focus");
       });
     });
 
-    btnEditEmp.map(b => {
-      b.addEventListener("click", ({target}) => {
-        mngBody.map(e => e.classList.remove("focus"));
-        empEdit.classList.add("focus");
-        empInfo.classList.remove("focus");
-      })
-    })
+    btnEditEmp.map((b, index) => {
+      b.addEventListener("click", ({ target }) => {
+        const s1 = document.querySelectorAll(".editEmpType")[index];
+        const empType = s1.options[s1.selectedIndex].value;
+        const empWage = document.querySelectorAll(".editEmpWage")[index].value;
+        const s2 = document.querySelectorAll(".editSftId")[index];
+        const sftId = s2.options[s2.selectedIndex].value;
+
+        const data = `empId=${target.nextElementSibling.value}&empType=${empType}&empWage=${empWage}&sftId=${sftId}`;
+        this.getResult("owner/editEmp.do", data, this.approvalEmp);
+      });
+    });
 
     btnApproval.map(e =>
       e.addEventListener("click", ({ target }) => {
         mngBody.map(e => e.classList.remove("focus"));
-        empEdit.classList.remove("focus");
         empInfo.classList.add("focus");
         const id = target.nextElementSibling.value;
         this.aprEmp = id;
@@ -83,7 +84,7 @@ class MngEmp {
   approvalEmp = respText => {
     if (respText != "fail") {
       this.aprEmp = "";
-      socket.send(respText);
+      socket.send(JSON.stringify({ flag: respText }));
       location.href = contextPath + "owner/manageEmp.do";
     }
   };

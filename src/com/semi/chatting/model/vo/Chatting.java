@@ -1,5 +1,6 @@
 package com.semi.chatting.model.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Chatting {
@@ -86,6 +87,7 @@ public class Chatting {
 	}
 
 	public void setChatDate(Date chatDate) {
+		SimpleDateFormat simple=new SimpleDateFormat("yyyy-MM-DD HH:mm");
 		this.chatDate = chatDate;
 	}
 

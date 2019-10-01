@@ -72,10 +72,21 @@ public class BusinessService {
 		close(conn);
 		return r;
 	}
-	
+
 	public int rejectEmp(String busId, String empId) {
 		Connection conn = getConnection();
 		int r = dao.rejectEmp(conn, busId, empId);
+		if (r > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return r;
+	}
+
+	public int editEmp(String busId, Employee e) {
+		Connection conn = getConnection();
+		int r = dao.editEmp(conn, busId, e);
 		if (r > 0)
 			commit(conn);
 		else
