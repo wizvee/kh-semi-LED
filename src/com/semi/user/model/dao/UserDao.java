@@ -326,13 +326,30 @@ public class UserDao {
 		return result;
 	}
 
-	public int originPic(Connection conn, String userId) {
+	public int OwneroriginPic(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("originPic");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "own_default.png");
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int EmporiginPic(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("originPic");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "emp_default.png");
 			pstmt.setString(2, userId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

@@ -138,10 +138,23 @@ public class UserService {
 		return result;
 	}
 	
-	public int originPic(String userId) {
+	public int OwneroriginPic(String userId) {
 		Connection conn = getConnection();
 		int result = 0;
-		result = dao.originPic(conn, userId);
+		result = dao.OwneroriginPic(conn, userId);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int EmporiginPic(String userId) {
+		Connection conn = getConnection();
+		int result = 0;
+		result = dao.EmporiginPic(conn, userId);
 		if (result > 0) {
 			commit(conn);
 		} else {

@@ -1,4 +1,4 @@
-package com.semi.user.controller;
+package com.semi.emp.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.emp.model.vo.Employee;
 import com.semi.owner.model.vo.Owner;
 import com.semi.user.model.service.UserService;
 
 /**
  * Servlet implementation class ChangeAjaxinfoOriginloadServlet
  */
-@WebServlet("/ajaxoriproFile.do")
-public class ChangeAjaxinfoOriginloadServlet extends HttpServlet {
+@WebServlet("/ajaxemporiproFile.do")
+public class ChangeAjaxinfoEmpOriginloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeAjaxinfoOriginloadServlet() {
+    public ChangeAjaxinfoEmpOriginloadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +34,22 @@ public class ChangeAjaxinfoOriginloadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userId = request.getParameter("userId");
-		Owner o = (Owner) request.getSession().getAttribute("loginOwner");
+		Employee e = (Employee) request.getSession().getAttribute("loginEmp");
 		
 		String path=getServletContext().getRealPath("/upload/profile");
-		String old = o.getProfilePic();
+		String old = e.getProfilePic();
 		
-		if(!o.getProfilePic().equals("own_default.png")) {
+		if(!e.getProfilePic().equals("emp_default.png")) {
 			File deleteFile=new File(path+"/"+old);
 			boolean result=deleteFile.delete();
 		}
 		
 		
-		int result = new UserService().originPic(userId);
+		int result = new UserService().EmporiginPic(userId);
 		
 		if(result > 0) {
-			o.setProfilePic("own_default.png");
-			request.getSession().setAttribute("loginOwner", o);
+			e.setProfilePic("emp_default.png");
+			request.getSession().setAttribute("loginEmp", e);
 		} else {
 			return;
 		}
