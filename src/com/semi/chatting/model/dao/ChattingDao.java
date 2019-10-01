@@ -63,7 +63,7 @@ public class ChattingDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
-			pstmt.setString(2, userId);
+			pstmt.setString(2, busId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Chatting c=new Chatting();
