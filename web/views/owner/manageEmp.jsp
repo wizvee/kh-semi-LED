@@ -65,7 +65,7 @@
 						<div class="view_header">
 							<b>#<%=++count %></b>
 						</div>
-						<div class="view_body">
+						<div class="view_body focus">
 							<img src="<%=request.getContextPath()%>/upload/profile/<%=e.getProfilePic()%>">
 							<span><%=e.getUserName()%></span>
 							<span><%=e.getUserPhone()%></span>
@@ -76,15 +76,15 @@
 							</div>
 							<button class="btn-primary btn_viewEdit">편집</button>
 						</div>
-						<div class="edit_body focus">
+						<div class="edit_body">
 							<span><%=e.getUserName()%></span>
-							<select class="editEmpType">
+							<select class="editEmpType inpt-outline">
 								<option value="H" <%=e.getEmpType().equals("H") ? "selected" : "" %>>시급</option>
 								<option value="D" <%=e.getEmpType().equals("D") ? "selected" : "" %>>일당</option>
 								<option value="M" <%=e.getEmpType().equals("M") ? "selected" : "" %>>월급</option>
 							</select>
-							<input type="text" class="editEmpWage" value="<%=e.getEmpWage() %>">
-							<select class="editSftId">
+							<input type="text" class="editEmpWage inpt-outline" value="<%=e.getEmpWage() %>">
+							<select class="editSftId inpt-outline">
 								<%
 									for(Shift s : sftList) {
 								%>
@@ -95,8 +95,11 @@
 									}
 								%>
 							</select>
-							<button class="btn-primary btn_editEmp">수정</button>
-							<input type="hidden" value="<%=e.getUserId()%>">
+							<div>
+								<button class="btn-primary btn_editEmp">수정</button>
+								<input type="hidden" value="<%=e.getUserId()%>">
+								<button class="btn-outline btn_backView">돌아가기</button>
+							</div>
 						</div>
 					</div>
 					<%

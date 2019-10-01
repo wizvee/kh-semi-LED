@@ -12,6 +12,8 @@ class MngEmp {
 
     const sftItem = selectElements(".busShift_area .sftItem");
 
+    const btnViewEdit = selectElements(".btn_viewEdit");
+    const btnBackView = selectElements(".btn_backView");
     const btnApproval = selectElements(".btn_approval");
     const btnReject = selectElements(".btn_reject");
 
@@ -28,18 +30,23 @@ class MngEmp {
       });
     });
 
-    btnEditEmp.map((b, index) => {
-      b.addEventListener("click", ({ target }) => {
-        const s1 = document.querySelectorAll(".editEmpType")[index];
-        const empType = s1.options[s1.selectedIndex].value;
-        const empWage = document.querySelectorAll(".editEmpWage")[index].value;
-        const s2 = document.querySelectorAll(".editSftId")[index];
-        const sftId = s2.options[s2.selectedIndex].value;
+    btnViewEdit.map(e =>
+      e.addEventListener("click", ({ target }) => {
+        const view = target.parentElement;
+        const edit = view.nextElementSibling;
+        view.classList.remove("focus");
+        edit.classList.add("focus");
+      })
+    );
 
-        const data = `empId=${target.nextElementSibling.value}&empType=${empType}&empWage=${empWage}&sftId=${sftId}`;
-        this.getResult("owner/editEmp.do", data, this.approvalEmp);
-      });
-    });
+    btnBackView.map(e =>
+      e.addEventListener("click", ({ target }) => {
+        const edit = target.parentElement.parentElement;
+        const view = edit.previousElementSibling;
+        view.classList.add("focus");
+        edit.classList.remove("focus");
+      })
+    );
 
     btnApproval.map(e =>
       e.addEventListener("click", ({ target }) => {
@@ -78,6 +85,19 @@ class MngEmp {
 
       const data = `empId=${this.aprEmp}&empType=${empType}&empWage=${empWage}&sftId=${sftId}&empStart=${empStart}`;
       this.getResult("owner/ApprovalEmp.do", data, this.approvalEmp);
+    });
+
+    btnEditEmp.map((b, index) => {
+      b.addEventListener("click", ({ target }) => {
+        const s1 = document.querySelectorAll(".editEmpType")[index];
+        const empType = s1.options[s1.selectedIndex].value;
+        const empWage = document.querySelectorAll(".editEmpWage")[index].value;
+        const s2 = document.querySelectorAll(".editSftId")[index];
+        const sftId = s2.options[s2.selectedIndex].value;
+
+        const data = `empId=${target.nextElementSibling.value}&empType=${empType}&empWage=${empWage}&sftId=${sftId}`;
+        this.getResult("owner/editEmp.do", data, this.approvalEmp);
+      });
     });
   }
 

@@ -40,6 +40,8 @@ function () {
       var mngBody = selectElements(".mngEmp_body .mngDiv");
       var empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
       var sftItem = selectElements(".busShift_area .sftItem");
+      var btnViewEdit = selectElements(".btn_viewEdit");
+      var btnBackView = selectElements(".btn_backView");
       var btnApproval = selectElements(".btn_approval");
       var btnReject = selectElements(".btn_reject");
       var btnApvEmp = document.querySelectorAll(".btn_arvEmp")[0];
@@ -58,22 +60,27 @@ function () {
           mngBody[index].classList.add("focus");
         });
       });
-      btnEditEmp.map(function (b, index) {
-        b.addEventListener("click", function (_ref2) {
+      btnViewEdit.map(function (e) {
+        return e.addEventListener("click", function (_ref2) {
           var target = _ref2.target;
-          var s1 = document.querySelectorAll(".editEmpType")[index];
-          var empType = s1.options[s1.selectedIndex].value;
-          var empWage = document.querySelectorAll(".editEmpWage")[index].value;
-          var s2 = document.querySelectorAll(".editSftId")[index];
-          var sftId = s2.options[s2.selectedIndex].value;
-          var data = "empId=".concat(target.nextElementSibling.value, "&empType=").concat(empType, "&empWage=").concat(empWage, "&sftId=").concat(sftId);
-
-          _this2.getResult("owner/editEmp.do", data, _this2.approvalEmp);
+          var view = target.parentElement;
+          var edit = view.nextElementSibling;
+          view.classList.remove("focus");
+          edit.classList.add("focus");
+        });
+      });
+      btnBackView.map(function (e) {
+        return e.addEventListener("click", function (_ref3) {
+          var target = _ref3.target;
+          var edit = target.parentElement.parentElement;
+          var view = edit.previousElementSibling;
+          view.classList.add("focus");
+          edit.classList.remove("focus");
         });
       });
       btnApproval.map(function (e) {
-        return e.addEventListener("click", function (_ref3) {
-          var target = _ref3.target;
+        return e.addEventListener("click", function (_ref4) {
+          var target = _ref4.target;
           mngBody.map(function (e) {
             return e.classList.remove("focus");
           });
@@ -85,8 +92,8 @@ function () {
         });
       });
       btnReject.map(function (e) {
-        return e.addEventListener("click", function (_ref4) {
-          var target = _ref4.target;
+        return e.addEventListener("click", function (_ref5) {
+          var target = _ref5.target;
           var id = target.previousElementSibling.value;
           var data = "empId=".concat(id);
 
@@ -94,8 +101,8 @@ function () {
         });
       });
       sftItem.map(function (e) {
-        return e.addEventListener("click", function (_ref5) {
-          var target = _ref5.target;
+        return e.addEventListener("click", function (_ref6) {
+          var target = _ref6.target;
           sftItem.map(function (e) {
             return e.classList.remove("selected");
           });
@@ -113,6 +120,19 @@ function () {
         var data = "empId=".concat(_this2.aprEmp, "&empType=").concat(empType, "&empWage=").concat(empWage, "&sftId=").concat(sftId, "&empStart=").concat(empStart);
 
         _this2.getResult("owner/ApprovalEmp.do", data, _this2.approvalEmp);
+      });
+      btnEditEmp.map(function (b, index) {
+        b.addEventListener("click", function (_ref7) {
+          var target = _ref7.target;
+          var s1 = document.querySelectorAll(".editEmpType")[index];
+          var empType = s1.options[s1.selectedIndex].value;
+          var empWage = document.querySelectorAll(".editEmpWage")[index].value;
+          var s2 = document.querySelectorAll(".editSftId")[index];
+          var sftId = s2.options[s2.selectedIndex].value;
+          var data = "empId=".concat(target.nextElementSibling.value, "&empType=").concat(empType, "&empWage=").concat(empWage, "&sftId=").concat(sftId);
+
+          _this2.getResult("owner/editEmp.do", data, _this2.approvalEmp);
+        });
       });
     }
   }, {
@@ -150,8 +170,8 @@ function () {
 var mngEmp = new MngEmp();
 var dropShift = selectElements(".dropMenu .sftItem");
 dropShift.map(function (s) {
-  s.addEventListener("click", function (_ref6) {
-    var currentTarget = _ref6.currentTarget;
+  s.addEventListener("click", function (_ref8) {
+    var currentTarget = _ref8.currentTarget;
     var target = document.querySelectorAll(".sftSelect")[0];
     var copy = currentTarget.cloneNode(true);
     target.firstElementChild.remove();

@@ -54,15 +54,16 @@
 
         .viewEmp_area {
             @include grid;
-            grid-template-rows: 30px 1fr 45px;
+            grid-template-rows: 50px 1fr;
             padding-bottom: 10px;
             border: 1px solid $border-default;
             border-radius: 5px;
             text-align: center;
             transition: all 0.5s;
+            @include shadow-flat;
 
             .view_header {
-                line-height: 30px;
+                line-height: 50px;
             }
 
             .view_body {
@@ -77,7 +78,7 @@
                 &.focus {
                     visibility: visible;
                     @include grid;
-                    grid-template-rows: 80px repeat(2, $line) 10px $line;
+                    grid-template-rows: 80px repeat(4, $line) 50px;
                     opacity: 1;
                 }
 
@@ -89,6 +90,12 @@
                 span,
                 div {
                     line-height: $line;
+                }
+
+                button {
+                    grid-row-start: 6;
+                    width: 90%;
+                    @include trans-All;
                 }
 
                 .detailInfo {
@@ -119,26 +126,38 @@
                 }
             }
 
-            .view_footer {
-                padding: 10px;
-
-                // background: blue;
-                button {
-                    width: 189px;
-                    height: 30px;
-                    transform: translateX(-3px);
-                }
-            }
-
             .edit_body {
                 visibility: hidden;
                 display: none;
                 opacity: 0;
                 transition: all 0.5s;
 
+                select,
+                input {
+                    width: 90%;
+                    @include trans-center;
+                }
+
+                span {
+                    line-height: 40px;
+                }
+                
+                div {
+                    @include grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-gap: 5px;
+                    padding: 0 5%;
+
+                    button {
+                        @include trans-middle;
+                    }
+                }
+
                 &.focus {
                     visibility: visible;
                     @include grid;
+                    grid-template-rows: 40px repeat(3, 1fr) 40px;
+                    grid-gap: 7px;
                     opacity: 1;
                 }
             }
@@ -175,9 +194,7 @@
                 @include grid;
                 grid-template-columns: 150px 1fr;
                 height: 50px;
-                border-bottom: 1px solid $background-default;
                 line-height: 50px;
-                // font-size: 95%;
 
                 span {
                     color: $text-gray;
