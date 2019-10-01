@@ -14,6 +14,7 @@ import com.semi.bus.model.service.BusinessService;
 import com.semi.emp.model.vo.Employee;
 import com.semi.noti.model.service.NotiService;
 import com.semi.noti.model.vo.Notification;
+import com.semi.user.model.service.UserService;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/owner/editEmp.do")
@@ -37,14 +38,16 @@ public class EditEmpServlet extends HttpServlet {
 		e.setEmpType(request.getParameter("empType"));
 		e.setEmpWage(Integer.parseInt(request.getParameter("empWage")));
 		e.setSftId(request.getParameter("sftId"));
+		
+		String empName = new UserService().getUserName(e.getUserId());
 
 		Notification n = new Notification();
 		n.setUserId(ui.getUserId());
 		n.setTargetUserId(e.getUserId());
 		n.setTargetBusId(busId);
 		n.setNotiType("editEmp");
-		n.setNotiMsg(e.getUserId() + " 정보 변경");
-		n.setNotiUrl("");
+		n.setNotiMsg(empName + " 정보 변경");
+		n.setNotiUrl("emp/viewInfo.do");
 
 		int r = new BusinessService().editEmp(busId, e);
 		int r2 = new NotiService().insertNoti(n);
