@@ -50,7 +50,7 @@
 								case "D":
 									type = "일당";
 									break;
-								case "Y":
+								case "M":
 									type = "월급";
 									break;
 								}
@@ -128,12 +128,6 @@
 						}
 					%>
 				</div>
-				<div class="editEmp_area">
-					<span>이름</span>
-					<span>유형</span>
-					<span>근무조</span>
-					<span>시급</span>
-				</div>
 				<div class="approvalEmpInfo_area">
 					<div>
 						<span>고용 형태</span>
@@ -151,7 +145,6 @@
 					</div>
 					<div>
 						<span>근무조 설정</span>
-
 						<div class="sftList">
 							<%
 								ArrayList<String> days = new ArrayList<>(Arrays.asList(sftList.get(0).getSftDay().split(",")));

@@ -18,6 +18,8 @@ import com.semi.user.model.service.UserService;
 public class UserInfo {
 
 	private String userId;
+	private String userName;
+	private String profilePic;
 	private String selectBusId;
 	private HashMap<String, Business> busMap;
 	private ArrayList<Notification> notiList;
@@ -31,11 +33,13 @@ public class UserInfo {
 	public UserInfo() {
 	}
 
-	public UserInfo(String userId, String selectBusId, HashMap<String, Business> busMap,
-			ArrayList<Notification> notiList, ArrayList<Shift> sftList, ArrayList<Employee> empList,
-			ArrayList<Chatting> chatList, String flag) {
+	public UserInfo(String userId, String userName, String profilePic, String selectBusId,
+			HashMap<String, Business> busMap, ArrayList<Notification> notiList, ArrayList<Shift> sftList,
+			ArrayList<Employee> empList, ArrayList<Chatting> chatList, String flag) {
 		super();
 		this.userId = userId;
+		this.userName = userName;
+		this.profilePic = profilePic;
 		this.selectBusId = selectBusId;
 		this.busMap = busMap;
 		this.notiList = notiList;
@@ -79,6 +83,22 @@ public class UserInfo {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	public String getSelectBusId() {

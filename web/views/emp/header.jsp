@@ -51,12 +51,12 @@
 				<img class="snb_profile"
 					src="<%=request.getContextPath()%>/upload/profile/<%=loginEmp.getProfilePic()%>" alt="프로필 사진">
 				<span><%=loginEmp.getUserName()%></span>
-				<%-- <a href="<%=request.getContextPath()%>/owner/manageEmp.do">전체 직원 관리</a> --%>
-				<a href="<%=request.getContextPath()%>/views/emp/pwdck.jsp">개인 정보</a>
-				<%-- <a href="<%=request.getContextPath()%>/views/attendance.do">근태 관리</a>
-				<a href="<%=request.getContextPath()%>/owner/payRollManagement.do">급여 관리</a>
-				<a href="<%=request.getContextPath()%>/owner/statistics.do">직원 통계</a>
-				<a href="<%=request.getContextPath()%>/owner/calendar.do">캘린더</a> --%>
+				<ul id="snb_btnList">
+					<li>
+						<a href="<%=request.getContextPath()%>/views/emp/pwdck.jsp">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>개인 정보</a>
+					</li>
+				</ul>
 			</nav>
 		</aside>
 		<!-- //사이드 메뉴 -->

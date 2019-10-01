@@ -66,14 +66,14 @@
     position: absolute;
     top: 12px;
     left: 5px;
-    color: $text-gray;
+    color: #999;
   }
 
   &+span:before {
     content: attr(data-placeholder);
     z-index: -5;
     font-size: 95%;
-    color: $text-gray;
+    color: #999;
     transition: all 1s;
     @include position-center(50%, 0);
     left: 30px;
