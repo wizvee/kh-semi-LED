@@ -10,14 +10,13 @@ class MngEmp {
     const mngBody = selectElements(".mngEmp_body .mngDiv");
     const empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
 
-    const btnEditEmp = selectElements(".btn_editEmp");
-
     const sftItem = selectElements(".busShift_area .sftItem");
 
     const btnApproval = selectElements(".btn_approval");
     const btnReject = selectElements(".btn_reject");
 
     const btnApvEmp = document.querySelectorAll(".btn_arvEmp")[0];
+    const btnEditEmp = selectElements(".btn_editEmp");
 
     mngHeader.map((e, index) => {
       e.addEventListener("click", ({ target }) => {
@@ -29,11 +28,18 @@ class MngEmp {
       });
     });
 
-    btnEditEmp.map(b => {
-      b.addEventListener("click", ({target}) => {
-        console.log("^^");
-      })
-    })
+    btnEditEmp.map((b, index) => {
+      b.addEventListener("click", ({ target }) => {
+        const s1 = document.querySelectorAll(".editEmpType")[index];
+        const empType = s1.options[s1.selectedIndex].value;
+        const empWage = document.querySelectorAll(".editEmpWage")[index].value;
+        const s2 = document.querySelectorAll(".editSftId")[index];
+        const sftId = s2.options[s2.selectedIndex].value;
+
+        const data = `empId=${target.nextElementSibling.value}&empType=${empType}&empWage=${empWage}&sftId=${sftId}`;
+        this.getResult("owner/editEmp.do", data, this.approvalEmp);
+      });
+    });
 
     btnApproval.map(e =>
       e.addEventListener("click", ({ target }) => {
@@ -78,7 +84,7 @@ class MngEmp {
   approvalEmp = respText => {
     if (respText != "fail") {
       this.aprEmp = "";
-      socket.send(respText);
+      socket.send(JSON.stringify({ flag: respText }));
       location.href = contextPath + "owner/manageEmp.do";
     }
   };

@@ -6,11 +6,22 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Alert =
 /*#__PURE__*/
 function () {
   function Alert() {
+    var _this = this;
+
     _classCallCheck(this, Alert);
+
+    _defineProperty(this, "getNotiList", function (res) {
+      _this.list = JSON.parse(res);
+      _this.count = _this.list.length;
+      console.log("get List");
+      console.log(_this.list);
+    });
 
     this.list = userInfo.notiList;
     if (this.list != null) this.count = this.list.length;else this.count = 0;
@@ -30,6 +41,7 @@ function () {
       var area = document.querySelector("#gnb_alert");
       var badge = document.querySelector("#gnb_alertBadge");
       badge.textContent = this.count;
+      console.log(this.count);
 
       if (this.count > 0) {
         area.setAttribute("class", "news");
@@ -39,14 +51,14 @@ function () {
   }, {
     key: "viewNoti",
     value: function viewNoti() {
-      var _this = this;
+      var _this2 = this;
 
       var area = document.querySelector("#alert_body");
       selectElements("#alert_body .alert_item").map(function (e) {
         return e.remove();
       });
       if (this.count > 0) this.list.map(function (n) {
-        return _this.createItem(area, n);
+        return _this2.createItem(area, n);
       });else area.textContent = "알림이 없습니다.";
     }
   }, {
@@ -74,7 +86,7 @@ function () {
   }, {
     key: "itemLink",
     value: function itemLink(item, url) {
-      var _this2 = this;
+      var _this3 = this;
 
       item.addEventListener("click", function () {
         var id = item.getAttribute("id");
@@ -82,23 +94,23 @@ function () {
         if (!id.includes("static")) {
           var data = "notiId=".concat(id.split(",")[1]);
 
-          _this2.getResult(data, url);
+          _this3.getResult(data, url);
         }
       });
     }
   }, {
     key: "getResult",
     value: function getResult(data, url) {
-      var _this3 = this;
+      var _this4 = this;
 
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", function () {
         if (xhr.responseText != "fail") {
-          _this3.list = JSON.parse(xhr.responseText);
+          _this4.list = JSON.parse(xhr.responseText);
 
-          _this3.viewCount();
+          _this4.viewCount();
 
-          _this3.viewNoti();
+          _this4.viewNoti();
 
           location.href = "/p_190826_semi/".concat(url);
         }

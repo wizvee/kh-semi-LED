@@ -127,7 +127,7 @@ public class NotiDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, busId);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				set.add(rs.getString("USER_ID"));
 				set.add(rs.getString("TARGET_USER_ID"));
 			}

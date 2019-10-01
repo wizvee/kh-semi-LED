@@ -84,9 +84,9 @@ public class BusinessService {
 		return r;
 	}
 
-	public int editEmp(String empId, int empWage, String empType, String sftId) {
+	public int editEmp(String busId, Employee e) {
 		Connection conn = getConnection();
-		int r = dao.editEmp(conn, empId, empWage, empType, sftId);
+		int r = dao.editEmp(conn, busId, e);
 		if (r > 0)
 			commit(conn);
 		else
