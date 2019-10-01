@@ -212,6 +212,11 @@ userName=userInfo.userName;
 
 socket.onmessage=function(e){
 	const chatInfo=JSON.parse(e.data);
+	if (chatInfo.flag == "N") {
+		promiseGetDefault("getNotiList.do")
+		  .then(res => alert.getNotiList(res))
+		  .then(() => alert.viewCount());
+	}
 	if(chatInfo.flag=='C'){
 	var d = new Date();
 	var hours=d.getHours();

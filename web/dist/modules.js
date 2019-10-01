@@ -31,15 +31,3 @@ var evetList = promiseGetDefault("getCalList.do").then(function (res) {
 }); // WebSocket
 
 var socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");
-
-socket.onmessage = function (e) {
-  console.log(e.data);
-
-  if (e.data == "N") {
-    promiseGetDefault("getNotiList.do").then(function (res) {
-      return alert.getNotiList(res);
-    }).then(function () {
-      return alert.viewCount();
-    });
-  }
-};

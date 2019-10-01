@@ -1,10 +1,7 @@
 package common.websocket;
 
 import java.io.IOException;
-import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-import javax.websocket.EndpointConfig;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -16,16 +13,17 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.JsonParser;
 import com.semi.chatting.model.service.ChattingService;
-import com.semi.chatting.model.vo.Chatting;
-import com.semi.userinfo.model.vo.UserInfo;
 
-@ServerEndpoint(value = "/ws", configurator = GetHttpSession.class)
+@ServerEndpoint(value = "/ws")
 public class SemiWebSocket {
 
-	
 	JsonParser jsonParser = new JsonParser();
 	ChattingService service = new ChattingService();
-
+	
+	@OnOpen
+	public void onOpen(Session session) {
+		System.out.println(session.getId());
+	}
 
 	@OnMessage
 	public void onMessage(Session session, String str) {
@@ -46,22 +44,21 @@ public class SemiWebSocket {
 			String userId = (String) json.get("userId");
 			String chatType = (String) json.get("chatType");
 			String chatMsg = (String) json.get("chatMsg");
-			String userName= (String) json.get("userName");
-			String profilePic=(String) json.get("profilePic");
+			String userName = (String) json.get("userName");
+			String profilePic = (String) json.get("profilePic");
 			session.getUserProperties().put("busId", busId);
 
 			int result = service.insertChat(busId, userId, chatType, chatMsg);
-			
 
 			for (Session s : session.getOpenSessions()) {
 				if (s.getUserProperties().get("busId") != null) {
 					try {
-						JSONObject jso=new JSONObject();
-						jso.put("flag",flag);
-						jso.put("userName",userName);
-						jso.put("profilePic",profilePic);
-						jso.put("chatMsg",chatMsg);
-						String jsonChat=jso.toJSONString();
+						JSONObject jso = new JSONObject();
+						jso.put("flag", flag);
+						jso.put("userName", userName);
+						jso.put("profilePic", profilePic);
+						jso.put("chatMsg", chatMsg);
+						String jsonChat = jso.toJSONString();
 						System.out.println(jsonChat);
 						s.getBasicRemote().sendText(jsonChat);
 					} catch (IOException e) {
@@ -86,12 +83,17 @@ public class SemiWebSocket {
 				return;
 			}
 		}
-		System.out.println(flag);
+
 		if (flag.equals("N")) {
-			System.out.println("??");
+
 			for (Session s : session.getOpenSessions()) {
 				try {
-					s.getBasicRemote().sendText("N");
+					System.out.println("??");
+					JSONObject jso = new JSONObject();
+					jso.put("flag", flag);
+					String toStr = jso.toJSONString();
+					System.out.println(toStr);
+					s.getBasicRemote().sendText(toStr);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
