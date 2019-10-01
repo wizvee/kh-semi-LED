@@ -9,6 +9,27 @@ console.log(userInfo.userName);
 //console.log(userNow);
 
 
+// new css
+const chatHeaderBtn = document.querySelectorAll(".chat .chat_header span");
+const chatListAea = document.querySelectorAll(".chat .chat_body .chatList_area")[0];
+const chatRoomArea = document.querySelectorAll(".chat .chat_body .chatRoom_area")[0];
+const chatBusList = selectElements(".chat .chat_body .chatList_area .chatListItem_area");
+chatHeaderBtn[0].addEventListener("click", () => {
+	chatListAea.classList.add("focus");
+	chatRoomArea.classList.remove("focus");
+	chatHeaderBtn[0].classList.add("focus");
+	chatHeaderBtn[1].classList.remove("focus");
+})
+chatBusList.map(l => l.addEventListener("click", () => {
+	chatListAea.classList.remove("focus");
+	chatRoomArea.classList.add("focus");
+	chatHeaderBtn[0].classList.remove("focus");
+	chatHeaderBtn[1].classList.add("focus");
+}))
+
+
+// old css
+
 btnChat.addEventListener("click", () => {
   const chatArea = document.querySelector("#chat_area");
   if (chatArea.style.display == "none") chatArea.style.display = "block";
