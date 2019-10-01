@@ -125,7 +125,6 @@
 }
 
 @mixin scroll($bg: $white) {
-
   /* total width */
   &::-webkit-scrollbar {
     background: transparent;

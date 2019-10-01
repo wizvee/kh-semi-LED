@@ -66,8 +66,6 @@ public class AttendanceDao {
 		List<Attendance> list = new ArrayList<Attendance>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(id);
-		System.out.println(date);
 		String sql = prop.getProperty("setAttendanceList");
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -84,7 +82,8 @@ public class AttendanceDao {
 				a.setSftOn(rs.getString("SFT_ON"));
 				a.setSftOff(rs.getString("SFT_OFF"));
 				if(rs.getString("ATD_TYPE")!= null) {
-					a.setAtdType(rs.getString("ATD_TYPE").split(","));
+					a.setAtdType((rs.getString("ATD_TYPE").split(",")));
+					System.out.println(a.getAtdType()[0]);
 				}
 				a.setAtdOn(rs.getString("ATD_ON"));
 				a.setAtdOff(rs.getString("ATD_OFF"));
