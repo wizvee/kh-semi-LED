@@ -79,6 +79,25 @@
   }
 }
 
+@keyframes ani_slideLeft {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(10%);
+  }
+
+  50% {
+    visibility: visible;
+    opacity: 0.5;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes ani_alert {
   50% {
     transform: rotateZ(-15deg);

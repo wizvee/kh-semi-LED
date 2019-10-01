@@ -52,9 +52,12 @@ function () {
             view.classList.add("focus");
             add.classList.remove("focus"); // 일정 보기 event
 
+            var calItem = document.querySelectorAll(".cal_item")[0];
             var calTitle = document.querySelectorAll(".calTitle")[0];
+            var calSft = document.querySelectorAll(".calSft")[0];
             var calDetail = document.querySelectorAll(".calDetail")[0];
             var calTask = document.querySelectorAll(".calTask")[0];
+            calItem.classList.add("focus");
 
             _toConsumableArray(calTask.children).map(function (e) {
               return e.remove();
@@ -67,6 +70,7 @@ function () {
             });
 
             calTitle.textContent = thisEvent.calTitle;
+            calSft.textContent = thisEvent.sftName;
             calDetail.textContent = thisEvent.calDetail;
             thisEvent.taskList.map(function (t) {
               var ck = document.createElement("input");
@@ -76,7 +80,7 @@ function () {
               lb.setAttribute("for", t.taskId);
               if (t.userId != userInfo.userId) ck.disabled = true;
               if (t.done == true) ck.checked = true;
-              lb.innerHTML = "<b>[ ".concat(t.userName, " ]</b> ").concat(t.taskMsg);
+              lb.innerHTML = "<b>".concat(t.userName, " \uC885\uC5C5\uC6D0 : </b> ").concat(t.taskMsg);
               calTask.appendChild(ck);
               calTask.appendChild(lb);
             });
@@ -165,11 +169,8 @@ function () {
         if (_toConsumableArray(containEmp).length == 0) console.log("modal! alert!");else {
           var targetEmpList = document.createElement("div");
           targetEmpList.setAttribute("class", "targetEmpList");
-          var inpt = document.createElement("input");
-          inpt.setAttribute("type", "hidden");
-          inpt.setAttribute("name", "taskUserId");
-          inpt.value = _toConsumableArray(containEmp)[0].userId;
           var targetEmp = document.createElement("span");
+          targetEmp.setAttribute("id", _toConsumableArray(containEmp)[0].userId);
           targetEmp.setAttribute("class", "selectTargetUser");
           targetEmp.textContent = _toConsumableArray(containEmp)[0].userName;
           var ul = document.createElement("ul");
@@ -181,9 +182,14 @@ function () {
             li.setAttribute("class", "taskUser");
             li.textContent = e.userName;
             ul.appendChild(li);
+            li.addEventListener("click", function (_ref) {
+              var target = _ref.target;
+              var selectTaskEmp = target.parentElement.previousElementSibling;
+              selectTaskEmp.textContent = target.textContent;
+              selectTaskEmp.setAttribute("id", target.getAttribute("id"));
+            });
           });
 
-          targetEmpList.appendChild(inpt);
           targetEmpList.appendChild(targetEmp);
           targetEmpList.appendChild(ul);
           var task = document.createElement("input");
@@ -222,8 +228,8 @@ function () {
         }
 
         this.body.appendChild(cell);
-        cell.addEventListener("click", function (_ref) {
-          var target = _ref.target;
+        cell.addEventListener("click", function (_ref2) {
+          var target = _ref2.target;
           var view = document.querySelectorAll(".viewCalendar_area")[0];
           var add = document.querySelectorAll(".addCal_area")[0];
           view.classList.remove("focus");
@@ -236,9 +242,11 @@ function () {
           });
           var targetDate = target.getAttribute("id"); // 일정 추가 event
 
+          var calItem = document.querySelectorAll(".cal_item")[0];
           var date = document.getElementsByName("date")[0];
           var title = document.getElementsByName("title")[0];
           var content = document.getElementsByName("content")[0];
+          calItem.classList.add("focus");
           date.value = targetDate;
           title.value = "";
           content.value = "";
@@ -283,8 +291,8 @@ promiseGetDefault("getCalList.do").then(function (res) {
 });
 var sfts = selectElements(".sftList .sft");
 sfts.map(function (s) {
-  return s.addEventListener("click", function (_ref2) {
-    var target = _ref2.target;
+  return s.addEventListener("click", function (_ref3) {
+    var target = _ref3.target;
     selectElements(".taskList div").map(function (e) {
       return e.remove();
     });
