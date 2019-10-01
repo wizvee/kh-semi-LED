@@ -14,10 +14,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.semi.chatting.model.service.ChattingService;
-import com.semi.chatting.model.vo.Chatting;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @ServerEndpoint(value = "/ws", configurator = GetHttpSession.class)

@@ -227,7 +227,6 @@ function drawTimeLine() {
     height: '80%',
     backgroundColor:'#f1f8e9'
   };
-
   chart.draw(dataTable, options);
 }
 

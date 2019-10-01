@@ -1,6 +1,8 @@
 const btnChat = document.querySelector("#btn_chatting");
 var busId="";
 var userId="";
+var userName="";
+var profilePic="";
 
 //var userNow = <%=loginOwner %>;
 //console.log(userNow);
@@ -65,7 +67,7 @@ function addChat(profilePic, userName, chatMsg, chatDate, chatType){
 			'<div class="main-content">'+
 			'<div class="media">'+
 			'<a class="pull-left" href="#">'+
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src='+contextPath+'"upload/profile/'+profilePic+'" alt="">'+
+			'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
 			'</a>'+
 			'<div class="media-body">'+
 			'<h5 class="media-heading">'+
@@ -131,9 +133,41 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 
 
 //userName 그리고 userProfile 불러와야함 
+var Message;
+profilePic=$(target).find("#hidden_profilePic").val();
+userName=$(target).find("#hidden_userName").val();
+var d = new Date();
+var chatDate= d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
 socket.onmessage=function(e){
-	$('.chatMsg_area').append("<p>"+userId+" : "+e.data+"</p>");
+	console.log(e.data);
+	console.log(typeof e.data);
+		if(e.data=="연결"){
+		var message="채팅방에 입장하셨습니다!";
+	}else{
+		message=e.data
+	}
+	$('.chatMsg_area').append('<div class="row">'+
+			'<div class="main-content">'+
+			'<div class="media">'+
+			'<a class="pull-left" href="#">'+
+			'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+			'</a>'+
+			'<div class="media-body">'+
+			'<h5 class="media-heading">'+
+			userName+
+			'<span class="small pull-right">'+
+			chatDate+
+			'</span>' +
+			'</h5>'+
+			'<p>'+
+			message +
+			'</p>'+
+			'</div>'+
+			'</div>'+
+			'</div>'+
+			'</div>'+
+			'<hr>');
 }
 
 
