@@ -54,7 +54,6 @@ public class ChangeAjaxinfoEmpUploadServlet extends HttpServlet {
 		
 		MultipartRequest mr=new MultipartRequest(request, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 
-		
 		String userId = mr.getParameter("userId");
 		String upfile = mr.getFilesystemName("upfile");
 		
