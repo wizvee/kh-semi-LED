@@ -327,6 +327,11 @@ input[id="ck_chat"]:checked {
     .chatRoom_area {
       background: blue;
       grid-template-columns: 200px 1fr;
+
+      .chatMsg_area {
+        overflow-y: auto;
+        @include scroll;
+      }
     }
   }
 }

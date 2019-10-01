@@ -176,5 +176,12 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+	
+	public String getUserName(String userId) {
+		Connection conn = getConnection();
+		String name = dao.getUserName(conn, userId);
+		close(conn);
+		return name;
+	}
 
 }
