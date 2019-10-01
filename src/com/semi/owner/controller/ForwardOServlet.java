@@ -45,6 +45,8 @@ public class ForwardOServlet extends HttpServlet {
 		// 기존 개발용 owner instance 생성
 		Owner loginOwner = new OwnerService().castingTypeO(userInfo.getUserId());
 		session.setAttribute("loginOwner", loginOwner);
+		userInfo.setUserName(loginOwner.getUserName());
+		userInfo.setProfilePic(loginOwner.getProfilePic());
 		String selectBusId = request.getParameter("selectBus");
 
 		if (userInfo.getBusMap().isEmpty() && selectBusId == null)

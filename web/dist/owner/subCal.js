@@ -22,9 +22,10 @@ function () {
       _this.createCal();
 
       $.ajax({
-        url: contextPath + "ajaxPrevCal.do",
+        url: contextPath + "ajaxCal.do",
         data: {
-          "date": _this.target.getMonth() + 1
+          "month": _this.target.getMonth() + 1,
+          "year": _this.target.getFullYear()
         },
         method: "post",
         dataType: "json",
@@ -33,6 +34,8 @@ function () {
           var date = $(".date");
 
           for (var i = 0; i < data.length; i++) {
+            console.log(data);
+
             if (data[i][1] == 0) {
               var flagDate = data[i][0];
               $.each(date, function (i, v) {
@@ -58,18 +61,22 @@ function () {
 
       _this.createCal();
 
-      if (_this.now.getFullYear() >= _this.target.getFullYear() && _this.target.getMonth() + 1 < _this.now.getMonth() + 1) {
+      if (!(_this.target.getFullYear() > _this.now.getFullYear()) && !(_this.target.getMonth() + 1 > _this.now.getMonth() + 1)) {
         $.ajax({
-          url: contextPath + "ajaxNexCal.do",
+          url: contextPath + "ajaxCal.do",
           data: {
-            "date": _this.target.getMonth() + 1
+            "month": _this.target.getMonth() + 1,
+            "year": _this.target.getFullYear()
           },
           method: "post",
           dataType: "json",
           success: function success(data) {
+            //setAjaxCalendar(data);
             var date = $(".date");
 
             for (var i = 0; i < data.length; i++) {
+              console.log(data);
+
               if (data[i][1] == 0) {
                 var flagDate = data[i][0];
                 $.each(date, function (i, v) {
@@ -117,6 +124,39 @@ function () {
       var nxt = document.querySelector("#btn_calNxt");
       pre.addEventListener("click", this.previous);
       nxt.addEventListener("click", this.next);
+      $.ajax({
+        url: contextPath + "ajaxCal.do",
+        data: {
+          "month": this.target.getMonth() + 1,
+          "year": this.target.getFullYear()
+        },
+        method: "post",
+        dataType: "json",
+        success: function success(data) {
+          //setAjaxCalendar(data);
+          var date = $(".date");
+
+          for (var i = 0; i < data.length; i++) {
+            console.log(data);
+
+            if (data[i][1] == 0) {
+              var flagDate = data[i][0];
+              $.each(date, function (i, v) {
+                var dateId = $(v).attr("id");
+
+                if (dateId != undefined) {
+                  var temp = flagDate.substring(flagDate.length - 2);
+                  var temp2 = dateId.substring(dateId.length - 2);
+
+                  if (temp == temp2) {
+                    $(v).css("borderBottom", "5px solid red");
+                  }
+                }
+              });
+            }
+          }
+        }
+      });
     }
   }, {
     key: "createCal",
