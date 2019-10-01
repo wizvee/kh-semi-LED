@@ -36,7 +36,6 @@ function () {
 
       var mngHeader = selectElements(".mngEmp_header span");
       var mngBody = selectElements(".mngEmp_body .mngDiv");
-      var empEdit = document.querySelectorAll(".editEmp_area")[0];
       var empInfo = document.querySelectorAll(".approvalEmpInfo_area")[0];
       var btnEditEmp = selectElements(".btn_editEmp");
       var sftItem = selectElements(".busShift_area .sftItem");
@@ -50,7 +49,6 @@ function () {
             return e.classList.remove("focus");
           });
           target.classList.add("focus");
-          empEdit.classList.remove("focus");
           empInfo.classList.remove("focus");
           mngBody.map(function (e) {
             return e.classList.remove("focus");
@@ -61,11 +59,7 @@ function () {
       btnEditEmp.map(function (b) {
         b.addEventListener("click", function (_ref2) {
           var target = _ref2.target;
-          mngBody.map(function (e) {
-            return e.classList.remove("focus");
-          });
-          empEdit.classList.add("focus");
-          empInfo.classList.remove("focus");
+          console.log("^^");
         });
       });
       btnApproval.map(function (e) {
@@ -74,7 +68,6 @@ function () {
           mngBody.map(function (e) {
             return e.classList.remove("focus");
           });
-          empEdit.classList.remove("focus");
           empInfo.classList.add("focus");
           var id = target.nextElementSibling.value;
           _this2.aprEmp = id;

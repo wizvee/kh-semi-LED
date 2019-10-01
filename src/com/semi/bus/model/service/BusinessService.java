@@ -83,4 +83,9 @@ public class BusinessService {
 		close(conn);
 		return r;
 	}
+	
+	public int editEmp(String empId, int empWage, String empType, String sftId) {
+		Connection conn = getConnection();
+		
+	}
 }
