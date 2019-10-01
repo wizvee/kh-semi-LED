@@ -56,6 +56,10 @@
 						<a href="<%=request.getContextPath()%>/views/emp/pwdck.jsp">
 							<i class="fa fa-user-circle-o" aria-hidden="true"></i>개인 정보</a>
 					</li>
+					<li id="btnSnbCalendar">
+						<a href="<%=request.getContextPath()%>/owner/calendar.do">
+							<i class="fa fa-calendar-check-o" aria-hidden="true"></i>캘린더</a>
+					</li>
 				</ul>
 			</nav>
 		</aside>
