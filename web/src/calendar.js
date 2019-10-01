@@ -62,11 +62,11 @@ class Calendar {
           li.setAttribute("class", "taskUser");
           li.textContent = e.userName;
           ul.appendChild(li);
-          li.addEventListener("click", ({target}) => {
+          li.addEventListener("click", ({ target }) => {
             const selectTaskEmp = target.parentElement.previousElementSibling;
             selectTaskEmp.textContent = target.textContent;
             selectTaskEmp.setAttribute("id", target.getAttribute("id"));
-          })
+          });
         });
 
         targetEmpList.appendChild(targetEmp);
@@ -198,19 +198,23 @@ class Calendar {
     const title = document.getElementsByName("title")[0].value;
     const content = document.getElementsByName("content")[0].value;
 
-    const taskUserId = document.getElementsByName("taskUserId");
+    const taskUserId = document.querySelectorAll(".selectTargetUser");
     const taskMsg = document.getElementsByName("taskMsg");
     const taskArr = [];
 
-    for (let i = 0; i < this.taskCount; i++) {
-      const task = new Task(date, taskUserId[i].value, taskMsg[i].value);
-      taskArr.push(task);
-    }
+    console.log(taskUserId);
 
-    const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(
-      taskArr
-    )}`;
-    this.getResult("owner/insertCal.do", data, this.insertCal);
+    // for (let i = 0; i < this.taskCount; i++) {
+    //   const task = new Task(date, taskUserId[i].value, taskMsg[i].value);
+    //   taskArr.push(task);
+    // }
+
+    // this.taskCount = 0;
+    
+    // const data = `calDate=${date}&sftId=${sftId}&calTitle=${title}&calDetail=${content}&taskArr=${JSON.stringify(
+    //   taskArr
+    // )}`;
+    // this.getResult("owner/insertCal.do", data, this.insertCal);
   };
 
   insertCal = respText => {
@@ -257,7 +261,7 @@ sfts.map(s =>
   s.addEventListener("click", ({ target }) => {
     selectElements(".taskList div").map(e => e.remove());
     selectElements(".taskList input").map(e => e.remove());
-    
+
     const id = document.getElementsByName("sftId")[0];
     const name = selectElements(".sftList .selectSft")[0];
     sfts.map(e => e.classList.remove("select"));
