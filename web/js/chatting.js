@@ -80,8 +80,12 @@ chatBusList.map(l => l.addEventListener("click", () => {
 						whatMinutes="0"+whatMinutes;
 					}
 					whatChatDate= wampm+" "+whatHours+":"+whatMinutes;
-					
-					addChat (msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
+
+					if(msg.userName==userName){
+						addSelfChat(msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
+					}else{
+						addChat (msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
+					}
 				}
 				})
     		}else{
@@ -118,6 +122,30 @@ chatBusList.map(l => l.addEventListener("click", () => {
 	chatHeaderBtn[1].classList.add("focus");
 
 }));
+
+function addSelfChat(profilePic,userName,chatMsg,whatChatDate,chatType){
+	$('.chatMsg_area').append('<div class="mySelf">'+
+	'<div class="main-content">'+
+	'<div class="media">'+
+	'<a class="pull-left" href="#">'+
+	'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+	'</a>'+
+	'<div class="media-body">'+
+	'<h5 class="media-heading">'+
+	userName+
+	'<span class="small pull-right">'+
+	whatChatDate+
+	'</span>' +
+	'</h5>'+
+	'<p>'+
+	chatMsg +
+	'</p>'+
+	'</div>'+
+	'</div>'+
+	'</div>'+
+	'</div>'
+	);
+}
 
 
 // addChat 메소드
