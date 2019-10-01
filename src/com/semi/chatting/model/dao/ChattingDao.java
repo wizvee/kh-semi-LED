@@ -38,7 +38,7 @@ public class ChattingDao {
 			while(rs.next()){
 				Chatting c=new Chatting();
 				c.setChatType(rs.getString(1));
-				c.setChatDate(rs.getDate(2));
+				c.setChatDate(rs.getString(2));
 				c.setChatMsg(rs.getString(3));
 				c.setUserName(rs.getString(4));
 				c.setProfilePic(rs.getString(5));

@@ -42,6 +42,7 @@ chatListItem.map(e => {
     		if(wholeData.chatHistory!='none'){
     		const result=JSON.parse(wholeData.chatHistory);
     		result.forEach(function(msg){
+				console.log(msg.chatMsg.getHours);
     			addChat (msg.profilePic, msg.userName, msg.chatMsg, msg.chatDate, msg.chatType);
     		})
     		

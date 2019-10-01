@@ -1,5 +1,6 @@
 package com.semi.chatting.model.vo;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -86,9 +87,13 @@ public class Chatting {
 		return chatDate;
 	}
 
-	public void setChatDate(Date chatDate) {
+	public void setChatDate(String chatDate) {
 		SimpleDateFormat simple=new SimpleDateFormat("yyyy-MM-DD HH:mm");
-		this.chatDate = chatDate;
+		try {
+			this.chatDate = simple.parse(chatDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getUserName() {
