@@ -5,19 +5,6 @@ var contextPath = "/p_190826_semi/";
 
 var selectElements = function selectElements(src) {
   return Array.from(document.querySelectorAll(src));
-}; // WebSocket
-
-
-var socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");
-
-socket.onmessage = function (e) {
-  console.log(e.data);
-
-  if (e.data == "N") {
-    promiseGetDefault("getNotiList.do").then(function (res) {
-      return alert.getNotiList(res);
-    }).then(alert.viewCount());
-  }
 }; // SPA - Basic Data
 
 
@@ -41,4 +28,18 @@ var getEventList = function getEventList(res) {
 
 var evetList = promiseGetDefault("getCalList.do").then(function (res) {
   return getEventList(res);
-});
+}); // WebSocket
+
+var socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");
+
+socket.onmessage = function (e) {
+  console.log(e.data);
+
+  if (e.data == "N") {
+    promiseGetDefault("getNotiList.do").then(function () {
+      return new Promise(function (res) {
+        return alert.getNotiList(res);
+      });
+    }).then(alert.viewCount());
+  }
+};

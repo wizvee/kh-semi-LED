@@ -12,7 +12,6 @@ import com.semi.bus.model.dao.BusinessDao;
 import com.semi.bus.model.vo.Business;
 import com.semi.emp.model.vo.Employee;
 import com.semi.noti.model.dao.NotiDao;
-import com.semi.noti.model.vo.Notification;
 import com.semi.sft.model.dao.ShiftDao;
 import com.semi.sft.model.vo.Shift;
 
