@@ -6,7 +6,6 @@ var profilePic="";
 
 
 
-
 const chatHeaderBtn = document.querySelectorAll(".chat .chat_header span");
 const chatListArea = document.querySelectorAll(".chat .chat_body .chatList_area")[0];
 const chatRoomArea = document.querySelectorAll(".chat .chat_body .chatRoom_area")[0];
