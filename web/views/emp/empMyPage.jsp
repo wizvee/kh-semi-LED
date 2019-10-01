@@ -12,6 +12,10 @@
 	grid-template-rows: repeat(1, 1fr);
 }
 
+.item .item_body {
+	min-height: 0px;
+}
+
 .item .item_mypage #pic .snb_profile {
 	border: 2px solid #fff;
     width: 50px;

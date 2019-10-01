@@ -94,7 +94,7 @@
 
                 button {
                     grid-row-start: 6;
-                    width: 90%;
+                    width: 85%;
                     @include trans-All;
                 }
 
@@ -170,6 +170,7 @@
             line-height: 50px;
             border-radius: 10px;
             border: 1px solid $border-default;
+            @include shadow-flat;
 
             div {
                 text-align: center;

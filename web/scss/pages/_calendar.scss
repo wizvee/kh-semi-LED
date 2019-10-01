@@ -160,7 +160,15 @@
 }
 
 .cal_item {
+  visibility: hidden;
   grid-template-rows: 1fr;
+  opacity: 0;
+  transition: all 0.5s;
+
+  &.focus {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .viewCalendar_area,
@@ -175,12 +183,48 @@
     grid-template-rows: 60px 1fr;
     visibility: visible;
     opacity: 1;
-    animation: ani_slideUp 1s 1;
+    animation: ani_slideLeft 0.7s 1 ease-in-out;
     animation-fill-mode: both;
   }
 }
 
 .viewCal_area {
+  @include grid;
+  grid-template-rows: 30px 50px 1fr 1fr;
+
+  .calSft {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 0 5px;
+    border: 1px solid $border-default;
+    border-radius: 10px;
+    line-height: 30px;
+    font-size: 90%;
+    color: $text-gray;
+    @include shadow-flat;
+  }
+
+  .calTitle {
+    padding-left: 15px;
+    border-bottom: 1px solid $border-default;
+    line-height: 50px;
+    font-size: 115%;
+    font-weight: bold;
+    text-shadow: 2px 2px 1px $background-default;
+  }
+
+  .calDetail,
+  .calTask {
+    padding: 15px;
+    height: auto;
+    min-height: 100px;
+  }
+
+  .calTask {
+    padding-top: 0;
+    border-radius: 5px;
+    background: rgba($background-default, 0.5);
+  }
 
   input[type="checkbox"] {
     &[disabled]+label {

@@ -50,11 +50,8 @@ class Calendar {
       else {
         const targetEmpList = document.createElement("div");
         targetEmpList.setAttribute("class", "targetEmpList");
-        const inpt = document.createElement("input");
-        inpt.setAttribute("type", "hidden");
-        inpt.setAttribute("name", "taskUserId");
-        inpt.value = [...containEmp][0].userId;
         const targetEmp = document.createElement("span");
+        targetEmp.setAttribute("id", [...containEmp][0].userId);
         targetEmp.setAttribute("class", "selectTargetUser");
         targetEmp.textContent = [...containEmp][0].userName;
         const ul = document.createElement("ul");
@@ -65,9 +62,13 @@ class Calendar {
           li.setAttribute("class", "taskUser");
           li.textContent = e.userName;
           ul.appendChild(li);
+          li.addEventListener("click", ({target}) => {
+            const selectTaskEmp = target.parentElement.previousElementSibling;
+            selectTaskEmp.textContent = target.textContent;
+            selectTaskEmp.setAttribute("id", target.getAttribute("id"));
+          })
         });
 
-        targetEmpList.appendChild(inpt);
         targetEmpList.appendChild(targetEmp);
         targetEmpList.appendChild(ul);
 
@@ -119,9 +120,11 @@ class Calendar {
 
         const targetDate = target.getAttribute("id");
         // 일정 추가 event
+        const calItem = document.querySelectorAll(".cal_item")[0];
         const date = document.getElementsByName("date")[0];
         const title = document.getElementsByName("title")[0];
         const content = document.getElementsByName("content")[0];
+        calItem.classList.add("focus");
         date.value = targetDate;
         title.value = "";
         content.value = "";
@@ -149,14 +152,18 @@ class Calendar {
           view.classList.add("focus");
           add.classList.remove("focus");
           // 일정 보기 event
+          const calItem = document.querySelectorAll(".cal_item")[0];
           const calTitle = document.querySelectorAll(".calTitle")[0];
+          const calSft = document.querySelectorAll(".calSft")[0];
           const calDetail = document.querySelectorAll(".calDetail")[0];
           const calTask = document.querySelectorAll(".calTask")[0];
+          calItem.classList.add("focus");
           [...calTask.children].map(e => e.remove());
 
           const calId = event.target.getAttribute("id");
           const thisEvent = this.calList.find(e => e.calId == calId);
           calTitle.textContent = thisEvent.calTitle;
+          calSft.textContent = thisEvent.sftName;
           calDetail.textContent = thisEvent.calDetail;
           thisEvent.taskList.map(t => {
             const ck = document.createElement("input");
@@ -166,7 +173,7 @@ class Calendar {
             lb.setAttribute("for", t.taskId);
             if (t.userId != userInfo.userId) ck.disabled = true;
             if (t.done == true) ck.checked = true;
-            lb.innerHTML = `<b>[ ${t.userName} ] </b>${t.taskMsg}`;
+            lb.innerHTML = `<b>${t.userName} 종업원 : </b> ${t.taskMsg}`;
             calTask.appendChild(ck);
             calTask.appendChild(lb);
           });
