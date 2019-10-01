@@ -1,4 +1,4 @@
-package com.semi.user.controller;
+package com.semi.owner.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,14 +20,14 @@ import com.semi.user.model.service.UserService;
 /**
  * Servlet implementation class ChangeAjaxinfoUploadServlet
  */
-@WebServlet("/ajaxproFile.do")
-public class ChangeAjaxinfoUploadServlet extends HttpServlet {
+@WebServlet("/ajaxownerproFile.do")
+public class ChangeAjaxinfoOwnerUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeAjaxinfoUploadServlet() {
+    public ChangeAjaxinfoOwnerUploadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -74,11 +74,30 @@
 								<span class="tag"><%=String.format("%,d", e.getEmpWage()) %></span>
 								<span class="tag"><%=sftName %></span>
 							</div>
-						</div>
-						<div class="view_footer">
 							<button class="btn-primary btn_editEmp">편집</button>
-							<input type="hidden" value="<%=e.getUserId()%>">
 						</div>
+						<form action="<%=request.getContextPath() %>/owner/editEmp.do" method="post" class="edit_body focus">
+							<span><%=e.getUserName()%></span>
+							<select name="editEmpType">
+								<option value="H" <%=e.getEmpType().equals("H") ? "selected" : "" %>>시급</option>
+								<option value="D" <%=e.getEmpType().equals("D") ? "selected" : "" %>>일당</option>
+								<option value="M" <%=e.getEmpType().equals("M") ? "selected" : "" %>>월급</option>
+							</select>
+							<input type="text" name="editEmpWage" value="<%=e.getEmpWage() %>">
+							<select name="editSftId">
+								<%
+									for(Shift s : sftList) {
+								%>
+								<option value="<%=s.getSftId()%>"
+									<%=e.getSftId().equals(s.getSftId()) ? "selected" : "" %>><%=s.getSftName() %>
+								</option>
+								<%
+									}
+								%>
+							</select>
+							<button class="btn-primary btn_editEmp">수정</button>
+							<input type="hidden" name="editEmpId" value="<%=e.getUserId()%>">
+						</form>
 					</div>
 					<%
 						}
