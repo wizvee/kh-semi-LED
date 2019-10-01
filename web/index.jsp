@@ -2,18 +2,16 @@
 <%@ page import="com.semi.user.model.vo.User"%>
 <% User loginUser = (User) session.getAttribute("loginUser"); %>
 <%
-/* 	Cookie[] cookies = request.getCookies();
+ 	Cookie[] cookies = request.getCookies();
 	String loginKeep = null;
 	if (cookies != null) {
 		for (Cookie c : cookies) {
-			System.out.println("key : " + c.getName());
-			System.out.println("value : " + c.getValue());
+			//getName()->key값 가져오기, getValue()->값 가져오기
 			 if(c.getName().equals("loginKeep")){
 				 loginKeep=c.getValue();
 			}
 		}
 	}
-	System.out.println("이게 널?"+loginKeep); */
 %>
 <!DOCTYPE html>
 
@@ -23,7 +21,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+  <meta name="google-signin-client_id" content="1061017499607-742nadv8vi7clq3o7mk8tt2dpo2l3sl8.apps.googleusercontent.com">
   <title>service : site menu</title>
   <!-- CSS -->
   <link rel="stylesheet" href="css/main.min.css" />
@@ -80,24 +78,24 @@
           <!-- 로그인 폼 -->
           <form method="post" class="frm_login active">
             <div>
-              <input type="email" name="userEmail" class="inpt-gradient" <%-- value='<%=loginKeep!=null?loginKeep:"" %>' --%> required />
+              <input type="email" name="userEmail" id="userEmail" class="inpt-gradient" value='<%=loginKeep!=null?loginKeep:"" %>' required />
               <span data-placeholder="이메일">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
             </div>
             <div>
-              <input type="password" name="userPw" class="inpt-gradient" required />
+              <input type="password" name="userPw" id="userPw" class="inpt-gradient" required />
               <span data-placeholder="비밀번호">
                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
               </span>
             </div>
             <div>
               <button id="btn_login" class="btn-gradient" onclick="return false;">
-                로그인
+               로그인
               </button>
             </div>
             <div class="option_area">
-              <input type="checkbox" name="loginKeep" id="loginKeep" <%-- <%=loginKeep!=null?"checked":"" %> --%>/>
+              <input type="checkbox" name="loginKeep" id="loginKeep" <%=loginKeep!=null?"checked":"" %>/>
               <label for="loginKeep" >이메일 저장</label>
               <a href="#">비밀번호 찾기</a>
             </div>
@@ -109,8 +107,8 @@
               </button>
             </div>
             <div>
-              <button id="btn_gg" class="btn-primary">
-                  <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> 구글 로그인 버튼 --> 
+             <!--  <button id="btn_gg" class="btn-primary"> -->
+                  <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 <i class="fa fa-google-plus-square" aria-hidden="true"></i>
                 구글로 로그인
               </button>
