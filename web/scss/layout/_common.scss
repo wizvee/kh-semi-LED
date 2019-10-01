@@ -31,9 +31,8 @@ input[id="ck_snb"]:checked {
   left: 0;
   width: 210px;
   height: 100vh;
-  border-right: 1px solid $border-default;
   background: $aside-bg;
-  transform: translateX(-100%);
+  transform: translateX(-101%);
   transition: transform 0.7s;
   z-index: 5;
 
@@ -44,27 +43,72 @@ input[id="ck_snb"]:checked {
 
   nav {
     @include grid;
-    grid-template-rows: 100px repeat(8, 50px);
+    grid-template-rows: 100px 70px 1fr;
     margin: 0 auto;
+    padding: 80px 0;
 
-    img,
-    span {
-      text-align: center;
+    img {
+      margin-left: -13px;
+      @include trans-center;
     }
 
-    a {
-      display: inline-block;
-      margin-left: 30px;
-      &:hover {
-        border-right: 2px solid $primary;
+    span {
+      display: block;
+      margin-left: -25px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 120%;
+      color: #D8DCDF;
+    }
+
+    ul {
+      li {
+        $snb_height: 30px;
+        display: block;
+        margin-bottom: 5px;
+        padding: 7px 30px;
+        height: $snb_height;
+        line-height: $snb_height;
+        transition: background 0.5s;
+
+        a {
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          color: #7C7F92;
+
+          i {
+            margin-right: 10px;
+          }
+        }
+
+        &:hover {
+          border-left: 5px solid $primary-dark;
+          background: #4F5269;
+
+          a {
+            color: #D8DCDF;
+            transform: translateX(-5px);
+          }
+        }
+
+        &.focus {
+          border-left: 5px solid $primary-dark;
+          background: #4F5269;
+
+          a {
+            color: #D8DCDF;
+            transform: translateX(-5px);
+          }
+        }
       }
     }
   }
 
   .snb_profile {
-    border: 2px solid $white;
+    border: 3px solid $white;
     @include circle(100px);
-    @include shadow;
+    box-sizing: border-box;
   }
 }
 
@@ -123,12 +167,16 @@ input[id="ck_snb"]:checked {
     }
 
     i {
-      color: $text-gray;
+      color: #C2C7D8;
       font-size: 120%;
       transition: all 0.7s;
       @include cursor-pointer;
 
       &:hover {
+        color: #8A8EA5;
+      }
+
+      &.focus {
         color: $primary;
       }
     }
@@ -178,8 +226,8 @@ input[id="ck_snb"]:checked {
   width: 100%;
   height: auto;
   border-radius: 5px;
-  background: $white;
-  @include shadow;
+  background: $item-bg;
+  @include shadow-flat;
 
   .item_header {
     $title-height: 60px;
@@ -189,7 +237,6 @@ input[id="ck_snb"]:checked {
     line-height: $title-height;
     box-sizing: border-box;
 
-    // background: blue;
     @include respond-to("medium") {
       padding: 0 30px;
     }

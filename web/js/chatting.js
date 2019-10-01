@@ -65,7 +65,7 @@ function addChat(profilePic, userName, chatMsg, chatDate, chatType){
 			'<div class="main-content">'+
 			'<div class="media">'+
 			'<a class="pull-left" href="#">'+
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src="/p_190826_semi/upload/profile/'+profilePic+'" alt="">'+
+			'<img class="media-object img-circle" style="width:30px; height:30px;" src='+contextPath+'"upload/profile/'+profilePic+'" alt="">'+
 			'</a>'+
 			'<div class="media-body">'+
 			'<h5 class="media-heading">'+

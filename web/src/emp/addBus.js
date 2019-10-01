@@ -81,7 +81,7 @@ class AddBus {
 
   submitEnroll(respText) {
     if (respText != "fail")
-    location.href = "/p_190826_semi/emp/main.do";
+    location.href = contextPath+"emp/main.do";
   }
 
   getResult(servletURL, data, fn) {
@@ -89,7 +89,7 @@ class AddBus {
     xhr.addEventListener("load", () => {
       fn(xhr.responseText);
     });
-    xhr.open("post", "/p_190826_semi/" + servletURL);
+    xhr.open("post", contextPath + servletURL);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(data);
   }

@@ -6,10 +6,6 @@
   grid-auto-flow: row dense;
   grid-gap: 20px;
   justify-items: start;
-
-  @include respond-to("large") {
-    grid-template-columns: 2fr 1fr;
-  }
 }
 
 .calendar_area {
@@ -21,6 +17,10 @@
   @include grid;
   grid-template-columns: 25px 1fr 25px;
   font-size: 95%;
+
+  i {
+    @include cursor-pointer;
+  }
 }
 
 .calendar_body {
@@ -52,7 +52,7 @@
         overflow: hidden;
         margin-bottom: 2px;
         border-radius: 5px;
-        background: red;
+        background: rgba($primary, 0.2);
         text-overflow: ellipsis;
         text-align: left;
         white-space: nowrap;
@@ -65,10 +65,26 @@
   }
 }
 
+
+.subCal_body {
+
+  .week {
+    margin-bottom: 0 !important;
+    height: 35px;
+    border-bottom: 1px solid $border-default;
+    line-height: 35px;
+  }
+
+  .date {
+    margin: 0 2px;
+  }
+}
+
 .subCal_area {
   @include grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
+  height: 100%;
 
   $height: 40px;
 
@@ -143,7 +159,29 @@
   }
 }
 
+.cal_item {
+  grid-template-rows: 1fr;
+}
+
+.viewCalendar_area,
+.addCal_area {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.7s;
+
+  &.focus {
+    @include grid;
+    grid-template-rows: 60px 1fr;
+    visibility: visible;
+    opacity: 1;
+    animation: ani_slideUp 1s 1;
+    animation-fill-mode: both;
+  }
+}
+
 .viewCal_area {
+
   input[type="checkbox"] {
     &[disabled]+label {
       color: $text-gray;

@@ -109,6 +109,14 @@ class Calendar {
       }
       this.body.appendChild(cell);
       cell.addEventListener("click", ({ target }) => {
+        const view = document.querySelectorAll(".viewCalendar_area")[0];
+        const add = document.querySelectorAll(".addCal_area")[0];
+        view.classList.remove("focus");
+        add.classList.add("focus");
+
+        selectElements(".taskList div").map(e => e.remove());
+        selectElements(".taskList input").map(e => e.remove());
+
         const targetDate = target.getAttribute("id");
         // 일정 추가 event
         const date = document.getElementsByName("date")[0];
@@ -134,14 +142,19 @@ class Calendar {
         div.setAttribute("id", e.calId);
         div.textContent = e.calTitle;
         cell.appendChild(div);
-        div.addEventListener("click", ({ target }) => {
+        div.addEventListener("click", event => {
+          event.stopPropagation();
+          const view = document.querySelectorAll(".viewCalendar_area")[0];
+          const add = document.querySelectorAll(".addCal_area")[0];
+          view.classList.add("focus");
+          add.classList.remove("focus");
           // 일정 보기 event
           const calTitle = document.querySelectorAll(".calTitle")[0];
           const calDetail = document.querySelectorAll(".calDetail")[0];
           const calTask = document.querySelectorAll(".calTask")[0];
           [...calTask.children].map(e => e.remove());
 
-          const calId = target.getAttribute("id");
+          const calId = event.target.getAttribute("id");
           const thisEvent = this.calList.find(e => e.calId == calId);
           calTitle.textContent = thisEvent.calTitle;
           calDetail.textContent = thisEvent.calDetail;
@@ -235,6 +248,9 @@ promiseGetDefault("getCalList.do").then(res => new Calendar(JSON.parse(res)));
 const sfts = selectElements(".sftList .sft");
 sfts.map(s =>
   s.addEventListener("click", ({ target }) => {
+    selectElements(".taskList div").map(e => e.remove());
+    selectElements(".taskList input").map(e => e.remove());
+    
     const id = document.getElementsByName("sftId")[0];
     const name = selectElements(".sftList .selectSft")[0];
     sfts.map(e => e.classList.remove("select"));
