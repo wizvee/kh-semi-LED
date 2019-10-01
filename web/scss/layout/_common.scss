@@ -123,18 +123,6 @@ input[id="ck_chat"]:checked {
   }
 }
 
-.chat {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 500px;
-  height: 100vh;
-  background: $aside-bg;
-  transform: translateX(101%);
-  transition: transform 0.7s;
-  z-index: 200;
-}
-
 .container_main {
   width: 100%;
   height: auto;
@@ -286,6 +274,16 @@ input[id="ck_chat"]:checked {
 }
 
 .chat {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 100vh;
+  background: $aside-bg;
+  transform: translateX(101%);
+  transition: transform 0.7s;
+  z-index: 200;
+
   .chat_header {
     @include grid;
     grid-template-columns: repeat(2, 80px) 1fr;
@@ -328,6 +326,7 @@ input[id="ck_chat"]:checked {
 
     .chatRoom_area {
       background: blue;
+      grid-template-columns: 200px 1fr;
     }
   }
 }

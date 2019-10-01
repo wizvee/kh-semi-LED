@@ -106,12 +106,17 @@
 					%>
 				</div>
 				<div class="chatRoom_area">
-					<div class="chatMsg_area">
+					<div class="chatEmp_area">
+						zz
 					</div>
-					<div class="chatMsg_enter">
-						<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white"
-							autofocus></textarea>
-						<button id=btn>Send</button>
+					<div>
+						<div class="chatMsg_area">
+						</div>
+						<div class="chatMsg_enter">
+							<textarea id=content rows="3" cols="20" maxlength="99" style="border:1px solid white"
+								autofocus></textarea>
+							<button id=btn>Send</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -120,7 +125,7 @@
 		<!-- container -->
 		<div id="container" class="container_main">
 			<!-- 채팅창 -->
-			<div id="chat_area" class="item" style="display: none;">
+			<!-- <div id="chat_area" class="item" style="display: none;">
 				<div class="item_header">채팅창</div>
 				<div class="item_body">
 					<div class="chatList_area" style="display: block;">
@@ -148,7 +153,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- //채팅창 -->
 			<!-- gnb -->
 			<nav class="gnb gnb_main gnb_own">
