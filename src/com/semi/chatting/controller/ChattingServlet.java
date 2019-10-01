@@ -40,14 +40,15 @@ public class ChattingServlet extends HttpServlet {
 		String data;
 		
 		//ajax 로 보낸 busId 값 받기 
-		String busId =request.getParameter("data");
-		System.out.println(busId);
+		String busAnduser =request.getParameter("data");
+		String busId=busAnduser.split("/")[0];  
+		String userId=busAnduser.split("/")[1];
 		
 		// 채팅 타입,채팅 내역, 채팅 날짜, 유저 이름, 사진 정보 DB 에서 가지고 오기 
 		List<Chatting>chatList=service.getHistory(busId);
 
 		// //해당 사업장에 등록된 유저들 모두 불러오기 
-		List<String>uList=service.getAllUsers(busId);		
+		List<Chatting>uList=service.getAllUsers(busId,userId);		
 		
 		
 		if(!chatList.isEmpty()) {

@@ -16,6 +16,7 @@ const chatBusList = selectElements(".chat .chat_body .chatList_area .chatListIte
 chatHeaderBtn[0].addEventListener("click", () => {
 	$('#content').val('');
 	$('.chatMsg_area').empty();
+	$('.chatEmp_area').empty();
 
 	chatListArea.classList.add("focus");
 	chatRoomArea.classList.remove("focus");
@@ -40,37 +41,71 @@ chatBusList.map(l => l.addEventListener("click", () => {
     	async: false,
     	url: contextPath+'chat.do',
     	dataType: 'text',
-    	data: {"data": busId},
+    	data: {"data": busId+"/"+userId},
     	success:function(data){
-    		const wholeData=JSON.parse(data);
+			const wholeData=JSON.parse(data);
     		if(wholeData.chatHistory!='none'){
     		const result=JSON.parse(wholeData.chatHistory);
     		result.forEach(function(msg){
-				var whatTime=new Date(msg.chatDate);
-				var whatHours=whatTime.getHours();
-				var whatMinutes=whatTime.getMinutes();
-				var wampm="";
-				if (whatHours >12){
-					whatHours -=12;
-					wampm="오후";
+				if(msg.chatType=='timecheck'){
+					var theTime=new Date(msg.chatDate);
+					var theYear=theTime.getFullYear();
+					var theMonth=theTime.getMonth();
+					var theDate=theTime.getDate();
+					var theDay="";
+					switch(theTime.getDay()){
+						case 0: theDay='월요일';
+								case 1: theDay='화요일';
+										case 2: theDay='수요일';
+												case 3: theDay='목요일';
+														case 4: theDay='금요일';
+																case 5: theDay='토요일';
+																		case 6: theDay='일요일';
+					}
+					$('.chatMsg_area').append('<div><p>'+theYear+'년 '+theMonth+'월 '+theDate+'일 '+theDay+'</p></div>');
 				}else{
-					wampm="오전";
+					var whatTime=new Date(msg.chatDate);
+					var whatHours=whatTime.getHours();
+					var whatMinutes=whatTime.getMinutes();
+					var wampm="";
+					if (whatHours >12){
+						whatHours -=12;
+						wampm="오후";
+					}else if(whatHours==0){
+						whatHours=12
+						wampm="오전"
+					}else{
+						wampm="오전";
+					}
+					if(whatMinutes<10){
+						whatMinutes="0"+whatMinutes;
+					}
+					whatChatDate= wampm+" "+whatHours+":"+whatMinutes;
+					
+					addChat (msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
 				}
-				if(whatMinutes<10){
-					whatMinutes="0"+whatMinutes;
-				}
-				whatChatDate= wampm+" "+whatHours+":"+whatMinutes;
-
-    			addChat (msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
-    		})
-    		
+				})
     		}else{
-    			$('.chatMsg_area').append('<p> 대화내용이 없습니다. </p>');
+				$('.chatMsg_area').append('<p> 대화내용이 없습니다. </p>');
     		}
+			var profileP="";
     		if(wholeData.userList!='none'){
-    			// 리스트 뿌려줘야함 
+				const userList=JSON.parse(wholeData.userList);
+				userList.forEach(function(user){
+					if(user.profilePic==null){
+						profileP='emp_default.png';
+					}else{
+						profileP=user.profilePic;
+					}					
+					$('.chatEmp_area').append('<div>'+user.userName+
+					'<a class="pull-left" href="#">'+
+					'<img class="media-object img-circle" style="width:10px; height:10px;" src="'+contextPath+'upload/profile/'+profileP+'" alt="">'+
+					'</a>'+
+					'</div>'
+					)
+					});
     		}else{
-    			
+    			$('.chatEmp_area').append('<div>사업장에 등록된 인원이 없습니다</div>');
     		}
     	},
     	error:function(e){
@@ -83,41 +118,8 @@ chatBusList.map(l => l.addEventListener("click", () => {
 	chatHeaderBtn[0].classList.remove("focus");
 	chatHeaderBtn[1].classList.add("focus");
 
-
-
-	// 뒤로가기 버튼 이벤트
-// const btnChatBack = document.querySelectorAll(".btn_chatBack")[0];
-// btnChatBack.addEventListener("click", () => {
-
-	// cListarea.style.display = "block";
-	// chatRoom.style.display = "none";
-// });
 }));
 
-
-// old css
-
-// btnChat.addEventListener("click", () => {
-//   const chatArea = document.querySelector("#chat_area");
-//   if (chatArea.style.display == "none") chatArea.style.display = "block";
-//   else chatArea.style.display = "none";
-// });
-
-// const chatListItem = selectElements("#chat_area .chatListItem_area");
-// const cListarea = document.querySelectorAll(".chatList_area")[0];
-// const chatRoom = document.querySelectorAll(".chatRoom_area")[0];
-// chatListItem.map(e => {
-//   e.addEventListener("click", ({ target }) => {
-//     cListarea.style.display = "none";
-//     chatRoom.style.display = "block";
-    
-//    const content = document.querySelectorAll(".chatMsg_area p")[0];
-//    content.textContent = target.innerText;
-
-
-
-//   });
-// });
 
 // addChat 메소드
 function addChat(profilePic, userName, chatMsg, whatChatDate, chatType){
@@ -214,6 +216,9 @@ socket.onmessage=function(e){
 	if (hours >12){
 		hours -=12;
 		ampm="오후";
+	}else if(hours==0){
+		hours=12
+		ampm="오전"
 	}else{
 		ampm="오전";
 	}
