@@ -33,7 +33,6 @@ chatBusList.map(l => l.addEventListener("click", () => {
     userId=userInfo.userId;
     console.log(busId);
 	console.log(userId);
-
     
     $.ajax({
     	type:'post',
@@ -80,8 +79,8 @@ chatBusList.map(l => l.addEventListener("click", () => {
 						whatMinutes="0"+whatMinutes;
 					}
 					whatChatDate= wampm+" "+whatHours+":"+whatMinutes;
-
-					if(msg.userName==userName){
+	
+					if((msg.userName&&msg.profilePic)==(userInfo.userName&&userInfo.profilePic)){
 						addSelfChat(msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
 					}else{
 						addChat (msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
@@ -267,29 +266,55 @@ socket.onmessage=function(e){
 	var userName=chatInfo.userName;
 	var profilePic=chatInfo.profilePic;
 	var message=chatInfo.chatMsg;
+	
+	if((userName&&profilePic)==(userInfo.userName&&userInfo.profilePic)){
 
-	$('.chatMsg_area').append('<div class="mySelf">'+
-			'<div class="main-content">'+
-			'<div class="media">'+
-			'<a class="pull-left" href="#">'+
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
-			'</a>'+
-			'<div class="media-body">'+
-			'<h5 class="media-heading">'+
-			userName+
-			'<span class="small pull-right">'+
-			chatDate+
-			'</span>' +
-			'</h5>'+
-			'<p>'+
-			message +
-			'</p>'+
-			'</div>'+
-			'</div>'+
-			'</div>'+
-			'</div>'
-			);
-		}
+		$('.chatMsg_area').append('<div class="mySelf">'+
+		'<div class="main-content">'+
+		'<div class="media">'+
+		'<a class="pull-left" href="#">'+
+		'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+		'</a>'+
+		'<div class="media-body">'+
+		'<h5 class="media-heading">'+
+		userName+
+		'<span class="small pull-right">'+
+		chatDate+
+		'</span>' +
+		'</h5>'+
+		'<p>'+
+		message +
+		'</p>'+
+		'</div>'+
+		'</div>'+
+		'</div>'+
+		'</div>'
+		);
+	}
+	else{
+		$('.chatMsg_area').append('<div class="row">'+
+		'<div class="main-content">'+
+		'<div class="media">'+
+		'<a class="pull-left" href="#">'+
+		'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+		'</a>'+
+		'<div class="media-body">'+
+		'<h5 class="media-heading">'+
+		userName+
+		'<span class="small pull-right">'+
+		chatDate+
+		'</span>' +
+		'</h5>'+
+		'<p>'+
+		message +
+		'</p>'+
+		'</div>'+
+		'</div>'+
+		'</div>'+
+		'</div>'
+		);
+	}
+	}
 }
 
 
