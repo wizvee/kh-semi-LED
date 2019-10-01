@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- //content -->
 </div>
-<button id="btn_chatting"><i class="fa fa-comments" aria-hidden="true"></i></button>
+<label for="ck_chat" id="btn_chatting"><i class="fa fa-comments" aria-hidden="true"></i></label>
 <!-- //container -->
 </div>
 <!-- JavaScript Libraries -->

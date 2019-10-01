@@ -25,6 +25,17 @@ input[id="ck_snb"]:checked {
   }
 }
 
+input[id="ck_chat"]:checked {
+  &~.chat {
+    transform: translateX(0);
+  }
+
+  &+label {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 .snb {
   position: fixed;
   top: 0;
@@ -34,7 +45,7 @@ input[id="ck_snb"]:checked {
   background: $aside-bg;
   transform: translateX(-101%);
   transition: transform 0.7s;
-  z-index: 5;
+  z-index: 200;
 
   @include respond-to("large") {
     position: sticky;
@@ -110,6 +121,18 @@ input[id="ck_snb"]:checked {
     @include circle(100px);
     box-sizing: border-box;
   }
+}
+
+.chat {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 100vh;
+  background: $aside-bg;
+  transform: translateX(101%);
+  transition: transform 0.7s;
+  z-index: 200;
 }
 
 .container_main {
@@ -262,6 +285,53 @@ input[id="ck_snb"]:checked {
   @include circle(34px);
 }
 
+.chat {
+  .chat_header {
+    @include grid;
+    grid-template-columns: repeat(2, 80px) 1fr;
+    border-bottom: 1px solid #575972;
+    text-align: center;
+    line-height: 35px;
+    color: $text-gray;
+    transition: all 0.7s;
+
+    span {
+
+      &.focus {
+        color: $text-default;
+        font-weight: 900;
+        border-bottom: 2px solid $primary;
+        // transform: translateY(-2px);
+      }
+    }
+  }
+
+  .chat_body {
+    &>div {
+      display: none;
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: all 0.7s;
+
+      &.focus {
+        visibility: visible;
+        @include grid;
+        opacity: 1;
+      }
+    }
+
+    .chatList_area {
+      background: red;
+    }
+
+    .chatRoom_area {
+      background: blue;
+    }
+  }
+}
+
 #chat_area {
   position: fixed;
   top: 50%;
@@ -291,9 +361,14 @@ input[id="ck_snb"]:checked {
   bottom: 50px;
   right: 50px;
   @include circle(50px);
-  border: 2px solid $white;
-  background: $primary;
+  box-sizing: border-box;
+  border: 3px solid $white;
+  background: #E3BA73;
   color: $white;
   font-size: 130%;
-  @include shadow;
+  @include shadow-flat;
+
+  i {
+    @include trans-All;
+  }
 }

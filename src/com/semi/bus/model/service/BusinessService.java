@@ -72,7 +72,7 @@ public class BusinessService {
 		close(conn);
 		return r;
 	}
-	
+
 	public int rejectEmp(String busId, String empId) {
 		Connection conn = getConnection();
 		int r = dao.rejectEmp(conn, busId, empId);
@@ -83,9 +83,15 @@ public class BusinessService {
 		close(conn);
 		return r;
 	}
-	
+
 	public int editEmp(String empId, int empWage, String empType, String sftId) {
 		Connection conn = getConnection();
-		
+		int r = dao.editEmp(conn, empId, empWage, empType, sftId);
+		if (r > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return r;
 	}
 }

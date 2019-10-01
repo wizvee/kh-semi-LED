@@ -191,5 +191,20 @@ public class BusinessDao {
 		}
 		return r;
 	}
+	
+	public int editEmp(Connection conn, String empId, int empWage, String empType, String sftId) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("editEmp");
+		int r = -1;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return r;
+	}
 
 }
