@@ -148,15 +148,7 @@ function addChat(profilePic, userName, chatMsg, whatChatDate, chatType){
 $('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 
 
-//채팅 객체 생성 
-var chatInfo=function(flag, busId, userId, chatType, chatMsg, readed) {
-	this.flag = flag;
-	this.busId = busId;
-	this.userId = userId;
-	this.chatType = chatType;
-	this.chatMsg = chatMsg;
-	this.readed= readed;
-}
+
 
 // 타임 인터벌 체크 
 var timecheck="";
@@ -188,12 +180,23 @@ setInterval(function(){
 },1000*60);
 
 
+//채팅 객체 생성 
+var chatInfo=function(flag, busId, userId, chatType, chatMsg, readed, userName, profilePic) {
+	this.flag = flag;
+	this.busId = busId;
+	this.userId = userId;
+	this.chatType = chatType;
+	this.chatMsg = chatMsg;
+	this.readed= readed;
+	this.userName=userName;
+	this.profilePic=profilePic;
+}
 
 //textArea 엔터키 이벤트
 document.getElementById('content').addEventListener('keydown', function(event) {
 	if (event.keyCode == 13) {
 		var chatMsg=$("#content").val();
-		var websocket=new chatInfo("C",busId,userId,"MSG",chatMsg,"T");
+		var websocket=new chatInfo("C",busId,userId,"MSG",chatMsg,"T",userName,profilePic);
 		socket.send(JSON.stringify(websocket));
 		
 		event.preventDefault();
@@ -208,6 +211,7 @@ profilePic=userInfo.profilePic;
 userName=userInfo.userName;
 
 socket.onmessage=function(e){
+	const chatInfo=JSON.parse(e.data);
 	var d = new Date();
 	var hours=d.getHours();
 	var minutes=d.getMinutes();
@@ -226,11 +230,10 @@ socket.onmessage=function(e){
 	}
 	var chatDate= ampm+" "+hours+":"+minutes;
 
-		if(e.data=="연결"){
-		console.log("연결됨");
-	}else{
-		message=e.data
-	}
+	var userName=chatInfo.userName;
+	var profilePic=chatInfo.profilePic;
+	var message=chatInfo.chatMsg;
+
 	$('.chatMsg_area').append('<div class="row">'+
 			'<div class="main-content">'+
 			'<div class="media">'+
