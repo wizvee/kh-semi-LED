@@ -98,8 +98,6 @@
 							<%=b.getBusName()%>
 							<input type="hidden" id="hidden_busId" value='<%=b.getBusId()%>'>
 							<input type="hidden" id="hidden_userId" value='<%=userInfo.getUserId()%>'>
-							<input type="hidden" id="hidden_profilePic" value='<%=loginOwner.getProfilePic()%>'>
-							<input type="hidden" id="hidden_userName" value='<%=loginOwner.getUserName()%>'>
 						</div>
 						<%
 							}

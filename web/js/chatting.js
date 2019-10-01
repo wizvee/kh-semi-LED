@@ -3,6 +3,7 @@ var busId="";
 var userId="";
 var userName="";
 var profilePic="";
+console.log(userInfo.userName);
 
 //var userNow = <%=loginOwner %>;
 //console.log(userNow);
@@ -134,10 +135,23 @@ document.getElementById('content').addEventListener('keydown', function(event) {
 
 //userName 그리고 userProfile 불러와야함 
 var Message;
-profilePic=$(target).find("#hidden_profilePic").val();
-userName=$(target).find("#hidden_userName").val();
+profilePic=userInfo.profilePic;
+userName=userInfo.userName;
 var d = new Date();
-var chatDate= d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+var hours=d.getHours();
+var minutes=d.getMinutes();
+var ampm="";
+if (hours >12){
+	hours -=12;
+	ampm="오후";
+}else{
+	ampm="오전";
+}
+if(minutes<10){
+	minutes="0"+minutes;
+}
+
+var chatDate= ampm+" "+hours+":"+minutes;
 
 socket.onmessage=function(e){
 	console.log(e.data);

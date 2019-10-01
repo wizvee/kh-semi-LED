@@ -1,7 +1,5 @@
 package com.semi.statistics.model.vo;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Statistics {
@@ -10,9 +8,9 @@ public class Statistics {
 	private String Date;
 	private String empName;
 	private boolean workingNow;
-	private Date empStart;
+	private String empStart;
 	private String empStartStr;
-	private Date empEnd;
+	private String empEnd;
 	private String empEndStr;
 	private int hourlyWorkedHours;
 	private int dailyWorkedHours;
@@ -30,8 +28,8 @@ public class Statistics {
 	}
 
 	
-	public Statistics(int totalWage, String date, String empName, boolean workingNow, java.sql.Date empStart,
-			java.sql.Date empEnd, int hourlyWorkedHours, int dailyWorkedHours, int monthlyWorkedHours,
+	public Statistics(int totalWage, String date, String empName, boolean workingNow, String empStart,
+			String empEnd, int hourlyWorkedHours, int dailyWorkedHours, int monthlyWorkedHours,
 			int totalWorkedHours, int lateDays, int earlyLeaveDays, int empCount, List<StatisticsMonth> years) {
 		super();
 		this.totalWage = totalWage;
@@ -91,31 +89,31 @@ public class Statistics {
 	}
 
 
-	public Date getEmpStart() {
+	public String getEmpStart() {
 		return empStart;
 	}
 
 
-	public void setEmpStart(Date empStart) {
+	public void setEmpStart(String empStart) {
 		this.empStart = empStart;
-		if(empStart!=null) {
-			SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
-			this.empStartStr=s.format(empStart);
-		}
+//		if(empStart!=null) {
+//			SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd ");
+//			this.empStartStr=s.format(empStart);
+//		}
 	}
 
 
-	public Date getEmpEnd() {
+	public String getEmpEnd() {
 		return empEnd;
 	}
 
 
-	public void setEmpEnd(Date empEnd) {
+	public void setEmpEnd(String empEnd) {
 		this.empEnd = empEnd;
-		if(empEnd!=null) {
-			SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
-			this.empEndStr=s.format(empEnd);
-		}
+//		if(empEnd!=null) {
+//			SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
+//			this.empEndStr=s.format(empEnd);
+//		}
 	}
 
 	
