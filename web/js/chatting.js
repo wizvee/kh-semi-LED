@@ -259,8 +259,8 @@ socket.onmessage=function(e){
 			'</div>'+
 			'</div>'+
 			'</div>'+
-			'</div>'+
-			'<hr>');
+			'</div>'
+			);
 		}
 }
 
