@@ -37,6 +37,8 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.css" />
 	<!-- JavaScript Libraries -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+	<!-- favicon erro -->
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 
 <body>

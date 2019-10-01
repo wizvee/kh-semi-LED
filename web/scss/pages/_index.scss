@@ -155,27 +155,28 @@ video {
         display: inline-block;
         width: 30px;
         height: 30px;
-        color: $text-gray;
+        color: #999;
         font-size: 125%;
         text-align: center;
         line-height: 30px;
         transition: color 0.5s;
 
         &:hover {
-          color: $text-default;
+          color: #666;
         }
       }
     }
 
     span {
       align-self: center;
+      font-weight: 700;
       text-align: center;
-      color: $text-gray;
-      transition: all 0.1s;
+      color: #999;
+      transition: all 0.5s;
       @include cursor-pointer;
 
       &:hover {
-        color: $text-default;
+        color: #666;
       }
     }
 
@@ -192,6 +193,12 @@ video {
     width: 100%;
     height: $wrap_height - $header_height;
 
+    a,
+    label {
+      color: red;
+      margin-right: 2px;
+    }
+
     form {
       position: relative;
       margin: 10px auto;
@@ -207,6 +214,7 @@ video {
 
       input {
         @include placeholder;
+        color: #666;
       }
 
       .focus+span {
