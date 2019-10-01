@@ -29,7 +29,7 @@ chatHeaderBtn[0].addEventListener("click", () => {
 // 방 입장 
 chatBusList.map(l => l.addEventListener("click", () => {
 	var whatChatDate="";
-	busId=$('#hidden_busId').val();
+	busId=$(l).find(".hidden_busId").val();
     userId=userInfo.userId;
     console.log(busId);
 	console.log(userId);
