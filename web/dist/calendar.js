@@ -106,15 +106,16 @@ function () {
       var sftId = document.getElementsByName("sftId")[0].value;
       var title = document.getElementsByName("title")[0].value;
       var content = document.getElementsByName("content")[0].value;
-      var taskUserId = document.getElementsByName("taskUserId");
+      var taskUserId = document.querySelectorAll(".selectTargetUser");
       var taskMsg = document.getElementsByName("taskMsg");
       var taskArr = [];
 
       for (var i = 0; i < _this.taskCount; i++) {
-        var task = new Task(date, taskUserId[i].value, taskMsg[i].value);
+        var task = new Task(date, taskUserId[i].getAttribute("id"), taskMsg[i].value);
         taskArr.push(task);
       }
 
+      _this.taskCount = 0;
       var data = "calDate=".concat(date, "&sftId=").concat(sftId, "&calTitle=").concat(title, "&calDetail=").concat(content, "&taskArr=").concat(JSON.stringify(taskArr));
 
       _this.getResult("owner/insertCal.do", data, _this.insertCal);
