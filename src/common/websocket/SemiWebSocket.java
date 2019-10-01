@@ -59,7 +59,6 @@ public class SemiWebSocket {
 						jso.put("profilePic", profilePic);
 						jso.put("chatMsg", chatMsg);
 						String jsonChat = jso.toJSONString();
-						System.out.println(jsonChat);
 						s.getBasicRemote().sendText(jsonChat);
 					} catch (IOException e) {
 						e.printStackTrace();
