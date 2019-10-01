@@ -277,7 +277,7 @@ input[id="ck_chat"]:checked {
   position: fixed;
   top: 0;
   right: 0;
-  width: 600px;
+  width: 500px;
   height: 100vh;
   background: $aside-bg;
   transform: translateX(101%);
@@ -289,27 +289,28 @@ input[id="ck_chat"]:checked {
     grid-template-columns: repeat(2, 80px) 1fr;
     border-bottom: 1px solid #575972;
     text-align: center;
-    line-height: 35px;
+    line-height: 40px;
     color: $text-gray;
     transition: all 0.7s;
 
     span {
+      @include cursor-pointer;
 
       &.focus {
         color: $text-default;
         font-weight: 900;
         border-bottom: 2px solid $primary;
-        // transform: translateY(-2px);
       }
     }
   }
 
   .chat_body {
+
     &>div {
       display: none;
       visibility: hidden;
-      width: 100%;
-      height: 100%;
+      // width: 100%;
+      // height: 100%;
       opacity: 0;
       transition: all 0.7s;
 
@@ -325,12 +326,64 @@ input[id="ck_chat"]:checked {
     }
 
     .chatRoom_area {
-      background: blue;
-      grid-template-columns: 200px 1fr;
+      grid-template-columns: 150px 1fr;
 
-      .chatMsg_area {
-        overflow-y: auto;
-        @include scroll;
+      .chatEmp_area {
+        div {
+          height: 30px;
+        }
+      }
+
+      .chat2 {
+        @include grid;
+        grid-template-rows: 1fr 170px;
+        height: 100vh;
+
+        .chatMsg_area {
+          overflow-y: auto;
+          @include scroll($aside-bg);
+
+          .row,
+          .mySelf {
+            padding: 5px;
+            margin: 10px 0;
+            width: 95%;
+            border-radius: 10px;
+            background: #7a79b2;
+            color: $white;
+
+            h5 {
+              margin-bottom: 10px;
+              font-size: 90%;
+              font-weight: normal;
+
+              span {
+                font-size: 90%;
+              }
+            }
+
+            img {
+              @include circle(30px);
+              margin-left: 5px;
+              margin-right: 10px;
+              transform: translateY(3px);
+            }
+          }
+
+          .mySelf {
+            background: #c9799c;
+          }
+
+        }
+
+        .chatMsg_enter {
+          textarea {
+            width: 90%;
+            border-radius: 10px;
+            background: $background-default;
+            resize: none;
+          }
+        }
       }
     }
   }

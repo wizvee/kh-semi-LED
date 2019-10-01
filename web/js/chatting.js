@@ -29,11 +29,10 @@ chatHeaderBtn[0].addEventListener("click", () => {
 // 방 입장 
 chatBusList.map(l => l.addEventListener("click", () => {
 	var whatChatDate="";
-	busId=userInfo.selectBusId;
+	busId=$(l).find(".hidden_busId").val();
     userId=userInfo.userId;
     console.log(busId);
 	console.log(userId);
-
     
     $.ajax({
     	type:'post',
@@ -80,8 +79,12 @@ chatBusList.map(l => l.addEventListener("click", () => {
 						whatMinutes="0"+whatMinutes;
 					}
 					whatChatDate= wampm+" "+whatHours+":"+whatMinutes;
-					
-					addChat (msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
+	
+					if((msg.userName&&msg.profilePic)==(userInfo.userName&&userInfo.profilePic)){
+						addSelfChat(msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
+					}else{
+						addChat (msg.profilePic, msg.userName, msg.chatMsg, whatChatDate, msg.chatType);
+					}
 				}
 				})
     		}else{
@@ -119,6 +122,30 @@ chatBusList.map(l => l.addEventListener("click", () => {
 
 }));
 
+function addSelfChat(profilePic,userName,chatMsg,whatChatDate,chatType){
+	$('.chatMsg_area').append('<div class="mySelf">'+
+	'<div class="main-content">'+
+	'<div class="media">'+
+	'<a class="pull-left" href="#">'+
+	'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+	'</a>'+
+	'<div class="media-body">'+
+	'<h5 class="media-heading">'+
+	userName+
+	'<span class="small pull-right">'+
+	whatChatDate+
+	'</span>' +
+	'</h5>'+
+	'<p>'+
+	chatMsg +
+	'</p>'+
+	'</div>'+
+	'</div>'+
+	'</div>'+
+	'</div>'
+	);
+}
+
 
 // addChat 메소드
 function addChat(profilePic, userName, chatMsg, whatChatDate, chatType){
@@ -141,8 +168,8 @@ function addChat(profilePic, userName, chatMsg, whatChatDate, chatType){
 			'</div>'+
 			'</div>'+
 			'</div>'+
-			'</div>'+
-			'<hr>');
+			'</div>'
+			);
 }
 
 $('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
@@ -239,29 +266,55 @@ socket.onmessage=function(e){
 	var userName=chatInfo.userName;
 	var profilePic=chatInfo.profilePic;
 	var message=chatInfo.chatMsg;
+	
+	if((userName&&profilePic)==(userInfo.userName&&userInfo.profilePic)){
 
-	$('.chatMsg_area').append('<div class="row">'+
-			'<div class="main-content">'+
-			'<div class="media">'+
-			'<a class="pull-left" href="#">'+
-			'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
-			'</a>'+
-			'<div class="media-body">'+
-			'<h5 class="media-heading">'+
-			userName+
-			'<span class="small pull-right">'+
-			chatDate+
-			'</span>' +
-			'</h5>'+
-			'<p>'+
-			message +
-			'</p>'+
-			'</div>'+
-			'</div>'+
-			'</div>'+
-			'</div>'+
-			'<hr>');
-		}
+		$('.chatMsg_area').append('<div class="mySelf">'+
+		'<div class="main-content">'+
+		'<div class="media">'+
+		'<a class="pull-left" href="#">'+
+		'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+		'</a>'+
+		'<div class="media-body">'+
+		'<h5 class="media-heading">'+
+		userName+
+		'<span class="small pull-right">'+
+		chatDate+
+		'</span>' +
+		'</h5>'+
+		'<p>'+
+		message +
+		'</p>'+
+		'</div>'+
+		'</div>'+
+		'</div>'+
+		'</div>'
+		);
+	}
+	else{
+		$('.chatMsg_area').append('<div class="row">'+
+		'<div class="main-content">'+
+		'<div class="media">'+
+		'<a class="pull-left" href="#">'+
+		'<img class="media-object img-circle" style="width:30px; height:30px;" src="'+contextPath+'upload/profile/'+profilePic+'" alt="">'+
+		'</a>'+
+		'<div class="media-body">'+
+		'<h5 class="media-heading">'+
+		userName+
+		'<span class="small pull-right">'+
+		chatDate+
+		'</span>' +
+		'</h5>'+
+		'<p>'+
+		message +
+		'</p>'+
+		'</div>'+
+		'</div>'+
+		'</div>'+
+		'</div>'
+		);
+	}
+	}
 }
 
 

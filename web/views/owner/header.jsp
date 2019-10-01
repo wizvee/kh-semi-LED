@@ -98,8 +98,8 @@
 					%>
 					<div class="chatListItem_area">
 						<%=b.getBusName()%>
-						<input type="hidden" id="hidden_busId" value='<%=b.getBusId()%>'>
-						<input type="hidden" id="hidden_userId" value='<%=userInfo.getUserId()%>'>
+						<input type="hidden" class="hidden_busId" value='<%=b.getBusId()%>'>
+						<!-- <input type="hidden" id="hidden_userId" value='<%=userInfo.getUserId()%>'> -->
 					</div>
 					<%
 						}
@@ -109,7 +109,7 @@
 					<div class="chatEmp_area">
 						
 					</div>
-					<div>
+					<div class="chat2">
 						<div class="chatMsg_area">
 						</div>
 						<div class="chatMsg_enter">
