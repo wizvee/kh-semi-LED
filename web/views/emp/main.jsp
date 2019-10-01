@@ -9,15 +9,10 @@
 			<h2>제목</h2>
 		</div>
 		<div class="item_body">
-			<button id="test">테스트</button>
+			<button id="" class="btn-primary">출근</button>
+			<button id="" class="btn-primary">퇴근</button>
 		</div>
 	</section>
-	
-	<script>
-		document.querySelector("#test").addEventListener("click", () => {
-			userInfo.flag = "T";
-			socket.send(JSON.stringify(userInfo));
-		})
-	</script>
+
 </div>
 <%@ include file="footer.jsp"%>
