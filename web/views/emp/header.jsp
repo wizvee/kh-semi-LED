@@ -45,6 +45,7 @@
 	<script src="<%=request.getContextPath()%>/dist/modules.js"></script>
 	<div id="wrap">
 		<input type="checkbox" id="ck_snb" class="ly" /> <label for="ck_snb"></label>
+		<input type="checkbox" id="ck_chat" class="ly"><label for="ck_chat"></label>
 		<!-- 사이드 메뉴 -->
 		<aside class="snb snb_emp">
 			<nav>
