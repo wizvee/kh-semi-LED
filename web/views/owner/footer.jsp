@@ -6,7 +6,7 @@
 </div>
 <!-- JavaScript Libraries -->
 <script src="<%=request.getContextPath()%>/dist/common.js"></script>
-<script src="<%=request.getContextPath()%>/js/chatting.js"></script>
+<script src="<%=request.getContextPath()%>/dist/chatting.js"></script>
 </body>
 
 </html>

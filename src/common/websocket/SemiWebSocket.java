@@ -85,8 +85,9 @@ public class SemiWebSocket {
 				return;
 			}
 		}
-
+		System.out.println(flag);
 		if (flag.equals("N")) {
+			System.out.println("??");
 			for (Session s : session.getOpenSessions()) {
 				try {
 					s.getBasicRemote().sendText("N");
