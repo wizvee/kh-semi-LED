@@ -44,13 +44,13 @@ public class ChattingDao {
 				c.setProfilePic(rs.getString(5));
 				list.add(c);
 			}
-			}catch(SQLException e) {
+		
+		}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
 				close(rs);
 				close(pstmt);
 			}
-			System.out.println("날짜: "+list.get(0).getChatDate());
 			return list;			
 		}
 	
@@ -119,6 +119,7 @@ public class ChattingDao {
 		return result;
 	}
 	
+	// 시간이 없다면 insert하기
 	public int insertTime(Connection conn, String busId, String userId,String chatType, String chatMsg) {
 		PreparedStatement pstmt=null;
 		int result=0;

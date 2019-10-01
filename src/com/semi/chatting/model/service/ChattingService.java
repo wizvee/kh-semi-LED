@@ -51,6 +51,7 @@ public class ChattingService {
 		return result;
 	}
 	
+	// 시간이 없다면 insert하기
 	public int insertTime(String busId, String userId, String chatType, String chatMsg) {
 		Connection conn=getConnection();
 		int result=dao.insertTime(conn,busId,userId,chatType,chatMsg);
