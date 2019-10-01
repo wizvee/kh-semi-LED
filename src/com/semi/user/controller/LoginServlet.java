@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,7 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		String login = request.getParameter("data");
+		System.out.println("로그인 서블릿"+login);
 		UserService service = new UserService();
 		User user = null;
 		
@@ -42,16 +44,26 @@ public class LoginServlet extends HttpServlet {
 			JSONObject json = (JSONObject) jp.parse(login);
 			String password = SHA512.getSHA512((String) json.get("password"));
 			user = service.selectUser((String) json.get("email"), password);
+			if (user != null) {
+				if(user.getEmail() != null) {
+					Cookie c = new Cookie("loginKeep",(String) json.get("email"));
+					c.setMaxAge(3*24*60*60); //3일
+					response.addCookie(c);
+				} else {
+					Cookie c = new Cookie("loginKeep",(String) json.get("email"));
+					c.setMaxAge(0);
+					response.addCookie(c);
+				}
+				 
+				HttpSession session = request.getSession();
+				session.setAttribute("loginUser", user);
+				out.print("success");
+			} else
+				out.print("fail");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		if (user != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", user);
-			out.print("success");
-		} else
-			out.print("fail");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
