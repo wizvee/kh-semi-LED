@@ -65,7 +65,7 @@ public class SemiWebSocket {
 		for(Session s:session.getOpenSessions()) {
 		if(s.getUserProperties().get("busId")!=null) {
 				try {
-					s.getBasicRemote().sendText("N");
+					s.getBasicRemote().sendText(chatMsg);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -81,7 +81,9 @@ public class SemiWebSocket {
 			
 			int exist=service.checkTime(busId,chatType,chatMsg);
 			if(exist!=1) {
-				int insert = service.insertTime(busId, userId, chatType, chatMsg);				
+				System.out.println("exist: "+exist);
+				int insert = service.insertTime(busId, userId, chatType, chatMsg);	
+				System.out.println("insert: "+insert);
 			}else {
 				return;
 			}

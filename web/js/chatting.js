@@ -206,9 +206,6 @@ var Message;
 profilePic=userInfo.profilePic;
 userName=userInfo.userName;
 
-
-
-
 socket.onmessage=function(e){
 	var d = new Date();
 	var hours=d.getHours();
