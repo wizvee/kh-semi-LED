@@ -12,6 +12,10 @@
 	grid-template-rows: repeat(1, 1fr);
 }
 
+.item .item_body {
+	min-height: 0px;
+}
+
 .item .item_mypage #pic .snb_profile {
 	border: 2px solid #fff;
     width: 50px;
@@ -70,7 +74,7 @@
 
 label {
 	margin: 0;
-    padding: 7px 13px;
+    padding: 3.3px 16px;
     height: 30px;
 	box-sizing: border-box;
     vertical-align: top;
