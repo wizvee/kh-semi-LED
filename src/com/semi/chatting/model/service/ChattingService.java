@@ -36,9 +36,9 @@ public class ChattingService {
 	}
 	
 	//해당 사업장에 등록된 유저들 모두 불러오기 
-	public List<String> getAllUsers(String busId){
+	public List<Chatting> getAllUsers(String busId,String userId){
 		Connection conn=getConnection();
-		List<String>list=dao.getAllUsers(conn,busId);
+		List<Chatting>list=dao.getAllUsers(conn,busId,userId);
 		close(conn);
 		return list;
 	}
