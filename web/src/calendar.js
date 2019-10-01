@@ -166,7 +166,7 @@ class Calendar {
             lb.setAttribute("for", t.taskId);
             if (t.userId != userInfo.userId) ck.disabled = true;
             if (t.done == true) ck.checked = true;
-            lb.innerHTML = `<b>[ ${t.userName} ] </b>${t.taskMsg}`;
+            lb.innerHTML = `<b>[ ${t.userName} ]</b> ${t.taskMsg}`;
             calTask.appendChild(ck);
             calTask.appendChild(lb);
           });

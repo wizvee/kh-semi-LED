@@ -76,7 +76,7 @@ function () {
               lb.setAttribute("for", t.taskId);
               if (t.userId != userInfo.userId) ck.disabled = true;
               if (t.done == true) ck.checked = true;
-              lb.innerHTML = "<b>[ ".concat(t.userName, " ] </b>").concat(t.taskMsg);
+              lb.innerHTML = "<b>[ ".concat(t.userName, " ]</b> ").concat(t.taskMsg);
               calTask.appendChild(ck);
               calTask.appendChild(lb);
             });
