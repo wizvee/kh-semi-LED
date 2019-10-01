@@ -17,10 +17,10 @@ import com.semi.caldendar.model.vo.Cal;
 import com.semi.userinfo.model.vo.UserInfo;
 
 @WebServlet("/getCalList.do")
-public class GetCalListServlet extends HttpServlet {
+public class getCalListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GetCalListServlet() {
+	public getCalListServlet() {
 		super();
 	}
 

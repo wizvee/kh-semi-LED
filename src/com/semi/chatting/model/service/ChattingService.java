@@ -42,5 +42,21 @@ public class ChattingService {
 		close(conn);
 		return list;
 	}
+	
+	// 시간 있는지 체크하기 
+	public int checkTime(String busId, String chatType, String chatMsg) {
+		Connection conn=getConnection();
+		int result=dao.checkTime(conn,busId,chatType,chatMsg);
+		close(conn);
+		return result;
+	}
+	
+	// 시간이 없다면 insert하기
+	public int insertTime(String busId, String userId, String chatType, String chatMsg) {
+		Connection conn=getConnection();
+		int result=dao.insertTime(conn,busId,userId,chatType,chatMsg);
+		close(conn);
+		return result;
+	}
 
 }
