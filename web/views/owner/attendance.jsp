@@ -149,10 +149,10 @@ position: absolute;
 	right: -2px;
 	height: 80%;
 	border-left: 2px solid rgba(0, 0, 0, 0.025);
-	*/
+
 }
 
-.card .additional .user-card .level, .card .additional .user-card .points
+.card .additional .user-card .level, .card .additional .user-card .points 
 	{
 	top: 15%;
 	color: #fff;
@@ -169,7 +169,7 @@ position: absolute;
 	top: 85%;
 }
 
-.card .additional .user-card svg {
+.card .additional .user-card .svg {
 	top: 50%;
 }
 
@@ -200,9 +200,9 @@ position: absolute;
 	color: #325C46;
 }
 
-.card .additional .coords span+span {
+/* .card .additional .coords span+span {
 	float: right;
-}
+} */
 
 .card .additional .stats {
 	width: 95%;
@@ -299,12 +299,18 @@ position: absolute;
     vertical-align: text-bottom;    
 }
 
-fieldset {
+.checkAttendance {
 	border: 4px solid #e5e5e5;
+	display: none;
 }
 
-fieldset > legend {
+.checkAttendance > legend {
 	font-size: 1.5em;
+}
+.svg{
+	width: 100%;
+	height: 100%
+	
 }
 
 </style>
@@ -331,7 +337,7 @@ fieldset > legend {
 		
 		<script src="<%=request.getContextPath()%>/src/owner/subCal.js"></script>
 
-			<fieldset>
+			<fieldset class="checkAttendance">
 					<legend> 사업장 근무자 리스트 </legend>
 					<div class="item_atd">
 

@@ -80,7 +80,9 @@ public class AttendanceAjaxServlet extends HttpServlet {
 			json.put("nSft", a.getSftOff());
 			json.put("atdOn", a.getStAtdTime());
 			json.put("atdOff", a.getEnAtdTime());
-			json.put("atdType", a.getAtdType());
+			json.put("atdType", a.getAtdType()!=null?String.join(",", a.getAtdType()):"");
+		
+			
 //			 data[i]["name"]
 					
 
@@ -91,6 +93,7 @@ public class AttendanceAjaxServlet extends HttpServlet {
 		}
 		}else {
 			// 리스트 값이 없을때의 예외처리 로직
+			System.out.println("데이터 리스트 없음");
 		}
 		response.setContentType("application/x-json); charset-UTF-8");
 		response.getWriter().print(jarr);
