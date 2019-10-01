@@ -109,7 +109,7 @@
 					<div class="chatEmp_area">
 						
 					</div>
-					<div>
+					<div class="chat2">
 						<div class="chatMsg_area">
 						</div>
 						<div class="chatMsg_enter">
