@@ -343,16 +343,30 @@ input[id="ck_chat"]:checked {
           overflow-y: auto;
           @include scroll($aside-bg);
 
-          .row {
+          .row,
+          .mySelf {
             padding: 5px;
+            margin: 10px 0;
             width: 95%;
             border-radius: 10px;
             background: #7a79b2;
             color: $white;
 
+            h5 {
+              margin-bottom: 10px;
+              font-size: 90%;
+              font-weight: normal;
+
+              span {
+                font-size: 90%;
+              }
+            }
+
             img {
               @include circle(30px);
+              margin-left: 5px;
               margin-right: 10px;
+              transform: translateY(3px);
             }
           }
 
@@ -363,7 +377,12 @@ input[id="ck_chat"]:checked {
         }
 
         .chatMsg_enter {
-          background: yellow;
+          textarea {
+            width: 90%;
+            border-radius: 10px;
+            background: $background-default;
+            resize: none;
+          }
         }
       }
     }
