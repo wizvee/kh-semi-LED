@@ -29,7 +29,7 @@ chatHeaderBtn[0].addEventListener("click", () => {
 // 방 입장 
 chatBusList.map(l => l.addEventListener("click", () => {
 	var whatChatDate="";
-	busId=userInfo.selectBusId;
+	busId=$('#hidden_busId').val();
     userId=userInfo.userId;
     console.log(busId);
 	console.log(userId);
@@ -141,8 +141,8 @@ function addChat(profilePic, userName, chatMsg, whatChatDate, chatType){
 			'</div>'+
 			'</div>'+
 			'</div>'+
-			'</div>'+
-			'<hr>');
+			'</div>'
+			);
 }
 
 $('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
@@ -240,7 +240,7 @@ socket.onmessage=function(e){
 	var profilePic=chatInfo.profilePic;
 	var message=chatInfo.chatMsg;
 
-	$('.chatMsg_area').append('<div class="row">'+
+	$('.chatMsg_area').append('<div class="mySelf">'+
 			'<div class="main-content">'+
 			'<div class="media">'+
 			'<a class="pull-left" href="#">'+
