@@ -212,6 +212,7 @@ userName=userInfo.userName;
 
 socket.onmessage=function(e){
 	const chatInfo=JSON.parse(e.data);
+	if(chatInfo.flag=='C'){
 	var d = new Date();
 	var hours=d.getHours();
 	var minutes=d.getMinutes();
@@ -255,6 +256,7 @@ socket.onmessage=function(e){
 			'</div>'+
 			'</div>'+
 			'<hr>');
+		}
 }
 
 

@@ -57,6 +57,7 @@ public class SemiWebSocket {
 				if (s.getUserProperties().get("busId") != null) {
 					try {
 						JSONObject jso=new JSONObject();
+						jso.put("flag",flag);
 						jso.put("userName",userName);
 						jso.put("profilePic",profilePic);
 						jso.put("chatMsg",chatMsg);
