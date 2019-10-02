@@ -32,7 +32,7 @@ public class EmailSendServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String email = request.getParameter("email");
 
-		String from = "jeonghye.dev@gmail.com";
+		String from = "albarang1002@gmail.com";
 		String subject = "이메일 인증";
 		String content = "안녕하세요!<br>";
 		content += "저희 홈페이지에 가입해주셔서 감사합니다.<br><br>";
@@ -54,7 +54,7 @@ public class EmailSendServlet extends HttpServlet {
 			Address toAddr = new InternetAddress(email);
 			msg.addRecipient(Message.RecipientType.TO, toAddr);
 			msg.setContent(content, "text/html; charset=UTF-8");
-//			Transport.send(msg);
+			Transport.send(msg);
 
 			request.setAttribute("send", true);
 		} catch (Exception e) {

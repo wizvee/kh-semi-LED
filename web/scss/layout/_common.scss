@@ -305,6 +305,7 @@ input[id="ck_chat"]:checked {
         color: $text-default;
         font-weight: 900;
         border-bottom: 2px solid $primary;
+        color: $white;
       }
     }
   }
@@ -327,7 +328,13 @@ input[id="ck_chat"]:checked {
     }
 
     .chatList_area {
-      background: red;
+      div {
+        padding: 20px;
+        width: 90%;
+        height: 20px;
+        @include cursor-pointer;
+        background: $background-default;
+      }
     }
 
     .chatRoom_area {
