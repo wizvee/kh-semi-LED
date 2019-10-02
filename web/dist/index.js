@@ -10,9 +10,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var selectElements = function selectElements(src) {
   return Array.from(document.querySelectorAll(src));
-};
+}; // const contextPath="/albarang/";
 
-var contextPath = "/albarang/";
+
+var contextPath = "/p_190826_semi/";
 
 var Register =
 /*#__PURE__*/

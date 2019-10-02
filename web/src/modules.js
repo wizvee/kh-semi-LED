@@ -1,5 +1,6 @@
 // Variables
-const contextPath = "/albarang/";
+// const contextPath = "/albarang/";
+const contextPath = "/p_190826_semi/";
 const selectElements = src => Array.from(document.querySelectorAll(src));
 
 // SPA - Basic Data
@@ -26,5 +27,5 @@ let evetList = promiseGetDefault("getCalList.do").then(res =>
 );
 
 // WebSocket
-let socket = new WebSocket("ws://rclass.iptime.org:9999" + contextPath + "ws");
-// let socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");
+// let socket = new WebSocket("ws://rclass.iptime.org:9999" + contextPath + "ws");
+let socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");
