@@ -111,18 +111,6 @@
                             content: "#";
                         }
                     }
-
-                    .H {
-                        background: red;
-                    }
-
-                    .D {
-                        background: green;
-                    }
-
-                    .M {
-                        background: blue;
-                    }
                 }
             }
 
@@ -141,7 +129,7 @@
                 span {
                     line-height: 40px;
                 }
-                
+
                 div {
                     @include grid;
                     grid-template-columns: repeat(2, 1fr);

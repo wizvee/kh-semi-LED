@@ -4,7 +4,7 @@
 <%@ include file="header.jsp"%>
 <div id="content" class="content_main">
 
-<!--    <section class="item">
+   <section class="item">
       <div class="item_header">
          <h2>제목</h2>
       </div>
@@ -12,7 +12,7 @@
          <button id="" class="btn-primaryOn">출근</button>
          <button id="" class="btn-primaryOff">퇴근</button>
       </div>
-   </section> -->
+   </section>
    
 <script>
    $('.btn-primaryOn').click(function(){

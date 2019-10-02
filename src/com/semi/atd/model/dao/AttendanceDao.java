@@ -265,7 +265,7 @@ public class AttendanceDao {
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, nowDate);
          pstmt.setString(2, type);
-         pstmt.setLong(3, atdTime);
+         pstmt.setLong(3, atdTime<0?0:atdTime);
          pstmt.setInt(4, atdWage);
          pstmt.setString(5, atdOn);
          pstmt.setString(6, id);

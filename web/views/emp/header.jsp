@@ -61,6 +61,10 @@
 						<a href="<%=request.getContextPath()%>/emp/calendar.do">
 							<i class="fa fa-calendar-check-o" aria-hidden="true"></i>캘린더</a>
 					</li>
+					<li id="btnBoard">
+						<a href="<%=request.getContextPath()%>/views/boardList">
+							<i class="fa fa-window-close" aria-hidden="true"></i></i>익명 게시판</a>
+					</li>
 				</ul>
 			</nav>
 		</aside>

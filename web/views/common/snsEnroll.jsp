@@ -14,12 +14,12 @@
 <title>추가 정보를 입력해주세요!</title>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/snsLoginEndServlet" method="post">
+	<form action="<%=request.getContextPath()%>/snsLoginEndServlet.do" method="post">
 	<input type="text" name="email" value=<%=email %>>
-	<input type="text" name="password" value=<%=password %>>
+	<input type="password" name="password" value=<%=password %>>
 	<input type="hidden" name="imageUrl" value=<%=imageUrl %>>
-	<input type="text" name="name">
-	<input type="text" name="phone">
+	<input type="text" name="name" placeholder="이름 입력">
+	<input type="text" name="phone" placeholder="전화번호 입력 (-) 사용" >
 	<input type="submit" value="가입"/>
 	</form>
 </body>
