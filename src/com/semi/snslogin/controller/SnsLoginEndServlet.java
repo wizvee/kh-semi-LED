@@ -17,7 +17,7 @@ import common.util.SHA512;
 /**
  * Servlet implementation class SnsLoginEndServlet
  */
-@WebServlet("/snsLoginEndServlet")
+@WebServlet("/snsLoginEndServlet.do")
 public class SnsLoginEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,17 +34,18 @@ public class SnsLoginEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		UserService service=new UserService();
 		
 		String email=request.getParameter("email");
-		String pass=request.getParameter("password");
-		String imageUrl=request.getParameter("imageUrl");
 		String name=request.getParameter("name");
 		String phone=request.getParameter("phone");
+		String pass=request.getParameter("password");
+		String imageUrl=request.getParameter("imageUrl");
 		String password = SHA512.getSHA512(pass);
-		UserService service=new UserService();
 		try {
-			int result=service.insertUser(email, name, phone, password);
-			if(result>0) {
+			int result=service.insertUser(email, password, name, phone);
+			int res=service.updateEmailCheck(email);
+			if(res>0) {
 				User user=service.selectUser(email);
 				if(user!=null) {
 					HttpSession session = request.getSession();
