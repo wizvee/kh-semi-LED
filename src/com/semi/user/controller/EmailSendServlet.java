@@ -37,7 +37,7 @@ public class EmailSendServlet extends HttpServlet {
 		String content = "안녕하세요!<br>";
 		content += "저희 홈페이지에 가입해주셔서 감사합니다.<br><br>";
 		content += "이메일 인증을 완료하기 위해, 아래 링크를 클릭해 주세요.<br>";
-		content += "<a href='http://localhost:9090/" + request.getContextPath() + "/token.do?token="
+		content += "<a href='http://rclass.iptime.org:9999/" + request.getContextPath() + "/token.do?token="
 				+ SHA512.getSHA512(email) + "&email=" + email + "'>인증하기</a>";
 
 		Properties prop = new Properties();
