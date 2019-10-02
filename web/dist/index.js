@@ -121,12 +121,6 @@ function () {
       btnLogin.addEventListener("click", function () {
         var mail = document.getElementsByName("userEmail")[0].value;
         var pw = document.getElementsByName("userPw")[0].value;
-        var checkboxValue = document.getElementsByName("loginKeep")[0];
-        if(checkboxValue.checked == true){
-          checkboxValue = true;
-        } else {
-          checkboxValue = false;
-        }
         var isBlank = mail != null && pw != null;
         var area = document.querySelectorAll(".frm_login .msg_area")[0];
 
@@ -135,8 +129,7 @@ function () {
         if (isBlank) {
           var rawData = {
             email: mail,
-            password: pw,
-            loginKeep: checkboxValue
+            password: pw
           };
 
           var data = _this2.getData(JSON.stringify(rawData));

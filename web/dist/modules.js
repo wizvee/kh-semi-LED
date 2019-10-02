@@ -30,4 +30,4 @@ var evetList = promiseGetDefault("getCalList.do").then(function (res) {
   return getEventList(res);
 }); // WebSocket
 
-var socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");
+var socket = new WebSocket("ws://rclass.iptime.org:9999" + contextPath + "ws");
