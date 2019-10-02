@@ -48,11 +48,11 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession(); 
 			    session.setAttribute("loginUser", user); 
 			    out.print("success"); 
-			    if ((boolean) json.get("loginKeep") == true) {
+			    if (json.get("loginKeep") != null && (boolean) json.get("loginKeep") == true) {
 			    	Cookie c = new Cookie("loginKeep",(String) json.get("email"));
 			    	c.setMaxAge(3*24*60*60); //3일 
 			    	response.addCookie(c);
-			    } else  {
+			    } else {
 			    	Cookie c = new Cookie("loginKeep",(String) json.get("email"));
 			    	c.setMaxAge(0);
 		    		response.addCookie(c); 
