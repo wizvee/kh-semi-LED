@@ -1,7 +1,7 @@
 "use strict";
 
 // Variables
-var contextPath = "/p_190826_semi/";
+var contextPath = "/albarang/";
 
 var selectElements = function selectElements(src) {
   return Array.from(document.querySelectorAll(src));
@@ -30,4 +30,4 @@ var evetList = promiseGetDefault("getCalList.do").then(function (res) {
   return getEventList(res);
 }); // WebSocket
 
-var socket = new WebSocket("ws://rclass.iptime.org:9999" + contextPath + "ws");
+var socket = new WebSocket("ws://rclass.iptime.org:9999" + contextPath + "ws"); // let socket = new WebSocket("ws://localhost:9090" + contextPath + "ws");

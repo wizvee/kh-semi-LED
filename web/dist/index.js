@@ -12,7 +12,7 @@ var selectElements = function selectElements(src) {
   return Array.from(document.querySelectorAll(src));
 };
 
-var contextPath = "/p_190826_semi/";
+var contextPath = "/albarang/";
 
 var Register =
 /*#__PURE__*/
