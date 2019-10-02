@@ -42,7 +42,6 @@ chatBusList.map(l => l.addEventListener("click", () => {
     	data: {"data": busId+"/"+userId},
     	success:function(data){
 			const wholeData=JSON.parse(data);
-			$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
     		if(wholeData.chatHistory!='none'){
     		const result=JSON.parse(wholeData.chatHistory);
     		result.forEach(function(msg){
@@ -175,7 +174,7 @@ function addChat(profilePic, userName, chatMsg, whatChatDate, chatType){
 			$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 }
 
-$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
+// $('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 
 
 
@@ -271,7 +270,6 @@ socket.onmessage=function(e){
 	var message=chatInfo.chatMsg;
 	
 	if((userName&&profilePic)==(userInfo.userName&&userInfo.profilePic)){
-
 		$('.chatMsg_area').append('<div class="mySelf">'+
 		'<div class="main-content">'+
 		'<div class="media">'+
@@ -321,6 +319,7 @@ socket.onmessage=function(e){
 	}
 	}
 }
+$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 
 
 
