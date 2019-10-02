@@ -184,11 +184,22 @@ public class UserService {
 		return name;
 	}
 	
-	public int insertSnsUser(String email, String name, String phone, String password) {
+	public int insertSnsUser(String email, String password, String name, String phone) {
 		Connection conn= getConnection();
 		int output=dao.insertUser(conn, email, password, name, phone);
 		close(conn);
 		return output;
+	}
+	
+	public int updateEmailCheck (String email) {
+		Connection conn= getConnection();
+		int result=dao.checkUser(conn, email);
+		if (result>0) {
+			close(conn);	
+		}else {
+			rollback(conn);
+		}
+		return result;
 	}
 
 }
