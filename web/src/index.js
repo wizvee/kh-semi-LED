@@ -1,4 +1,5 @@
 const selectElements = src => Array.from(document.querySelectorAll(src));
+// const contextPath="/albarang/";
 const contextPath="/p_190826_semi/";
 
 class Register {

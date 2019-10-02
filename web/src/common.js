@@ -38,7 +38,7 @@ class Alert {
     item.setAttribute("class", "alert_item");
     const img = document.createElement("img");
     img.setAttribute("class", "item_profile");
-    img.setAttribute("src", `/p_190826_semi/upload/profile/${n.profilePic}`);
+    img.setAttribute("src", `${contextPath}upload/profile/${n.profilePic}`);
     const content = document.createElement("div");
     content.setAttribute("class", "alert_content");
     const spanUser = document.createElement("span");
@@ -80,7 +80,7 @@ class Alert {
         this.list = JSON.parse(xhr.responseText);
         this.viewCount();
         this.viewNoti();
-        location.href = `/p_190826_semi/${url}`;
+        location.href = contextPath + `${url}`;
       }
     });
     xhr.open("post", contextPath + "notiRead.do");

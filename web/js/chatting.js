@@ -42,6 +42,7 @@ chatBusList.map(l => l.addEventListener("click", () => {
     	data: {"data": busId+"/"+userId},
     	success:function(data){
 			const wholeData=JSON.parse(data);
+			$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
     		if(wholeData.chatHistory!='none'){
     		const result=JSON.parse(wholeData.chatHistory);
     		result.forEach(function(msg){
@@ -101,7 +102,7 @@ chatBusList.map(l => l.addEventListener("click", () => {
 					}					
 					$('.chatEmp_area').append('<div>'+user.userName+
 					'<a class="pull-left" href="#">'+
-					'<img class="media-object img-circle" style="width:10px; height:10px;" src="'+contextPath+'upload/profile/'+profileP+'" alt="">'+
+					'<img class="media-object img-circle" style="width:20px; height:20px;" src="'+contextPath+'upload/profile/'+profileP+'" alt="">'+
 					'</a>'+
 					'</div>'
 					)
@@ -144,6 +145,7 @@ function addSelfChat(profilePic,userName,chatMsg,whatChatDate,chatType){
 	'</div>'+
 	'</div>'
 	);
+	$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 }
 
 
@@ -170,6 +172,7 @@ function addChat(profilePic, userName, chatMsg, whatChatDate, chatType){
 			'</div>'+
 			'</div>'
 			);
+			$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 }
 
 $('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
@@ -290,6 +293,7 @@ socket.onmessage=function(e){
 		'</div>'+
 		'</div>'
 		);
+		$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 	}
 	else{
 		$('.chatMsg_area').append('<div class="row">'+
@@ -313,6 +317,7 @@ socket.onmessage=function(e){
 		'</div>'+
 		'</div>'
 		);
+		$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 	}
 	}
 }

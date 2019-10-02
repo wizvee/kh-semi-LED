@@ -69,7 +69,7 @@ function () {
       item.setAttribute("class", "alert_item");
       var img = document.createElement("img");
       img.setAttribute("class", "item_profile");
-      img.setAttribute("src", "/p_190826_semi/upload/profile/".concat(n.profilePic));
+      img.setAttribute("src", "".concat(contextPath, "upload/profile/").concat(n.profilePic));
       var content = document.createElement("div");
       content.setAttribute("class", "alert_content");
       var spanUser = document.createElement("span");
@@ -112,7 +112,7 @@ function () {
 
           _this4.viewNoti();
 
-          location.href = "/p_190826_semi/".concat(url);
+          location.href = contextPath + "".concat(url);
         }
       });
       xhr.open("post", contextPath + "notiRead.do");
