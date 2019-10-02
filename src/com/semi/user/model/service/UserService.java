@@ -183,5 +183,12 @@ public class UserService {
 		close(conn);
 		return name;
 	}
+	
+	public int insertSnsUser(String email, String name, String phone, String password) {
+		Connection conn= getConnection();
+		int output=dao.insertUser(conn, email, password, name, phone);
+		close(conn);
+		return output;
+	}
 
 }

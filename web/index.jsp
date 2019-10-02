@@ -26,8 +26,8 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/main.min.css" />
   <link rel="stylesheet" href="css/font-awesome.css" />
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 </head>
-
 <body>
   <div id="wrap">
     <!-- gnb -->
@@ -108,9 +108,9 @@
             </div>
             <div>
              <!--  <button id="btn_gg" class="btn-primary"> -->
-                  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-                구글로 로그인
+                 <div class="g-signin2" data-onsuccess="onSignIn"></div>
+               <!--  <i class="fa fa-google-plus-square" aria-hidden="true"></i> -->
+                <!-- 구글로 로그인 -->
               </button>
             </div>
           </form>
@@ -155,6 +155,9 @@
             <div class="msg_area"></div>
           </form>
           <!-- // 회원가입 폼 -->
+          <form name="snsLoginForm" method="post">
+          <input type="hidden" id="snsLogin" name="snsLogin">
+          </form>
         </div>
         <!-- //pop container -->
       </div>
@@ -171,6 +174,15 @@
     </div>
   </div>
   <!-- //container -->
+  <script>
+  function onSignIn(googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  console.log(profile.getUserId);
+	  $('#snsLogin').val(JSON.stringify(profile));
+	  snsLoginForm.action="<%=request.getContextPath()%>/snsLogin.do";
+	  snsLoginForm.submit();
+ 	 };
+  </script>
   <!-- JavaScript Libraries -->
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript" src="dist/index.js"></script>
