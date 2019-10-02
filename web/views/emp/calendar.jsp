@@ -55,5 +55,5 @@
 	</section>
 
 </div>
-<script src="<%=request.getContextPath()%>/dist/calendar.js"></script>
+<script src="<%=request.getContextPath()%>/dist/emp/calendar.js"></script>
 <%@ include file="footer.jsp"%>

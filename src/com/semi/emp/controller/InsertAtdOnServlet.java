@@ -1,7 +1,9 @@
-package com.semi.atd.controller;
+package com.semi.emp.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,23 +14,20 @@ import javax.servlet.http.HttpSession;
 
 import com.semi.atd.model.Service.AttendanceService;
 import com.semi.atd.model.vo.Attendance;
-import com.semi.bus.model.service.BusinessService;
-import com.semi.emp.model.vo.Employee;
-import com.semi.sft.model.Service.ShiftService;
-import com.semi.sft.model.vo.Shift;
+import com.semi.emp.model.service.EmpService;
 import com.semi.userinfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class AttendanceServlet
+ * Servlet implementation class UpdateAtdOnServlet
  */
-@WebServlet("/views/attendance.do")
-public class AttendanceServlet extends HttpServlet {
+@WebServlet("/atdOn.do")
+public class InsertAtdOnServlet extends HttpServlet {
    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AttendanceServlet() {
+    public InsertAtdOnServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,12 +36,22 @@ public class AttendanceServlet extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // TODO Auto-generated method stub
 
+      HttpSession session = request.getSession();
+      UserInfo ui = (UserInfo) session.getAttribute("userInfo");
+      String busId = ui.getSelectBusId();
+      String userId = ui.getUserId();
+      
+      
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm", Locale.KOREA); 
+      Date date = new Date(); 
+      String nowDate = formatter.format(date);
+      System.out.println(nowDate);
+      String sftId = new AttendanceService().setAtdCheck(busId, userId);
+      int result = new EmpService().insertAtdOn(nowDate, busId, userId, sftId);
 
-      request.getRequestDispatcher("/views/owner/attendance.jsp").forward(request, response);
-
-   
+      
+       
    }
 
    /**

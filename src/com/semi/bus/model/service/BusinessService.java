@@ -93,4 +93,11 @@ public class BusinessService {
 		close(conn);
 		return r;
 	}
+	
+	public ArrayList<String> getSftEmpList(String sftId) {
+		Connection conn = getConnection();
+		ArrayList<String> list = dao.getSftEmpList(conn, sftId);
+		close(conn);
+		return list;
+	}
 }
