@@ -117,6 +117,7 @@ chatBusList.map(l => l.addEventListener("click", () => {
 
 	chatListArea.classList.remove("focus");
 	chatRoomArea.classList.add("focus");
+	$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 	chatHeaderBtn[0].classList.remove("focus");
 	chatHeaderBtn[1].classList.add("focus");
 
@@ -319,7 +320,6 @@ socket.onmessage=function(e){
 	}
 	}
 }
-$('.chatMsg_area').scrollTop($('.chatMsg_area')[0].scrollHeight);
 
 
 

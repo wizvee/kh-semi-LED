@@ -1,6 +1,6 @@
 const selectElements = src => Array.from(document.querySelectorAll(src));
-// const contextPath="/albarang/";
-const contextPath="/p_190826_semi/";
+const contextPath="/albarang/";
+// const contextPath = "/p_190826_semi/";
 
 class Register {
   constructor() {
@@ -76,6 +76,14 @@ class Register {
       () => {
         const mail = document.getElementsByName("userEmail")[0].value;
         const pw = document.getElementsByName("userPw")[0].value;
+
+        var checkboxValue = document.getElementsByName("loginKeep")[0];
+        if (checkboxValue.checked == true) {
+          checkboxValue = true;
+        } else {
+          checkboxValue = false;
+        }
+
         const isBlank = mail != null && pw != null;
 
         const area = document.querySelectorAll(".frm_login .msg_area")[0];
@@ -84,7 +92,8 @@ class Register {
         if (isBlank) {
           const rawData = {
             email: mail,
-            password: pw
+            password: pw,
+            loginKeep: checkboxValue
           };
           const data = this.getData(JSON.stringify(rawData));
           this.getResult("login.do", data, this.submitLogin);
@@ -107,7 +116,7 @@ class Register {
   submitRegister = respText => {
     if (respText == "success") {
       const mail = document.querySelector("#uMail").value;
-      location.href = contextPath+"emailSend.do?email=" + mail;
+      location.href = contextPath + "emailSend.do?email=" + mail;
     } else {
       const area = document.querySelectorAll(".frm_register .msg_area")[0];
       this.insertError(area, "회원가입 실패");
@@ -115,7 +124,7 @@ class Register {
   };
 
   submitLogin = respText => {
-    if (respText == "success") location.href = contextPath+"main.do";
+    if (respText == "success") location.href = contextPath + "main.do";
     else {
       const area = document.querySelectorAll(".frm_login .msg_area")[0];
       this.insertError(area, "로그인 실패");
