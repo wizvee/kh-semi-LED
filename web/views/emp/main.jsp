@@ -6,11 +6,11 @@
 
    <section class="item">
       <div class="item_header">
-         <h2>제목</h2>
+         <h2>출·퇴근 위젯</h2>
       </div>
-      <div class="item_body">
-         <button id="" class="btn-primaryOn">출근</button>
-         <button id="" class="btn-primaryOff">퇴근</button>
+      <div class="item_body atd_body">
+         <button id="" class="btn-primary btn-primaryOn">출근</button>
+         <button id="" class="btn-primary btn-primaryOff">퇴근</button>
       </div>
    </section>
    

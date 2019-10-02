@@ -456,3 +456,8 @@ input[id="ck_chat"]:checked {
     @include trans-All;
   }
 }
+
+.atd_body {
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
