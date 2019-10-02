@@ -313,13 +313,20 @@ video {
   }
 }
 
-#btn_gg {
-  $google: rgba(229, 77, 38, 0.8);
-  background: $google;
-  font-size: 90%;
-  text-align: left;
+.g-signin2 {
+  width: 100% !important;
 
-  &:hover {
-    background: darken($google, 10%);
+  div {
+    width: 100% !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+
+    &>div>span {
+      margin-left: -375px !important;
+      font-family: $base-font-family !important;
+      font-size: 100% !important;
+      font-weight: bold !important;
+      // color: red !important;
+    }
   }
 }
