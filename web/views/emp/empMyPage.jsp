@@ -74,7 +74,7 @@
 
 label {
 	margin: 0;
-    padding: 7px 13px;
+    padding: 3.3px 16px;
     height: 30px;
 	box-sizing: border-box;
     vertical-align: top;
